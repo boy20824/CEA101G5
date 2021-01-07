@@ -1,0 +1,552 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* 從這裡開始 */
+/* 整個網頁 */
+.wrap {
+  width: 100%;
+  align-self: center;
+  background-color: #f0f5e5;
+}
+/* 左邊側拉選單 */
+.side-menu-all {
+  height: 100%;
+  position: fixed;
+  top: 13.3%;
+  left: 0;
+  z-index: 99;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 10;
+}
+/* 左邊側拉選單裡面的設定 */
+.side-menu {
+  position: fixed;
+  float: left;
+  height: 100%;
+  width: 20vw;
+  background-image: linear-gradient(0deg, #fff, #f6f6f6);
+  display: none;
+  z-index: 5;
+  margin-top: 15px;
+  color: black;
+  box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.4);
+}
+/* 左邊側拉選單的第一個input標籤 */
+.side-menu input {
+  display: block;
+  margin: 2vh 0 0 5vw;
+  font-size: 1.5vw;
+  border-radius: 1vw;
+  border: none;
+  padding: 1vw;
+  letter-spacing: 0.8vw;
+}
+.side-menu input:hover {
+  cursor: pointer;
+}
+.side-menu input:focus {
+  outline: none;
+}
+/* 左邊隱藏選單設定  */
+.side-menu nav {
+  margin-left: 0.8vw;
+}
+/* 左邊側拉選的圖片滑動設計 */
+.side-menu a .fas {
+  color: black;
+  margin-right: -1.1em;
+  font-size: 1.5vw;
+  transform: scale(0);
+  transition: 0.4s;
+}
+.side-menu a:hover .fas {
+  margin-right: 0.3em;
+  transform: scale(1);
+}
+.side-menu a {
+  color: black;
+  font-size: 1.5vw;
+  padding: 2vh 0 2vh 0;
+  margin: 0 0.8vw 0 0.8vw;
+  border-bottom: 0.2vw solid black;
+}
+.side-menu a:first-child {
+  margin-top: 5vh;
+}
+nav {
+  display: block;
+  display: flex;
+  flex-direction: column;
+}
+nav a {
+  display: block;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+nav a + a::before {
+  content: " ";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 0;
+}
+/* 左邊側拉選單右邊的黑色背景*/
+.side-menu-black {
+  margin-top: 15px;
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+/* 第一層底端得上標題 */
+.forfiexed {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  background-color: transparent;
+}
+/* 滑動下來第二層的上標題 */
+.forfiexed2 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  background-color: transparent;
+}
+.title {
+  display: flex;
+  align-items: center;
+  z-index: 0;
+}
+/* 標題左邊的漢堡選單 */
+.title img {
+  width: 3vw;
+  height: 3vw;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+  display: block;
+  opacity: 1;
+}
+.title img:hover {
+  cursor: pointer;
+}
+/* 標題左邊的logo圖片 */
+.title a {
+  display: block;
+  background-image: url("../img/LOGO/Logo3\ \(2\).png");
+  background-size: 100%;
+  width: 10vw;
+  height: 6vw;
+  white-space: wrap;
+  text-indent: 101%;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  padding-left: 10px;
+}
+.loge {
+  display: flex;
+  width: 10vw;
+  height: 6vw;
+  padding-right: 50px;
+  align-self: center;
+}
+.loge a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.7vw;
+  font-weight: bold;
+  padding-top: 0.7em;
+}
+/* banner輪播 套版bootstrap設定 */
+.carouselExampleIndicators {
+  width: 100%;
+}
+.carousel-control-next {
+  z-index: 999;
+}
+/* 中間搜尋的容器 */
+.banner {
+  width: 100%;
+  height: 30vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10%;
+  z-index: 1;
+}
+/* 中間搜尋的容器文字 */
+.banner p {
+  margin-bottom: 10px;
+  font-size: 2vw;
+}
+/* 中間搜尋的容器搜尋input標籤 */
+.search {
+  margin-bottom: 10px;
+  border-radius: 10px;
+  width: 30vw;
+  height: 4vw;
+  border: 1px solid #b1a3a0;
+  background: white url("../img/圖片/iconfinder_ic_search_48px_3669253.png")
+    no-repeat scroll 5px 5px;
+  background-size: 10%;
+  background-position: 0% 50%;
+  padding-left: 3vw;
+  font-size: 2vw;
+}
+.search:focus {
+  outline: none;
+}
+/* 中間搜尋的容器送出按鈕 */
+.submit {
+  width: 10vw;
+  height: 4vw;
+  border-radius: 1vw;
+  background-color: #465764;
+  border: none;
+  color: white;
+  font-size: 1.5vw;
+}
+.submit:focus {
+  outline: none;
+}
+.submit:hover {
+  cursor: pointer;
+}
+/* 推薦餐廳的標題 */
+.title1 {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin: 20px;
+}
+/* 推薦餐廳的文字 */
+.title1 p {
+  padding-left: 5px;
+  font-size: 2vw;
+  margin-top: 15px;
+}
+/* 推薦餐廳的圖片 */
+.title1 img {
+  width: 5vw;
+  height: 10vh;
+}
+/* 推薦餐廳內容 */
+.slick-slide{
+  border: 1px solid #b1a3a0;
+  margin-right: 2vw;
+  margin-left: 2vw;
+}
+.slick-dots button{
+  border:100px solid red;
+}
+.menu {
+  width: 88%;
+  display:flex;
+  justify-content:center;
+  margin-left: 5vw;
+}
+/* 推薦餐廳的圖片 */
+.menu li > img {
+  width: 24vw;
+  height: 40vh;
+  padding: 10px;
+}
+/* 推薦餐廳的內容 */
+.content {
+  padding-top: 3vh;
+  border-top: 1px solid #b1a3a0;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+}
+.content ul {
+  margin-top: -15px;
+  display: flex;
+  flex-direction: column;
+}
+.content li {
+  display: flex;
+}
+/* 推薦餐廳的內容的小icon */
+.content ul img {
+  margin-top: 5px;
+  display: block;
+  width: 6vw;
+  height: 6vh;
+  padding-left: 1px;
+
+}
+.content p {
+  margin-left: -15px;
+  margin-top: 10px;
+  align-self: center;
+  font-size: 1vw;
+}
+/* 購物商城 */
+.shopCard {
+  margin-bottom: 50px;
+}
+.shopCard ul {
+  display: flex;
+  justify-content: space-between;
+}
+.shopCard li {
+  border: 1px solid #b1a3a0;
+  margin-left: 15px;
+  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+/* 購物商城內容的圖片 */
+.shopCard li > img {
+  width: 20vw;
+  height: 35vh;
+  padding: 5px;
+}
+/* 購物商城的內容 */
+.contents {
+  padding-bottom: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.contents p:first-child {
+  border-top: 1px solid #b1a3a0;
+  padding-top: 10px;
+  padding-left: 8px;
+  padding-bottom: 5px;
+  font-size: 2vw;
+}
+.contents p:last-child {
+  height: 25vh;
+  width: 20vw;
+  padding: 5px;
+  padding-left: 10px;
+  font-size: 1vw;
+}
+/* 購物商城的價格 */
+.price {
+  display: flex;
+  justify-content: flex-end;
+}
+.price img {
+  display: block;
+  width: 4vw;
+  height: 4vh;
+  margin-top: 6px;
+}
+.price p {
+  padding-right: 50px;
+  font-size: 1.5vw;
+}
+/* 購物商城導向按鈕 */
+.moreBtn {
+  position: relative;
+  left: 90%;
+  background-color: #db6638;
+  color: white;
+  width: 8vw;
+  height: 3vw;
+  border-radius: 0.5vw;
+  border: none;
+  font-size: 1vw;
+  margin-bottom: 20px;
+  margin-right: 50px;
+}
+.moreBtn:focus {
+  outline: none;
+}
+.moreBtn:hover {
+  cursor: pointer;
+}
+
+
+/* 底端列 */
+.footer {
+  background-color: #fa7e23;
+  opacity: 85%;
+  display: flex;
+  justify-content: space-around;
+  align-items:flex-start;
+  padding-top:5vh;
+}
+
+.footer-image {
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: -5vw;
+}
+/* 底端列的圖片 */
+.footer-image > img {
+  width: 18vw;
+  height: 20vh;
+  margin-bottom: 5vh;
+}
+.footer-image-bottom {
+  display: flex;
+  margin-left: 2vw;
+  margin-bottom: 4vh;
+}
+/* 底端列的小ICON */
+.footer-image-bottom>img{
+    width: 1.5vw;
+    height: 3vh;
+    margin-right: 2vw;
+}
+.footer-image-bottom>img:hover{
+    cursor: pointer;
+}
+/* 底端列的文字 */
+.footer-item h2{
+    font-size: 1.5vw;
+    font-weight: bolder;
+    color:#475665;
+    padding-bottom: 2vh;
+    border-bottom: 0.1598vw solid #475665 ;
+}
+.footer-item li:hover{
+    color:#475665;
+    cursor: pointer;
+}
+.footer-item{
+ font-size: 1.2vw;
+ justify-content: space-around;
+ align-items:center;
+ padding-top:3vh;
+ color:white;
+}
+/* 最底端的標籤 */
+.footer-bottom {
+  text-align: center;
+}
