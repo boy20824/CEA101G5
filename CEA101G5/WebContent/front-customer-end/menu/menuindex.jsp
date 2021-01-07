@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.menu.model.*"%>
-<%@ page import="com.restaurant.model.*"%>
+
 
 <%
 	RestaurantService restaurantSvc = new RestaurantService(); //創建 實體

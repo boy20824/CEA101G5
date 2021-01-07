@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.menu.model.*"%>
-<%@ page import="com.restaurant.model.*"%>
+
 
 <%
 	MenuVO menuVO = (MenuVO) request.getAttribute("menuVO"); // JSP一開時得到null值   ;EL為空字串
