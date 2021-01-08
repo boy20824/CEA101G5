@@ -111,7 +111,6 @@ font {
 				<input type="hidden" name="menuSellStatus" value="1">
 				<input type="submit" value="確定修改" /> 
 				<input type="button" onclick="history.back()" value="取消" /> 
-				<input type="button" value="客製化選項修改" />
 			</div>
 		</div>
 	</form>

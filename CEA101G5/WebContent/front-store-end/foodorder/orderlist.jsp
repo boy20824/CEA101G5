@@ -29,12 +29,19 @@
     <style>
     body {
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+  
 }
+.sidebar label{line-height: 80px;}
     </style>
 </head>
 
 <body>
+
 <input type="hidden" class="storeId" value="S000001">
+
+
+
+<%@include file="../selectpage/selectstorepage.jsp" %>
     <div class="storeDetail">
         <h1>訂單清單</h1>
         <c:forEach var="foodOrderVO" items="${list}">

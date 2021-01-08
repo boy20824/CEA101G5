@@ -22,6 +22,9 @@ import com.foodorderdetail.model.FoodOrderDetailVO;
 import com.menu.model.MenuService;
 import com.menu.model.MenuVO;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 @WebServlet("/foodorder/FoodOrderServlet.do")
 public class FoodOrderServlet extends HttpServlet {
@@ -98,7 +101,34 @@ public class FoodOrderServlet extends HttpServlet {
 			String status = req.getParameter("status");
 			String foodOrderId = req.getParameter("foodOrderId");
 			Timestamp nowTime = new Timestamp(System.currentTimeMillis());
+			if(Integer.parseInt(status) == 1 ) {
+				 Twilio.init("AC7d57641ebe9e035722647a8aebec3ab3", "c25fd56d29afebf3ab4dbc81e240278a");
 
+			        Message message = Message
+			                .creator(new PhoneNumber("+886985845289"), // to
+			                        new PhoneNumber("+14074567528"), // from
+			                        "Hello 訂單已完成")
+			                .create();
+
+			        System.out.println(message.getSid());
+			}
+			
+			if(Integer.parseInt(status) == 2 ) {
+				MailService send = new MailService();
+				String to = "boy20824@gmail.com";
+			      
+			      String subject = "餐點完成通知";
+			      
+			      String ch_name = "John";
+			      String passRandom = "您的餐點已完成囉";
+			      String messageText = "Hello! " + ch_name + passRandom ; 
+			
+			      send.sendMail(to, subject, messageText);
+			}
+			
+			
+			
+			
 			
 //			開始新增資料
 			FoodOrderService foodOrderSvc =new FoodOrderService();
