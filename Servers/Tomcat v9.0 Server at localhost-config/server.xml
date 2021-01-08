@@ -154,7 +154,7 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
       <Context docBase="CEA101G5" path="/CEA101G5" reloadable="true" source="org.eclipse.jst.jee.server:CEA101G5"/>
-      </Host>
+      <Context docBase="CEA101G5" path="/CEA101G5" reloadable="true" source="org.eclipse.jst.jee.server:CEA101G5"/></Host>
     </Engine>
   </Service>
 </Server>
