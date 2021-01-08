@@ -10,19 +10,33 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import com.emp.model.EmpVO;
+
+
+
 
 public class RestaurantPictureDAO implements RestaurantPicture_interface{
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "CEA101G5";
-	String passwd = "123456";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G5");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
-	private static final String INSERT_STMT = "INSERT INTO restaurant_picture (store_picture_id, store_id, store_picture) values ('SP' ||LPAD(SEQ_STORE_PICTURE_ID.NEXTVAL,6,'0'),?,?)";
-	private static final String UPDATE = "UPDATE restaurant_picture set store_picture=? where store_picture_id=?";
-	private static final String GET_ALL_STMT = "SELECT store_picture_id,store_id,store_picture FROM restaurant_picture order by store_picture_id";
-	private static final String GET_PIC_STMT = "SELECT store_picture_id,store_id,store_picture FROM restaurant_picture where store_picture_id=?";
-	private static final String GET_PIC_BYSTORE_STMT = "SELECT store_picture_id,store_id,store_picture FROM restaurant_picture where AND store_id=?";
-	private static final String DELETE = "DELETE FROM restaurant_picture where store_picture_id = ?";
+	private static final String INSERT_STMT = "INSERT INTO RESTAURANT_PICTURE (STORE_PICTURE_ID, STORE_ID, STORE_PICTURE) VALUES ('SP' ||LPAD(SEQ_STORE_PICTURE_ID.NEXTVAL,6,'0'),?,?)";
+	private static final String UPDATE = "UPDATE RESTAURANT_PICTURE SET STORE_PICTURE=? WHERE STORE_PICTURE_ID=?";
+	private static final String GET_ALL_STMT = "SELECT STORE_PICTURE_ID,STORE_ID,STORE_PICTURE FROM RESTAURANT_PICTURE ORDER BY STORE_PICTURE_ID";
+	private static final String GET_PIC_STMT = "SELECT STORE_PICTURE_ID,STORE_ID,STORE_PICTURE FROM RESTAURANT_PICTURE WHERE STORE_PICTURE_ID=?";
+	private static final String GET_PIC_BYSTORE_STMT = "SELECT STORE_PICTURE_ID,STORE_ID,STORE_PICTURE FROM RESTAURANT_PICTURE WHERE AND STORE_ID=?";
+	private static final String DELETE = "DELETE FROM RESTAURANT_PICTURE WHERE STORE_PICTURE_ID = ?";
 
 	@Override
 	public List<RestaurantPictureVO> insert(List<RestaurantPictureVO> list) {
@@ -31,8 +45,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 		try {
 			
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			for(RestaurantPictureVO restaurantPictureVO : list) {
@@ -44,9 +57,6 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -77,8 +87,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, restaurantPictureVO.getStoreId());
@@ -88,9 +97,6 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -111,6 +117,47 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			}
 		}
 	}
+	
+	public void insertWithStore (RestaurantPictureVO restaurantPictureVO , Connection con) {
+
+		PreparedStatement pstmt = null;
+
+		try {
+
+			pstmt = con.prepareStatement(INSERT_STMT);
+
+			pstmt.setString(1, restaurantPictureVO.getStoreId());
+			pstmt.setBytes(2, restaurantPictureVO.getStorePicture());
+			
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-emp");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
 
 	//修改
 	@Override
@@ -120,8 +167,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setBytes(1, restaurantPictureVO.getStorePicture());
@@ -130,9 +176,6 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -164,8 +207,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_PIC_STMT);
 
 			pstmt.setString(1, storePictureId);
@@ -181,9 +223,6 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -224,8 +263,6 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_PIC_BYSTORE_STMT);
 			
 			pstmt.setString(1, storeId);
@@ -241,9 +278,6 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -284,8 +318,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -298,9 +331,6 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -338,8 +368,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, storePictureId);
@@ -347,9 +376,6 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -369,52 +395,6 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 				}
 			}
 		}
-	}
-
-
-	
-	
-	public static void main(String[] args)  throws IOException{
-		RestaurantPictureDAO dao = new RestaurantPictureDAO();
-
-//		 新增
-//		 RestaurantPictureVO restaurantPictureVO = new RestaurantPictureVO();
-//		 restaurantPictureVO.setStoreId("S000001");
-//		 byte[] pic = getPictureByteArray("C:\\CEA101_G5\\images/p3.jpg");
-//		 restaurantPictureVO.setStorePicture(pic);
-//		 RestaurantPictureVO restaurantPictureVO1 = new RestaurantPictureVO();
-//		 restaurantPictureVO1.setStoreId("S000001");
-//		 byte[] pic1 = getPictureByteArray("C:\\CEA101_G5\\images/p4.jpg");
-//		 restaurantPictureVO1.setStorePicture(pic1);
-//		 RestaurantPictureVO restaurantPictureVO2 = new RestaurantPictureVO();
-//		 restaurantPictureVO2.setStoreId("S000001");
-//		 byte[] pic2 = getPictureByteArray("C:\\CEA101_G5\\images/p7.jpg");
-//		 restaurantPictureVO2.setStorePicture(pic2);
-//		 
-//		 List list = new ArrayList();
-//		 list.add(restaurantPictureVO);
-//		 list.add(restaurantPictureVO1);
-//		 list.add(restaurantPictureVO2);
-//		 System.out.println(list);
-//		 
-//		 
-//		 dao.insert(list);
-
-
-		// 修改  
-		
-		RestaurantPictureVO restaurantPictureVO = new RestaurantPictureVO();
-		 
-		 restaurantPictureVO.setStorePictureId("SP000161");
-		 
-		 byte[] pic = getPictureByteArray("C:\\CEA101_G5\\images/p2.jpg");
-		 restaurantPictureVO.setStorePicture(pic);
-		 dao.update(restaurantPictureVO);
-
-
-		// 刪除
-//		dao.delete("SP000001");
-	
 	}
 	
 	public static byte[] getPictureByteArray(String path) throws IOException {

@@ -1,6 +1,6 @@
 package com.storechardetail.model;
 
-public class StoreCharDetailVO implements java.io.Serializable{
+public class StoreCharDetailVO {
 	private String storeChar;
 	private String storeCharName;
 

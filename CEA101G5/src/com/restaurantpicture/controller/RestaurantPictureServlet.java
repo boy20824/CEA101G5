@@ -33,14 +33,15 @@ public class RestaurantPictureServlet extends HttpServlet {
 
 		if ("getOne_For_Display".equals(action)) {
 			res.setContentType("img/jpg");
-			String storePicId = req.getParameter("storePicId").trim();
+			String storeId = req.getParameter("storeId").trim();
 			RestaurantPictureService resPicSvc = new RestaurantPictureService();
-			RestaurantPictureVO restPicVO = resPicSvc.getOneStorePicByStoreId(storePicId);
+			RestaurantPictureVO restPicVO = resPicSvc.getOneStorePicByStoreId(storeId);
 			byte[] storePic = restPicVO.getStorePicture();
 			res.getOutputStream().write(storePic);
 			res.getOutputStream().flush();
 			return;
 		}
+		
 
 		if ("insert".equals(action)) {
 			//從req取得part物件

@@ -10,28 +10,24 @@ public class StoreCharDetailService {
 		
 		dao = new StoreCharDetailDAO();
 	}
-	public StoreCharDetailVO addStoreCharDetail(String storeChar,String storeCharName) {
+	public StoreCharDetailVO addStoreCharDetail(String storeCharName) {
 		
 		StoreCharDetailVO storeCharDetailVO = new StoreCharDetailVO();
 		
-		storeCharDetailVO.setStoreChar(storeCharName);
 		storeCharDetailVO.setStoreCharName(storeCharName);
 		dao.insert(storeCharDetailVO);
 
 		return storeCharDetailVO;
 	}
-
-
-public StoreCharDetailVO updateStoreCharDetail(String storeChar,String storeCharName) {
 	
-	StoreCharDetailVO storeCharDetailVO = new StoreCharDetailVO();
-	
-	storeCharDetailVO.setStoreChar(storeCharName);
-	storeCharDetailVO.setStoreCharName(storeCharName);
-	dao.insert(storeCharDetailVO);
-	
-	return storeCharDetailVO;
-}
+	public void deleteStoreCharDetail(String storeChar) {
+		
+		StoreCharDetailVO storeCharDetailVO = new StoreCharDetailVO();
+		
+		storeCharDetailVO.setStoreCharName(storeChar);
+		dao.delete(storeChar);
+		
+	}
 
 	public StoreCharDetailVO getOneStoreCharDetail(String storeChar) {
 		return dao.findByPrimaryKey(storeChar);
