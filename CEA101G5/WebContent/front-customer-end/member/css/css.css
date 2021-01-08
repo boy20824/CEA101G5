@@ -1,0 +1,1250 @@
+/*匯入字型*/
+
+@font-face {
+    font-family: Microsoft JhengHei;
+    src: url('../fonts/Minecraft-Regular.otf');
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+@font-face {
+    font-family: Lato;
+    src: url（'https://fonts.googleapis.com/css2？family = Lato＆ display = swap'）
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/* 整體背景 */
+
+.wrap {
+    width: 100%;
+    align-self: center;
+    background-color: #F0F5E5;
+}
+
+
+/* 側拉選單 */
+
+.side-menu-all {
+    height: 100%;
+    position: fixed;
+    top: 13.3%;
+    left: 0;
+    z-index: 99;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.side-menu {
+    position: fixed;
+    float: left;
+    height: 100%;
+    width: 20vw;
+    background-image: linear-gradient(0deg, #fff, #f6f6f6);
+    display: none;
+    z-index: 5;
+    margin-top: 15px;
+    color: black;
+    box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.4);
+}
+
+.side-menu input {
+    display: block;
+    margin: 2vh 0 0 5vw;
+    font-size: 1.5vw;
+    border: none;
+    padding: 1.0vw;
+    letter-spacing: 0.2vw;
+    background-color: #404040;
+    color: #ffffff;
+    height: 4.2vw;
+    width: 10vw;
+}
+
+.side-menu input:hover {
+    cursor: pointer;
+}
+
+.side-menu input:focus {
+    outline: none;
+}
+
+.side-menu nav {
+    margin-left: 0.8vw;
+}
+
+.side-menu a .fas {
+    color: black;
+    margin-right: -1.1em;
+    font-size: 1.5vw;
+    transform: scale(0);
+    transition: 0.4s;
+}
+
+.side-menu a:hover .fas {
+    margin-right: 0.3em;
+    transform: scale(1);
+}
+
+.side-menu a {
+    color: black;
+    font-size: 1.5vw;
+    padding: 2vh 0 2vh 0;
+    margin: 0 0.8vw 0 0.8vw;
+    border-bottom: 0.2vw solid black;
+}
+
+.side-menu a:first-child {
+    margin-top: 5vh;
+}
+
+nav {
+    display: block;
+    display: flex;
+    flex-direction: column;
+}
+
+nav a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+nav a+a::before {
+    content: " ";
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 0;
+}
+
+.side-menu-black {
+    margin-top: 15px;
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+/* 上方條 */
+
+.forfiexed {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    background-color: #FA7E23;
+    opacity: 85%;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    z-index: 0;
+}
+
+.title img {
+    width: 4vw;
+    height: 4vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    display: block;
+    opacity: 1;
+}
+
+.title img:hover {
+    cursor: pointer;
+}
+
+.title a {
+    display: block;
+    background-image: url("../img/LOGO/Logo3\ \(2\).png");
+    background-size: 100%;
+    width: 10vw;
+    height: 6vw;
+    white-space: wrap;
+    text-indent: 101%;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    padding-left: 10px;
+}
+
+.loge {
+    display: flex;
+    width: 10vw;
+    height: 6vw;
+    padding-right: 50px;
+    align-self: center;
+}
+
+.loge a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.7vw;
+    font-weight: bold;
+    padding-top: 0.7em;
+}
+
+.loge a:hover {
+    text-decoration: underline;
+    color: white;
+    font-size: 1.7vw;
+    font-weight: bold;
+    padding-top: 0.7em;
+}
+
+.carouselExampleIndicators {
+    width: 100%;
+}
+
+.carousel-control-next {
+    z-index: 999;
+}
+
+
+/* 輪播畫面 */
+
+.banner {
+    width: 100%;
+    height: 30vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 15%;
+    z-index: 1;
+}
+
+.banner p {
+    margin-bottom: 65px;
+    font-size: 4vw;
+}
+
+.search {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 50vw;
+    height: 4vw;
+    border: 1px solid #b1a3a0;
+    background: white url("../img/圖片/iconfinder_ic_search_48px_3669253.png") no-repeat scroll 5px 5px;
+    background-size: 7%;
+    background-position: 0% 50%;
+    padding-left: 3vw;
+    font-size: 1.6vw;
+}
+
+.search:focus {
+    outline: none;
+}
+
+.submit {
+    width: 8.6vw;
+    height: 3.5vw;
+    border-radius: 10px;
+    background-color: #465764;
+    border: none;
+    color: white;
+    font-size: 1.4vw;
+    margin-top: 30px;
+}
+
+.submit:focus {
+    outline: none;
+}
+
+.submit:hover {
+    cursor: pointer;
+}
+
+.title1 {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+.title1 i {
+    color: #465665;
+}
+
+.title1 p {
+    padding-left: 3px;
+    font-size: 1.8vw;
+    margin-top: 15px;
+    padding-top: 3px;
+    font-family: Lato;
+}
+
+.title1 img {
+    width: 5vw;
+    height: 10vh;
+}
+
+.slick-slide {
+    border: 1px solid #b1a3a0;
+    margin-right: 2vw;
+    margin-left: 2vw;
+}
+
+.slick-dots button {
+    border: 100px solid red;
+}
+
+.menu {
+    width: 88%;
+    display: flex;
+    justify-content: center;
+    margin-left: 5vw;
+}
+
+.menu li>img {
+    width: 24vw;
+    height: 40vh;
+    padding: 10px;
+}
+
+
+/* 餐廳資訊 */
+
+.card__image {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card__content ul img {
+    margin-top: 5px;
+    display: inline;
+    width: 5vw;
+    height: 5vh;
+    padding-left: 1px;
+    padding-right: 1px;
+    position: relative;
+    right: 7%;
+}
+
+.card__content ul {
+    font-size: 0;
+}
+
+.card__content ul p {
+    display: inline;
+    font-size: 16px;
+    position: relative;
+    right: 14%;
+    top: 8px;
+}
+
+.card__content .btn {
+    background-color: white;
+    border: 1px solid @gray-light;
+    //border-radius: 1rem;
+    color: @gray-dark;
+    padding: 0.5rem;
+    text-transform: lowercase;
+}
+
+.card__content .btn--block {
+    display: block;
+    width: 100%;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cards__item {
+    display: flex;
+    padding: 1rem;
+    @media(min-width: 40rem) {
+        width: 50%;
+    }
+    @media(min-width: 56rem) {
+        width: 33.3333%;
+    }
+}
+
+.storecard {
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    &:hover {
+        .card__image {
+            filter: contrast(100%);
+        }
+    }
+}
+
+.card__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.card__image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    filter: contrast(70%);
+    //filter: saturate(180%);
+    overflow: hidden;
+    position: relative;
+    transition: filter 0.5s cubic-bezier(.43, .41, .22, .91);
+    ;
+    &::before {
+        content: "";
+        display: block;
+        padding-top: 56.25%; // 16:9 aspect ratio
+    }
+    @media(min-width: 40rem) {
+        &::before {
+            padding-top: 66.6%; // 3:2 aspect ratio
+        }
+    }
+}
+
+.card__title {
+    color: @gray-dark;
+    font-size: 1.25rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.card__text {
+    flex: 1 1 auto;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+}
+
+
+/* 商品資訊 */
+
+.shopCard {
+    margin-bottom: 50px;
+    background-color: #FFFFFF;
+}
+
+.title1 {
+    background-color: #FFFFFF;
+}
+
+#shopButton {
+    background-color: #FFFFFF;
+}
+
+.shopCard ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.shopCard li {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.productcard {
+    width: 288px;
+    height: 600px;
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    &:hover {
+        .card__image {
+            filter: contrast(100%);
+        }
+    }
+}
+
+.productcard+img {
+    width: 300px;
+    height: 350px;
+}
+
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* white-space: nowrap; */
+    width: 250px;
+    height: 70px;
+}
+
+.card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* white-space: pre; */
+    width: 250px;
+    height: 50px;
+}
+
+.card-img-top {
+    width: 300px;
+    height: 350px;
+}
+
+
+/* 商城商品資訊 */
+
+.contents {
+    padding-bottom: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.contents p:first-child {
+    border-top: 1px solid #b1a3a0;
+    padding-top: 10px;
+    padding-left: 8px;
+    padding-bottom: 5px;
+    font-size: 2vw;
+    overflow: hidden;
+    /* white-space: nowrap; */
+    text-overflow: ellipsis;
+}
+
+.contents p:last-child {
+    height: 25vh;
+    width: 20vw;
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 1vw;
+    overflow: hidden;
+    /*         white-space: nowrap; */
+    text-overflow: ellipsis;
+}
+
+.price {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.price img {
+    display: block;
+    width: 4vw;
+    height: 4vh;
+    margin-top: 6px;
+    margin-left: 99%;
+    position: relative;
+    left: 5%;
+}
+
+.price p {
+    font-size: 1.5vw;
+}
+
+
+/* 查看更多 */
+
+.moreBtn {
+    position: relative;
+    left: 90%;
+    background-color: #db6638;
+    color: white;
+    width: 7vw;
+    height: 3vw;
+    border-radius: 0.5vw;
+    border: none;
+    font-size: 1.2vw;
+    margin-bottom: 20px;
+    margin-right: 5%;
+    max-width: 100%;
+}
+
+.moreBtn:focus {
+    outline: none;
+}
+
+.moreBtn:hover {
+    cursor: pointer;
+}
+
+
+/* 下邊欄 */
+
+.footer {
+    background-color: #fa7e23;
+    opacity: 85%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-top: 5vh;
+}
+
+.footer a {
+    color: inherit;
+}
+
+.footer a:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-image {
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: -5vw;
+}
+
+.footer-image>img {
+    width: 18vw;
+    height: 20vh;
+    margin-bottom: 5vh;
+}
+
+.footer-image-bottom {
+    display: flex;
+    margin-left: 2vw;
+    margin-bottom: 4vh;
+}
+
+.footer-image-bottom>img {
+    width: 1.5vw;
+    height: 3vh;
+    margin-right: 2vw;
+}
+
+.footer-image-bottom>img:hover {
+    cursor: pointer;
+}
+
+.footer-item h2 {
+    font-size: 1.5vw;
+    font-weight: bolder;
+    color: #475665;
+    padding-bottom: 2vh;
+    border-bottom: 0.1598vw solid #475665;
+}
+
+.footer-item li:hover {
+    color: #475665;
+    cursor: pointer;
+}
+
+.footer-item {
+    font-size: 1.2vw;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 3vh;
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+}
+
+
+/* 新會員註冊 */
+
+.addMemBlock {
+    background-color: #F0F5E5;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.addMemForm {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.memContainer h4 {
+    color: #FF615E;
+}
+
+.memContainer input,
+.memContainer input[type="radio"]+label,
+.memContainer input[type="checkbox"]+label:before,
+.memContainer select option,
+.memContainer select {
+    width: 100%;
+    padding: 1em;
+    line-height: 1.4;
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+.memContainer input:focus {
+    outline: 0;
+    border-color: #FF615E;
+}
+
+.memContainer input:focus+.input-icon i {
+    color: #FF615E;
+}
+
+.memContainer input:focus+.input-icon:after {
+    border-right-color: #FF615E;
+}
+
+.memContainer input[type="radio"] {
+    display: none;
+}
+
+.memContainer input[type="radio"]+label,
+.memContainer select {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    float: left;
+    border-radius: 0;
+}
+
+.memContainer input[type="radio"]+label:first-of-type {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.memContainer input[type="radio"]+label:last-of-type {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.memContainer input[type="radio"]+label i {
+    padding-right: 0.4em;
+}
+
+.memContainer input[type="radio"]:checked+label,
+.memContainer input:checked+label:before,
+.memContainer select:focus,
+.memContainer select:active {
+    background-color: #FF615E;
+    color: #fff;
+    border-color: #FF615E;
+}
+
+.memContainer input[type="checkbox"] {
+    display: none;
+}
+
+.memContainer input[type="checkbox"]+label {
+    position: relative;
+    display: block;
+    padding-left: 1.6em;
+}
+
+.memContainer input[type="checkbox"]+label:before {
+    position: absolute;
+    top: 0.2em;
+    left: 0;
+    display: block;
+    width: 1em;
+    height: 1em;
+    padding: 0;
+    content: "";
+}
+
+.memContainer input[type="checkbox"]+label:after {
+    position: absolute;
+    top: 0.45em;
+    left: 0.2em;
+    font-size: 0.8em;
+    color: #fff;
+    opacity: 0;
+    font-family: FontAwesome;
+    content: "\f00c";
+}
+
+.memContainer input:checked+label:after {
+    opacity: 1;
+}
+
+.memContainer select {
+    height: 3.4em;
+    line-height: 2;
+}
+
+.memContainer select:first-of-type {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.memContainer select:last-of-type {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.memContainer select:focus,
+.memContainer select:active {
+    outline: 0;
+}
+
+.memContainer select option {
+    background-color: #FF615E;
+    color: #fff;
+}
+
+.memContainer .input-group {
+    margin-bottom: 1em;
+    zoom: 1;
+}
+
+.memContainer .input-group:before,
+.memContainer .input-group:after {
+    content: "";
+    display: table;
+}
+
+.memContainer .input-group:after {
+    clear: both;
+}
+
+.memContainer .input-group-icon {
+    position: relative;
+}
+
+.memContainer .input-group-icon input {
+    padding-left: 4.4em;
+}
+
+.memContainer .input-group-icon .input-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3.4em;
+    height: 3.4em;
+    line-height: 3.4em;
+    text-align: center;
+    pointer-events: none;
+}
+
+.memContainer .input-group-icon .input-icon:after {
+    position: absolute;
+    top: 0.9em;
+    bottom: 0.6em;
+    left: 3.4em;
+    display: block;
+    border-right: 1px solid #e5e5e5;
+    content: "";
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+.memContainer .input-group-icon .input-icon i {
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+    position: relative;
+    top: 20px;
+}
+
+.memContainer {
+    background-color: #F0F5E5;
+    max-width: 38em;
+    padding: 1em 3em 2em 3em;
+    margin: 0em auto;
+    background-color: #fff;
+    border-radius: 4.2px;
+    box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+    margin-top: 100px;
+    color: #b9b9b9;
+}
+
+.memContainer .row {
+    zoom: 1;
+}
+
+.memContainer .row:before,
+.memContainer .row:after {
+    content: "";
+    display: table;
+}
+
+.memContainer .row:after {
+    clear: both;
+}
+
+.memContainer .col-half {
+    padding-right: 10px;
+    float: left;
+    width: 50%;
+}
+
+.memContainer .col-half:last-of-type {
+    padding-right: 0;
+}
+
+.memContainer .col-third {
+    padding-right: 10px;
+    float: left;
+    width: 33.33333333%;
+}
+
+.memContainer .col-third:last-of-type {
+    padding-right: 0;
+}
+
+.memContainer #Photo {
+    width: 50%;
+}
+
+
+/* DatePicker */
+
+.xdsoft_datetimepicker .xdsoft_datepicker {
+    width: 300px;
+    /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+    height: 151px;
+    /* height:  151px; */
+}
+
+#joinSuccess img {
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+
+
+/* 加入成功按鈕 */
+
+.successSubmit {
+    width: 8vw;
+    height: 3vw;
+    border-radius: 0.5vw;
+    background-color: #465764;
+    border: none;
+    color: white;
+    font-size: 1.2vw;
+    text-align: center;
+    margin-right: 30;
+}
+
+#joinSuccess p {
+    color: #465764;
+    font-size: 3vw;
+    text-align: center;
+}
+
+#joinSuccessBtn {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+
+/* 登入 */
+
+#Login input[type=text],
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#Login #lname {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#Login input[type=submit] {
+    width: 100%;
+    background-color: #FF615F;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#Login input[type=submit]:hover {
+    background-color: #e75755;
+}
+
+#Login {
+    border-radius: 5px;
+    background-color: #F6F6F6;
+    padding: 20px;
+    width: 25%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #CBCBCB;
+}
+
+#LoginBlock {
+    padding-top: 250px;
+    padding-bottom: 100px;
+    background-color: #f0f5e5;
+}
+
+
+/* 會員頁面 */
+
+#memberPageTable {
+    border-radius: 5px;
+    background-color: #F6F6F6;
+    padding: 20px;
+    width: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #CBCBCB;
+}
+
+#memberPageTable input[type=text],
+#memberPageTable input[type=password],
+#memberPageTable input[type=email],
+#memberPageTable select {
+    width: 100%;
+    padding: 4px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 1.8vw;
+}
+
+#memberPageTable input[type=submit] {
+    width: 90%;
+    background-color: #FF615F;
+    color: white;
+    padding: 14px 25px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#memberPageTableBlock {
+    background-color: #f0f5e5;
+    display: block;
+    padding-bottom: 150px;
+}
+
+.memPageBlock {
+    background-color: #f0f5e5;
+    padding-bottom: 20px;
+    padding-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.memPageList {
+    width: 48%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.memPageList i {
+    color: #81726A;
+    font-size: 10vh;
+    display: inline-flex;
+    text-align: center;
+}
+
+.memPageBlock p {
+    color: #81726A;
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.memPageList li {
+    padding: 20px;
+    display: inline-flex;
+}
+
+.memPageList i:hover {
+    color: #68534D;
+}
+
+.memPageList a {
+    color: #81726A;
+}
+
+.memPageList a:hover {
+    color: #68534D;
+    text-decoration: none;
+}
+
+.memPageList p {
+    font-size: 20px;
+}
+
+.memChoseList {
+    display: inline-flex;
+    flex-direction: column;
+}

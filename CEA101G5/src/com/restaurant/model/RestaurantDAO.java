@@ -1,41 +1,57 @@
 package com.restaurant.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-public class RestaurantDAO implements Restaurant_interface{
-	
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "CEA101G5";
-	String passwd = "123456";
-	
-	
-	private static final String INSERT_STMT = "INSERT INTO restaurant (store_id, mem_phone, store_char, store_info, store_name, store_phone, "
-			+ "store_address, store_status, store_final_reservdate, store_order_condition, store_reserv_condition,store_queue_condition, "
-			+ "store_order_waittime, store_opentime, store_closetime, STORE_START_ORDERDATE, STORE_END_ORDERDATE, accept_groups, num_of_groups, "
-			+ "store_people_total, store_rating_total)"
+import com.restaurantpicture.model.RestaurantPictureDAO;
+import com.restaurantpicture.model.RestaurantPictureVO;
+
+public class RestaurantDAO implements Restaurant_interface {
+
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G5");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static final String INSERT_STMT = "INSERT INTO RESTAURANT (STORE_ID, MEM_PHONE, STORE_CHAR, STORE_INFO, STORE_NAME, STORE_PHONE, "
+			+ "STORE_ADDRESS, STORE_STATUS, STORE_FINAL_RESERVDATE, STORE_ORDER_CONDITION, STORE_RESERV_CONDITION,STORE_QUEUE_CONDITION, "
+			+ "STORE_ORDER_WAITTIME, STORE_OPENTIME, STORE_CLOSETIME, STORE_START_ORDERDATE, STORE_END_ORDERDATE, ACCEPT_GROUPS, NUM_OF_GROUPS, "
+			+ "STORE_PEOPLE_TOTAL, STORE_RATING_TOTAL)"
 			+ "VALUES ('S' ||LPAD(SEQ_STORE_ID.NEXTVAL,6,'0'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE = "UPDATE restaurant set MEM_PHONE= ?, STORE_CHAR=?, store_info=?, store_name=?, store_phone=?, store_address=?, store_status=?, "
-			+ "store_final_reservdate=?, store_order_condition=?, store_reserv_condition=?, store_queue_condition=?, store_order_waittime=?, "
-			+ "store_opentime=?, store_closetime=?, STORE_START_ORDERDATE=?, STORE_END_ORDERDATE=?, accept_groups=?, num_of_groups=?, "
-			+ "store_people_total=?, store_rating_total=? WHERE store_id=? ";
+
+	private static final String EASY_INSERT_STMT = "INSERT INTO RESTAURANT (STORE_ID, MEM_PHONE, STORE_CHAR, STORE_INFO, STORE_NAME, STORE_PHONE, "
+			+ "STORE_ADDRESS, STORE_STATUS, STORE_OPENTIME, STORE_CLOSETIME)"
+			+ "VALUES ('S' ||LPAD(SEQ_STORE_ID.NEXTVAL,6,'0'),?,?,?,?,?,?,?,?,?)";
 	
-	private static final String GET_ONE_STMT = "SELECT store_id, mem_phone, store_char, store_info, store_name, store_phone," + 
-			"store_address, store_status, store_final_reservdate, store_order_condition, store_reserv_condition,store_queue_condition," + 
-			"store_order_waittime, store_opentime, store_closetime, STORE_START_ORDERDATE, STORE_END_ORDERDATE, accept_groups, num_of_groups,"+ 
-			"store_people_total, store_rating_total from restaurant where store_id=?";
-	
-	private static final String GET_ALl_STMT = "select * from restaurant order by store_id";
-			
-	
-	
+	private static final String UPDATE = "UPDATE RESTAURANT SET MEM_PHONE= ?, STORE_CHAR=?, STORE_INFO=?, STORE_NAME=?, STORE_PHONE=?, STORE_ADDRESS=?, STORE_STATUS=?, "
+			+ "STORE_FINAL_RESERVDATE=?, STORE_ORDER_CONDITION=?, STORE_RESERV_CONDITION=?, STORE_QUEUE_CONDITION=?, STORE_ORDER_WAITTIME=?, "
+			+ "STORE_OPENTIME=?, STORE_CLOSETIME=?, STORE_START_ORDERDATE=?, STORE_END_ORDERDATE=?, ACCEPT_GROUPS=?, NUM_OF_GROUPS=?, "
+			+ "STORE_PEOPLE_TOTAL=?, STORE_RATING_TOTAL=? WHERE STORE_ID=? ";
+
+	private static final String GET_ONE_STMT = "SELECT STORE_ID, MEM_PHONE, STORE_CHAR, STORE_INFO, STORE_NAME, STORE_PHONE,"
+			+ "STORE_ADDRESS, STORE_STATUS, STORE_FINAL_RESERVDATE, STORE_ORDER_CONDITION, STORE_RESERV_CONDITION,STORE_QUEUE_CONDITION,"
+			+ "STORE_ORDER_WAITTIME, STORE_OPENTIME, STORE_CLOSETIME, STORE_START_ORDERDATE, STORE_END_ORDERDATE, ACCEPT_GROUPS, NUM_OF_GROUPS,"
+			+ "STORE_PEOPLE_TOTAL, STORE_RATING_TOTAL FROM RESTAURANT WHERE STORE_ID=?";
+
+	private static final String GET_ALl_STMT = "SELECT * FROM RESTAURANT";
+
+	private static final String DELETE_RESTAURANT = "DELETE FROM RESTAURANT WHERE STORE_ID = ?";
+
 	// 新增
 	@Override
 	public void insert(RestaurantVO restaurantVO) {
@@ -44,8 +60,7 @@ public class RestaurantDAO implements Restaurant_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, restaurantVO.getMemPhone());
@@ -72,9 +87,6 @@ public class RestaurantDAO implements Restaurant_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -94,7 +106,7 @@ public class RestaurantDAO implements Restaurant_interface{
 				}
 			}
 		}
-		
+
 	}
 
 	// 修改
@@ -105,12 +117,11 @@ public class RestaurantDAO implements Restaurant_interface{
 
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1,restaurantVO.getMemPhone());
-			pstmt.setString	(2,restaurantVO.getStoreChar())	;	
+			pstmt.setString(1, restaurantVO.getMemPhone());
+			pstmt.setString(2, restaurantVO.getStoreChar());
 			pstmt.setString(3, restaurantVO.getStoreInfo());
 			pstmt.setString(4, restaurantVO.getStoreName());
 			pstmt.setString(5, restaurantVO.getStorePhone());
@@ -134,9 +145,6 @@ public class RestaurantDAO implements Restaurant_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -156,7 +164,7 @@ public class RestaurantDAO implements Restaurant_interface{
 				}
 			}
 		}
-		
+
 	}
 
 	// 主鍵查詢
@@ -168,8 +176,7 @@ public class RestaurantDAO implements Restaurant_interface{
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, storeId);
@@ -178,34 +185,31 @@ public class RestaurantDAO implements Restaurant_interface{
 
 			while (rs.next()) {
 				restaurantVO = new RestaurantVO();
-				restaurantVO.setStoreId(rs.getString("store_id"));
-				restaurantVO.setMemPhone(rs.getString("mem_phone"));
-				restaurantVO.setStoreChar(rs.getString("store_char"));
-				restaurantVO.setStoreInfo(rs.getString("store_info"));
-				restaurantVO.setStoreName(rs.getString("store_name"));
-				restaurantVO.setStorePhone(rs.getString("store_phone"));
-				restaurantVO.setStoreAddress(rs.getString("store_address"));
-				restaurantVO.setStoreStatus(rs.getInt("store_status"));
-				restaurantVO.setStoreFinalReservDate(rs.getInt("store_final_reservdate"));
-				restaurantVO.setStoreQueueCondition(rs.getInt("store_queue_condition"));
-				restaurantVO.setStoreReservCondition(rs.getInt("STORE_RESERV_CONDITION"));				
-				restaurantVO.setStoreOrderCondition(rs.getInt("store_order_condition"));
-				restaurantVO.setStoreOrderWaitTime(rs.getInt("store_order_waittime"));
-				restaurantVO.setStoreOpenTime(rs.getTimestamp("store_opentime"));
-				restaurantVO.setStoreCloseTime(rs.getTimestamp("store_closetime"));
+				restaurantVO.setStoreId(rs.getString("STORE_ID"));
+				restaurantVO.setMemPhone(rs.getString("MEM_PHONE"));
+				restaurantVO.setStoreChar(rs.getString("STORE_CHAR"));
+				restaurantVO.setStoreInfo(rs.getString("STORE_INFO"));
+				restaurantVO.setStoreName(rs.getString("STORE_NAME"));
+				restaurantVO.setStorePhone(rs.getString("STORE_PHONE"));
+				restaurantVO.setStoreAddress(rs.getString("STORE_ADDRESS"));
+				restaurantVO.setStoreStatus(rs.getInt("STORE_STATUS"));
+				restaurantVO.setStoreFinalReservDate(rs.getInt("STORE_FINAL_RESERVDATE"));
+				restaurantVO.setStoreQueueCondition(rs.getInt("STORE_QUEUE_CONDITION"));
+				restaurantVO.setStoreReservCondition(rs.getInt("STORE_RESERV_CONDITION"));
+				restaurantVO.setStoreOrderCondition(rs.getInt("STORE_ORDER_CONDITION"));
+				restaurantVO.setStoreOrderWaitTime(rs.getInt("STORE_ORDER_WAITTIME"));
+				restaurantVO.setStoreOpenTime(rs.getTimestamp("STORE_OPENTIME"));
+				restaurantVO.setStoreCloseTime(rs.getTimestamp("STORE_CLOSETIME"));
 				restaurantVO.setStoreStartOrderDate(rs.getTimestamp("STORE_START_ORDERDATE"));
 				restaurantVO.setStoreEndOrderDate(rs.getTimestamp("STORE_END_ORDERDATE"));
-				restaurantVO.setAcceptGroups(rs.getInt("accept_groups"));
-				restaurantVO.setNumOfGroups(rs.getInt("num_of_groups"));
-				restaurantVO.setStorePeopleTotal(rs.getInt("store_people_total"));
-				restaurantVO.setStoreRatingTotal(rs.getInt("store_rating_total"));
+				restaurantVO.setAcceptGroups(rs.getInt("ACCEPT_GROUPS"));
+				restaurantVO.setNumOfGroups(rs.getInt("NUM_OF_GROUPS"));
+				restaurantVO.setStorePeopleTotal(rs.getInt("STORE_PEOPLE_TOTAL"));
+				restaurantVO.setStoreRatingTotal(rs.getInt("STORE_RATING_TOTAL"));
 
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -243,42 +247,38 @@ public class RestaurantDAO implements Restaurant_interface{
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALl_STMT);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				restaurantVO = new RestaurantVO();
-				restaurantVO.setStoreId(rs.getString("store_id"));
-				restaurantVO.setMemPhone(rs.getString("mem_phone"));
-				restaurantVO.setStoreChar(rs.getString("store_char"));
-				restaurantVO.setStoreInfo(rs.getString("store_info"));
-				restaurantVO.setStoreId(rs.getString("store_id"));
-				restaurantVO.setStoreName(rs.getString("store_name"));
-				restaurantVO.setStorePhone(rs.getString("store_phone"));
-				restaurantVO.setStoreAddress(rs.getString("store_address"));
-				restaurantVO.setStoreStatus(rs.getInt("store_status"));
-				restaurantVO.setStoreFinalReservDate(rs.getInt("store_final_reservdate"));
-				restaurantVO.setStoreQueueCondition(rs.getInt("store_queue_condition"));
-				restaurantVO.setStoreOrderCondition(rs.getInt("store_order_condition"));
-				restaurantVO.setStoreOrderWaitTime(rs.getInt("store_order_waittime"));
-				restaurantVO.setStoreOpenTime(rs.getTimestamp("store_opentime"));
-				restaurantVO.setStoreCloseTime(rs.getTimestamp("store_closetime"));
+				restaurantVO.setStoreId(rs.getString("STORE_ID"));
+				restaurantVO.setMemPhone(rs.getString("MEM_PHONE"));
+				restaurantVO.setStoreChar(rs.getString("STORE_CHAR"));
+				restaurantVO.setStoreInfo(rs.getString("STORE_INFO"));
+				restaurantVO.setStoreId(rs.getString("STORE_ID"));
+				restaurantVO.setStoreName(rs.getString("STORE_NAME"));
+				restaurantVO.setStorePhone(rs.getString("STORE_PHONE"));
+				restaurantVO.setStoreAddress(rs.getString("STORE_ADDRESS"));
+				restaurantVO.setStoreStatus(rs.getInt("STORE_STATUS"));
+				restaurantVO.setStoreFinalReservDate(rs.getInt("STORE_FINAL_RESERVDATE"));
+				restaurantVO.setStoreQueueCondition(rs.getInt("STORE_QUEUE_CONDITION"));
+				restaurantVO.setStoreOrderCondition(rs.getInt("STORE_ORDER_CONDITION"));
+				restaurantVO.setStoreOrderWaitTime(rs.getInt("STORE_ORDER_WAITTIME"));
+				restaurantVO.setStoreOpenTime(rs.getTimestamp("STORE_OPENTIME"));
+				restaurantVO.setStoreCloseTime(rs.getTimestamp("STORE_CLOSETIME"));
 				restaurantVO.setStoreStartOrderDate(rs.getTimestamp("STORE_START_ORDERDATE"));
 				restaurantVO.setStoreEndOrderDate(rs.getTimestamp("STORE_END_ORDERDATE"));
-				restaurantVO.setAcceptGroups(rs.getInt("accept_groups"));
-				restaurantVO.setNumOfGroups(rs.getInt("num_of_groups"));
-				restaurantVO.setStorePeopleTotal(rs.getInt("store_people_total"));
-				restaurantVO.setStoreRatingTotal(rs.getInt("store_rating_total"));
+				restaurantVO.setAcceptGroups(rs.getInt("ACCEPT_GROUPS"));
+				restaurantVO.setNumOfGroups(rs.getInt("NUM_OF_GROUPS"));
+				restaurantVO.setStorePeopleTotal(rs.getInt("STORE_PEOPLE_TOTAL"));
+				restaurantVO.setStoreRatingTotal(rs.getInt("STORE_RATING_TOTAL"));
 				list.add(restaurantVO);
 			}
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -306,115 +306,258 @@ public class RestaurantDAO implements Restaurant_interface{
 		}
 		return list;
 	}
-	
-	
-	public static void main(String[] args) {
-		RestaurantDAO dao = new RestaurantDAO();
-		
-		// 新增
-//		RestaurantVO rstrtVO1 = new RestaurantVO();
-//		rstrtVO1.setMemPhone("0921842852");
-//		rstrtVO1.setStoreChar("SCHAR000001");
-//		rstrtVO1.setStoreInfo("美味便當店");
-//		rstrtVO1.setStoreName("瀚林察院");
-//		rstrtVO1.setStorePhone("044445555");
-//		rstrtVO1.setStoreAddress("Taipei");
-//		rstrtVO1.setStoreStatus(1);
-//		rstrtVO1.setStoreFinalReservDate(30);
-//		rstrtVO1.setStoreOrderCondition(1);
-//		rstrtVO1.setStoreReservCondition(1);
-//		rstrtVO1.setStoreQueueCondition(1);
-//		rstrtVO1.setStoreOrderWaitTime(30);
-//		rstrtVO1.setStoreOpenTime(java.sql.Timestamp.valueOf("2021-01-01 09:22:30"));
-//		rstrtVO1.setStoreCloseTime(java.sql.Timestamp.valueOf("2021-02-01 09:22:30"));
-//		rstrtVO1.setStoreStartOrderDate(java.sql.Timestamp.valueOf("2021-01-01 09:22:30"));
-//		rstrtVO1.setStoreEndOrderDate(java.sql.Timestamp.valueOf("2021-02-01 09:22:30"));
-//		rstrtVO1.setAcceptGroups(1);
-//		rstrtVO1.setNumOfGroups(4);
-//		rstrtVO1.setStorePeopleTotal(10);
-//		rstrtVO1.setStoreRatingTotal(1200);
-//		
-//		dao.insert(rstrtVO1);
-	
-		
-		// 修改
-//		RestaurantVO rstrtVO2 = new RestaurantVO();
-//		rstrtVO2.setStoreId("S000012");
-//		rstrtVO2.setMemPhone("0921842852");
-//		rstrtVO2.setStoreChar("SCHAR000001");
-//		rstrtVO2.setStoreInfo("this is fucking good");
-//		rstrtVO2.setStoreName("googoo");
-//		rstrtVO2.setStorePhone("044445555");
-//		rstrtVO2.setStoreAddress("Caipei");
-//		rstrtVO2.setStoreStatus(1);
-//		rstrtVO2.setStoreFinalReservDate(30);
-//		rstrtVO2.setStoreOrderCondition(1);
-//		rstrtVO2.setStoreReservCondition(1);
-//		rstrtVO2.setStoreQueueCondition(1);
-//		rstrtVO2.setStoreOrderWaitTime(30);
-//		rstrtVO2.setStoreOpenTime(java.sql.Timestamp.valueOf("2021-01-01 09:23:30"));
-//		rstrtVO2.setStoreCloseTime(java.sql.Timestamp.valueOf("2021-01-01 09:22:30"));
-//		rstrtVO2.setStoreStartOrderDate(java.sql.Timestamp.valueOf("2021-01-01 09:25:30"));
-//		rstrtVO2.setStoreEndOrderDate(java.sql.Timestamp.valueOf("2021-01-01 09:27:30"));
-//		rstrtVO2.setAcceptGroups(1);
-//		rstrtVO2.setNumOfGroups(4);
-//		rstrtVO2.setStorePeopleTotal(10);
-//		rstrtVO2.setStoreRatingTotal(1200);
-//		
-//		dao.update(rstrtVO2);
-		
-//		// 主鍵查詢
-//		RestaurantVO rstrtVO3 = dao.findByPrimaryKey("S000001");
-//		System.out.print(rstrtVO3.getStoreId()+",");
-//		System.out.print(rstrtVO3.getMemPhone()+",");
-//		System.out.print(rstrtVO3.getStoreChar()+",");
-//		System.out.print(rstrtVO3.getStoreInfo()+",");
-//		System.out.print(rstrtVO3.getStoreName()+",");
-//		System.out.print(rstrtVO3.getStorePhone()+",");
-//		System.out.print(rstrtVO3.getStoreAddress()+",");
-//		System.out.print(rstrtVO3.getStoreStatus()+",");
-//		System.out.print(rstrtVO3.getStoreFinalReservDate()+",");
-//		System.out.print(rstrtVO3.getStoreOrderCondition()+",");
-//		System.out.print(rstrtVO3.getStoreReservCondition()+",");
-//		System.out.print(rstrtVO3.getStoreQueueCondition()+",");
-//		System.out.print(rstrtVO3.getStoreOrderWaitTime()+",");
-//		System.out.print(rstrtVO3.getStoreOpenTime()+",");
-//		System.out.print(rstrtVO3.getStoreCloseTime()+",");
-//		System.out.print(rstrtVO3.getStoreStartOrderDate()+",");
-//		System.out.print(rstrtVO3.getStoreEndOrderDate()+",");
-//		System.out.print(rstrtVO3.getAcceptGroups()+",");
-//		System.out.print(rstrtVO3.getNumOfGroups()+",");
-//		System.out.print(rstrtVO3.getStorePeopleTotal()+",");
-//		System.out.print(rstrtVO3.getStoreRatingTotal());
-		
-	// 查詢全部
-		
-		List<RestaurantVO> list = dao.getAll();
-		for (RestaurantVO rstrtVO : list) {
-			System.out.print(rstrtVO.getStoreId()+",");
-			System.out.print(rstrtVO.getMemPhone()+",");
-			System.out.print(rstrtVO.getStoreChar()+",");
-			System.out.print(rstrtVO.getStoreInfo()+",");
-			System.out.print(rstrtVO.getStoreName()+",");
-			System.out.print(rstrtVO.getStorePhone()+",");
-			System.out.print(rstrtVO.getStoreAddress()+",");
-			System.out.print(rstrtVO.getStoreStatus()+",");
-			System.out.print(rstrtVO.getStoreFinalReservDate()+",");
-			System.out.print(rstrtVO.getStoreOrderCondition()+",");
-			System.out.print(rstrtVO.getStoreReservCondition()+",");
-			System.out.print(rstrtVO.getStoreQueueCondition()+",");
-			System.out.print(rstrtVO.getStoreOrderWaitTime()+",");
-			System.out.print(rstrtVO.getStoreOpenTime()+",");
-			System.out.print(rstrtVO.getStoreCloseTime()+",");
-			System.out.print(rstrtVO.getStoreStartOrderDate()+",");
-			System.out.print(rstrtVO.getStoreEndOrderDate()+",");
-			System.out.print(rstrtVO.getAcceptGroups()+",");
-			System.out.print(rstrtVO.getNumOfGroups()+",");
-			System.out.print(rstrtVO.getStorePeopleTotal()+",");
-			System.out.println(rstrtVO.getStoreRatingTotal());
-			System.out.println();
+
+	@Override
+	public void delete(String storeId) {
+		int updateCount_RESTAURANT = 0;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+
+			// 1●設定於 pstm.executeUpdate()之前
+			con.setAutoCommit(false);
+
+			// 刪除會員
+			pstmt = con.prepareStatement(DELETE_RESTAURANT);
+			pstmt.setString(1, storeId);
+			updateCount_RESTAURANT = pstmt.executeUpdate();
+
+			// 2●設定於 pstm.executeUpdate()之後
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("刪除餐廳編號" + storeId + "時,共有餐廳" + updateCount_RESTAURANT + "間同時被刪除");
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
 		}
-		
+
+	}
+
+	@Override
+	public void easyinsert(RestaurantVO restaurantVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(EASY_INSERT_STMT);
+			
+			pstmt.setString(1, restaurantVO.getMemPhone());
+			pstmt.setString(2, restaurantVO.getStoreChar());
+			pstmt.setString(3, restaurantVO.getStoreInfo());
+			pstmt.setString(4, restaurantVO.getStoreName());
+			pstmt.setString(5, restaurantVO.getStorePhone());
+			pstmt.setString(6, restaurantVO.getStoreAddress());
+			pstmt.setInt(7, restaurantVO.getStoreStatus());
+			pstmt.setTimestamp(8, restaurantVO.getStoreOpenTime());
+			pstmt.setTimestamp(9, restaurantVO.getStoreCloseTime());
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	@Override
+	public void easyInsertWithPics(RestaurantVO restaurantVO,RestaurantPictureVO restaurantPictureVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			
+			// 1●設定於 pstm.executeUpdate()之前
+    		con.setAutoCommit(false);
+			
+    		// 先新增餐廳
+			String cols[] = {"STORE_ID"};
+			pstmt = con.prepareStatement(EASY_INSERT_STMT , cols);			
+			pstmt.setString(1, restaurantVO.getMemPhone());
+			pstmt.setString(2, restaurantVO.getStoreChar());
+			pstmt.setString(3, restaurantVO.getStoreInfo());
+			pstmt.setString(4, restaurantVO.getStoreName());
+			pstmt.setString(5, restaurantVO.getStorePhone());
+			pstmt.setString(6, restaurantVO.getStoreAddress());
+			pstmt.setInt(7, restaurantVO.getStoreStatus());
+			pstmt.setTimestamp(8, restaurantVO.getStoreOpenTime());
+			pstmt.setTimestamp(9, restaurantVO.getStoreCloseTime());
+			pstmt.executeUpdate();
+			//掘取對應的自增主鍵值
+			String next_storeId = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_storeId = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_storeId +"(剛新增成功的餐廳編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			// 再同時新增餐廳照片
+			RestaurantPictureDAO dao = new RestaurantPictureDAO();
+			RestaurantPictureVO aStorePic = new RestaurantPictureVO();; 
+				aStorePic.setStoreId(next_storeId) ;
+				dao.insertWithStore(aStorePic,con);
+
+			// 2●設定於 pstm.executeUpdate()之後
+			con.commit();
+			con.setAutoCommit(true);
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-store");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
+	@Override
+	public List<RestaurantVO> getAll(Map<String, String[]> map) {
+		List<RestaurantVO> list = new ArrayList<RestaurantVO>();
+		RestaurantVO restaurantVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			con = ds.getConnection();
+			String finalSQL = "select * from Restaurant "
+		          + jdbcUtil_CompositeQuery_Restaurant.get_WhereCondition(map)
+		          + "order by store_Id";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				restaurantVO = new RestaurantVO();
+				restaurantVO.setStoreId(rs.getString("STORE_ID"));
+				restaurantVO.setMemPhone(rs.getString("MEM_PHONE"));
+				restaurantVO.setStoreChar(rs.getString("STORE_CHAR"));
+				restaurantVO.setStoreInfo(rs.getString("STORE_INFO"));
+				restaurantVO.setStoreId(rs.getString("STORE_ID"));
+				restaurantVO.setStoreName(rs.getString("STORE_NAME"));
+				restaurantVO.setStorePhone(rs.getString("STORE_PHONE"));
+				restaurantVO.setStoreAddress(rs.getString("STORE_ADDRESS"));
+				restaurantVO.setStoreStatus(rs.getInt("STORE_STATUS"));
+				restaurantVO.setStoreFinalReservDate(rs.getInt("STORE_FINAL_RESERVDATE"));
+				restaurantVO.setStoreQueueCondition(rs.getInt("STORE_QUEUE_CONDITION"));
+				restaurantVO.setStoreOrderCondition(rs.getInt("STORE_ORDER_CONDITION"));
+				restaurantVO.setStoreOrderWaitTime(rs.getInt("STORE_ORDER_WAITTIME"));
+				restaurantVO.setStoreOpenTime(rs.getTimestamp("STORE_OPENTIME"));
+				restaurantVO.setStoreCloseTime(rs.getTimestamp("STORE_CLOSETIME"));
+				restaurantVO.setStoreStartOrderDate(rs.getTimestamp("STORE_START_ORDERDATE"));
+				restaurantVO.setStoreEndOrderDate(rs.getTimestamp("STORE_END_ORDERDATE"));
+				restaurantVO.setAcceptGroups(rs.getInt("ACCEPT_GROUPS"));
+				restaurantVO.setNumOfGroups(rs.getInt("NUM_OF_GROUPS"));
+				restaurantVO.setStorePeopleTotal(rs.getInt("STORE_PEOPLE_TOTAL"));
+				restaurantVO.setStoreRatingTotal(rs.getInt("STORE_RATING_TOTAL"));
+				list.add(restaurantVO);
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 	
 }
