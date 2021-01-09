@@ -7,17 +7,23 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
-
+import com.member.model.MemRedis;
+import com.member.model.MemSMSSender;
 import com.member.model.MemService;
 import com.member.model.MemVO;
 import com.restaurant.model.RestaurantService;
 import com.restaurant.model.RestaurantVO;
+
+
+import redis.clients.jedis.Jedis;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 
 public class MemServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	public static final String ACCOUNT_SID = "ACd807bf62b6cf033835cc5d6e7f0c8a52";
+    public static final String AUTH_TOKEN = "3e527d9f5bb69432299ff88f97fccd6e";
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -481,7 +487,18 @@ public class MemServlet extends HttpServlet {
 				session.removeAttribute("memPhoto");
 
 				/*************************** 3.新增完成轉交成功畫面(Send the Success view) ***********/
-				String url = "/front-customer-end/member/JoinSuccess.jsp";
+				/*************************** 寄送SMS驗證訊息 ***********/
+				MemRedis memRedis = new MemRedis();
+				String memAuthCode = memRedis.setAuthCode(memVO.getMemPhone());
+				
+				String messageText = "HI！ " +memVO.getMemName()+" 歡迎加入Enak，你要的美食都在這裡。"+ "\n驗證碼："+ memAuthCode  ;
+				MemSMSSender memSMS = new MemSMSSender();
+				memSMS.sendSMS(memVO.getMemPhone(),messageText);
+				
+				MemVO memRegister = memSvc.getOneMem(memPhone);
+				session.setAttribute("memRegister", memRegister);
+				
+				String url = "/front-customer-end/member/SMSAuth.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -489,6 +506,60 @@ public class MemServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/member/addMem.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("checkAuth".equals(action)) { 
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+				String memPhone = req.getParameter("memPhone");
+				String memAuthCode = req.getParameter("memAuthCode");
+				Integer memCondition = new Integer(req.getParameter("memCondition").trim());
+
+				Jedis jedis = new Jedis("localhost", 6379);
+				jedis.auth("123456");
+				
+				String testAuth = jedis.get(memPhone);
+				if (!memAuthCode.trim().equals(testAuth)) {
+					errorMsgs.add("驗證有誤，請重新確認");
+				}else if (testAuth == null) {
+					errorMsgs.add("驗證碼已逾時，請重新申請");
+				}
+				
+				MemVO memVO = new MemVO();
+				memVO.setMemPhone(memPhone);
+				memVO.setMemCondition(memCondition);
+
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("memVO", memVO);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-custom-end/member/SMSAuth.jsp");
+					failureView.forward(req, res);
+					return; // 程式中斷
+				}
+
+				/*************************** 2.開始修改資料 *****************************************/
+				MemService memSvc = new MemService();
+				memVO = memSvc.updateMemCondition(memPhone,memCondition);
+
+				/*************************** 3.修改完成轉交成功畫面(Send the Success view) *************/
+				req.setAttribute("memVO", memVO);
+				String url = "/front-customer-end/member/JoinSuccess.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/*************************** 其他錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("其他錯誤訊息:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-custom-end/member/SMSAuth.jsp");
 				failureView.forward(req, res);
 			}
 		}
