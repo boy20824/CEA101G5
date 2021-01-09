@@ -5,10 +5,12 @@
 <%@ page import="com.foodorderdetail.model.*"%>
 <%@ page import="com.foodorder.model.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ page import="com.member.model.*"%>
+<!-- 從session拿到會員編號 -->
+<%MemVO member =(MemVO)session.getAttribute("memLogin") ;%>
 <%
 	FoodOrderService foodOrderSvc = new FoodOrderService();
-	List<FoodOrderVO> list = foodOrderSvc.getAllByMemberPhoneStatus2("0921842852"); //先用會員電話找到訂單資料
+	List<FoodOrderVO> list = foodOrderSvc.getAllByMemberPhoneStatus2(member.getMemPhone()); //先用會員電話找到訂單資料
 	pageContext.setAttribute("list", list);
 %>
 

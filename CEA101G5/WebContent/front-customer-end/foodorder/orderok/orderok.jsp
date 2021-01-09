@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.foodorderdetail.model.*"%>
 <%@ page import="com.foodorder.model.*"%>
+<%@ page import="com.member.model.*"%>
 
 <%
 	FoodOrderService foodOrderSvc = new FoodOrderService();
@@ -42,6 +43,8 @@ response.setDateHeader("Expires", 0);
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 <body>
+<!-- 從session拿到會員編號 -->
+<%MemVO member =(MemVO)session.getAttribute("memLogin") ;%>
 	<div class="wrap">
 		<!--  側拉選單  -->
 		<div class="side-menu-all">
@@ -97,11 +100,11 @@ response.setDateHeader("Expires", 0);
 						</li>
 						<li>
 							<p>取餐人姓名</p>
-							<p>女生慢慢來沒關西</p>
+							<p><%=member.getMemName() %></p>
 						</li>
 						<li>
 							<p>取餐人手機</p>
-							<p>500 眼睛??</p>
+							<p><%=member.getMemPhone() %></p>
 						</li>
 					</ul>
 					<p>訂單資訊</p>
