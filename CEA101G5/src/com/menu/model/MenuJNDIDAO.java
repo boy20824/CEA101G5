@@ -394,7 +394,7 @@ public class MenuJNDIDAO implements Menu_interface{
 		ResultSet rs = null;
 
 		try {
-
+			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT_BY_STORE_ID );
 			
