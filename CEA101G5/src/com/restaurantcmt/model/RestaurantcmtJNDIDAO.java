@@ -18,7 +18,7 @@ public class RestaurantcmtJNDIDAO implements RestaurantCmt_interface  {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestENAK");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
