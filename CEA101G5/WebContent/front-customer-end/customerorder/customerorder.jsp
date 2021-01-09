@@ -10,7 +10,8 @@
 <%MemVO member =(MemVO)session.getAttribute("memLogin") ;%>
 <%
 	FoodOrderService foodOrderSvc = new FoodOrderService();
-	List<FoodOrderVO> list = foodOrderSvc.getAllByMemberPhoneStatus2(member.getMemPhone()); //先用會員電話找到訂單資料
+// 	List<FoodOrderVO> list = foodOrderSvc.getAllByMemberPhoneStatus2(member.getMemPhone()); //先用會員電話找到訂單資料
+	List<FoodOrderVO> list = foodOrderSvc.getAllByMemberPhoneStatus2("0921842859");
 	pageContext.setAttribute("list", list);
 %>
 
@@ -89,7 +90,9 @@
                     <div class="open-btn">
                         <a class="showMore">查看更多..</a>
                     </div>
+                    <c:if test="${foodOrderVO.foodorderCmtStatus==0 }">
                     <input type="button" class="cmt" value="評論餐點">
+                    </c:if>
                 </div> 
                 
             </div>
@@ -108,6 +111,7 @@
             </div>
             <form method="post" action="<%=request.getContextPath()%>/restaurantcmt/RestaurantCmt.do">
             <input type="hidden" name="storeId" value="${foodOrderVO.storeId}">
+            <input type="hidden" name="foodOrderId" value="${foodOrderVO.foodOrderId }">
             <input type="hidden" name="memPhone" value="0921842851">
             <input type="hidden" name="action" value="insert">
             <div class="star">

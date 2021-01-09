@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.foodorder.model.FoodOrderService;
 import com.menu.model.MenuService;
 import com.menu.model.MenuVO;
 import com.restaurantcmt.model.RestaurantCmtService;
@@ -44,6 +45,7 @@ public class RestaurantCmtServlet extends HttpServlet {
 			String memPhone =req.getParameter("memPhone");
 			String storeCmtContent = req.getParameter("cmt");
 			Integer storeRating=0;
+			String foodOrderId = req.getParameter("foodOrderId");
 //			取得餐廳評分
 			Enumeration<String> enu= req.getParameterNames();
 			int i =0;
@@ -56,7 +58,8 @@ public class RestaurantCmtServlet extends HttpServlet {
 			}
 				/*************************** 2.開始查詢資料 *****************************************/
 				RestaurantCmtService cmtSvc = new RestaurantCmtService();
-				
+				FoodOrderService foodSvc = new FoodOrderService();
+				foodSvc.updateOneByFoodOrderId(foodOrderId);
 				 cmtSvc.addRestaurantCmt(storeId,memPhone,storeCmtContent,storeRating,new Integer(0));
 			
 
