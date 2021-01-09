@@ -3,10 +3,12 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.menu.model.*"%>
 <%@ page import="com.restaurant.model.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.member.model.*"%>
 
 <%
 	RestaurantService restaurantSvc = new RestaurantService(); //創建 實體
-	RestaurantVO restaurantVO = restaurantSvc.getOneRestaurant("S000001"); //呼叫DAO並執行getAll()取得VO為每一列資訊的所有欄位並裝入List集合<泛型只能裝取該VO型別>;
+	RestaurantVO restaurantVO = restaurantSvc.getOneRestaurant(request.getParameter("storeId")); //呼叫DAO並執行getAll()取得VO為每一列資訊的所有欄位並裝入List集合<泛型只能裝取該VO型別>;
 	pageContext.setAttribute("restaurantVO", restaurantVO);
 %>
 
@@ -55,12 +57,13 @@ response.setDateHeader("Expires", 0);
 }
 </style>
 
-</script>
+
 </head>
 <body>
 	<!--存放外會員進來的參數以及餐點編號 -->
 	<input type="hidden" class="storeId" value="<%=restaurantVO.getStoreId()%>" />
-	<input type="hidden" class="memberId" value="m000001" />
+	<% MemVO memberPhone =(MemVO)session.getAttribute("memLogin");%>
+	<input type="hidden" class="memberId" value="<%= memberPhone.getMemPhone() %>" />
 
 
 	<div class="wrap">
@@ -146,7 +149,7 @@ response.setDateHeader("Expires", 0);
 						<li>
 							<img src="<%=request.getContextPath()%>/front-customer-end/menu/img/ICON/utensils-solid.svg" alt="" />
 							<p>餐廳名稱 :</p>
-							<span>桃園市中壢區復興東路35號樓之3</span>
+							<span>${restaurantVO.storeName}</span>
 						</li>
 						<li>
 							<img src="<%=request.getContextPath()%>/front-customer-end/menu/img/ICON/star-solid.svg" alt="" />
@@ -161,15 +164,15 @@ response.setDateHeader("Expires", 0);
 						<li>
 							<img src="<%=request.getContextPath()%>/front-customer-end/menu/img/ICON/phone-solid.svg" alt="" />
 							<p>餐廳電話 :</p>
-							<span>123</span>
+							<span>${restaurantVO.storePhone}</span>
 						</li>
 						<li>
 							<img src="<%=request.getContextPath()%>/front-customer-end/menu/img/ICON/map-marker-alt-solid.svg" alt="" />
-							<p>餐廳地址 :</p> <span>123</span></li>
+							<p>餐廳地址 :</p> <span>${restaurantVO.storeAddress}</span></li>
 						<li class="time">
 							<img src="<%=request.getContextPath()%>/front-customer-end/menu/img/圖片/time.png" alt="" />
 							<p>營業時間 :</p>
-							<span>123</span>
+							<span><fmt:formatDate value="${restaurantVO.storeOpenTime}" pattern="yyyy-MM-dd HH:mm:ss"/>-<fmt:formatDate value="${restaurantVO.storeCloseTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 						</li>
 					</ul>
 				</div>
@@ -185,11 +188,11 @@ response.setDateHeader("Expires", 0);
           				<div><div class="dog">${cmtVO.storeCmtContent }</div></div>
           			</c:forEach>
           			<input type="hidden" class="rating" value="${rating/cmtSvc.getAll('S000001').size()*10}" />
-          			<script>
+        			</div>
+        			<script>
           				let rate = document.querySelector('.rating')
           				document.querySelector('.full_star').style.width=Math.round(rate.value)+'%'
           			</script>
-        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     	<script type="text/javascript" src="<%=request.getContextPath()%>/front-customer-end/menu/slick/slick.min.js"></script>
     	<script>
