@@ -24,7 +24,7 @@ public class MenuJNDIDAO implements Menu_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestENAK");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -394,7 +394,7 @@ public class MenuJNDIDAO implements Menu_interface{
 		ResultSet rs = null;
 
 		try {
-
+			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT_BY_STORE_ID );
 			

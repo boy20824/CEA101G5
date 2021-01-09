@@ -229,7 +229,7 @@ color: #F5E960; /*前景星星顏色*/
 							src="<%=request.getContextPath()%>/front-customer-end/restaurant/img/ICON/map-marker-alt-solid.svg"
 							alt="" /> <span><p>餐廳地址:${restaurantVO.storeAddress}</p></span></li>
 					</ul>
-					<button class="btn btn--block card__btn">查看更多</button>
+					<button class="btn btn--block card__btn" onclick="window.location.href='<%=request.getContextPath()%>/front-customer-end/menu/menuindex.jsp?storeId=${restaurantVO.storeId}'">查看更多</button>
 				</div>
 			</div>
 		</c:forEach>

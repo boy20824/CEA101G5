@@ -9,4 +9,205 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/CEA101G5</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+	<servlet>
+		<servlet-name>MemServlet</servlet-name>
+		<servlet-class>com.member.controller.MemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemServlet</servlet-name>
+		<url-pattern>/back-end/member/mem.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MemPhotoReader</servlet-name>
+		<servlet-class>com.member.controller.MemPhotoReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemPhotoReader</servlet-name>
+		<url-pattern>/back-end/member/memPhotoReader.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RestaurantServlet</servlet-name>
+		<servlet-class>com.restaurant.controller.RestaurantServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RestaurantServlet</servlet-name>
+		<url-pattern>/back-end/restaurant/restaurant.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RestaurantPictureServlet</servlet-name>
+		<servlet-class>com.restaurantpicture.controller.RestaurantPictureServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RestaurantPictureServlet</servlet-name>
+		<url-pattern>/back-end/restaurantpicture/restaurantPicture.do</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>EmpServlet</servlet-name>
+		<servlet-class>com.emp.controller.EmpServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpServlet</servlet-name>
+		<url-pattern>/back-end/emp/emp.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EmpAuthCategoryServlet</servlet-name>
+		<servlet-class>com.empauthcategory.controller.EmpAuthCategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpAuthCategoryServlet</servlet-name>
+		<url-pattern>/back-end/empauthcategory/empac.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EmpAuthServlet</servlet-name>
+		<servlet-class>com.empauth.controller.EmpAuthServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpAuthServlet</servlet-name>
+		<url-pattern>/back-end/empauth/ea.do</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>MenuReportServlet</servlet-name>
+		<servlet-class>com.menureport.controller.MenuReportServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MenuReportServlet</servlet-name>
+		<url-pattern>/back-end/menureport/mr.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>StoreCmtReportServlet</servlet-name>
+		<servlet-class>com.storecmtreport.controller.StoreCmtReportServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StoreCmtReportServlet</servlet-name>
+		<url-pattern>/back-end/storecmtreport/scr.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>StoreCharDetailServlet</servlet-name>
+		<servlet-class>com.storechardetail.controller.StoreCharDetailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StoreCharDetailServlet</servlet-name>
+		<url-pattern>/back-end/storeChar/storeChar.do</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>AcceptReserveServlet</servlet-name>
+		<servlet-class>com.acceptreserve.controller.AcceptReserveServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcceptReserveServlet</servlet-name>
+		<url-pattern>/acceptreserve/acceptreserve.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ReserveOrderServlet</servlet-name>
+		<servlet-class>com.reserveorder.controller.ReserveOrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReserveOrderServlet</servlet-name>
+		<url-pattern>/reserveorder/reserveorder.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ReserveSituationServlet</servlet-name>
+		<servlet-class>com.reservesituation.controller.ReserveSituationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReserveSituationServlet</servlet-name>
+		<url-pattern>/reservesituation/reservesituation.do</url-pattern>
+	</servlet-mapping>
+
+
+
+
+	<filter>
+		<filter-name>MemberLoginFilter</filter-name>
+		<filter-class>com.filter.MemberLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>MemberLoginFilter</filter-name>
+		<url-pattern>/front-customer-end/member/memberPage.jsp</url-pattern>
+		<url-pattern>/front-customer-end/member/memberPageUpdate.jsp</url-pattern>
+		<url-pattern>/front-customer-end/restaurant/application.jsp</url-pattern>
+		<url-pattern>/front-store-end/restaurant/WelcomePage.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>ApplyFilter</filter-name>
+		<filter-class>com.filter.ApplyFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ApplyFilter</filter-name>
+		<url-pattern>/front-customer-end/restaurant/application.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>EmploginFilter</filter-name>
+		<filter-class>com.filter.EmpLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>EmploginFilter</filter-name>
+		<url-pattern>/back-end/emp/EmpNoAuth.jsp</url-pattern>
+		<url-pattern>/back-end/emp/listAllEmp.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>EmpEmpFilter</filter-name>
+		<filter-class>com.filter.EmpEmpFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>EmpEmpFilter</filter-name>
+		<url-pattern>/back-end/emp/listAllEmp.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>StoreLoginFilter</filter-name>
+		<filter-class>com.filter.StoreLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>StoreLoginFilter</filter-name>
+		<url-pattern>/front-store-end/restaurant/WelcomePage.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
 </web-app>

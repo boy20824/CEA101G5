@@ -24,7 +24,7 @@ public class FoodOrderJNDIDAO implements FoodOrder_interface{
 		static {
 			try {
 				Context ctx = new InitialContext();  //初始化註冊 javax.naming.InitialContext;
-				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestENAK"); //javax.naming.InitialContext 尋找連線池
+				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G5"); //javax.naming.InitialContext 尋找連線池
 			} catch (NamingException e) {
 				e.printStackTrace();
 			}
