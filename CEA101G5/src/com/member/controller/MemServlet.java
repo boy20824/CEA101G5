@@ -13,7 +13,9 @@ import com.member.model.MemService;
 import com.member.model.MemVO;
 import com.restaurant.model.RestaurantService;
 import com.restaurant.model.RestaurantVO;
-
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 import redis.clients.jedis.Jedis;
 
@@ -23,7 +25,7 @@ public class MemServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	public static final String ACCOUNT_SID = "ACd807bf62b6cf033835cc5d6e7f0c8a52";
-    public static final String AUTH_TOKEN = "3e527d9f5bb69432299ff88f97fccd6e";
+	public static final String AUTH_TOKEN = "5a5437b229b95f39202dec5be94ca6f6";
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -108,11 +110,11 @@ public class MemServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("memVO", memVO); // 資料庫取出的memVO物件,存入req
-				if("fromMemberPage".equals(comeFrom)) {
+				if ("fromMemberPage".equals(comeFrom)) {
 					String url = "/front-customer-end/member/memberPageUpdate.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_member_input.jsp
 					successView.forward(req, res);
-				}else {
+				} else {
 					String url = "/back-end/member/update_member_input.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_member_input.jsp
 					successView.forward(req, res);
@@ -125,30 +127,30 @@ public class MemServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
-		if("get_Account_Check".equals(action)) {
+
+		if ("get_Account_Check".equals(action)) {
 			res.setContentType("text/html; charset=UTF-8");
 			/*************************** 1.接收請求參數 ****************************************/
 			String memPhone = req.getParameter("memPhone");
 			/*************************** 2.開始查詢資料 ****************************************/
 			MemService memSvc = new MemService();
-			List<MemVO>list = memSvc.getAll();
+			List<MemVO> list = memSvc.getAll();
 			PrintWriter out = res.getWriter();
-			for(MemVO memVO : list) {
-				if(memVO.getMemPhone().equals(memPhone)||memPhone.length() != 10) {
+			for (MemVO memVO : list) {
+				if (memVO.getMemPhone().equals(memPhone) || memPhone.length() != 10) {
 					out.write("false");
 					break;
 				}
 			}
 			out.flush();
 			out.close();
-			
+
 		}
 
 		if ("update".equals(action)) { // 來自update_member_input.jsp的請求
 			String comeFrom = req.getParameter("comeFrom");
 			System.out.println(action);
-			
+
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -158,7 +160,6 @@ public class MemServlet extends HttpServlet {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 				String memPhone = req.getParameter("memPhone");
 				System.out.println(req.getParameter("memPhone"));
-
 
 				String memPwd = req.getParameter("memPwd").trim();
 				String memPwdReg = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).*$";
@@ -237,7 +238,7 @@ public class MemServlet extends HttpServlet {
 					in.read(memPhoto);
 					in.close();
 				}
-				
+
 				System.out.println(memPhoto);
 
 				String memCardNumber = req.getParameter("memCardNumber");
@@ -283,13 +284,13 @@ public class MemServlet extends HttpServlet {
 
 				/*************************** 3.修改完成轉交成功畫面(Send the Success view) *************/
 				req.setAttribute("memVO", memVO);
-				if("fromMemUpdate".equals(comeFrom)) {
+				if ("fromMemUpdate".equals(comeFrom)) {
 					String url = "/front-customer-end/member/memberPage.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);
 					MemVO memLogin = memSvc.getOneMem(memPhone);
 					session.setAttribute("memLogin", memLogin);
 					successView.forward(req, res);
-				}else {
+				} else {
 					String url = "/back-end/member/listAllMem.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);
 					successView.forward(req, res);
@@ -302,8 +303,8 @@ public class MemServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
-		if ("updateMemLice".equals(action)) { 
+
+		if ("updateMemLice".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -315,7 +316,6 @@ public class MemServlet extends HttpServlet {
 				String memPhone = req.getParameter("memPhone");
 				Integer memLice = new Integer(req.getParameter("memLice").trim());
 				Integer memCondition = new Integer(req.getParameter("memCondition").trim());
-
 
 				MemVO memVO = new MemVO();
 				memVO.setMemPhone(memPhone);
@@ -344,7 +344,8 @@ public class MemServlet extends HttpServlet {
 				/*************************** 其他錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("其他錯誤訊息:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/restaurant/application.jsp");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-customer-end/restaurant/application.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -421,7 +422,6 @@ public class MemServlet extends HttpServlet {
 					errorMsgs.add("暱稱只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 				}
 
-
 				InputStream in = req.getPart("memPhoto").getInputStream();
 				byte[] memPhoto = null;
 				if (in.available() == 0) {
@@ -474,8 +474,7 @@ public class MemServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO);
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-customer-end/member/addMem.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/member/addMem.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -488,20 +487,23 @@ public class MemServlet extends HttpServlet {
 
 				/*************************** 3.新增完成轉交成功畫面(Send the Success view) ***********/
 				/*************************** 寄送SMS驗證訊息 ***********/
+			
 				MemRedis memRedis = new MemRedis();
-				String memAuthCode = memRedis.setAuthCode(memVO.getMemPhone());
-				
-				String messageText = "HI！ " +memVO.getMemName()+" 歡迎加入Enak，你要的美食都在這裡。"+ "\n驗證碼："+ memAuthCode  ;
-				MemSMSSender memSMS = new MemSMSSender();
-				memSMS.sendSMS(memVO.getMemPhone(),messageText);
+				String memAuthCode = memRedis.setAuthCode(memPhone);
+				System.out.println(memAuthCode);
+				String messageText = "HI！ " + memName + " 歡迎加入Enak，你要的美食都在這裡。" + "驗證碼：" + memAuthCode;
+				System.out.println(messageText);
+//				MemSMSSender memSMS = new MemSMSSender();
+				MemSMSSender.sendSMS(memPhone, messageText);
 				
 				MemVO memRegister = memSvc.getOneMem(memPhone);
 				session.setAttribute("memRegister", memRegister);
 				
+				req.setAttribute("memVO", memVO); 
 				String url = "/front-customer-end/member/SMSAuth.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-
+				
 				/*************************** 其他錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
@@ -509,8 +511,8 @@ public class MemServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
-		if ("checkAuth".equals(action)) { 
+
+		if ("checkAuth".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -525,14 +527,14 @@ public class MemServlet extends HttpServlet {
 
 				Jedis jedis = new Jedis("localhost", 6379);
 				jedis.auth("123456");
-				
+
 				String testAuth = jedis.get(memPhone);
 				if (!memAuthCode.trim().equals(testAuth)) {
 					errorMsgs.add("驗證有誤，請重新確認");
-				}else if (testAuth == null) {
+				} else if (testAuth == null) {
 					errorMsgs.add("驗證碼已逾時，請重新申請");
 				}
-				
+
 				MemVO memVO = new MemVO();
 				memVO.setMemPhone(memPhone);
 				memVO.setMemCondition(memCondition);
@@ -540,15 +542,14 @@ public class MemServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO);
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-custom-end/member/SMSAuth.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-custom-end/member/SMSAuth.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
 
 				/*************************** 2.開始修改資料 *****************************************/
 				MemService memSvc = new MemService();
-				memVO = memSvc.updateMemCondition(memPhone,memCondition);
+				memVO = memSvc.updateMemCondition(memPhone, memCondition);
 
 				/*************************** 3.修改完成轉交成功畫面(Send the Success view) *************/
 				req.setAttribute("memVO", memVO);
@@ -615,8 +616,8 @@ public class MemServlet extends HttpServlet {
 				if (memPwd == null || memPwd.trim().length() == 0) {
 					errorMsgs.add("會員密碼請勿空白");
 				}
-				
-				if(memPhone.equals("admin") && memPwd.equals("admin")) {
+
+				if (memPhone.equals("admin") && memPwd.equals("admin")) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/emp/EmpLogin.jsp");
 					failureView.forward(req, res);
 					return;
@@ -645,19 +646,18 @@ public class MemServlet extends HttpServlet {
 					return;
 				}
 
-
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				RestaurantService restSvc = new RestaurantService();
 				List<RestaurantVO> list = restSvc.getAll();
-				
+
 				RestaurantVO storeLogin = null;
-				for(RestaurantVO RestaurantVO:list) {
-					if(RestaurantVO.getMemPhone().equals(memPhone)) {
+				for (RestaurantVO RestaurantVO : list) {
+					if (RestaurantVO.getMemPhone().equals(memPhone)) {
 						String nowStoreId = RestaurantVO.getStoreId();
 						storeLogin = restSvc.getOneRestaurant(nowStoreId);
 					}
-				} 
-				
+				}
+
 				session.setAttribute("storeLogin", storeLogin);
 				session.setAttribute("memLogin", memLogin);
 
@@ -669,11 +669,11 @@ public class MemServlet extends HttpServlet {
 						return;
 					}
 				} catch (Exception ignored) {
-					
+
 				}
 
 				res.sendRedirect(req.getContextPath() + "/front-customer-end/front/front.jsp");
-			
+
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("沒有此帳號!!!");

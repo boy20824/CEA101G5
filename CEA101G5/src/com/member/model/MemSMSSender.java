@@ -8,10 +8,10 @@ import com.twilio.type.PhoneNumber;
 public class MemSMSSender {
 
 	public static final String ACCOUNT_SID = "ACd807bf62b6cf033835cc5d6e7f0c8a52";
-	public static final String AUTH_TOKEN = "3e527d9f5bb69432299ff88f97fccd6e";
+	public static final String AUTH_TOKEN = "5a5437b229b95f39202dec5be94ca6f6";
 
 		
-		public void sendSMS(String memPhone,String messageText) {
+		public static void sendSMS(String memPhone,String messageText) {
 			
 			Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 			
@@ -23,6 +23,16 @@ public class MemSMSSender {
 
 			System.out.println(message.getSid());
 		}
+		
+//		以下為測試
+//		public static void main(String[] args) {
+//			String phone ="0921842859";
+//			String message ="0921842859";
+//			
+//			MemSMSSender.sendSMS(phone,message);
+//		}
+		
+		
 //		public void sendSMS(String memPhone,String messageText) {
 //
 //
