@@ -400,4 +400,10 @@ public class MemJDBCDAO implements MemDAO_interface {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void updateMemConditionBymemPhone(MemVO memVO) {
+		// TODO Auto-generated method stub
+		
+	}
 }
