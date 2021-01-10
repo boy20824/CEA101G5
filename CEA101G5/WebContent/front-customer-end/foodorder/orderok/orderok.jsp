@@ -6,9 +6,10 @@
 <%@ page import="com.foodorder.model.*"%>
 <%@ page import="com.member.model.*"%>
 
+
 <%
 	FoodOrderService foodOrderSvc = new FoodOrderService();
-	List<FoodOrderVO> list = foodOrderSvc.getAll("0921842852");
+	List<FoodOrderVO> list = foodOrderSvc.getAll(((MemVO)session.getAttribute("memLogin")).getMemPhone());
 	pageContext.setAttribute("list", list);
 %>
 <%

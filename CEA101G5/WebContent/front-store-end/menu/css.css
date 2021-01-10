@@ -1,0 +1,85 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* start */
+
+.container{
+	display:none;
+	position: relative;
+	left: 25%;
+	background-color:#f6f6f6;
+    width: 50em;
+	height: 28em;
+	padding-top: 2em;
+	margin-top: 4.5em;
+}
+.top1{
+    display: flex;
+}
+
+.add{
+    display: flex;
+	flex-direction: column;
+}
+.add label{
+	margin-bottom: 2vh;
+}
+.add input{
+	margin-bottom: 1em;
+}
+.add select{
+	margin-bottom: 2vh;
+}
+.detail h2{
+	margin-bottom: 2vh;
+}
+.bottom{
+    display: flex;
+	flex-direction: row-reverse;
+	margin-top: -6vh;
+	margin-right: 3vw;
+}
+.bottom input{
+	margin-right: 2vw;
+}
+

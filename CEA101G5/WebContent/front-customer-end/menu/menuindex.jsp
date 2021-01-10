@@ -63,8 +63,9 @@ response.setDateHeader("Expires", 0);
 	<!--存放外會員進來的參數以及餐點編號 -->
 	<input type="hidden" class="storeId" value="<%=restaurantVO.getStoreId()%>" />
 	<% MemVO memberPhone =(MemVO)session.getAttribute("memLogin");%>
+	<c:if test="${not empty sessionScope.memLogin}"> 
 	<input type="hidden" class="memberId" value="<%= memberPhone.getMemPhone() %>" />
-
+	</c:if>
 
 	<div class="wrap">
 		<!--  側拉選單  -->
@@ -126,7 +127,7 @@ response.setDateHeader("Expires", 0);
 						</ul>
 					</div>
 				</c:forEach>
-				<a href="<%=request.getContextPath()%>/front-customer-end/foodorder/foodorder.jsp?storeId=<%=restaurantVO.getStoreId()%>" class="button">結帳</a>
+				<a href="<%=request.getContextPath()%>/front-customer-end/foodorder/foodorder.jsp" class="button">結帳</a>
 			</div>
 		</div>
 
@@ -172,7 +173,7 @@ response.setDateHeader("Expires", 0);
 						<li class="time">
 							<img src="<%=request.getContextPath()%>/front-customer-end/menu/img/圖片/time.png" alt="" />
 							<p>營業時間 :</p>
-							<span><fmt:formatDate value="${restaurantVO.storeOpenTime}" pattern="yyyy-MM-dd HH:mm:ss"/>-<fmt:formatDate value="${restaurantVO.storeCloseTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+							<span><fmt:formatDate value="${restaurantVO.storeOpenTime}" pattern="HH:mm"/>-<fmt:formatDate value="${restaurantVO.storeCloseTime}" pattern="HH:mm"/></span>
 						</li>
 					</ul>
 				</div>
