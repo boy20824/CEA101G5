@@ -11,7 +11,7 @@
 	pageContext.setAttribute("list", list);
 	String storeid = (String) request.getAttribute("storeid");
 %>
-<%=list == null%>
+<%=list == null%> 
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
