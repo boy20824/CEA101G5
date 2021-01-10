@@ -131,7 +131,7 @@ response.setDateHeader("Expires", 0);
 				<input type="submit" onclick="webSocketGo()" value="確認送出" /> <input type="button" onclick="location.href='<%=request.getContextPath()%>/front-customer-end/menu/menuindex.jsp'" value="取消" />
 			</div>
 		</div>
-		<input type="hidden" name="storeId"  class="storeId" value="<%= list.get(0).getStoreId().trim()%>">
+		<input type="hidden" name="storeId"  class="storeId" value="<%=request.getParameter("storeId")%>">
 		<input type="hidden" name="action" value="insert">
 	</Form>
 <!-- 	註冊推播事件 -->

@@ -127,7 +127,7 @@ response.setDateHeader("Expires", 0);
 						</ul>
 					</div>
 				</c:forEach>
-				<a href="<%=request.getContextPath()%>/front-customer-end/foodorder/foodorder.jsp" class="button">結帳</a>
+				<a href="<%=request.getContextPath()%>/front-customer-end/foodorder/foodorder.jsp?storeId=<%=restaurantVO.getStoreId()%>" class="button">結帳</a>
 			</div>
 		</div>
 

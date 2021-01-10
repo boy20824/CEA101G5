@@ -1,0 +1,285 @@
+@font-face {
+    font-family: 'Lato', sans-serif;
+    src: url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    background-color: #ffffff;
+}
+
+.sidebar {
+    height: 100%;
+    width: 100px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #404040;
+    transition: 0.5s;
+    padding-top: 10px;
+    transform: translateX(-100%);
+    transition: 0.5s;
+    box-sizing: content-box;
+}
+
+#side-menu-switch:checked+.sidebar {
+    transform: translateX(0);
+    transition: 0.5s;
+}
+
+#side-menu-switch:checked+.sidebar label .fas {
+    transition: 0.5s;
+    transform: scaleX(-1);
+}
+
+#side-menu-switch {
+    transition: 0.5s;
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.sidebar label {
+    position: absolute;
+    width: 30px;
+    height: 80px;
+    background-color: #404040;
+    color: white;
+    right: -30px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    line-height: 160px;
+    font-size: 30px;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+}
+
+.sidebar li {
+    position: relative;
+}
+
+.sidebar span:hover>ul {
+    display: block;
+}
+
+.sidebar span li:hover {
+    background-color: #EBEBEB;
+}
+
+.sidebar span ul li:hover ul {
+    display: block;
+}
+
+.sidebar ul {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0px;
+    width: 200px;
+    height: 100%;
+    background-color: #F6F6F6;
+}
+
+.sidebar span ul {
+    list-style-type: none;
+    background-color: #F6F6F6;
+    padding: 0px 30px 0px 0px;
+    width: 257.78px;
+}
+
+.sidebar span ul li a {
+    text-decoration: none;
+    color: #FCAA23;
+    font-size: x-large;
+    padding-right: 30px;
+    font-weight: bold;
+    padding-bottom: 5%;
+    padding-top: 5%;
+}
+
+.sidebar span ul li {
+    color: #FCAA23;
+    font-size: x-large;
+    font-weight: bold;
+    margin-left: 0px;
+    padding-right: 2vw;
+    border-bottom: 2px solid #CBCBCB;
+    background-color: #F6F6F6;
+    padding-bottom: 5%;
+    padding-top: 5%;
+    padding-left: 15%;
+    width: 210px;
+}
+
+.sidebar span ul li ul {
+    position: absolute;
+    top: 0px;
+}
+
+.fas {
+    margin-top: 25px;
+}
+
+.sidebar svg {
+    width: 100px;
+    height: 50px;
+    padding-right: 30px;
+    padding-bottom: 20px;
+}
+
+.sidebar p {
+    margin-left: 26px;
+    font-size: 18px;
+    color: #cbcbcb;
+    position: relative;
+    bottom: 10px;
+    padding-left: 2%;
+}
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+    .sidebar span {
+        font-size: 18px;
+    }
+}
+
+.forDiv {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.positionForCheckbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.addStorecontainer img {
+    box-shadow: 0 0;
+    filter: saturate(1);
+}
+
+.error {
+    position: absolute;
+    top: 3.8%;
+    left: 25%;
+}
+
+font {
+    position: absolute;
+    top: 1%;
+    left: 25%;
+}
+
+.preview {
+    width: 160px;
+    height: 150px;
+    border: 1px solid gray;
+    border-radius: 0.2vh;
+    margin-top: 16%;
+    background-color: #ffffff;
+}
+
+#storeChar,
+#storeName,
+#storeAddress,
+#storePhone,
+#storeChar {
+    width: 80%;
+}
+
+#storeInfo {
+    margin-top: 1%;
+    margin-left: 5%;
+}
+
+.addStorecontainer .row {
+    margin-top: 2%
+}
+
+*,
+ ::after,
+ ::before {
+    box-sizing: content-box;
+}
+
+.addStorecontainer {
+    border: 1px solid black;
+    background-color: #F6F6F6;
+    margin-top: 10%;
+    width: 45%;
+    margin-left: 700px;
+}
+
+.button {
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.row {
+    margin-left: 5%;
+}
+
+#addTextBlock {
+    margin-top: 24px;
+}
+
+
+/* 沒有商家權限 */
+
+.noAuthBlock img {
+    width: 45%;
+    margin-left: 500px;
+}
+
+.noAuthBlock p {
+    font-size: 36px;
+    color: #465764;
+    margin-left: 700px;
+    font-weight: bold;
+}
+
+.noAuthBlocBtn button {
+    width: 9vw;
+    height: 2.7vw;
+    border-radius: 0.2vw;
+    background-color: #465764;
+    border: none;
+    color: white;
+    font-size: 1.1vw;
+    font-weight: bold;
+}
+
+.noAuthBlocBtn {
+    margin-left: 750px;
+}
+
+
+/* 歡迎頁面 */
+
+.welcomePageBlock img {
+    width: 35%;
+    margin-left: 600px;
+}
+
+.welcomePageBtn {
+    margin-left: 500px;
+    padding-bottom: 50px;
+}
+
+.welcomePageBtn button {
+    width: 9vw;
+    height: 2.7vw;
+    border-radius: 0.2vw;
+    background-color: #465764;
+    border: none;
+    color: white;
+    font-size: 1.1vw;
+    font-weight: bold;
+}

@@ -34,7 +34,7 @@ public class MemRedis {
 		return code;
 	}
 
-	public String getAuthCode() {
+	public static String getAuthCode() {
 		StringBuffer code = new StringBuffer();
 		String elements = "01234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		for (int i = 0; i < 8; i++)

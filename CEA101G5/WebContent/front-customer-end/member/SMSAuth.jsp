@@ -136,7 +136,7 @@
 								</ul>
 							</c:if>
 						</div>
-						<h4>歡迎您加入Enak，請輸入驗證碼(っ●ω●)っ</h4>
+						<h4>Account</h4>
 						<div class="input-group input-group-icon">
 							<input type="text" placeholder="請輸入驗證碼"
 								name="memAuthCode" id="memPhone" value="${param.memAuthCode}" />
