@@ -197,6 +197,51 @@
 		<url-pattern>/shop/ordermaster.do</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>QueTableServlet</servlet-name>
+		<servlet-class>com.queuetable.controller.QueTableServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QueTableServlet</servlet-name>
+		<url-pattern>/front-store-end/queue/queueTable/queueTable.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>QueLineServlet</servlet-name>
+		<servlet-class>com.queueline.controller.QueLineServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QueLineServlet</servlet-name>
+		<url-pattern>/front-store-end/queue/queueLine/queueLine.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>QuePeriodServlet</servlet-name>
+		<servlet-class>com.queueperiod.controller.QuePeriodServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QuePeriodServlet</servlet-name>
+		<url-pattern>/front-store-end/queue/queuePeriod/queuePeriod.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>QueNoServlet</servlet-name>
+		<servlet-class>com.queueno.controller.QueNoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QueNoServlet</servlet-name>
+		<url-pattern>/front-store-end/queue/queueNo/queueNo.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>QueNoPickupServlet</servlet-name>
+		<servlet-class>com.queueno.controller.QueNoPickupServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QueNoPickupServlet</servlet-name>
+		<url-pattern>/front-store-end/queue/queueNo/queueNoPickup.do</url-pattern>
+	</servlet-mapping>
+	
 
 
 
