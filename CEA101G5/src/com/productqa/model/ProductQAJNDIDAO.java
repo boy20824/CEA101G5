@@ -8,9 +8,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import util.Util;
 
-public class ProductQAJDBCDAO implements ProductQADAO_Interface {
+public class ProductQAJNDIDAO implements ProductQADAO_Interface {
+	
+	private static DataSource dataSource = null;
+	static {
+		try {
+			Context context = new InitialContext();
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/CEA101G5");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_STMT = 
 		"INSERT INTO PRODUCT_QA (PQA_ID, PRODUCT_ID, MEM_PHONE, PRODUCT_QUES, PRODUCT_REPLY) VALUES (SEQ_PQA_ID.NEXTVAL, ?, ?, ?, ?)";
@@ -30,8 +45,7 @@ public class ProductQAJDBCDAO implements ProductQADAO_Interface {
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(Util.DRIVER);
-			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			pstmt.setString(1, productQAVO.getProductId());
@@ -41,8 +55,6 @@ public class ProductQAJDBCDAO implements ProductQADAO_Interface {
 			
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -69,8 +81,7 @@ public class ProductQAJDBCDAO implements ProductQADAO_Interface {
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(Util.DRIVER);
-			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			pstmt.setString(1, productQAVO.getProductId());
@@ -81,8 +92,6 @@ public class ProductQAJDBCDAO implements ProductQADAO_Interface {
 			
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -115,8 +124,7 @@ public class ProductQAJDBCDAO implements ProductQADAO_Interface {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(Util.DRIVER);
-			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			pstmt.setInt(1, pqaId);
 			rs = pstmt.executeQuery();
@@ -132,8 +140,6 @@ public class ProductQAJDBCDAO implements ProductQADAO_Interface {
 				productQAVO.setProductReplyTstamp(rs.getDate("PRODUCT_REPLY_TSTAMP"));
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -172,8 +178,7 @@ public class ProductQAJDBCDAO implements ProductQADAO_Interface {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(Util.DRIVER);
-			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			
@@ -189,8 +194,6 @@ public class ProductQAJDBCDAO implements ProductQADAO_Interface {
 				list.add(productQAVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -228,8 +231,7 @@ public class ProductQAJDBCDAO implements ProductQADAO_Interface {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(Util.DRIVER);
-			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_BYPRODUCTID_STMT);
 			pstmt.setString(1, productId);
 			rs = pstmt.executeQuery();
@@ -247,8 +249,6 @@ public class ProductQAJDBCDAO implements ProductQADAO_Interface {
 				list.add(productQAVO);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

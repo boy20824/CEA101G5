@@ -230,8 +230,8 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_Interface {
 		
 //		testing : insert()
 //		LatestNewsVO LatestNewsVO = new LatestNewsVO();
-//		LatestNewsVO.setNewsTitle("測試活動主題");
-//		LatestNewsVO.setNewsContentTxt("測試活動內容");
+//		LatestNewsVO.setNewsTitle("嚙踝蕭嚙調穿蕭嚙褊主嚙瘩");
+//		LatestNewsVO.setNewsContentTxt("嚙踝蕭嚙調穿蕭嚙褊歹蕭嚙箴");
 //		try {
 //			LatestNewsVO.setNewsContentImg(getPictureByteArray("/Users/jordan/desktop/cat.png"));
 //		} catch (IOException e) {
@@ -242,18 +242,18 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_Interface {
 //		System.out.println("Statement Processed...");
 		
 //		testing : update()
-//		LatestNewsVO latestNewsVO = new LatestNewsVO();
-//		latestNewsVO.setNewsId(6);
-//		latestNewsVO.setNewsTitle("測試活動主題");
-//		latestNewsVO.setNewsContentTxt("測試活動內容");
-//		try {
-//			latestNewsVO.setNewsContentImg(getPictureByteArray("/Users/jordan/desktop/cat.png"));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		latestNewsVO.setNewsStatus(1);
-//		dao.update(latestNewsVO);
-//		System.out.println("Statement Processed...");
+		LatestNewsVO latestNewsVO = new LatestNewsVO();
+		latestNewsVO.setNewsId(5);
+		latestNewsVO.setNewsTitle("");
+		latestNewsVO.setNewsContentTxt("");
+		try {
+			latestNewsVO.setNewsContentImg(getPictureByteArray("/Users/jordan/desktop/Web/images/unnamed.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		latestNewsVO.setNewsStatus(1);
+		dao.update(latestNewsVO);
+		System.out.println("Statement Processed...");
 		
 //		testing : getOne()
 //		LatestNewsVO latestNewsVO = dao.getOne(7);

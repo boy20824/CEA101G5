@@ -7,11 +7,12 @@ public class ProductQAService {
 	private ProductQADAO_Interface dao;
 	
 	public ProductQAService() {
-		dao = new ProductQADAO();
+		dao = new ProductQAJNDIDAO();
 	}
 	
 	public ProductQAVO addQA(String productId, String memPhone, String productQues, String productReply) {
 		ProductQAVO productQAVO = new ProductQAVO();
+		
 		productQAVO.setProductId(productId);
 		productQAVO.setMemPhone(memPhone);
 		productQAVO.setProductQues(productQues);
@@ -37,40 +38,35 @@ public class ProductQAService {
 	public ProductQAVO getQAById(Integer pqaId) {
 		return dao.getOne(pqaId);
 	}
-	public void deletePqaId(Integer pqaId) {
-		dao.delete(pqaId);
-	}
 	
 	public List<ProductQAVO> getAllQA() {
 		return dao.getAll();
 	}
-	public List<ProductQAVO> getAllQANull() {
-		return dao.getAllNull();
-	}
+	
 	public List<ProductQAVO> getAllQAByProductId(String productId) {
 		return dao.getQAByProductId(productId);
 	}
 	
-//	public static void main(String[] args) {
-//		ProductQAService productQAService = new ProductQAService(); 
+	public static void main(String[] args) {
+		ProductQAService productQAService = new ProductQAService(); 
 		
 //		testing : addQA()
-//		productQAService.addQA("ENP0008", "0921842859", "SERVICE���հ��D", "SERVICE���զ^��");
+//		productQAService.addQA("ENP0008", "0921842859", "SERVICE´ú¸Ő°ÝĂD", "SERVICE´ú¸ŐŚ^ľŞ");
 //		System.out.println("Statement Processed...");
 		
 //		testing : updateQA()
-//		productQAService.updateQA(21, "ENP0010", "0921842859", "SERVICE���հ��D", "SERVICE���զ^��");
+//		productQAService.updateQA(21, "ENP0010", "0921842859", "SERVICE´ú¸Ő°ÝĂD", "SERVICE´ú¸ŐŚ^ľŞ");
 //		System.out.println("Statement Processed...");
 		
 //		testing : getQAById()
-//		ProductQAVO productQAVO = productQAService.getQAById(10);
-//		System.out.println("PQA ID: " + productQAVO.getPqaId());
-//		System.out.println("PRODUCT ID: " + productQAVO.getProductId());
-//		System.out.println("MEM_PHONE: " + productQAVO.getMemPhone());
-//		System.out.println("PRODUCT_QUES: " + productQAVO.getProductQues());
-//		System.out.println("PRODUCT_QUES_TSTAMP: " + productQAVO.getProductQuesTstamp());
-//		System.out.println("PRODUCT_REPLY: " + productQAVO.getProductReply());
-//		System.out.println("PRODUCT_REPLY_TSTAMP: " + productQAVO.getProductReplyTstamp());
+		ProductQAVO productQAVO = productQAService.getQAById(35);
+		System.out.println("PQA ID: " + productQAVO.getPqaId());
+		System.out.println("PRODUCT ID: " + productQAVO.getProductId());
+		System.out.println("MEM_PHONE: " + productQAVO.getMemPhone());
+		System.out.println("PRODUCT_QUES: " + productQAVO.getProductQues());
+		System.out.println("PRODUCT_QUES_TSTAMP: " + productQAVO.getProductQuesTstamp());
+		System.out.println("PRODUCT_REPLY: " + productQAVO.getProductReply());
+		System.out.println("PRODUCT_REPLY_TSTAMP: " + productQAVO.getProductReplyTstamp());
 		
 //		testing : getAllQA()
 //		List<ProductQAVO> list = productQAService.getAllQA();
@@ -86,7 +82,7 @@ public class ProductQAService {
 //		}
 		
 //		testing : getAllQAByProductId()
-//		List<ProductQAVO> list = productQAService.getAllQAByProductId("ENP0011");
+//		List<ProductQAVO> list = productQAService.getAllQAByProductId("ENP0001");
 //		for (ProductQAVO productQAVO : list) {
 //			System.out.println("PQA ID: " + productQAVO.getPqaId());
 //			System.out.println("PRODUCT ID: " + productQAVO.getProductId());
@@ -97,6 +93,8 @@ public class ProductQAService {
 //			System.out.println("PRODUCT_REPLY_TSTAMP: " + productQAVO.getProductReplyTstamp());
 //			System.out.println("-----------------------------------");
 //		}
-//	}
+		
+		
+	}
 	
 }
