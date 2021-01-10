@@ -65,7 +65,7 @@ $('document').ready(function(){
             	add[i].addEventListener('click', function(){
          
             		$.ajax({
-            			url:'/CEA101G5//menu/MenuServlet.do?menuId='+data[menuNumber[i]].menuId+'&quantity='+quantity[i].value+'&memberId='+memberId.value+'&action=add',
+            			url:'/CEA101G5//menu/MenuServlet.do?menuId='+data[menuNumber[i]].menuId+'&quantity='+quantity[i].value+'&action=add',
             			type : "GET",
             			dataType : "json",
             			success : function(data) { 

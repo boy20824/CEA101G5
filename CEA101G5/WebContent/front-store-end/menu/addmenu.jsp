@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.menu.model.*"%>
-
+<%@ page import="com.restaurant.model.*"%>
 
 <%
 	MenuVO menuVO = (MenuVO) request.getAttribute("menuVO"); // JSP一開時得到null值   ;EL為空字串
@@ -98,7 +98,7 @@ left:25%;
 			<div class="bottom">
 				<input type="hidden" name="menuStatus" value="1"> 
 				<input type="hidden" name="menuSellStatus" value="1">
-				<input type="hidden" name="storeId" value="S000001">
+				<input type="hidden" name="storeId" value="<%=((RestaurantVO)session.getAttribute("storeLogin")).getStoreId()%>">
 				<input type="hidden" name="action" value="insert"> 
 				<input type="submit" value="確定新增" /> 
 				<input type="reset" value="取消" />

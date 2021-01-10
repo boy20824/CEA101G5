@@ -56,6 +56,7 @@ public class FoodOrderServlet extends HttpServlet {
 				String[] menuId = req.getParameterValues("menuId");//多值
 				String storeId = req.getParameter("storeId");
 				Integer foodOrderTotalPrice =Integer.parseInt(req.getParameter("foodOrderTotalPrice"));
+				String memberPhone = req.getParameter("memberPhone");
 				
 				
 
@@ -64,7 +65,7 @@ public class FoodOrderServlet extends HttpServlet {
 //				先呼叫訂單新增
 				FoodOrderService foodOrderSvc =new FoodOrderService();
 				List<FoodOrderDetailVO> foodOrderDetailList = new ArrayList<FoodOrderDetailVO>();//拿來放訂單明細
-				FoodOrderVO foodOrderVO =foodOrderSvc.addFoodOrder("0921842852",storeId,foodOrderTotalPrice,"食物備註");
+				FoodOrderVO foodOrderVO =foodOrderSvc.addFoodOrder(memberPhone,storeId,foodOrderTotalPrice,"食物備註");
 				for(int i=0;i<menuNum.length;i++) {
 					FoodOrderDetailVO FoodOrderDetail =new FoodOrderDetailVO(); 
 					//產生多筆訂單明細
@@ -90,7 +91,7 @@ public class FoodOrderServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/foodorder/foodorde.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/foodorder/foodorder.jsp");
 				failureView.forward(req, res);
 			}
 		}

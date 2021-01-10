@@ -4,16 +4,21 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.foodorderdetail.model.*"%>
 <%@ page import="com.foodorder.model.*"%>
+<%@ page import="com.restaurant.model.*"%>
+<%@ page import="com.member.model.*"%>
 
 <%
 	FoodOrderService foodOrderSvc = new FoodOrderService();
-	List<FoodOrderVO> list = foodOrderSvc.getAllByStoreId("S000001");
+	List<FoodOrderVO> list = foodOrderSvc.getAllByStoreId(((RestaurantVO)session.getAttribute("storeLogin")).getStoreId());
 	pageContext.setAttribute("list", list);
 %>
 <!-- 呼叫訂單明細 -->
 <jsp:useBean id="foodOrderDetailSvc" scope="page" class="com.foodorderdetail.model.FoodOrderDetailService" />
 <!-- 呼叫餐點 -->
 <jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService" />
+<!-- 呼叫會員 -->
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemService" />
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +42,7 @@
 
 <body>
 
-<input type="hidden" class="storeId" value="S000001">
+<input type="hidden" class="storeId" value="<%=((RestaurantVO)session.getAttribute("storeLogin")).getStoreId()%>">
 
 
 
@@ -65,7 +70,11 @@
             </span>
             </p>
             <div class="menu">
-                <p><span>電話:<span>0912123456</span></span><span>會員名稱:<span>王小明</span></span><span>訂單總價:$<span>6666666</span></span>時間:<span>2020/12/30 08:12:24</span></p>
+             <c:set var="total" value="${0}" />
+				<c:forEach var="foodOrderDetailVO" items="${foodOrderDetailSvc.getAll(foodOrderVO.getFoodOrderId())}">
+					<c:set var="total" value="${total + foodOrderDetailVO.menuNum * foodOrderDetailVO.menuPrice}" />
+				</c:forEach>
+                <p><span>電話:<span>${foodOrderVO.memPhone}</span></span><span>會員名稱:<span>${memSvc.getOneMem(foodOrderVO.memPhone).memName }</span></span><span>訂單總價:$<span>${total}</span></span>時間:<span>2020/12/30 08:12:24</span></p>
                 <table>
                     <tr>
                         <th>餐點名稱:</th>

@@ -97,7 +97,7 @@ public class MenuServlet extends HttpServlet {
 			req.setCharacterEncoding("UTF-8");
 			String menuId = req.getParameter("menuId");
 			String quantity = req.getParameter("quantity");
-			String memberId = req.getParameter("memberId");
+//			String memberId = req.getParameter("memberId");
 
 //			開始查詢該比訂單資訊
 			MenuService menuSvc = new MenuService();

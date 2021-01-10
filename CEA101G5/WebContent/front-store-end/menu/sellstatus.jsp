@@ -2,10 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.menu.model.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="com.restaurant.model.*"%>
 
 <%
 	MenuService menuSvc = new MenuService(); //創建 實體
-	List<MenuVO> list = menuSvc.getAllByStoreId("S000001");//呼叫DAO並執行getAll()取得VO為每一列資訊的所有欄位並裝入List集合<泛型只能裝取該VO型別>;
+	List<MenuVO> list = menuSvc.getAllByStoreId(((RestaurantVO)session.getAttribute("storeLogin")).getStoreId());//呼叫DAO並執行getAll()取得VO為每一列資訊的所有欄位並裝入List集合<泛型只能裝取該VO型別>;
 	Iterator it = list.iterator();
 	while (it.hasNext()) {
 		MenuVO m = (MenuVO) it.next();
