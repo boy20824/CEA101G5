@@ -1,4 +1,4 @@
-package com.productqa.controller;
+package com.product.controller;
 
 import java.io.IOException;
 import java.util.LinkedList;
