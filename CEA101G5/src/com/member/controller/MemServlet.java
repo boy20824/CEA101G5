@@ -488,19 +488,20 @@ public class MemServlet extends HttpServlet {
 				/*************************** 3.新增完成轉交成功畫面(Send the Success view) ***********/
 				/*************************** 寄送SMS驗證訊息 ***********/
 			
-				MemRedis memRedis = new MemRedis();
-				String memAuthCode = memRedis.setAuthCode(memPhone);
-				System.out.println(memAuthCode);
-				String messageText = "HI！ " + memName + " 歡迎加入Enak，你要的美食都在這裡。" + "驗證碼：" + memAuthCode;
-				System.out.println(messageText);
+//				MemRedis memRedis = new MemRedis();
+//				String memAuthCode = memRedis.setAuthCode(memPhone);
+//				System.out.println(memAuthCode);
+//				String messageText = "HI！ " + memName + " 歡迎加入Enak，你要的美食都在這裡。" + "驗證碼：" + memAuthCode;
+//				System.out.println(messageText);
 //				MemSMSSender memSMS = new MemSMSSender();
-				MemSMSSender.sendSMS(memPhone, messageText);
-				
-				MemVO memRegister = memSvc.getOneMem(memPhone);
-				session.setAttribute("memRegister", memRegister);
-				
+//				MemSMSSender.sendSMS(memPhone, messageText);
+//				
+//				MemVO memRegister = memSvc.getOneMem(memPhone);
+//				session.setAttribute("memRegister", memRegister);
+//				
 				req.setAttribute("memVO", memVO); 
-				String url = "/front-customer-end/member/SMSAuth.jsp";
+//				String url = "/front-customer-end/member/SMSAuth.jsp";
+				String url = "/front-customer-end/member/JoinSuccess.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
