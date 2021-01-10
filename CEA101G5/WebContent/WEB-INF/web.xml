@@ -133,6 +133,70 @@
 		<servlet-name>ReserveSituationServlet</servlet-name>
 		<url-pattern>/reservesituation/reservesituation.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LatestNewsPhotoReader</servlet-name>
+		<servlet-class>com.latestnews.controller.LatestNewsPhotoReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LatestNewsPhotoReader</servlet-name>
+		<url-pattern>/shop/latestnewsphotoreader.do</url-pattern>
+	</servlet-mapping>
+  	
+  	<servlet>
+		<servlet-name>ProductPhotoReader</servlet-name>
+		<servlet-class>com.productphoto.controller.ProductPhotoReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductPhotoReader</servlet-name>
+		<url-pattern>/shop/productphotoreader.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ShopProductPhotoReader</servlet-name>
+		<servlet-class>com.productphoto.controller.ShopProductPhotoReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShopProductPhotoReader</servlet-name>
+		<url-pattern>/shop/shopproductphotoreader.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>OrderDetailPhotoReader</servlet-name>
+		<servlet-class>com.orderdetail.controller.OrderDetailPhotoReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderDetailPhotoReader</servlet-name>
+		<url-pattern>/shop/orderdetailphotoreader.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ProductServlet</servlet-name>
+		<servlet-class>com.product.controller.ProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductServlet</servlet-name>
+		<url-pattern>/shop/product.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ProductQAServlet</servlet-name>
+		<servlet-class>com.productqa.controller.ProductQAServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductQAServlet</servlet-name>
+		<url-pattern>/shop/productqa.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>OrderMasterServlet</servlet-name>
+		<servlet-class>com.ordermaster.controller.OrderMasterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderMasterServlet</servlet-name>
+		<url-pattern>/shop/ordermaster.do</url-pattern>
+	</servlet-mapping>
+	
 
 
 
