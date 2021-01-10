@@ -148,7 +148,7 @@ table {
   background-image: linear-gradient(0deg, #fff, #f6f6f6);
   display: none;
   z-index: 5;
-  margin-top: 0px;
+  margin-top: -10px;
   color: black;
   box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.4);
 }
@@ -160,7 +160,6 @@ table {
   border-radius: 1vw;
   border: none;
   padding: 1vw;
-  letter-spacing: 0.8vw;
 }
 .side-menu input:hover {
   cursor: pointer;
@@ -219,6 +218,7 @@ nav a + a::before {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
+  margin-top:-10px;
 }
 /* 蝚砌�撅文�垢敺���� */
 .forfiexed {
@@ -279,7 +279,7 @@ nav a + a::before {
 }
 span.item-remove{
 	color: red;
-    margin-left: 1em;
+    margin-left: 0.2em;
 }
 span.item-remove:hover{
 	cursor: pointer;

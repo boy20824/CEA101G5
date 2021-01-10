@@ -89,7 +89,7 @@ video {
 
 @font-face {
     font-family: Lato;
-    src: url（'https://fonts.googleapis.com/css2?family = Lato&display = swap'）
+    src: url嚗�'https://fonts.googleapis.com/css2?family = Lato&display = swap'嚗�
 }
 
 
@@ -137,7 +137,7 @@ table {
 }
 
 
-/* 整體背景 */
+/* �擃� */
 
 .wrap {
     width: 100%;
@@ -146,7 +146,7 @@ table {
 }
 
 
-/* 側拉選單 */
+/* ���� */
 
 .side-menu-all {
     height: 100%;
@@ -167,7 +167,7 @@ table {
     background-image: linear-gradient(0deg, #fff, #f6f6f6);
     display: none;
     z-index: 5;
-    margin-top: 15px;
+    margin-top: 6px;
     color: black;
     box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.4);
 }
@@ -244,7 +244,7 @@ nav a+a::before {
 }
 
 .side-menu-black {
-    margin-top: 15px;
+    margin-top: 6px;
     display: none;
     position: fixed;
     height: 100%;
@@ -253,7 +253,7 @@ nav a+a::before {
 }
 
 
-/* 上方條 */
+/* 銝璇� */
 
 .forfiexed {
     display: flex;
@@ -341,7 +341,7 @@ nav a+a::before {
 }
 
 
-/* 輪播畫面 */
+/* 頛芣�� */
 
 .banner {
     width: 100%;
@@ -367,7 +367,7 @@ nav a+a::before {
     width: 50vw;
     height: 4vw;
     border: 1px solid #b1a3a0;
-    background: white url("../img/圖片/iconfinder_ic_search_48px_3669253.png") no-repeat scroll 5px 5px;
+    background: white url("../img/����/iconfinder_ic_search_48px_3669253.png") no-repeat scroll 5px 5px;
     background-size: 7%;
     background-position: 0% 50%;
     padding-left: 3vw;
@@ -445,7 +445,7 @@ nav a+a::before {
 }
 
 
-/* 餐廳資訊 */
+/* 擗輒鞈�� */
 
 .card__image {
     margin-left: auto;
@@ -569,7 +569,7 @@ nav a+a::before {
 }
 
 
-/* 商品資訊 */
+/* ������ */
 
 .shopCard {
     margin-bottom: 50px;
@@ -640,7 +640,7 @@ nav a+a::before {
 }
 
 
-/* 商城商品資訊 */
+/* �������� */
 
 .contents {
     padding-bottom: 20px;
@@ -690,7 +690,7 @@ nav a+a::before {
 }
 
 
-/* 查看更多 */
+/* ���憭� */
 
 .moreBtn {
     position: relative;
@@ -716,7 +716,7 @@ nav a+a::before {
 }
 
 
-/* 下邊欄 */
+/* 銝��� */
 
 .footer {
     background-color: #fa7e23;

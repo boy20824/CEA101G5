@@ -62,7 +62,7 @@ table {
   background-image: linear-gradient(0deg, #fff, #f6f6f6);
   display: none;
   z-index: 5;
-  margin-top: 0px;
+  margin-top: -10px;
   color: black;
   box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.4);
 }
@@ -133,6 +133,7 @@ nav a + a::before {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
+  margin-top:-10px;
 }
 /* 蝚砌�撅文�垢敺���� */
 .forfiexed {
@@ -291,7 +292,7 @@ span.item-remove:hover{
 /* 璅�椰���ogo���� */
 .title a {
   display: block;
-  background-image: url("../img/LOGO/Logo3\ \(2\).png");
+  background-image: url("img/LOGO/Logo3 (2).png");
   background-size: 100%;
   width: 10vw;
   height: 6vw;

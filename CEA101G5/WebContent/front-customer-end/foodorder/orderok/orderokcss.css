@@ -125,6 +125,7 @@ table {
 /* 敺�ㄐ���� */
 /* ��雯��� */
 .wrap {
+  padding-top:3em;
   width: 100%;
   align-self: center;
   background-color: white;
@@ -150,19 +151,20 @@ table {
   background-image: linear-gradient(0deg, #fff, #f6f6f6);
   display: none;
   z-index: 5;
-  margin-top: 15px;
+  margin-top: -10px;
   color: black;
   box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.4);
 }
 /* 撌阡������洵銝��nput璅惜 */
 .side-menu input {
-  display: block;
-  margin: 2vh 0 0 5vw;
-  font-size: 1.5vw;
-  border-radius: 1vw;
-  border: none;
-  padding: 1vw;
-  letter-spacing: 0.8vw;
+ 	color: white;
+    background-color: black;
+    text-align: center;
+    display: block;
+    margin: 2vh 5vw 0 5vw;
+    font-size: 1.5vw;
+    border: none;
+    padding: 0.5em 0.2em 0.5em 0.2em;
 }
 .side-menu input:hover {
   cursor: pointer;
@@ -216,7 +218,7 @@ nav a + a::before {
 }
 /* 撌阡�����������*/
 .side-menu-black {
-  margin-top: 15px;
+  margin-top: -10px;
   display: none;
   position: fixed;
   height: 100%;

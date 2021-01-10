@@ -89,7 +89,6 @@
                     <div class="open-btn">
                         <a class="showMore">查看更多..</a>
                     </div>
-                    <p>${foodOrderVO.foodOrderCmtStatus}</p>
                     <input type="button" class="cmt" value="${foodOrderVO.foodOrderCmtStatus==0?'評論餐點':'已評論'}"${foodOrderVO.foodOrderCmtStatus==0?'':'disabled style="background-color:gray;"'}>
                 </div> 
                 

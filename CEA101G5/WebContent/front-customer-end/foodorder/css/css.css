@@ -150,19 +150,21 @@ table {
   background-image: linear-gradient(0deg, #fff, #f6f6f6);
   display: none;
   z-index: 5;
-  margin-top: 15px;
+  margin-top: 6px;
   color: black;
   box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.4);
 }
 /* ��嚙踝�蹓蕭嚙踝蹓蕭謘蕭嚙踝�斯��蕭嚙踝�put����� */
 .side-menu input {
-  display: block;
-  margin: 2vh 0 0 5vw;
-  font-size: 1.5vw;
-  border-radius: 1vw;
-  border: none;
-  padding: 1vw;
-  letter-spacing: 0.8vw;
+	color: white;
+    background-color: black;
+    text-align: center;
+    display: block;
+    margin: 2vh 2vw 0 3vw;
+    font-size: 1.5vw;
+    border: none;
+    padding: 0.4em 3em 0.4em 3em;
+}
 }
 .side-menu input:hover {
   cursor: pointer;
@@ -216,7 +218,7 @@ nav a + a::before {
 }
 /* ��嚙踝�蹓蕭嚙踝蹓蕭謘蕭�嚙踝蕭��蕭��蕭��嚙踝蕭�謒�*/
 .side-menu-black {
-  margin-top: 15px;
+  margin-top: 6px;
   display: none;
   position: fixed;
   height: 100%;
