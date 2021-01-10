@@ -241,8 +241,15 @@
 		<servlet-name>QueNoPickupServlet</servlet-name>
 		<url-pattern>/front-store-end/queue/queueNo/queueNoPickup.do</url-pattern>
 	</servlet-mapping>
-	
 
+      <servlet>
+    <servlet-name>ProductQAServlet1</servlet-name>
+    <servlet-class>com.productqa.controller.ProductQAServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductQAServlet1</servlet-name>
+    <url-pattern>/back-end/productqa/productqa.do</url-pattern>
+  </servlet-mapping>
 
 
 

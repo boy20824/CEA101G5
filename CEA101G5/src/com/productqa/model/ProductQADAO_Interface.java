@@ -8,6 +8,6 @@ public interface ProductQADAO_Interface {
 	public void delete(Integer pqaId);
 	public ProductQAVO getOne(Integer pqaId);
 	public List<ProductQAVO> getAll();
-	
+	public List<ProductQAVO> getAllNull();
 	public List<ProductQAVO> getQAByProductId(String productId);
 }
