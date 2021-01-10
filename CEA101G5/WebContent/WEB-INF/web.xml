@@ -147,6 +147,7 @@
 		<url-pattern>/front-customer-end/member/memberPageUpdate.jsp</url-pattern>
 		<url-pattern>/front-customer-end/restaurant/application.jsp</url-pattern>
 		<url-pattern>/front-store-end/restaurant/WelcomePage.jsp</url-pattern>
+		<url-pattern>/front-customer-end/foodorder/foodorder.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
