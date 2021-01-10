@@ -11,7 +11,7 @@ public class MemSMSSender {
 	public static final String AUTH_TOKEN = "5a5437b229b95f39202dec5be94ca6f6";
 
 		
-		public static void sendSMS(String memPhone,String messageText) {
+		public void sendSMS(String memPhone,String messageText) {
 			
 			Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 			

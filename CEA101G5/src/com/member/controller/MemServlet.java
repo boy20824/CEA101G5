@@ -487,17 +487,30 @@ public class MemServlet extends HttpServlet {
 
 				/*************************** 3.新增完成轉交成功畫面(Send the Success view) ***********/
 				/*************************** 寄送SMS驗證訊息 ***********/
-			
+//				System.out.println("我在這1");
 //				MemRedis memRedis = new MemRedis();
-//				String memAuthCode = memRedis.setAuthCode(memPhone);
+//				String memAuthCode = memRedis.getAuthCode();
+//				
+//				System.out.println("我在這2");
+//				System.out.println(memAuthCode);
+//				
+//				Jedis jedis = new Jedis("localhost", 6379);
+//				jedis.auth("123456");
+//				
+//				jedis.set(memPhone,memAuthCode);
+//				
+//				System.out.println("我在這3");
+//				
 //				System.out.println(memAuthCode);
 //				String messageText = "HI！ " + memName + " 歡迎加入Enak，你要的美食都在這裡。" + "驗證碼：" + memAuthCode;
 //				System.out.println(messageText);
 //				MemSMSSender memSMS = new MemSMSSender();
-//				MemSMSSender.sendSMS(memPhone, messageText);
+//				memSMS.sendSMS(memPhone, messageText);
 //				
 //				MemVO memRegister = memSvc.getOneMem(memPhone);
 //				session.setAttribute("memRegister", memRegister);
+//				
+//				jedis.close();
 //				
 				req.setAttribute("memVO", memVO); 
 //				String url = "/front-customer-end/member/SMSAuth.jsp";
@@ -528,6 +541,7 @@ public class MemServlet extends HttpServlet {
 
 				Jedis jedis = new Jedis("localhost", 6379);
 				jedis.auth("123456");
+				
 
 				String testAuth = jedis.get(memPhone);
 				if (!memAuthCode.trim().equals(testAuth)) {
