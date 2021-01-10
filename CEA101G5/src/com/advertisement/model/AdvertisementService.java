@@ -10,7 +10,7 @@ public class AdvertisementService {
 	private AdvertisementDAO_Interface dao;
 	
 	public AdvertisementService() {
-		dao = new AdvertisementJDBCDAO();
+		dao = new AdvertisementJNDIDAO();
 	}
 	
 	public AdvertisementVO addAd(String productId, String adTitle, String adContentTxt, byte[] adContentImg, Date adStartDate, Date adEndDate, Integer adStatus) {
@@ -64,19 +64,19 @@ public class AdvertisementService {
 		AdvertisementService advertisementService = new AdvertisementService();
 		
 //		testing : addAd()
-		try {
-			byte[] productReviewPhoto = getPictureByteArray("/Users/jordan/desktop/cat.png");
-			advertisementService.addAd("ENP0010", "´ú¸Õ¼s§i¥DÃD", "´ú¸Õ¼s§i¤º®e", productReviewPhoto, java.sql.Date.valueOf("2020-12-01"), java.sql.Date.valueOf("2020-12-31"), 1);
-			System.out.println("Statement Processed...");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			byte[] productReviewPhoto = getPictureByteArray("/Users/jordan/desktop/cat.png");
+//			advertisementService.addAd("ENP0010", "æ¸¬è©¦ä¸»é¡Œ", "æ¸¬è©¦å…§å®¹", productReviewPhoto, java.sql.Date.valueOf("2020-12-01"), java.sql.Date.valueOf("2021-1-31"), 1);
+//			System.out.println("Statement Processed...");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 //		
 		
 //		testing : updateAd()
 //		try {
 //			byte[] productReviewPhoto = getPictureByteArray("/Users/jordan/desktop/cat.png");
-//			advertisementService.updateAd(1, "ENP0009", "´ú¸Õ¼s§i¥DÃD", "´ú¸Õ¼s§i¤º®e", productReviewPhoto, java.sql.Date.valueOf("2020-12-01"), java.sql.Date.valueOf("2020-12-31"), 1);
+//			advertisementService.updateAd(1, "ENP0009", "ï¿½ï¿½ï¿½Õ¼sï¿½iï¿½Dï¿½D", "ï¿½ï¿½ï¿½Õ¼sï¿½iï¿½ï¿½ï¿½e", productReviewPhoto, java.sql.Date.valueOf("2020-12-01"), java.sql.Date.valueOf("2020-12-31"), 1);
 //			System.out.println("Statement Processed...");
 //		} catch (IOException e) {
 //			e.printStackTrace();

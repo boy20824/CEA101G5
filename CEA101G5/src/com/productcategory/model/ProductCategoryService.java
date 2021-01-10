@@ -7,7 +7,7 @@ public class ProductCategoryService {
 	private ProductCategoryDAO_Interface dao;
 	
 	public ProductCategoryService() {
-		dao = new ProductCategoryJDBCDAO();
+		dao = new ProductCategoryJNDIDAO();
 	}
 	
 	public ProductCategoryVO addCategory(String categoryName, Integer categoryStatus) {
@@ -43,11 +43,11 @@ public class ProductCategoryService {
 		ProductCategoryService productCategoryService = new ProductCategoryService();
 		
 //		testing : addCategory()
-//		productCategoryService.addCategory("´ú¸ÕÃþ§O", 1);
+//		productCategoryService.addCategory("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½O", 1);
 //		System.out.println("Statement Processed...");
 		
 //		testing : updateCategory()
-//		productCategoryService.updateCategory(3, "´ú¸ÕÃþ§O", 1);
+//		productCategoryService.updateCategory(3, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½O", 1);
 //		System.out.println("Statement Processed...");
 		
 //		testing : getCategoryById()

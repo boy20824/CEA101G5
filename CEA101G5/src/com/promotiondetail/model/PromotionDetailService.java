@@ -7,7 +7,7 @@ public class PromotionDetailService {
 	private PromotionDetailDAO_Interface dao;
 	
 	public PromotionDetailService () {
-		dao = new PromotionDetailJDBCDAO();
+		dao = new PromotionDetailJNDIDAO();
 	}
 	
 	public PromotionDetailVO addPromotionDetail(Integer promoId,String productId,Integer productPrice,Integer productPromoQty) {

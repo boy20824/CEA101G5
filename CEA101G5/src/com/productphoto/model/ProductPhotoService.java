@@ -9,7 +9,7 @@ public class ProductPhotoService {
 	private ProductPhotoDAO_Interface dao;
 	
 	public ProductPhotoService() {
-		dao = new ProductPhotoJDBCDAO();
+		dao = new ProductPhotoJNDIDAO();
 	}
 	
 	public ProductPhotoVO addProductPhoto(String productId, byte[] productPhoto) {

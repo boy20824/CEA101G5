@@ -9,7 +9,7 @@ public class LatestNewsService {
 	private LatestNewsDAO_Interface dao;
 	
 	public LatestNewsService() {
-		dao = new LatestNewsJDBCDAO();
+		dao = new LatestNewsJNDIDAO();
 	}
 	
 	public LatestNewsVO addNews(String newsTitle, String newsContentTxt, byte[] newsContentImg, Integer newsStatus) {
@@ -59,7 +59,7 @@ public class LatestNewsService {
 //		testing : addNews()
 		try {
 			byte[] newsContentImg = getPictureByteArray("/Users/jordan/desktop/700430_HEAD.jpg");
-			latestNewsService.addNews("´ú¸Õ¬¡°Ê¥DÃD", "´ú¸Õ¬¡°Ê¤º®e", newsContentImg, 1);
+			latestNewsService.addNews("ï¿½ï¿½ï¿½Õ¬ï¿½ï¿½Ê¥Dï¿½D", "ï¿½ï¿½ï¿½Õ¬ï¿½ï¿½Ê¤ï¿½ï¿½e", newsContentImg, 1);
 			System.out.println("Statement Processed...");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -68,7 +68,7 @@ public class LatestNewsService {
 //		testing : updateNews()
 //		try {
 //			byte[] newsContentImg = getPictureByteArray("/Users/jordan/desktop/boxing-day-offer-banner.jpg");
-//			latestNewsService.updateNews(5, "´ú¸Õ¬¡°Ê¥DÃD", "´ú¸Õ¬¡°Ê¤º®e", newsContentImg, 1);
+//			latestNewsService.updateNews(5, "ï¿½ï¿½ï¿½Õ¬ï¿½ï¿½Ê¥Dï¿½D", "ï¿½ï¿½ï¿½Õ¬ï¿½ï¿½Ê¤ï¿½ï¿½e", newsContentImg, 1);
 //			System.out.println("Statement Processed...");
 //		} catch (IOException e) {
 //			e.printStackTrace();

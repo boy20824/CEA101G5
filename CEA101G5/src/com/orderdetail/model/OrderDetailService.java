@@ -9,7 +9,7 @@ public class OrderDetailService {
 	private OrderDetailDAO_Interface dao;
 	
 	public OrderDetailService() {
-		dao = new OrderDetailJDBCDAO();
+		dao = new OrderDetailJNDIDAO();
 	}
 	
 	public OrderDetailVO addOrderDetail(Integer orderId, String productId, Integer productPrice, Integer quantity, String productReview, byte[] productReviewPhoto, Integer productReviewStatus) {
@@ -68,7 +68,7 @@ public class OrderDetailService {
 //		testing : addOrderDetail()
 //		try {
 //			byte[] productReviewPhoto = getPictureByteArray("/Users/jordan/desktop/cat.png");
-//			orderDetailService.addOrderDetail(5, "ENP0009", 799, 4, "´ú¸Õµû»ù", productReviewPhoto, 1);
+//			orderDetailService.addOrderDetail(5, "ENP0009", 799, 4, "ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½", productReviewPhoto, 1);
 //			System.out.println("Statement Processed...");
 //		} catch (IOException e) {
 //			e.printStackTrace();
@@ -77,7 +77,7 @@ public class OrderDetailService {
 //		testing : updateOrderDetail()
 //		try {
 //			byte[] productReviewPhoto = getPictureByteArray("/Users/jordan/desktop/cat.png");
-//			orderDetailService.updateOrderDetail(5, "ENP0001", 1000, 1000, "´ú¸Õµû»ùXX", productReviewPhoto, 1);
+//			orderDetailService.updateOrderDetail(5, "ENP0001", 1000, 1000, "ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½XX", productReviewPhoto, 1);
 //			System.out.println("Statement Processed...");
 //		} catch (IOException e) {
 //			e.printStackTrace();

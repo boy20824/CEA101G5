@@ -7,7 +7,7 @@ public class ProductService {
 	private ProductDAO_Interface dao;
 	
 	public ProductService() {
-		dao = new ProductJDBCDAO();
+		dao = new ProductJNDIDAO();
 	}
 	
 	public ProductVO addProduct(String productId, String productName, String productDescription, Integer productMSRP, Integer productPrice, Integer productQtySold, Integer categoryId, Integer productStatus) {
@@ -74,11 +74,11 @@ public class ProductService {
 		ProductService productService = new ProductService();
 		
 //		testing : addProduct()
-//		productService.addProduct("ENP0016", "´ú¸Õ²£«~", "´ú¸Õ²£«~±Ô­z", 111, 222, 333, 1, 1);
+//		productService.addProduct("ENP0016", "ï¿½ï¿½ï¿½Õ²ï¿½ï¿½~", "ï¿½ï¿½ï¿½Õ²ï¿½ï¿½~ï¿½Ô­z", 111, 222, 333, 1, 1);
 //		System.out.println("Statement Processed...");
 		
 //		testing : updateProduct()
-//		productService.updateProduct("ENP0016", "´ú¸Õ²£«~", "´ú¸Õ²£«~±Ô­z", 777, 888, 999, 1, 1);
+//		productService.updateProduct("ENP0016", "ï¿½ï¿½ï¿½Õ²ï¿½ï¿½~", "ï¿½ï¿½ï¿½Õ²ï¿½ï¿½~ï¿½Ô­z", 777, 888, 999, 1, 1);
 //		System.out.println("Statement Processed...");
 		
 //		testing : getProductById()
@@ -135,7 +135,7 @@ public class ProductService {
 //		}
 		
 //		testing : getAllByKeywordSearch();
-//		List<ProductVO> list = productService.getAllByKeywordSearch("     ¥­¤é    ");
+//		List<ProductVO> list = productService.getAllByKeywordSearch("     ï¿½ï¿½ï¿½ï¿½    ");
 //		for (ProductVO productVO : list) {
 //			System.out.println("PRODUCT ID: " + productVO.getProductId());
 //			System.out.println("PRODUCT NAME: " + productVO.getProductName());

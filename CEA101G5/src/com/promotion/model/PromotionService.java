@@ -10,7 +10,7 @@ public class PromotionService {
 	private PromotionDAO_Interface dao;
 
 	public PromotionService() {
-		dao = new PromotionJDBCDAO();
+		dao = new PromotionJNDIDAO();
 	}
 
 	public PromotionVO addPromotion(String promoName, byte[] promoImg, Date promoStartDate, Date promoEndDate, Integer promoStatus) {

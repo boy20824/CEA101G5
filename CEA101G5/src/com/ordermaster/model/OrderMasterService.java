@@ -7,7 +7,7 @@ public class OrderMasterService {
 	private OrderMasterDAO_Interface dao;
 	
 	public OrderMasterService() {
-		dao = new OrderMasterJDBCDAO();
+		dao = new OrderMasterJNDIDAO();
 	}
 	
 	public OrderMasterVO addOrder(String memPhone, String recipientName, String recipientMobNumber, String recipientTelNumber, String recipientEmail, String businessNumber, Integer deliveryMethod, String deliveryAddress, String orderMemo, String invoicePrice, Integer orderStatus) {
@@ -61,11 +61,11 @@ public class OrderMasterService {
 		OrderMasterService orderMasterService = new OrderMasterService();
 		
 //		testing : addOrder()
-//		orderMasterService.addOrder("0921842850", "´ú¸Õ«È¤á¦WºÙ", "0988-8888888", "04-88888888", "test@testmail.com", "88888888", 0, "´ú¸Õ¦¬¥ó¦a§}", "¥H¤Uª`·N¨Æ¶µ", "299", 3);
+//		orderMasterService.addOrder("0921842850", "ï¿½ï¿½ï¿½Õ«È¤ï¿½Wï¿½ï¿½", "0988-8888888", "04-88888888", "test@testmail.com", "88888888", 0, "ï¿½ï¿½ï¿½Õ¦ï¿½ï¿½ï¿½aï¿½}", "ï¿½Hï¿½Uï¿½`ï¿½Nï¿½Æ¶ï¿½", "299", 3);
 //		System.out.println("Statement Processed...");
 
 //		testing : updateOrder()
-//		orderMasterService.updateOrder(6, "0921842850", "´ú¸Õ«È¤á¦WºÙ", "0988-8888888", "04-88888888", "test@testmail.com", "88888888", 0, "´ú¸Õ¦¬¥ó¦a§}", "¥H¤Uª`·N¨Æ¶µ", "299", 3);
+//		orderMasterService.updateOrder(6, "0921842850", "ï¿½ï¿½ï¿½Õ«È¤ï¿½Wï¿½ï¿½", "0988-8888888", "04-88888888", "test@testmail.com", "88888888", 0, "ï¿½ï¿½ï¿½Õ¦ï¿½ï¿½ï¿½aï¿½}", "ï¿½Hï¿½Uï¿½`ï¿½Nï¿½Æ¶ï¿½", "299", 3);
 //		System.out.println("Statement Processed...");
 		
 //		testing : getOrderById()
