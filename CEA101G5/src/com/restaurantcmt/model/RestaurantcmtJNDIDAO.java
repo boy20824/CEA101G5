@@ -40,6 +40,13 @@ public class RestaurantcmtJNDIDAO implements RestaurantCmt_interface  {
 						con = ds.getConnection();
 						pstmt = con.prepareStatement(INSERT_STMT);
 						
+						System.out.println(restaurantCmtVO.getStoreId());
+						System.out.println(restaurantCmtVO.getMemPhone());
+						System.out.println(restaurantCmtVO.getStoreCmtContent());
+						System.out.println(restaurantCmtVO.getStoreRating());
+						System.out.println(restaurantCmtVO.getStoreCmtStatus());
+						
+						
 						pstmt.setString(1, restaurantCmtVO.getStoreId());
 						pstmt.setString(2, restaurantCmtVO.getMemPhone());
 						pstmt.setString(3, restaurantCmtVO.getStoreCmtContent());

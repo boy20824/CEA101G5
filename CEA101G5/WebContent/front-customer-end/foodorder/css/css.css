@@ -122,15 +122,15 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/* 敺�ㄐ���� */
-/* ��雯��� */
+/* �豯剁蕭謕�蕭嚙踝�蕭嚙� */
+/* 嚙踐嚙踝�嚙踝蕭嚙� */
 .wrap {
   width: 100%;
   align-self: center;
   background-color: white;
   margin: 0px auto;
 }
-/* 撌阡���� */
+/* ��嚙踝�蹓蕭嚙踝蹓蕭謘� */
 .side-menu-all {
   height: 100%;
   position: fixed;
@@ -141,7 +141,7 @@ table {
   white-space: nowrap;
   z-index: 10;
 }
-/* 撌阡����鋆⊿��身摰� */
+/* ��嚙踝�蹓蕭嚙踝蹓蕭謘�豰蕭嚙踝�澈�嚙� */
 .side-menu {
   position: fixed;
   float: left;
@@ -154,7 +154,7 @@ table {
   color: black;
   box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.4);
 }
-/* 撌阡������洵銝��nput璅惜 */
+/* ��嚙踝�蹓蕭嚙踝蹓蕭謘蕭嚙踝�斯��蕭嚙踝�put����� */
 .side-menu input {
   display: block;
   margin: 2vh 0 0 5vw;
@@ -170,11 +170,11 @@ table {
 .side-menu input:focus {
   outline: none;
 }
-/* 撌阡����閮剖��  */
+/* ��嚙踝�盲嚙踝蕭�蹓蕭謘��蕭嚙�  */
 .side-menu nav {
   margin-left: 0.8vw;
 }
-/* 撌阡���������身閮� */
+/* ��嚙踝�蹓蕭嚙踝蹓蕭嚙踝�蕭謘橘蕭�嚙踐嚙踐頨恍嚙� */
 .side-menu a .fas {
   color: black;
   margin-right: -1.1em;
@@ -214,7 +214,7 @@ nav a + a::before {
   right: 10px;
   top: 0;
 }
-/* 撌阡�����������*/
+/* ��嚙踝�蹓蕭嚙踝蹓蕭謘蕭�嚙踝蕭��蕭��蕭��嚙踝蕭�謒�*/
 .side-menu-black {
   margin-top: 15px;
   display: none;
@@ -223,7 +223,7 @@ nav a + a::before {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
 }
-/* 蝚砌�撅文�垢敺���� */
+/* ���蕭���蕭���謅蕭��蕭謕蕭嚙� */
 .forfiexed {
   display: flex;
   justify-content: space-between;
@@ -238,7 +238,7 @@ nav a + a::before {
   align-items: center;
   z-index: 0;
 }
-/* 璅�椰���慰��� */
+/* ���蕭�璊堆蕭嚙踝�蕭��嚙踐�蕭蹓蕭謘� */
 .title img {
   width: 3vw;
   height: 3vw;
@@ -250,7 +250,7 @@ nav a + a::before {
 .title img:hover {
   cursor: pointer;
 }
-/* 璅�椰���ogo���� */
+/* ���蕭�璊堆蕭嚙踝�蕭�ogo嚙踝蕭謘橘蕭嚙� */
 .title a {
   display: block;
   background-image: url("../img/LOGO/Logo3\ \(2\).png");
@@ -364,7 +364,7 @@ width: 4.5em;
 
 
 
-/* 摨垢��� */
+/* ���嚙踝蕭嚙� */
 .footer {
     background-color: #fa7e23;
     opacity: 85%;
@@ -372,7 +372,7 @@ width: 4.5em;
     justify-content: space-around;
     align-items: flex-start;
     padding-top: 1vh;
-    height:12em;
+    height:20em;
 }
 
 .footer a {

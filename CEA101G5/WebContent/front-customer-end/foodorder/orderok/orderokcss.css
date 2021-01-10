@@ -122,15 +122,15 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/* 從這裡開始 */
-/* 整個網頁 */
+/* 敺�ㄐ���� */
+/* ��雯��� */
 .wrap {
   width: 100%;
   align-self: center;
   background-color: white;
   margin: 0px auto;
 }
-/* 左邊側拉選單 */
+/* 撌阡���� */
 .side-menu-all {
   height: 100%;
   position: fixed;
@@ -141,7 +141,7 @@ table {
   white-space: nowrap;
   z-index: 10;
 }
-/* 左邊側拉選單裡面的設定 */
+/* 撌阡����鋆⊿��身摰� */
 .side-menu {
   position: fixed;
   float: left;
@@ -154,7 +154,7 @@ table {
   color: black;
   box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.4);
 }
-/* 左邊側拉選單的第一個input標籤 */
+/* 撌阡������洵銝��nput璅惜 */
 .side-menu input {
   display: block;
   margin: 2vh 0 0 5vw;
@@ -170,11 +170,11 @@ table {
 .side-menu input:focus {
   outline: none;
 }
-/* 左邊隱藏選單設定  */
+/* 撌阡����閮剖��  */
 .side-menu nav {
   margin-left: 0.8vw;
 }
-/* 左邊側拉選的圖片滑動設計 */
+/* 撌阡���������身閮� */
 .side-menu a .fas {
   color: black;
   margin-right: -1.1em;
@@ -214,7 +214,7 @@ nav a + a::before {
   right: 10px;
   top: 0;
 }
-/* 左邊側拉選單右邊的黑色背景*/
+/* 撌阡�����������*/
 .side-menu-black {
   margin-top: 15px;
   display: none;
@@ -223,7 +223,7 @@ nav a + a::before {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
 }
-/* 第一層底端得上標題 */
+/* 蝚砌�撅文�垢敺���� */
 .forfiexed {
   display: flex;
   justify-content: space-between;
@@ -238,7 +238,7 @@ nav a + a::before {
   align-items: center;
   z-index: 0;
 }
-/* 標題左邊的漢堡選單 */
+/* 璅�椰���慰��� */
 .title img {
   width: 3vw;
   height: 3vw;
@@ -250,7 +250,7 @@ nav a + a::before {
 .title img:hover {
   cursor: pointer;
 }
-/* 標題左邊的logo圖片 */
+/* 璅�椰���ogo���� */
 .title a {
   display: block;
   background-image: url("../img/LOGO/Logo3\ \(2\).png");
@@ -275,7 +275,7 @@ nav a + a::before {
   color: white;
   font-size: 1.7vw;
   font-weight: bold;
-  padding-top: 0.7em;
+  padding-top: 1.2em;
 }
 
 
@@ -451,7 +451,7 @@ body {
     font-size: 3em;
     position:absolute;
     top:1em;
-    left: 14em;
+    left: 20em;
     z-index: 1;
     font-weight:900;
 }
@@ -509,7 +509,7 @@ body {
 
 
 
-/* 底端列 */
+/* 摨垢��� */
 .footer {
     background-color: #fa7e23;
     opacity: 85%;
@@ -517,7 +517,7 @@ body {
     justify-content: space-around;
     align-items: flex-start;
     padding-top: 1vh;
-    height:12em;
+    height:20em;
 }
 
 .footer a {

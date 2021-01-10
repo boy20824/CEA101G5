@@ -145,16 +145,16 @@
 				</li>
 				<li>
 					<div class="memChoseList">
-						<a href="#"><i class="fas fa-pizza-slice"></i></i></a> <a
-							href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">
+						<a href="<%=request.getContextPath()%>/front-customer-end/foodorder/orderok/orderok.jsp"><i class="fas fa-pizza-slice"></i></i></a> <a
+							href="<%=request.getContextPath()%>/front-customer-end/foodorder/orderok/orderok.jsp">
 							<p>外帶訂單</p>
 						</a>
 					</div>
 				</li>
 				<li>
 					<div class="memChoseList">
-						<a href="#"><i class="far fa-comments"></i></i></a> <a
-							href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">
+						<a href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp"><i class="far fa-comments"></i></i></a> <a
+							href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp">
 							<p>歷史評論</p>
 						</a>
 					</div>

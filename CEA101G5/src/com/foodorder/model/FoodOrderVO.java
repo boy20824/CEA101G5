@@ -13,7 +13,7 @@ public class FoodOrderVO implements Serializable {
 	private Integer foodOrderTotalPrice;
 	private String foodOrderNote;
 	private Integer foodOrderStatus;
-	private Integer foodorderCmtStatus;
+	private Integer foodOrderCmtStatus;
 	
 	public FoodOrderVO() {
 		super();
@@ -83,12 +83,12 @@ public class FoodOrderVO implements Serializable {
 		this.foodOrderStatus = foodOrderStatus;
 	}
 
-	public Integer getFoodorderCmtStatus() {
-		return foodorderCmtStatus;
+	public Integer getFoodOrderCmtStatus() {
+		return foodOrderCmtStatus;
 	}
 
-	public void setFoodorderCmtStatus(Integer foodorderCmtStatus) {
-		this.foodorderCmtStatus = foodorderCmtStatus;
+	public void setFoodOrderCmtStatus(Integer foodOrderCmtStatus) {
+		this.foodOrderCmtStatus = foodOrderCmtStatus;
 	}
 	
 	

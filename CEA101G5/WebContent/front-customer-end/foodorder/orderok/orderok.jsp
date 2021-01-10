@@ -5,7 +5,8 @@
 <%@ page import="com.foodorderdetail.model.*"%>
 <%@ page import="com.foodorder.model.*"%>
 <%@ page import="com.member.model.*"%>
-
+<%@ page import="java.lang.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
 	FoodOrderService foodOrderSvc = new FoodOrderService();
@@ -97,7 +98,7 @@ response.setDateHeader("Expires", 0);
 					<ul>
 						<li>
 							<p>取餐時間</p>
-							<p>時間呢參數呢</p>
+							<p><fmt:formatDate value="${Date(foodOrderVO.foodOrderTime.getTime()+1800000)}" pattern="yyyy-MM-dd HH:mm"/></p>
 						</li>
 						<li>
 							<p>取餐人姓名</p>

@@ -122,13 +122,13 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/* 從這裡開始 */
-/* 整個網頁 */
+/* 敺�ㄐ���� */
+/* ��雯��� */
 .wrap {
   width: 100%;
   align-self: center;
 }
-/* 左邊側拉選單 */
+/* 撌阡���� */
 .side-menu-all {
   height: 100%;
   position: fixed;
@@ -139,7 +139,7 @@ table {
   white-space: nowrap;
   z-index: 10;
 }
-/* 左邊側拉選單裡面的設定 */
+/* 撌阡����鋆⊿��身摰� */
 .side-menu {
   position: fixed;
   float: left;
@@ -152,7 +152,7 @@ table {
   color: black;
   box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.4);
 }
-/* 左邊側拉選單的第一個input標籤 */
+/* 撌阡������洵銝��nput璅惜 */
 .side-menu input {
   display: block;
   margin: 2vh 4vw 0 3vw;
@@ -168,11 +168,11 @@ table {
 .side-menu input:focus {
   outline: none;
 }
-/* 左邊隱藏選單設定  */
+/* 撌阡����閮剖��  */
 .side-menu nav {
   margin-left: 0.8vw;
 }
-/* 左邊側拉選的圖片滑動設計 */
+/* 撌阡���������身閮� */
 .side-menu a .fas {
   color: black;
   margin-right: -1.1em;
@@ -212,7 +212,7 @@ nav a + a::before {
   right: 10px;
   top: 0;
 }
-/* 左邊側拉選單右邊的黑色背景*/
+/* 撌阡�����������*/
 .side-menu-black {
   display: none;
   position: fixed;
@@ -220,7 +220,7 @@ nav a + a::before {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
 }
-/* 第一層底端得上標題 */
+/* 蝚砌�撅文�垢敺���� */
 .forfiexed {
   display: flex;
   justify-content: space-between;
@@ -244,7 +244,7 @@ nav a + a::before {
 .shopCard p{
   width: 10vw;
 }
-/*購物車*/
+/*鞈潛頠�*/
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 
@@ -356,13 +356,13 @@ span.item-remove:hover{
   clear: both;
 }
 
-/* 滑動下來第二層的上標題 */
+/* 皛���洵鈭惜������ */
 .title {
   display: flex;
   align-items: center;
   z-index: 0;
 }
-/* 標題左邊的漢堡選單 */
+/* 璅�椰���慰��� */
 .title img {
   width: 3vw;
   height: 3vw;
@@ -374,7 +374,7 @@ span.item-remove:hover{
 .title img:hover {
   cursor: pointer;
 }
-/* 標題左邊的logo圖片 */
+/* 璅�椰���ogo���� */
 .title a {
   display: block;
   background-image: url("../img/LOGO/Logo3\ \(2\).png");
@@ -400,10 +400,11 @@ span.item-remove:hover{
   font-size: 1.7vw;
   font-weight: bold;
   padding-top: 1.3em;
+  white-space:nowrap;
 }
 
 
-/* 餐廳簡易資訊 */
+/* 擗輒蝪⊥���� */
 .container{
   padding-top:20vh;
   padding-left: 5vw;
@@ -425,7 +426,7 @@ span.item-remove:hover{
   margin-bottom: 4vh;
 }
 .info ul{
-  margin-left: -8em;
+  margin-left: -15em;
 }
 .info p{
 display: inline-block;
@@ -472,7 +473,7 @@ display: inline-block;
   color:#ff615f;
   border:1px solid #ff615f;
 }
-/* 餐點分類選單 */
+/* 擗���� */
 .listBar h1{
   margin-top: 5vh;
   display: flex;
@@ -507,7 +508,7 @@ width: 90%;
   cursor: pointer;
   color:orange;
 }
-/* 餐點資訊表 */
+/* 擗���” */
 .list{
   display:flex;
   margin-bottom: 10vh;
@@ -613,7 +614,7 @@ width: 90%;
   cursor: pointer;
 }
 
-/* 底端列 */
+/* 摨垢��� */
 .footer {
     background-color: #fa7e23;
     opacity: 85%;
@@ -621,7 +622,7 @@ width: 90%;
     justify-content: space-around;
     align-items: flex-start;
     padding-top: 1vh;
-    height:12em;
+    height:20em;
 }
 
 .footer a {
@@ -709,4 +710,5 @@ width: 90%;
 }
  .slick-initialized .slick-slide .dog{
   margin-right: 1em;
+  font-size:24px;
 }

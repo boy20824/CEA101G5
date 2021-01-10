@@ -10,8 +10,7 @@
 <%MemVO member =(MemVO)session.getAttribute("memLogin") ;%>
 <%
 	FoodOrderService foodOrderSvc = new FoodOrderService();
-// 	List<FoodOrderVO> list = foodOrderSvc.getAllByMemberPhoneStatus2(member.getMemPhone()); //先用會員電話找到訂單資料
-	List<FoodOrderVO> list = foodOrderSvc.getAllByMemberPhoneStatus2("0921842859");
+	List<FoodOrderVO> list = foodOrderSvc.getAllByMemberPhoneStatus2(member.getMemPhone());
 	pageContext.setAttribute("list", list);
 %>
 
@@ -19,8 +18,8 @@
 <jsp:useBean id="foodOrderDetailSvc" scope="page" class="com.foodorderdetail.model.FoodOrderDetailService" />
 <!-- 呼叫餐點 -->
 <jsp:useBean id="menuSvc" scope="page" class="com.menu.model.MenuService" />
-
-
+<!-- 呼叫餐廳 -->
+<jsp:useBean id="restaurantSvc" scope="page" class="com.restaurant.model.RestaurantService" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,9 +89,8 @@
                     <div class="open-btn">
                         <a class="showMore">查看更多..</a>
                     </div>
-                    <c:if test="${foodOrderVO.foodorderCmtStatus==0 }">
-                    <input type="button" class="cmt" value="評論餐點">
-                    </c:if>
+                    <p>${foodOrderVO.foodOrderCmtStatus}</p>
+                    <input type="button" class="cmt" value="${foodOrderVO.foodOrderCmtStatus==0?'評論餐點':'已評論'}"${foodOrderVO.foodOrderCmtStatus==0?'':'disabled style="background-color:gray;"'}>
                 </div> 
                 
             </div>
@@ -106,13 +104,13 @@
                 <img src="<%=request.getContextPath()%>/front-customer-end/customerorder/餐廳.jpg" alt="">
             </div>
             <div class="restaurantContent">
-                <p>是否滿意<span>XXX餐廳</span>?</p>
+                <p>是否滿意<span>${restaurantSvc.getOneRestaurant(foodOrderVO.storeId).storeName}餐廳</span>?</p>
                 <p>讓餐廳知道您的想法。</p>
             </div>
             <form method="post" action="<%=request.getContextPath()%>/restaurantcmt/RestaurantCmt.do">
             <input type="hidden" name="storeId" value="${foodOrderVO.storeId}">
             <input type="hidden" name="foodOrderId" value="${foodOrderVO.foodOrderId }">
-            <input type="hidden" name="memPhone" value="0921842851">
+            <input type="hidden" name="memPhone" value="<%=member.getMemPhone()%>">
             <input type="hidden" name="action" value="insert">
             <div class="star">
                 <input type="radio" name="item<%= ++i%>" id="item01_<%= i%>" value="1"/>

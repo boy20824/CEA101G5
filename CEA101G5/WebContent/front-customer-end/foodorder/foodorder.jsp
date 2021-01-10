@@ -3,6 +3,7 @@
 <%@ page import="com.menu.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.member.model.*"%>
+<%@ page import="java.text.*"%>
 
 <!-- 取得存在session的購物車元清單 -->
 <%
@@ -77,8 +78,11 @@ response.setDateHeader("Expires", 0);
 		<div class="order animate__animated animate__bounceInLeft">
 			<ul>
 				<li>
-					<p>取餐時間</p>
-					<p>時間呢參數呢</p>
+					<p>訂餐時間</p>
+					<%SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+					Date date = new Date();
+					String strDate = sdFormat.format(date); %>
+					<p><%= sdFormat.format(date)%></p>
 				</li>
 				<li>
 					<p>取餐人姓名</p>

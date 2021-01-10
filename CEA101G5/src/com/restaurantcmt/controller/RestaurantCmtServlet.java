@@ -52,13 +52,17 @@ public class RestaurantCmtServlet extends HttpServlet {
 			while(enu.hasMoreElements()) {
 				i++;
 				String name=(String) enu.nextElement();
-				if(i%4==0) {
+				if(i%5==0) {
 					storeRating =Integer.parseInt(req.getParameter(name));
 				}
+			}
+			if(storeCmtContent==null) {
+				storeCmtContent="";
 			}
 				/*************************** 2.開始查詢資料 *****************************************/
 				RestaurantCmtService cmtSvc = new RestaurantCmtService();
 				FoodOrderService foodSvc = new FoodOrderService();
+				System.out.println(foodOrderId);
 				foodSvc.updateOneByFoodOrderId(foodOrderId);
 				 cmtSvc.addRestaurantCmt(storeId,memPhone,storeCmtContent,storeRating,new Integer(0));
 			

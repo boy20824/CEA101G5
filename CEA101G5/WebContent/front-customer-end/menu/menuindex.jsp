@@ -9,7 +9,7 @@
 <%
 	RestaurantService restaurantSvc = new RestaurantService(); //創建 實體
 	RestaurantVO restaurantVO = restaurantSvc.getOneRestaurant(request.getParameter("storeId")); //呼叫DAO並執行getAll()取得VO為每一列資訊的所有欄位並裝入List集合<泛型只能裝取該VO型別>;
-	pageContext.setAttribute("restaurantVO", restaurantVO);
+	request.setAttribute("restaurantVO", restaurantVO);
 %>
 
 <%
@@ -47,7 +47,7 @@ response.setDateHeader("Expires", 0);
 }
 
 .full_star {
-	width: 100%; /*調整寬度可變更星等*/
+	width: 0%; /*調整寬度可變更星等*/
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -61,7 +61,7 @@ response.setDateHeader("Expires", 0);
 </head>
 <body>
 	<!--存放外會員進來的參數以及餐點編號 -->
-	<input type="hidden" class="storeId" value="<%=restaurantVO.getStoreId()%>" />
+	<input type="hidden" class="storeId" value="${restaurantVO.storeId}" />
 	<% MemVO memberPhone =(MemVO)session.getAttribute("memLogin");%>
 	<c:if test="${not empty sessionScope.memLogin}"> 
 	<input type="hidden" class="memberId" value="<%= memberPhone.getMemPhone() %>" />
@@ -115,7 +115,7 @@ response.setDateHeader("Expires", 0);
 			
 			<!--end shopping-cart-header -->
 
-			<div class="forCar" style="overflow: auto; height: 350px;">
+			<div class="forCar" style="overflow: auto; height: 500px;width:300px;">
 				<c:forEach var="item" items="${memuList}">
 					<div id="${item.menuId}" class="carlist">
 						<ul class="shopping-cart-items">
@@ -184,12 +184,12 @@ response.setDateHeader("Expires", 0);
 			</div>
 			       <div class="data-slick">
 			       <c:set var="rating" value="${0}" />
-			       <c:forEach var="cmtVO" items="${cmtSvc.getAll('S000001')}">
+			       <c:forEach var="cmtVO" items="${cmtSvc.getAll(restaurantVO.storeId)}">
 			       		<c:set var="rating" value="${rating + cmtVO.storeRating }" />
           				<div><div class="dog">${cmtVO.storeCmtContent }</div></div>
           			</c:forEach>
-          			<input type="hidden" class="rating" value="${rating/cmtSvc.getAll('S000001').size()*10}" />
         			</div>
+        			<input type="hidden" class="rating" value="${rating/cmtSvc.getAll(restaurantVO.storeId).size()*10}" />
         			<script>
           				let rate = document.querySelector('.rating')
           				document.querySelector('.full_star').style.width=Math.round(rate.value)+'%'
