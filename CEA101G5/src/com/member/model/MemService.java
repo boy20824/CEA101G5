@@ -74,6 +74,17 @@ public class MemService {
 		
 		return memVO;
 	}
+	
+	public MemVO updateMemCondition(String memPhone,Integer memCondition) {
+		
+		MemVO memVO = new MemVO();
+		
+		memVO.setMemPhone(memPhone);
+		memVO.setMemCondition(memCondition);		
+		dao.updateMemConditionBymemPhone(memVO);
+		
+		return memVO;
+	}
 
 	public List<MemVO> getAll() {
 		return dao.getAll();

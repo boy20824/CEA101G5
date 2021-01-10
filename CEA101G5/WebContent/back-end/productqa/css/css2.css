@@ -1,0 +1,192 @@
+        /*匯入字型*/
+        @font-face {
+            font-family: Minecraft;
+            src: url('../fonts/Minecraft-Regular.otf');
+        }
+
+
+        /*右區塊底色*/
+        body {
+            font-family: "Lato", sans-serif;
+            background-color: #F6F6F6;
+
+        }
+        footer {
+            /* position: fixed; */
+
+            margin-left: 200px;
+            /* z-index: 200; */
+        }
+        header {
+            margin-left: 200px;
+        }
+        #logo {
+            width: 9%;
+            display: block;
+            background-color: #FF615E;
+            position: fixed;
+            top: 0;
+            left: 2;
+        }
+        .image {
+            width: 200px;
+            height: 200px;
+        }
+
+        /*最下層的sidebar 右框配色用*/
+        #backSidebar {
+            z-index: 0;
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #FF615E;
+        }
+        /*左側攔*/
+        .sidebar {
+
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 50px;
+            left: 0;
+
+            background-color: #FF615E;
+
+
+            transition: 0.5s;
+            padding-top: 60px;
+
+        }
+
+
+        span:hover .sidebar {
+            display: block;
+
+        }
+
+        /*左側攔 文字(超連結)*/
+        .sidebar span {
+            padding: 8px 8px 8px 32px;
+            width: 120px;
+            height: 35px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #FFFFFF;
+            display: block;
+            overflow: hidden;
+            line-height: 35px;
+            transition: height 0.5s;
+            font-family: STKaiti;
+
+        }
+
+        /*滑到sidebar文字變色*/
+        /*         .sidebar span:hover {
+            color: #f1f1f1;
+            height: 200px;
+
+        } */
+
+        #empFront:hover {
+            height: 130px;
+
+        }
+        #empShop:hover {
+            height: 200px;
+
+        }
+        #empMem:hover {
+            height: 100px;
+
+        }
+        #empBack:hover {
+            height: 200px;
+
+        }
+        /*下拉文字*/
+        .sidebar span a {
+            display: block;
+            font-size: 16px;
+            transition: all 0.8s;
+            text-decoration: none;
+            color: #FFFFFF;
+            /*文字顏色*/
+            margin-left: 20px;
+        }
+
+        .sidebar span a:hover {
+            background-color: gray;
+            /* color: #fff; */
+            color: #f1f1f1;
+
+        }
+
+        /*左上商標*/
+        .sidebar .icon {
+            position: absolute;
+            left: 10%;
+            top: -4%;
+            width: 200px;
+            height: 100px;
+            opacity: 0.8;
+            filter: hue-rotate(7deg);
+            font-family: Minecraft;
+            font-size: 2.5em;
+
+            /*文字漸層色彩 -webkit-是要給chrom辨識用*/
+            background-image: linear-gradient(135deg, #fdfcfb 30%, #e2d1c3 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+
+        }
+
+
+
+        /*讓你放東西的 需要自己再排版*/
+        #main {
+
+            padding-left: 50px;
+            margin-left: 200px;
+
+        }
+        #main1 {
+            padding-top: 50px;
+            padding-left: 50px;
+            margin-left: 200px;
+        }
+
+        /* 縮小排版不變 */
+        @media screen and (max-height: 450px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+            .sidebar span {
+                font-size: 18px;
+            }
+        }
+
+
+        /*登入圖標*/
+        #login {
+            position: fixed;
+            left: 1.8%;
+            top: 88%;
+            width: 130px;
+            height: 35px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #FFFFFF;
+            display: block;
+            z-index: 99;
+
+        }
+
+        #login:hover {
+
+            color: #f1f1f1;
+
+        }

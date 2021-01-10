@@ -30,14 +30,14 @@ public class FoodOrderJNDIDAO implements FoodOrder_interface{
 			}
 		}
 		
-		private static final String INSERT_STMT = "INSERT INTO FOODORDER (FOODORDER_ID,MEM_PHONE,STORE_ID,FOODORDER_TOTALPRICE,FOODORDER_NOTE) VALUES (('OD'||LPAD(SEQ_FOODORDER_ID.NEXTVAL,6,'0')), ?, ?, ?, ?)";
+		private static final String INSERT_STMT = "INSERT INTO FOODORDER (FOODORDER_ID,MEM_PHONE,STORE_ID,FOODORDER_TOTALPRICE,FOODORDER_NOTE,FOODORDER_CMT_STATUS) VALUES (('OD'||LPAD(SEQ_FOODORDER_ID.NEXTVAL,6,'0')), ?, ?, ?, ?,0)";
 		private static final String GET_ALL_STMT = "SELECT FOODORDER_ID,MEM_PHONE,STORE_ID,to_char(FOODORDER_TIME,'yyyy-mm-dd hh24:mm:ss')FOODORDER_TIME,to_char(FOODORDER_COMPLETE_TIME,'yyyy-mm-dd hh:mm:ss')FOODORDER_COMPLETE_TIME,FOODORDER_TOTALPRICE,FOODORDER_NOTE,FOODORDER_STATUS FROM FoodOrder where MEM_PHONE = ? and FOODORDER_STATUS= 0 order by FOODORDER_ID DESC";
 		private static final String GET_ALL_BY_STATUS_2 = "SELECT FOODORDER_ID,MEM_PHONE,STORE_ID,to_char(FOODORDER_TIME,'yyyy-mm-dd hh24:mm:ss')FOODORDER_TIME,to_char(FOODORDER_COMPLETE_TIME,'yyyy-mm-dd hh:mm:ss')FOODORDER_COMPLETE_TIME,FOODORDER_TOTALPRICE,FOODORDER_NOTE,FOODORDER_STATUS FROM FoodOrder where MEM_PHONE = ? order by FOODORDER_ID DESC";
 		private static final String GET_ONE_STMT = "SELECT FOODORDER_ID,MEM_PHONE,STORE_ID,to_char(FOODORDER_TIME,'yyyy-mm-dd hh24:mm:ss')FOODORDER_TIME,to_char(FOODORDER_COMPLETE_TIME,'yyyy-mm-dd hh:mm:ss')FOODORDER_COMPLETE_TIME,FOODORDER_TOTALPRICE,FOODORDER_NOTE,FOODORDER_STATUS FROM FOODORDER where FOODORDER_ID = ?";
 		private static final String DELETE = "DELETE FROM FOODORDER where FOODORDER_ID = ?";
 		private static final String UPDATE = "UPDATE FOODORDER set FOODORDER_COMPLETE_TIME=?, FOODORDER_STATUS=? where FOODORDER_ID = ?";
 		private static final String GET_ALL_By_STORE_ID = "SELECT FOODORDER_ID,MEM_PHONE,STORE_ID,to_char(FOODORDER_TIME,'yyyy-mm-dd hh24:mm:ss')FOODORDER_TIME,to_char(FOODORDER_COMPLETE_TIME,'yyyy-mm-dd hh:mm:ss')FOODORDER_COMPLETE_TIME,FOODORDER_TOTALPRICE,FOODORDER_NOTE,FOODORDER_STATUS FROM FoodOrder where STORE_ID = ? order by FOODORDER_ID DESC";
-		
+		private static final String UPDATE_BY_FOODORDER_ID = "UPDATE FOODORDER set FOODORDER_CMT_STATUS=1 where FOODORDER_ID = ?";
 		
 		@Override
 		public ResultSet insert(FoodOrderVO foodOrderVO) {
@@ -182,6 +182,42 @@ public class FoodOrderJNDIDAO implements FoodOrder_interface{
 				pstmt.setTimestamp(1, foodOrderVO.getFoodOrderCompleteTime());
 				pstmt.setInt(2, foodOrderVO.getFoodOrderStatus());
 				pstmt.setString(3, foodOrderVO.getFoodOrderId());
+
+				pstmt.executeUpdate();
+
+			}catch (SQLException se) {
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+
+		}
+		
+		@Override
+		public void updateOneByFoodOrderId(String foodOrderId) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+
+			try {
+
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(UPDATE_BY_FOODORDER_ID);
+
+				pstmt.setString(1, foodOrderId);
 
 				pstmt.executeUpdate();
 

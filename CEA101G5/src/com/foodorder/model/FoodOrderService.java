@@ -55,5 +55,7 @@ public class FoodOrderService {
 	public List<FoodOrderVO> getAllByMemberPhoneStatus2(String memPhone){
 		return dao.getAllByMemberPhoneStatus2(memPhone);
 	}
-	
+	public void updateOneByFoodOrderId(String foodOrderId) {
+		 dao.updateOneByFoodOrderId(foodOrderId);
+	}
 }

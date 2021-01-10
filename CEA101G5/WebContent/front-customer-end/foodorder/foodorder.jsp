@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.menu.model.*"%>
 <%@ page import="java.util.*"%>
-
+<%@ page import="com.member.model.*"%>
 
 <!-- 取得存在session的購物車元清單 -->
 <%
@@ -34,6 +34,8 @@ response.setDateHeader("Expires", 0);
 <body>
 <!-- 存餐廳編號 -->
 <% session.setAttribute("storeId", list.get(0).getStoreId().trim()); %>
+<!-- 從session拿到會員編號 -->
+<%MemVO member =(MemVO)session.getAttribute("memLogin") ;%>
 	<div class="wrap">
 		<!--  側拉選單  -->
 		<div class="side-menu-all">
@@ -80,11 +82,11 @@ response.setDateHeader("Expires", 0);
 				</li>
 				<li>
 					<p>取餐人姓名</p>
-					<p>女生慢慢來沒關西</p>
+					<p><%=member.getMemName() %></p>
 				</li>
 				<li>
 					<p>取餐人手機</p>
-					<p>500 眼睛??</p>
+					<p><%=member.getMemPhone() %></p>
 				</li>
 			</ul>
 			<p>訂單資訊</p>

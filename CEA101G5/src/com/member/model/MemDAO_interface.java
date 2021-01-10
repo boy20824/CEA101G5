@@ -10,5 +10,6 @@ public interface MemDAO_interface {
 		public void delete(String memPhone);
 		public MemVO findByPrimaryKey(String memPhone);
 		public List<MemVO> getAll();
+		public void updateMemConditionBymemPhone(MemVO memVO);
 
 }

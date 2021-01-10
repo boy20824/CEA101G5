@@ -28,7 +28,7 @@
 				<li>餐廳設定
 					<ul>
 						<li>
-						餐廳資訊設定
+						<a href="<%=request.getContextPath()%>/front-store-end/restaurant/addrestaurant.jsp">餐廳資訊設定</a>
 						</li>
 						<li>
 						功能開關選項

@@ -30,6 +30,7 @@ public class MemDAO implements MemDAO_interface {
 		private static final String UPDATE = "UPDATE MEMBER SET MEM_PWD=?, MEM_NAME=?, MEM_ADDRESS=?,MEM_SEX=?, MEM_EMAIL=?,MEM_IDENTITY=?, MEM_BIRTHDAY=?,MEM_NICKNAME=?, MEM_LICENSE=?, MEM_CONDITION=?, MEM_AUTHORITY=?,RECHARGE_TOTAL=? ,MEM_PHOTO=?,MEM_CARDNUMBER=?,MEM_CARDHOLDER=?,MEM_CARDEXPIRATIONDATE=?,MEM_CARDCCV=? WHERE MEM_PHONE = ?";
 		private static final String UPDATE_TOTALRECHARGE = "UPDATE MEMBER SET RECHARGE_TOTAL=? WHERE MEM_PHONE = ?";
 		private static final String UPDATE_LICENSE = "UPDATE MEMBER SET MEM_LICENSE=?, MEM_CONDITION=? WHERE MEM_PHONE = ?";
+		private static final String UPDATE_CONDITION = "UPDATE MEMBER SET MEM_CONDITION=? WHERE MEM_PHONE = ?";
 
 		@Override
 		public void insert(MemVO memVO) {
@@ -218,6 +219,46 @@ public class MemDAO implements MemDAO_interface {
 			}
 
 		}
+		
+		public void updateMemConditionBymemPhone(MemVO memVO) {
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			try {
+				
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(UPDATE_CONDITION);
+				
+				pstmt.setInt(1, memVO.getMemCondition());
+				pstmt.setString(2, memVO.getMemPhone());
+				
+				pstmt.executeUpdate();
+				
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			
+		}
+		
 		@Override
 		public void delete(String memPhone) {
 			int updateCount_MEMs = 0;

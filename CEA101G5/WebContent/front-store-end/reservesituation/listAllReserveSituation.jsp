@@ -2,22 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.acceptreserve.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+<%@ page import="com.reservesituation.model.*"%>
 
 <%
-	AcceptReserveService arSvc = new AcceptReserveService();
-    List<AcceptReserveVO> list = arSvc.getAll();
+    ReserveSituationService rsSvc = new ReserveSituationService();
+    List<ReserveSituationVO> list = rsSvc.fors("S000003");
     pageContext.setAttribute("list",list);
 %>
-
+<jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
 
 <html>
 <head>
-<title>所有訂位時段資料</title>
+<title>訂位狀況資料</title>
 
 <style>
-
   table#table-1 {
 	background-color: #f3853d;
     border: 2px solid black;
@@ -36,7 +34,7 @@
 
 <style>
   table {
- 	width: 900px;
+ 	width: 800px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -77,11 +75,14 @@
   background-color: white;
   margin:20px;
   }
+  #openp{
+  background-color: #228b22;
+  }
+
 </style>
 
 </head>
 <body bgcolor='white'>
-
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -92,38 +93,28 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
 <div class="tableborder">
-<%@ include file="page1.file" %> 
 <table class="info">
 	<tr>
-		<th>時段編號</th>
-		<th>餐廳名稱</th>
-		<th>開始時間</th>
-		<th>結束時間</th>
-		<th>訂位時段狀態</th>
+		<th>日期</th>
+		<th>餐廳編號</th>
+		<th>用餐時間</th>
+		<th>可訂桌數</th>
+		<th>已訂桌數</th>
 	</tr>
-	<c:forEach var="arVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<%@ include file="page1.file" %> 
+	<c:forEach var="ReserveSituationVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${arVO.periodId}</td>
-			<td>${arVO.storeId}</td>
-			<td><fmt:formatDate value="${arVO.startTime}" pattern="HH:mm:ss"/></td>
-			<td><fmt:formatDate value="${arVO.endTime}" pattern="HH:mm:ss"/></td>
-			<td>
-				<c:if test="${arVO.periodStatus==0}">
-					<span>關閉中</span>
-				</c:if>
-				<c:if test="${arVO.periodStatus==1}">
-					<span>開放中</span>
-				</c:if>
-			</td> <!-- JSP會自動幫你setAttribute EL會自動幫你getAttribute -->
-										 <!-- 如果要用jsp寫法java.text.DateFormat 要先setAttribute 再get很麻煩 -->
-										 <!-- 直接DateTimePicker的formatDate  然後上面要加 tablib fmt 1210 11有講 -->
+			<td>${ReserveSituationVO.reserveSituationDate}</td>
+			<td>${ReserveSituationVO.storeId}</td><!-- 缺餐廳model -->
+			<td><fmt:formatDate value="${arSvc.getOneAcceptReserve(ReserveSituationVO.storeId,ReserveSituationVO.periodId).startTime}" pattern="HH:mm"/></td>
+			<td>${ReserveSituationVO.acceptGroups}</td>
+			<td>${ReserveSituationVO.reservedGroups}</td> 
 <!-- 			<td> -->
-<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/reserveorder/reserveorder.do" style="margin-bottom: 0px;"> --%>
+<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-customer-end/ReserveSituation/ReserveSituation.do" style="margin-bottom: 0px;"> --%>
 <!-- 			     <input type="submit" value="刪除"> -->
-<%-- 			     <input type="hidden" name="reserveid"  value="${reserveOrderVO.reserveId}"> --%>
+<%-- 			     <input type="hidden" name="reserveid"  value="${ReserveSituationVO.reserveId}"> --%>
 <!-- 			     <input type="hidden" name="action" value="delete"></FORM> -->
 <!-- 			</td> -->
 		</tr>
