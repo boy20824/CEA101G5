@@ -550,6 +550,8 @@ public class MemServlet extends HttpServlet {
 				memVO.setMemPhone(memPhone);
 				memVO.setMemCondition(memCondition);
 
+				jedis.close();
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO);
