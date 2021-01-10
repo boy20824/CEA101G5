@@ -53,7 +53,7 @@
                             <a class="nav-link active" href="<%=request.getContextPath()%>/front-end/shopProductListing.jsp">商品專區</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="" tabindex="-1" aria-disabled="true">訂餐專區</a>
+                            <a class="nav-link active" href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp" tabindex="-1" aria-disabled="true">訂餐專區</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="">幫助中心</a>
