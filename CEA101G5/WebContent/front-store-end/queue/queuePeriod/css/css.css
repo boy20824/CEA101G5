@@ -1,0 +1,149 @@
+        /*��摮��*/
+        @font-face {
+            font-family: 敺株�迤暺��;
+            /*         src: url('../fonts/Minecraft-Regular.otf'); */
+        }
+        *{
+            box-sizing: border-box;
+        }
+
+        /*���憛�*/
+        body {
+            font-family: "Lato", sans-serif;
+            background-color: #FFFFFF;
+            font-size: 0;
+        }
+
+        /*撌血���*/
+        .sidebar {
+
+            height: 100%;
+            width: 100px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+
+            background-color: #404040;
+            transition: 0.5s;
+            padding-top: 30px;
+
+        }
+
+        /*撌阡�CON*/
+        .sidebar svg {
+            width: 50px;
+            height: 50px;
+            margin-left: 20px;
+        }
+        .sidebar p {
+            margin-left: 26px;
+            font-size: 18px;
+            color: #CBCBCB;
+        }
+        #setting {
+            position: absolute;
+            top: 80%;
+        }
+
+
+        /*霈��镼輻�� ��閬撌勗����*/
+        #main {
+            font-size: 16px;
+            border:1px solid black;
+            margin-top: 50px;
+            margin-left: 120px;
+            width:1680px; 
+            /* height:800px; */
+            /* display:flex; */
+        }
+        #main_top{
+            border: 2px solid blue;
+            /* margin-left: 2px; */
+            width: 1680px;
+            height: 120px;
+            /* display: inline-block; */
+            text-align: center;
+            display:flex;
+            align-items: center;
+        }
+        #main_bot{
+            border: 2px solid red;
+            /* margin-right: -2px; */
+            width: 1680px;
+            height: 680px;
+            /* display: inline-block; */
+            display:flex;
+            align-items: center;
+            
+        }
+        #store_name{
+            border: 2px solid blue;
+            width: 200px;
+            
+        }
+        #page_title{
+            border: 2px solid red;
+            width: 100%;
+            
+        }
+        #status_table{
+            font-size: 30px;
+            border: 1px solid black;
+            margin: auto;
+            margin-top: 50px;
+        }
+        table , td{
+            border-collapse: collapse;
+            border: 1px solid black;
+            height: 120px;
+            width: 1200px;
+        }
+        th{
+            height: 80px;
+            border-collapse: collapse;
+            border: 1px solid black;
+            width: 1000px;
+        }
+        .btn_position{
+            text-align: center;
+        }
+        .btn{
+            width: 100px;
+            font-size: 20px;  
+        }
+       
+        /* 蝮桀������ */
+        @media screen and (max-height: 450px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+            .sidebar span {
+                font-size: 18px;
+            }
+        }
+        /*銝剝�之���*/
+        /* #main img {
+            position: relative;
+            left: 50%;
+            width: 40%;
+            height: auto;
+            transform: translateX(-50%);
+        } */
+        /*擐�����見撘�*/
+        .main_btn button {
+            width: 9.5vw;
+            height: 2.7vw;
+            border-radius: 1vw;
+            background-color: #465764;
+            border: none;
+            color: white;
+            font-size: 1.1vw;
+        }
+        /*隤踵擐������蔭*/
+        .main_btn {
+
+            text-align: center;
+            border: 1px solid black;
+            transform: translateX(60px);
+        }

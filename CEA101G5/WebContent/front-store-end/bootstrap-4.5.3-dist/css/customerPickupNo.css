@@ -1,0 +1,16 @@
+div.row.reserve {
+  border: 1px red solid;
+  height: 75px;
+}
+div.row.reserve1 {
+  border: 1px red solid;
+  height: 20px;
+}
+form {
+  text-align: center;
+  width: 1000px;
+}
+span.table{
+   color: white;
+    background-color: #ff615f;
+}
