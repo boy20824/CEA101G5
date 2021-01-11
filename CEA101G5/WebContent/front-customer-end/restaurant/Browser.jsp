@@ -147,7 +147,7 @@
 			name="form1">
 			<div class="search">
 				<input type="text" class="searchTerm"
-					placeholder="What are you looking for?">
+					placeholder="What are you looking for?" name="store_Name">
 				<button type="submit" class="searchButton">
 					<i class="fa fa-search"></i>
 				</button>
