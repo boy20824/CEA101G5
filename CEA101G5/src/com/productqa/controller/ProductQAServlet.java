@@ -55,6 +55,7 @@ public class ProductQAServlet extends HttpServlet {
 		res.sendRedirect(url);
 			
 		}
+		
 		if ("getOne_For_Display".equals(action)) { // 來自select_emp_page.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -147,9 +148,6 @@ public class ProductQAServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
-		
-		
 		
 		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 			
@@ -308,8 +306,6 @@ public class ProductQAServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
-		
 	}
 
 }
