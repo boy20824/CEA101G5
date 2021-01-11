@@ -442,10 +442,9 @@ public class RestaurantDAO implements Restaurant_interface {
 			}
 			rs.close();
 			// 再同時新增餐廳照片
-			RestaurantPictureDAO dao = new RestaurantPictureDAO();
-			RestaurantPictureVO aStorePic = new RestaurantPictureVO();; 
-				aStorePic.setStoreId(next_storeId) ;
-				dao.insertWithStore(aStorePic,con);
+			RestaurantPictureDAO dao = new RestaurantPictureDAO(); 
+			restaurantPictureVO.setStoreId(next_storeId);
+			dao.insertWithStore(restaurantPictureVO,con);
 
 			// 2●設定於 pstm.executeUpdate()之後
 			con.commit();

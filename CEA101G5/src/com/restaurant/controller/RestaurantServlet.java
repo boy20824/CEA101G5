@@ -302,18 +302,35 @@ public class RestaurantServlet extends HttpServlet {
 				
 				System.out.println(storeOpenTime);
 				
-				Part part = req.getPart("storePic");
-				InputStream in = part.getInputStream();
+//				Part part = req.getPart("storePic");
+//				InputStream in = part.getInputStream();
+//				byte[] storePic = null;
+//				if(part.getSize()==0) {
+//					if(session.getAttribute("storePic") == null) {
+//						errorMsgs.put("image","請上傳圖片");
+//					}else {
+//						storePic = (byte[])session.getAttribute("storePic");
+//						in.read(storePic);
+//						in.close();
+//					}
+//				}else {				
+//					storePic = new byte[in.available()];
+//					session.setAttribute("storePic", storePic);
+//					in.read(storePic);
+//					in.close();
+//				}
+				
+				InputStream in = req.getPart("storePic").getInputStream();
 				byte[] storePic = null;
-				if(part.getSize()==0) {
-					if(session.getAttribute("storePic") == null) {
+				if (in.available() == 0) {
+					if (session.getAttribute("storePic") == null) {
 						errorMsgs.put("image","請上傳圖片");
-					}else {
-						storePic = (byte[])session.getAttribute("storePic");
+					} else {
+						storePic = (byte[]) session.getAttribute("storePic");
 						in.read(storePic);
 						in.close();
 					}
-				}else {				
+				} else {
 					storePic = new byte[in.available()];
 					session.setAttribute("storePic", storePic);
 					in.read(storePic);
@@ -337,8 +354,6 @@ public class RestaurantServlet extends HttpServlet {
 				restPicVO.setStorePicture(storePic);
 				System.out.println(storePic);
 				
-				
-				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("restVO", restVO);
@@ -350,7 +365,6 @@ public class RestaurantServlet extends HttpServlet {
 				/*************************** 2.開始新增資料 ***************************************/
 				RestaurantService restSvc = new RestaurantService();
 				restSvc.easyAddRestaurantWithPic(restVO,restPicVO);
-				session.removeAttribute("storePic");
 				
 				/*************************** 3.新增完成轉交成功畫面(Send the Success view) ***********/
 				String url = "/back-end/restaurant/listAllStore.jsp";
