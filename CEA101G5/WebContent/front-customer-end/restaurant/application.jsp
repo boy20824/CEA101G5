@@ -9,10 +9,6 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>建立您的企業帳戶</title>
                 <link rel="icon" href="<%=request.getContextPath()%>/front-customer-end/front/img/favicon.ico" type="image/x-icon" />
-                <!--CSS -->
-                <link rel="stylesheet" href="<%=request.getContextPath()%>/front-customer-end/restaurant/css/css.css" />
-                <link href="<%=request.getContextPath()%>/front-customer-end/restaurant/css/all.css" rel="stylesheet" />
-                <script src="<%=request.getContextPath()%>/front-customer-end/restaurant/js/all.js"></script>
 
                 <!--JQuery -->
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -38,6 +34,10 @@
 
                 <!-- Swal -->
                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                <!--CSS -->
+                <link rel="stylesheet" href="<%=request.getContextPath()%>/front-customer-end/restaurant/css/css.css" />
+                <link href="<%=request.getContextPath()%>/front-customer-end/restaurant/css/all.css" rel="stylesheet" />
+                <script src="<%=request.getContextPath()%>/front-customer-end/restaurant/js/all.js"></script>
             </head>
 
             <body>
