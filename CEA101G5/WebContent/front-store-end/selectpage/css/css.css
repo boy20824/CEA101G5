@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 嚙踐嚙踐馳���蕭蹇腦嚙踐�蕭����;
+    font-family: ���斑���有嚙踝蕭謕蕭��頩����蕭��嚙踐捶嚙踝蕭謕蕭豲;
     /*         src: url('../fonts/Minecraft-Regular.otf'); */
 }
 
@@ -9,7 +9,7 @@ body {
 }
 
 .sidebar {
-    height: 100%;
+	height: 100%;
     width: 100px;
     position: fixed;
     z-index: 1;
@@ -20,6 +20,10 @@ body {
     padding-top: 10px;
     transform: translateX(-100%);
     transition: 0.5s;
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 #side-menu-switch:checked+.sidebar {
