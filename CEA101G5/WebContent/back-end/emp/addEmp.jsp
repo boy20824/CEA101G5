@@ -40,7 +40,8 @@
 			href="#">促銷活動設置 </a>
 		</span> <span id="empStore">餐廳管理<br> <a
 			href="<%=request.getContextPath()%>/back-end/storeChar/listAllStoreChar.jsp">
-				餐廳分類管理 </a> <a href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp"> 餐廳資訊管理 </a> <a href="#"> 餐廳申請審核 </a>
+				餐廳分類管理 </a> <a href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp"> 餐廳資訊管理 </a> 
+				<a href="#"> 餐廳申請審核 </a>
 		</span> <span id="empMem">會員管理<br> <a
 			href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">
 				會員資料管理 </a> <a
@@ -49,7 +50,7 @@
 		</span> <span id="empBack">後台管理<br> <a
 			href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp">
 				員工管理 </a>
-				<a href="#">權限管理 </a>
+				<a href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理 </a>
 		</span>
 	</div>
 	<div>

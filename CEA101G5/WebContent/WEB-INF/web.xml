@@ -310,20 +310,6 @@
 	</filter-mapping>
 
 	<filter>
-		<filter-name>EmpEmpFilter</filter-name>
-		<filter-class>com.filter.EmpEmpFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>EmpEmpFilter</filter-name>
-		<url-pattern>/back-end/emp/listAllEmp.jsp</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>INCLUDE</dispatcher>
-		<dispatcher>ERROR</dispatcher>
-		<dispatcher>ASYNC</dispatcher>
-	</filter-mapping>
-
-	<filter>
 		<filter-name>StoreLoginFilter</filter-name>
 		<filter-class>com.filter.StoreLoginFilter</filter-class>
 	</filter>
