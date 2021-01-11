@@ -10,7 +10,7 @@ public class jdbcUtil_CompositeQuery_Restaurant {
 		String aCondition = null;
 
 		if ("store_Name".equals(columnName)) // 用於其他
-			aCondition = columnName + " like '%" + value + "%'";
+			aCondition = columnName + " like '%" + value + "%' OR MENU_NAME LIKE '%" + value + "%'";
 
 		return aCondition + " ";
 	}
