@@ -14,14 +14,16 @@
 	QueNoVO queNoVO2 = (QueNoVO) session.getAttribute("queNoVO2");
 	List<QuePeriodVO> quePeriodVO = new ArrayList<QuePeriodVO>();
 	quePeriodVO = (List<QuePeriodVO>) session.getAttribute("quePeriodVO");
+	String memberName = (String) session.getAttribute("memberName");
 // 	List<QueNoVO> list = new ArrayList<QueNoVO>();//取得by storeid and tableid 未決定時段
 // 	list = (List<QueNoVO>) session.getAttribute("list");
 // 	pageContext.setAttribute("list", list);
 	session.setAttribute("queNoVO", queNoVO);
 	session.setAttribute("queNoVO2", queNoVO);
 	session.setAttribute("quePeriodVO", quePeriodVO);
+	session.setAttribute("memberName", memberName);
 %>
-<%=queNoVO == null%>
+<%=memberName %>
 <%-- <%=list == null%> --%>
 
 <html>
@@ -39,15 +41,19 @@
 <title>customerpickup</title>
 </head>
 <body>
-<a href="select_page.jsp">首頁</a>
 	<div class="container">
 		<div class="row reserve"></div>
 		<div class="row reserve"></div>
 		<div class="row">
-			<div class="col-sm-4"></div>
+			<div class="col-sm-2"></div>
 			<div class="col-sm-4">
 				<h1>
-					<span class="badge badge-secondary">您好！</span>王大明
+					<span class="badge badge-secondary">您好！！</span>
+				</h1>
+			</div>
+			<div class="col-sm-4">
+				<h1>
+					${memberName }
 				</h1>
 			</div>
 		</div>

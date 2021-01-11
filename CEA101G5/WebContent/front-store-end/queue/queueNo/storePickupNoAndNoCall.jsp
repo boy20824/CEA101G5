@@ -28,7 +28,6 @@
 	Integer pickupNo = (Integer) session.getAttribute("pickupNo");
 	String storeid = (String) session.getAttribute("storeid");
 %>
-<%=pickupNo == null%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color: red">請修正以下錯誤:</font>
 	<ul>
@@ -52,10 +51,8 @@
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/storePickupNoAndNoCall.css" />
 </head>
 <body>
-	<a href="select_page.jsp">首頁</a>
 	<div class="container">
 		<input name="storeid" id="storeid" value="${storeid }" hidden="hidden" />
-		<div class="row reserve"></div>
 		<!-- <div class="row reserve1"></div> -->
 		<div class="row">
 			<div class="col-4 left">

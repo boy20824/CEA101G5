@@ -370,6 +370,7 @@ public class QueNoServlet extends HttpServlet {
 				/*********************** 1.?��?��請�?��?�數 - 輸入?��式�?�錯誤�?��?? *************************/
 				Integer queuenum = new Integer(req.getParameter("queuenum"));
 				String memphone = req.getParameter("memphone").trim();
+				String memberName = req.getParameter("memberName").trim();
 				if (memphone == null || memphone.trim().length() == 0) {
 					errorMsgs.add("請勿空白");
 				} else if (!memphone.trim().matches(memphone)) { // 以�?�練習正???(�?)表示�?(regular-expression)
@@ -429,6 +430,7 @@ public class QueNoServlet extends HttpServlet {
 //				custInsert = count;
 				/*************************** 3.?��增�?��??,準�?��?�交(Send the Success view) ***********/
 				HttpSession session = req.getSession();
+				session.setAttribute("memberName", memberName);
 				session.setAttribute("queNoVO", queNoVO);
 				session.setAttribute("queNoVO2", queNoVO2);
 				session.setAttribute("quePeriodVO", quePeriodVO);
