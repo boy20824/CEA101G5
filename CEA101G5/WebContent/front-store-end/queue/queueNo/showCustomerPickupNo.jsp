@@ -23,7 +23,6 @@
 	session.setAttribute("quePeriodVO", quePeriodVO);
 	session.setAttribute("memberName", memberName);
 %>
-<%=memberName %>
 <%-- <%=list == null%> --%>
 
 <html>

@@ -166,7 +166,7 @@
 			<!-- 第一種桌子 -->
 			<div class="col-8 right">
 				<c:forEach var="queTableVO" items="${queTableVO}">
-					<div class="row right-li">
+					<div class="row right-li tabledata">
 						<div class="col-2">
 							<div class="tabletype">桌位</div>
 							<c:choose>
@@ -578,9 +578,9 @@
 		//建立好Get連接
 		var url = "tableUpdate.jsp?storeid="
 				+ document.getElementById("storeid").value 
-				+ "&queuetableid="	+ $(e.target).parent().prev().prev().prev().prev().children(".queuetableid").val() 
-				+ "&queuetableocc=" + $(e.target).parent().prev().prev().prev().children(".queuetableocc").val()
-				+ "&queuetableusable=" + $(e.target).parent().prev().prev().prev().children(".quetableusable").val()	
+				+ "&queuetableid="	+ $(e.target).parents(".tabledata").find(".queuetableid").val() 
+				+ "&queuetableocc=" + $(e.target).parents(".tabledata").find(".queuetableocc").val()
+				+ "&queuetableusable=" + $(e.target).parents(".tabledata").find(".quetableusable").val()	
 		xhr.open("Get", url, true);
 		//送出請求 
 		xhr.send();
