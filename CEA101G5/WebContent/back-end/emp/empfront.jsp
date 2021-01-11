@@ -50,11 +50,20 @@
 				商家註冊審核 </a>
 		</span> <span id="empBack">後台管理<br> <a
 			href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp">
-				員工管理 </a> <a href="#">權限管理 </a>
+				員工管理 </a> <a
+			href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理
+		</a>
 		</span>
 	</div>
 	<div>
-		<a href="#" id="sidebarlogin"> 員工登入/登出 </a>
+		<c:if test="${empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/EmpLogin.jsp"
+				id="sidebarlogin"> 員工登入/登出 </a>
+		</c:if>
+		<c:if test="${not empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin"/>員工登入/登出 </a>
+		</c:if>
+
 	</div>
 	<div id=backSidebar></div>
 	<div class="main">

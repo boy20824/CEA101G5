@@ -460,7 +460,7 @@ public class EmpServlet extends HttpServlet {
 
 			try {
 				session.invalidate();
-				res.sendRedirect(req.getContextPath() + "/back-end/back.jsp");
+				res.sendRedirect(req.getContextPath() + "/back-end/emp/EmpLogin.jsp");
 			} catch (Exception e) {
 				e.printStackTrace(System.err);
 			}
