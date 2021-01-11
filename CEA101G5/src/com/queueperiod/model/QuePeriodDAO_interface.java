@@ -11,6 +11,6 @@ public interface QuePeriodDAO_interface {
 	public List<QuePeriodVO> findByStoreid(String storeid);
 	public List<QuePeriodVO> getAll();
 	//�U�νƦX�d��(�ǤJ�Ѽƫ��AMap)(�^�� List)
-//  public List<QuenoVO> getAll(Map<String, String[]> map);
+//  public List<QuenoVO> getAll(Map<String, String[]> map); 
 //	void delete(Integer queperiodid, String storeid);
 }

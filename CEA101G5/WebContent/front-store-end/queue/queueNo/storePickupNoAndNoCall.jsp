@@ -52,6 +52,7 @@
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/storePickupNoAndNoCall.css" />
 </head>
 <body>
+	<a href="select_page.jsp">首頁</a>
 	<div class="container">
 		<input name="storeid" id="storeid" value="${storeid }" hidden="hidden" />
 		<div class="row reserve"></div>
@@ -152,14 +153,11 @@
 							<h3>預計取號</h3>
 
 						</div>
-						<input name="queuenum" type="text" class="form-control"
-							value="<%=pickupNo%>" aria-label="Amount (to the nearest dollar)"
-							readonly> <input type="hidden" id="queuenotime"
-							name="queuenotime" class="quenotime"> <input
-							type="hidden" id="queuetableid" name="queuetableid" value="1">
+						<input name="queuenum" type="text" class="form-control" value="<%=pickupNo%>" aria-label="Amount (to the nearest dollar)" readonly> 
+						<input type="hidden" id="queuenotime" name="queuenotime" class="quenotime"> 
+						<input type="hidden" id="queuetableid" name="queuetableid" value="1">
 						<input type="hidden" id="queuelineno" name="queuelineno" value="1">
-						<input type="hidden" name="action" value="storeInsert">
-						
+						<input type="hidden" name="action" value="storeInsert">						
 						<button id="" type="button" class="btn btn-primary" value="新增">新增取號資訊</button>
 						<button id="submit" type="submit" class="btn btn-primary"
 							value="送出新增">新增取號</button>
@@ -431,7 +429,6 @@
 				+ fillZero(now.getMinutes()) + ':' + fillZero(now.getSeconds())
 				+ ' ' + AMPM;
 	}
-	console.log('現在時間：' + timeFormat(now));
 	let nowTime = document.getElementById('nowTime');
 	nowTime.innerText = timeFormat(now);
 
@@ -529,10 +526,10 @@
 		//建立好Get連接
 		var url = "updateNoCall.jsp?storeid="
 				+ document.getElementById("storeid").value 
-				+ "&queuetableid="	+ $(e.target).parent().prev().prev().prev().prev().prev().children(".queuetableid").val() 
+				+ "&queuetableid="	+ $(e.target).parent().prev().prev().prev().prev().children(".queuetableid").val() 
 				+ "&queuenum="	+ $(e.target).parent().prev().children(".queuenum").val()
-				+ "&queuetableocc=" + $(e.target).parent().prev().prev().prev().prev().children(".queuetableocc").val()
-				+ "&queuetableusable=" + $(e.target).parent().prev().prev().prev().prev().children(".quetableusable").val()	
+				+ "&queuetableocc=" + $(e.target).parent().prev().prev().prev().children(".queuetableocc").val()
+				+ "&queuetableusable=" + $(e.target).parent().prev().prev().prev().children(".quetableusable").val()	
 		xhr.open("Get", url, true);
 		//送出請求 
 		xhr.send();
@@ -584,13 +581,40 @@
 		//建立好Get連接
 		var url = "tableUpdate.jsp?storeid="
 				+ document.getElementById("storeid").value 
-				+ "&queuetableid="	+ $(e.target).parent().prev().prev().prev().prev().prev().children(".queuetableid").val() 
-				+ "&queuetableocc=" + $(e.target).parent().prev().prev().prev().prev().children(".queuetableocc").val()
-				+ "&queuetableusable=" + $(e.target).parent().prev().prev().prev().prev().children(".quetableusable").val()	
+				+ "&queuetableid="	+ $(e.target).parent().prev().prev().prev().prev().children(".queuetableid").val() 
+				+ "&queuetableocc=" + $(e.target).parent().prev().prev().prev().children(".queuetableocc").val()
+				+ "&queuetableusable=" + $(e.target).parent().prev().prev().prev().children(".quetableusable").val()	
 		xhr.open("Get", url, true);
 		//送出請求 
 		xhr.send();
 	});
+</script>
+<script>
+	$("#party").change(function(){
+		switch($(this).val()){
+		case "2":
+			$("#queuetableid").attr("value", "1");
+			$("#queuelineno").attr("value", "1");
+			break;
+		case "4":
+			$("#queuetableid").attr("value", "2");
+			$("#queuelineno").attr("value", "2");
+			break;
+		case "8":
+			$("#queuetableid").attr("value", "3");
+			$("#queuelineno").attr("value", "3");
+			break;
+		case "10":
+			$("#queuetableid").attr("value", "4");
+			$("#queuelineno").attr("value", "4");
+			break;
+			default:
+				break;
+		}
+		
+	});
+	
+	
 </script>
 </body>
 
