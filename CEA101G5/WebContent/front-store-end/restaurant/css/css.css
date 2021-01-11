@@ -21,9 +21,6 @@ body {
     transform: translateX(-100%);
     transition: 0.5s;
     box-sizing: content-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }
 
 #side-menu-switch:checked+.sidebar {
