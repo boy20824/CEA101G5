@@ -46,6 +46,13 @@ public class OrderDetailJNDIDAO implements OrderDetailDAO_Interface {
 		"SELECT * FROM ORDER_DETAIL WHERE PRODUCT_ID = ? ORDER BY ORDER_ID DESC";
 	private static final String INSERT_STMT_BYORDER = 
 		"INSERT INTO ORDER_DETAIL (ORDER_ID, PRODUCT_ID, PRODUCT_PRICE, QUANTITY, PRODUCT_REVIEW_STATUS) VALUES (?, ?, ?, ?, ?)";
+	
+	private static final String REVIEW_BY_ID = 
+		"SELECT ORDER_ID, PRODUCT_ID, PRODUCT_REVIEW, PRODUCT_REVIEW_TS, PRODUCT_REVIEW_STATUS FROM ORDER_DETAIL WHERE PRODUCT_ID = ? ORDER BY PRODUCT_REVIEW_TS DESC";
+	private static final String GET_ALL_REVIEW = 
+		"SELECT ORDER_ID, PRODUCT_ID, PRODUCT_REVIEW, PRODUCT_REVIEW_TS, PRODUCT_REVIEW_STATUS FROM ORDER_DETAIL ORDER BY PRODUCT_REVIEW_TS DESC";
+	private static final String UPDATE_REVIEW = 
+		"UPDATE ORDER_DETAIL SET PRODUCT_REVIEW_STATUS = ? WHERE ORDER_ID = ? AND PRODUCT_ID = ?";
 
 	@Override
 	public void insert(OrderDetailVO orderDetailVO) {
@@ -328,6 +335,147 @@ public class OrderDetailJNDIDAO implements OrderDetailDAO_Interface {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public void updateReview(Integer productReviewStatus,Integer orderId, String productId) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(UPDATE_REVIEW);
+			
+			pstmt.setInt(1, productReviewStatus);
+			pstmt.setInt(2, orderId);
+			pstmt.setString(3, productId);
+			
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	@Override
+	public List<OrderDetailVO> getAllReview() {
+		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
+		OrderDetailVO odVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_REVIEW);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				odVO = new OrderDetailVO();
+				odVO.setOrderId(rs.getInt("ORDER_ID"));
+				odVO.setProductId(rs.getString("PRODUCT_ID"));
+				odVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
+				odVO.setProductReviewTS(rs.getTimestamp("PRODUCT_REVIEW_TS"));
+				odVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
+				list.add(odVO);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<OrderDetailVO> getReviewById(String productId) {
+		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
+		OrderDetailVO orderDetailVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(REVIEW_BY_ID);
+			pstmt.setString(1, productId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				orderDetailVO = new OrderDetailVO();
+				orderDetailVO.setOrderId(rs.getInt("ORDER_ID"));
+				orderDetailVO.setProductId(rs.getString("PRODUCT_ID"));
+				orderDetailVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
+				orderDetailVO.setProductReviewTS(rs.getDate("PRODUCT_REVIEW_TS"));
+				orderDetailVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
+				list.add(orderDetailVO);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+				rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return list;
 	}
 	
 	public static byte[] getPictureByteArray(String path) throws IOException {

@@ -198,6 +198,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>OrderDetailServlet</servlet-name>
+		<servlet-class>com.orderdetail.controller.OrderDetailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderDetailServlet</servlet-name>
+		<url-pattern>/shop/orderdetail.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>ProductCategoryServlet</servlet-name>
 		<servlet-class>com.productcategory.controller.ProductCategoryServlet</servlet-class>
 	</servlet>

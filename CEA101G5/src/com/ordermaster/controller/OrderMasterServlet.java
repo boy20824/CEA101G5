@@ -162,6 +162,27 @@ public class OrderMasterServlet extends HttpServlet {
 //			System.out.println(productVO.getProductQty());
 //			System.out.println(buyList.size());
 //		}
+		
+		if ("updateom".equals(action)) {
+			Integer orderId = new Integer (req.getParameter("orderId"));
+			Integer orderStatus = new Integer (req.getParameter("orderStatus"));
+			
+			//因為原本的update要給他一個VO  所以所有屬性都要set才會過
+			OrderMasterService omSvc = new OrderMasterService();
+			omSvc.updateOM(orderStatus,orderId);
+			
+			String searchyn = req.getParameter("searchyn");
+			if ("yes".equals(searchyn)) {
+				String url = "/back-end/orderMaster/listOneOrderMaster.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			}
+			else {
+				String url = "/back-end/orderMaster/listAllOrderMaster.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			}
+		}
 	}
 	
 	private ProductVO getProductVO(HttpServletRequest req) {

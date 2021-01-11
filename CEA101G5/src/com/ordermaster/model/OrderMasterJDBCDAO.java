@@ -25,6 +25,9 @@ public class OrderMasterJDBCDAO implements OrderMasterDAO_Interface {
 		"SELECT * FROM ORDER_MASTER WHERE ORDER_ID = ?";
 	private static final String GET_ALL_STMT = 
 		"SELECT * FROM ORDER_MASTER ORDER BY ORDER_ID";
+	
+	private static final String UPDATEOM = 
+		"UPDATE ORDER_MASTER SET ORDER_STATUS = ? WHERE ORDER_ID = ?";
 
 	@Override
 	public void insert(OrderMasterVO orderMasterVO) {
@@ -326,6 +329,42 @@ public class OrderMasterJDBCDAO implements OrderMasterDAO_Interface {
 		}
 	}
 	
+	@Override
+	public void updateOM(Integer orderStatus,Integer orderId) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(Util.DRIVER);
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(UPDATEOM);
+			
+			pstmt.setInt(1, orderStatus);
+			pstmt.setInt(2, orderId);
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}	
 	
 	public static void main(String[] args) {
 		OrderMasterJDBCDAO dao = new OrderMasterJDBCDAO();
@@ -333,14 +372,14 @@ public class OrderMasterJDBCDAO implements OrderMasterDAO_Interface {
 //		testing : insert()
 //		OrderMasterVO orderMasterVO = new OrderMasterVO();
 //		orderMasterVO.setMemPhone("0921842850");
-//		orderMasterVO.setRecipientName("´ú¸Õ«È¤á¦WºÙ");
+//		orderMasterVO.setRecipientName("ï¿½ï¿½ï¿½Õ«È¤ï¿½Wï¿½ï¿½");
 //		orderMasterVO.setRecipientMobNumber("0988-8888888");
 //		orderMasterVO.setRecipientTelNumber("04-88888888");
 //		orderMasterVO.setRecipientEmail("test@testmail.com");
 //		orderMasterVO.setBusinessNumber("88888888");
 //		orderMasterVO.setDeliveryMethod(0);
-//		orderMasterVO.setDeliveryAddress("´ú¸Õ¦¬¥ó¦a§}");
-//		orderMasterVO.setOrderMemo("¥H¤Uª`·N¨Æ¶µ");
+//		orderMasterVO.setDeliveryAddress("ï¿½ï¿½ï¿½Õ¦ï¿½ï¿½ï¿½aï¿½}");
+//		orderMasterVO.setOrderMemo("ï¿½Hï¿½Uï¿½`ï¿½Nï¿½Æ¶ï¿½");
 //		orderMasterVO.setInvoicePrice("299");
 //		orderMasterVO.setOrderStatus(3);
 //		dao.insert(orderMasterVO);
@@ -350,14 +389,14 @@ public class OrderMasterJDBCDAO implements OrderMasterDAO_Interface {
 //		OrderMasterVO orderMasterVO = new OrderMasterVO();
 //		orderMasterVO.setOrderId(3);
 //		orderMasterVO.setMemPhone("0921842850");
-//		orderMasterVO.setRecipientName("´ú¸Õ«È¤á¦WºÙ");
+//		orderMasterVO.setRecipientName("ï¿½ï¿½ï¿½Õ«È¤ï¿½Wï¿½ï¿½");
 //		orderMasterVO.setRecipientMobNumber("0988-8888888");
 //		orderMasterVO.setRecipientTelNumber("04-88888888");
 //		orderMasterVO.setRecipientEmail("test@testmail.com");
 //		orderMasterVO.setBusinessNumber("88888888");
 //		orderMasterVO.setDeliveryMethod(0);
-//		orderMasterVO.setDeliveryAddress("´ú¸Õ¦¬¥ó¦a§}");
-//		orderMasterVO.setOrderMemo("¥H¤Uª`·N¨Æ¶µ");
+//		orderMasterVO.setDeliveryAddress("ï¿½ï¿½ï¿½Õ¦ï¿½ï¿½ï¿½aï¿½}");
+//		orderMasterVO.setOrderMemo("ï¿½Hï¿½Uï¿½`ï¿½Nï¿½Æ¶ï¿½");
 //		orderMasterVO.setInvoicePrice("299");
 //		orderMasterVO.setOrderStatus(3);
 //		dao.update(orderMasterVO);
@@ -406,21 +445,21 @@ public class OrderMasterJDBCDAO implements OrderMasterDAO_Interface {
 //		testing : insertWithOrderDetail()
 //		OrderMasterVO orderMasterVO = new OrderMasterVO();
 //		orderMasterVO.setMemPhone("0921842850");
-//		orderMasterVO.setRecipientName("´ú¸Õ¦WºÙ");
+//		orderMasterVO.setRecipientName("ï¿½ï¿½ï¿½Õ¦Wï¿½ï¿½");
 //		orderMasterVO.setRecipientMobNumber("0988888888");
 //		orderMasterVO.setRecipientTelNumber("0488888888");
 //		orderMasterVO.setRecipientEmail("test@gmail.com");
 //		orderMasterVO.setBusinessNumber("88888888");
 //		orderMasterVO.setDeliveryMethod(0);
-//		orderMasterVO.setDeliveryAddress("¥x¤¤¥«¥_¤Ù°Ï");
-//		orderMasterVO.setOrderMemo("½ÐºÉ§Ö¥X³f");
+//		orderMasterVO.setDeliveryAddress("ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½Ù°ï¿½");
+//		orderMasterVO.setOrderMemo("ï¿½ÐºÉ§Ö¥Xï¿½f");
 //		orderMasterVO.setInvoicePrice("19999");
 //		orderMasterVO.setOrderStatus(1);
 //		
 //		ProductVO productVO = new ProductVO();
 //		productVO.setProductId("ENP0001");
-//		productVO.setProductName("´ú¸Õ²£«~");
-//		productVO.setProductDescription("´ú¸Õ²£«~±Ô­z");
+//		productVO.setProductName("ï¿½ï¿½ï¿½Õ²ï¿½ï¿½~");
+//		productVO.setProductDescription("ï¿½ï¿½ï¿½Õ²ï¿½ï¿½~ï¿½Ô­z");
 //		productVO.setProductMSRP(9999);
 //		productVO.setProductPrice(9999);
 //		productVO.setProductQtySold(9999);

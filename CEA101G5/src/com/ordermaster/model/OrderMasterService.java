@@ -56,6 +56,10 @@ public class OrderMasterService {
 	public List<OrderMasterVO> getAllOrders() {
 		return dao.getAll();
 	}
+	
+	public void updateOM(Integer orderStatus,Integer orderId) {
+		dao.updateOM(orderStatus,orderId);
+	}
 		
 	public static void main(String[] args) {
 		OrderMasterService orderMasterService = new OrderMasterService();

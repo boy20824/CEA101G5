@@ -40,6 +40,9 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 		"SELECT * FROM ORDER_MASTER WHERE ORDER_ID = ?";
 	private static final String GET_ALL_STMT = 
 		"SELECT * FROM ORDER_MASTER ORDER BY ORDER_ID";
+	
+	private static final String UPDATEOM = 
+		"UPDATE ORDER_MASTER SET ORDER_STATUS = ? WHERE ORDER_ID = ?";
 
 	@Override
 	public void insert(OrderMasterVO orderMasterVO) {
@@ -326,6 +329,39 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 		}
 	}
 	
+	@Override
+	public void updateOM(Integer orderStatus,Integer orderId) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(UPDATEOM);
+			
+			pstmt.setInt(1, orderStatus);
+			pstmt.setInt(2, orderId);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}	
 	
 	public static void main(String[] args) {
 		OrderMasterJNDIDAO dao = new OrderMasterJNDIDAO();

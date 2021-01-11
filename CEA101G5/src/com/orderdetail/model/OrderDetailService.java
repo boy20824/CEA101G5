@@ -54,6 +54,18 @@ public class OrderDetailService {
 		return dao.getReviewByProductId(productId);
 	}
 	
+	public List<OrderDetailVO> getReviewById(String productId) {
+		return dao.getReviewById(productId);
+	}
+	
+	public List<OrderDetailVO> getAllReview() {
+		return dao.getAllReview();
+	}
+	
+	public void updateReview(Integer productReviewStatus,Integer orderId, String productId) {
+		dao.updateReview(productReviewStatus,orderId, productId);
+	}
+	
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(path);
 		byte[] buffer = new byte[fis.available()];

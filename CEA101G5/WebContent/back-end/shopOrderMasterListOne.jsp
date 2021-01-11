@@ -7,9 +7,29 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
+	String orderId = request.getParameter("orderId");
+	if (orderId != null){	//第一頁從input來的參數不會=null, 所以存到session裡
+		session.setAttribute("orderId", orderId);
+	}else{					//第二頁從input來的參數不見了, 所以要取剛剛存到session裡的參數
+		orderId = (String) session.getAttribute("orderId");
+	}
+	
+	Integer oid = 0;
+	try{oid = new Integer(orderId);}
+	catch(Exception e){}
 	OrderMasterService omSvc = new OrderMasterService();
-    List<OrderMasterVO> list = omSvc.getAllOrders();
-    pageContext.setAttribute("list",list);
+	OrderMasterVO omVO = omSvc.getOrderById(oid);
+	List<String> errorMsgs = new LinkedList<String>();
+	request.setAttribute("errorMsgs", errorMsgs);
+	if (omVO == null) {
+		errorMsgs.add("查無資料");
+	}
+	if (!errorMsgs.isEmpty()) {
+		RequestDispatcher failureView = request
+				.getRequestDispatcher("/back-end/shopOrderMasterListAll.jsp");
+		failureView.forward(request, response);
+		return;
+	}
 %>
 
 <html>
@@ -85,13 +105,14 @@
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
-			${message}
+			<li style="color:red">${message}</li>
 		</c:forEach>
+	</ul>
 </c:if>
-
 <div class="tableborder">
-<%@ include file="page1.file" %>
 
 <table class="info">
 	<tr>
@@ -114,63 +135,62 @@
 		<th>送出修改</th>
 		<th>查看明細</th>
 	</tr>
-	<c:forEach var="omVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop/ordermaster.do" style="margin-bottom: 0px;">
 			<tr>
-				<td>${omVO.orderId}</td>
-				<td><fmt:formatDate value="${omVO.orderDate}" pattern="yyyy-MM-dd"/></td>
-				<td>${omVO.memPhone}</td>
-				<td>${omVO.recipientName}</td>
-				<td>${omVO.recipientMobNumber}</td>
-				<td>${omVO.recipientTelNumber}</td>
-				<td>${omVO.recipientEmail}</td>
-				<td>${omVO.businessNumber}</td>
+				<td><%=omVO.getOrderId()%></td>
+				<td><fmt:formatDate value="<%=omVO.getOrderDate()%>" pattern="yyyy-MM-dd"/></td>
+				<td><%=omVO.getMemPhone()%></td>
+				<td><%=omVO.getRecipientName()%></td>
+				<td><%=omVO.getRecipientMobNumber()%></td>
+				<td><%=omVO.getRecipientTelNumber()%></td>
+				<td><%=omVO.getRecipientEmail()%></td>
+				<td><%=omVO.getBusinessNumber()%></td>
 				<td>
-					<c:if test="${omVO.deliveryMethod==0}">
+					<c:if test="<%=omVO.getDeliveryMethod()==0%>">
 						宅配
 					</c:if>
-					<c:if test="${omVO.deliveryMethod==1}">
+					<c:if test="<%=omVO.getDeliveryMethod()==1%>">
 						電子郵件寄送
 					</c:if>
 				</td>
-				<td>${omVO.deliveryAddress}</td>
-				<td>${omVO.orderMemo}</td>
-				<td>${omVO.invoicePrice}</td>
-				<td><fmt:formatDate value="${omVO.invoicePaidDate}" pattern="yyyy-MM-dd"/></td>
-				<td><fmt:formatDate value="${omVO.deliveryTime}" pattern="yyyy-MM-dd"/></td>
+				<td><%=omVO.getDeliveryAddress()%></td>
+				<td><%=omVO.getOrderMemo()%></td>
+				<td><%=omVO.getInvoicePrice()%></td>
+				<td><fmt:formatDate value="<%=omVO.getInvoicePaidDate()%>" pattern="yyyy-MM-dd"/></td>
+				<td><fmt:formatDate value="<%=omVO.getDeliveryTime()%>" pattern="yyyy-MM-dd"/></td>
 				
 				
 				<td>
 					<select name="orderStatus">
-						<c:if test="${omVO.orderStatus==0}">
+						<c:if test="<%=omVO.getOrderStatus()==0%>">
 							<option value=0 selected>等待付款中</option>
 							<option value=1>訂單已確認</option>
 							<option value=2>訂單處理中</option>
 							<option value=3>訂單已出貨</option>
 							<option value=4>取消</option>
 						</c:if>
-						<c:if test="${omVO.orderStatus==1}">
+						<c:if test="<%=omVO.getOrderStatus()==1%>">
 							<option value=0>等待付款中</option>
 							<option value=1  selected>訂單已確認</option>
 							<option value=2>訂單處理中</option>
 							<option value=3>訂單已出貨</option>
 							<option value=4>取消</option>
 						</c:if>
-						<c:if test="${omVO.orderStatus==2}">
+						<c:if test="<%=omVO.getOrderStatus()==2%>">
 							<option value=0>等待付款中</option>
 							<option value=1>訂單已確認</option>
 							<option value=2 selected>訂單處理中</option>
 							<option value=3>訂單已出貨</option>
 							<option value=4>取消</option>
 						</c:if>
-						<c:if test="${omVO.orderStatus==3}">
+						<c:if test="<%=omVO.getOrderStatus()==3%>">
 							<option value=0>等待付款中</option>
 							<option value=1>訂單已確認</option>
 							<option value=2>訂單處理中</option>
 							<option value=3 selected>訂單已出貨</option>
 							<option value=4>取消</option>
 						</c:if>
-						<c:if test="${omVO.orderStatus==4}">
+						<c:if test="<%=omVO.getOrderStatus()==4%>">
 							<option value=0>等待付款中</option>
 							<option value=1>訂單已確認</option>
 							<option value=2>訂單處理中</option>
@@ -182,25 +202,25 @@
 				<td>
 						<input type="submit" value="送出修改	" class="button">
 					    <input type="hidden" name="action" value="updateom">
-					    <input type="hidden" name=orderId value="${omVO.orderId}">
+					    <input type="hidden" name=orderId value="<%=omVO.getOrderId()%>">
+					    <input type="hidden" name=searchyn value="yes">
+					    
 				</td>
 				</FORM>
-				<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/orderDetail/listOneOrderDetail.jsp" >
+				<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/shopOrderDetailListOne.jsp" >
 					<td>
 							<input type="submit" value="查看明細" class="button">
 						    <input type="hidden" name="action" value="getDetail">
-						    <input type="hidden" name=orderId value="${omVO.orderId}">
+						    <input type="hidden" name=orderId value="<%=omVO.getOrderId()%>">
 					</td>
 				</FORM>
 			</tr>
 			
 		
-	</c:forEach>
 </table>
 
 </div>
-<%@ include file="page2.file" %>
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/orderMaster/listOneOrderMaster.jsp" >
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/shopOrderMasterListOne.jsp" >
 	<b>依訂單編號搜尋:</b>
 	<input type="text" name="orderId">
 	<input type="submit" value="送出" class="button">

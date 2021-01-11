@@ -14,4 +14,8 @@ public interface OrderDetailDAO_Interface {
 	
 	public List<OrderDetailVO> getReviewByProductId(String productId);
 	public void insert(ProductVO productVO, Connection con);
+	
+	public void updateReview(Integer productReviewStatus,Integer orderId, String productId);
+	public List<OrderDetailVO> getReviewById(String productId);
+	public List<OrderDetailVO> getAllReview();
 }

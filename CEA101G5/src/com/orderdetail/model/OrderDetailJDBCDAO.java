@@ -31,6 +31,13 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		"SELECT * FROM ORDER_DETAIL WHERE PRODUCT_ID = ? ORDER BY ORDER_ID DESC";
 	private static final String INSERT_STMT_BYORDER = 
 		"INSERT INTO ORDER_DETAIL (ORDER_ID, PRODUCT_ID, PRODUCT_PRICE, QUANTITY, PRODUCT_REVIEW_STATUS) VALUES (?, ?, ?, ?, ?)";
+	
+	private static final String REVIEW_BY_ID = 
+		"SELECT ORDER_ID, PRODUCT_ID, PRODUCT_REVIEW, PRODUCT_REVIEW_TS, PRODUCT_REVIEW_STATUS FROM ORDER_DETAIL WHERE PRODUCT_ID = ? ORDER BY PRODUCT_REVIEW_TS DESC";
+	private static final String GET_ALL_REVIEW = 
+		"SELECT ORDER_ID, PRODUCT_ID, PRODUCT_REVIEW, PRODUCT_REVIEW_TS, PRODUCT_REVIEW_STATUS FROM ORDER_DETAIL ORDER BY PRODUCT_REVIEW_TS DESC";
+	private static final String UPDATE_REVIEW = 
+		"UPDATE ORDER_DETAIL SET PRODUCT_REVIEW_STATUS = ? WHERE ORDER_ID = ? AND PRODUCT_ID = ?";
 
 	@Override
 	public void insert(OrderDetailVO orderDetailVO) {
@@ -330,6 +337,156 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		}
 	}
 	
+	@Override
+	public void updateReview(Integer productReviewStatus,Integer orderId, String productId) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(Util.DRIVER);
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(UPDATE_REVIEW);
+			
+			pstmt.setInt(1, productReviewStatus);
+			pstmt.setInt(2, orderId);
+			pstmt.setString(3, productId);
+			
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	@Override
+	public List<OrderDetailVO> getAllReview() {
+		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
+		OrderDetailVO odVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(Util.DRIVER);
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(GET_ALL_REVIEW);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				odVO = new OrderDetailVO();
+				odVO.setOrderId(rs.getInt("ORDER_ID"));
+				odVO.setProductId(rs.getString("PRODUCT_ID"));
+				odVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
+				odVO.setProductReviewTS(rs.getTimestamp("PRODUCT_REVIEW_TS"));
+				odVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
+				list.add(odVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<OrderDetailVO> getReviewById(String productId) {
+		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
+		OrderDetailVO orderDetailVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(Util.DRIVER);
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(REVIEW_BY_ID);
+			pstmt.setString(1, productId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				orderDetailVO = new OrderDetailVO();
+				orderDetailVO.setOrderId(rs.getInt("ORDER_ID"));
+				orderDetailVO.setProductId(rs.getString("PRODUCT_ID"));
+				orderDetailVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
+				orderDetailVO.setProductReviewTS(rs.getDate("PRODUCT_REVIEW_TS"));
+				orderDetailVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
+				list.add(orderDetailVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+				rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return list;
+	}
+	
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(path);
 		byte[] buffer = new byte[fis.available()];
@@ -347,7 +504,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 //		orderDetailVO.setProductId("ENP0002");
 //		orderDetailVO.setProductPrice(299);
 //		orderDetailVO.setQuantity(1);
-//		orderDetailVO.setProductReview("´ú¸Õµû»ù");
+//		orderDetailVO.setProductReview("ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½");
 //		try {
 //			orderDetailVO.setProductReviewPhoto(getPictureByteArray("/Users/jordan/desktop/cat.png"));
 //		} catch (IOException e) {
@@ -363,7 +520,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO.setProductId("ENP0009");
 		orderDetailVO.setProductPrice(1400);
 		orderDetailVO.setQuantity(1);
-		orderDetailVO.setProductReview("«K©yªº»ù®æ, ¥H«á¤@©w·|¦b¦^ÁÊ¡I¡I");
+		orderDetailVO.setProductReview("ï¿½Kï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Hï¿½ï¿½@ï¿½wï¿½|ï¿½bï¿½^ï¿½Ê¡Iï¿½I");
 		try {
 			orderDetailVO.setProductReviewPhoto(getPictureByteArray("/Users/jordan/desktop/boxing-day-offer-banner.jpg"));
 		} catch (IOException e) {

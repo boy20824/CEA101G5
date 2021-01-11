@@ -74,7 +74,7 @@ list-style-type:none;
 		<th>回覆</th>
 		<th>刪除</th>
 	</tr>
-	<%@ include file="page1.file" %> 
+	<%@ include file="/front-end/util/page1.file" %> 
 	<c:forEach var="productQAVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
@@ -106,7 +106,7 @@ list-style-type:none;
 		</tr>
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
+<%@ include file="/front-end/util/page2.file" %>
 <div align="center">
 
 </div>

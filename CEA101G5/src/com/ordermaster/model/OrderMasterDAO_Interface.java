@@ -12,4 +12,5 @@ public interface OrderMasterDAO_Interface {
 	public List<OrderMasterVO> getAll();
 	
 	public void insertWithOrderDetail(OrderMasterVO orderMasterVO, List<ProductVO> list);
+	public void updateOM(Integer orderStatus,Integer orderId);
 }
