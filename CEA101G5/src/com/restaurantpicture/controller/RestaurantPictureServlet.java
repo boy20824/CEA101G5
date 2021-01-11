@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.member.model.MemService;
 import com.restaurantpicture.model.RestaurantPictureService;
 import com.restaurantpicture.model.RestaurantPictureVO;
 
@@ -32,15 +34,20 @@ public class RestaurantPictureServlet extends HttpServlet {
 		System.out.println("action: "+action);
 
 		if ("getOne_For_Display".equals(action)) {
-			res.setContentType("img/jpg");
-			String storeId = req.getParameter("storeId").trim();
-			RestaurantPictureService resPicSvc = new RestaurantPictureService();
-			RestaurantPictureVO restPicVO = resPicSvc.getOneStorePicByStoreId(storeId);
-			byte[] storePic = restPicVO.getStorePicture();
-			res.getOutputStream().write(storePic);
-			res.getOutputStream().flush();
-			return;
-		}		
+			res.setContentType("image/gif");
+			ServletOutputStream out = res.getOutputStream();
+			try {
+				String storeId = req.getParameter("storeId");
+				RestaurantPictureService restPicSvc = new RestaurantPictureService();
+				byte[] baos = restPicSvc.getOneStorePicByStoreId(storeId).getStorePicture();
+				out.write(baos);
+				
+			} catch (Exception e) {
+				System.out.println("沒有圖片!!!");
+			}finally {
+				out.close();
+			}
+		}
 
 		if ("insert".equals(action)) {
 			//從req取得part物件

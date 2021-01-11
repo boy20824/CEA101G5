@@ -9,6 +9,8 @@
 	class="com.restaurant.model.RestaurantService" />
 <jsp:useBean id="restPicSvc" scope="page"
 	class="com.restaurantpicture.model.RestaurantPictureService" />
+<jsp:useBean id="restaurantPictureVO" scope="page"
+	class="com.restaurantpicture.model.RestaurantPictureVO" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -212,7 +214,7 @@
 			items="${listRestaurants_ByCompositeQuery}">
 			<div class="store-container">
 				<div class="store-img">
-					<img style="width:100px;" src="<%=request.getContextPath() %>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantPictureVO.storeId}&action=getOne_For_Display">
+					<img style="width:250px; height:280px;" src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantVO.storeId}&action=getOne_For_Display">
 				</div>
 				<div class="store-text">
 					<ul>
