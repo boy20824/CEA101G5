@@ -35,7 +35,8 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 	private static final String UPDATE = "UPDATE RESTAURANT_PICTURE SET STORE_PICTURE=? WHERE STORE_PICTURE_ID=?";
 	private static final String GET_ALL_STMT = "SELECT STORE_PICTURE_ID,STORE_ID,STORE_PICTURE FROM RESTAURANT_PICTURE ORDER BY STORE_PICTURE_ID";
 	private static final String GET_PIC_STMT = "SELECT STORE_PICTURE_ID,STORE_ID,STORE_PICTURE FROM RESTAURANT_PICTURE WHERE STORE_PICTURE_ID=?";
-	private static final String GET_PIC_BYSTORE_STMT = "SELECT STORE_PICTURE_ID,STORE_ID,STORE_PICTURE FROM RESTAURANT_PICTURE WHERE AND STORE_ID=?";
+	private static final String GET_PIC_BYSTORE_STMT = "SELECT STORE_PICTURE_ID,STORE_ID,STORE_PICTURE FROM RESTAURANT_PICTURE WHERE STORE_ID=?";
+	private static final String GET_ONEPIC_BYSTORE_STMT = "SELECT STORE_PICTURE_ID,STORE_ID,STORE_PICTURE FROM RESTAURANT_PICTURE WHERE STORE_ID=? AND ROWNUM = 1";
 	private static final String DELETE = "DELETE FROM RESTAURANT_PICTURE WHERE STORE_PICTURE_ID = ?";
 
 	@Override
@@ -277,6 +278,60 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 				list.add(restaurantPictureVO); // Store the row in the list
 			}
 
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	public RestaurantPictureVO findOneByStoreId(String storeId) {
+		RestaurantPictureVO list = new ArrayList<RestaurantPictureVO>();
+		RestaurantPictureVO restaurantPictureVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			pstmt = con.prepareStatement(GET_PIC_BYSTORE_STMT);
+			
+			pstmt.setString(1, storeId);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				restaurantPictureVO = new RestaurantPictureVO();
+				restaurantPictureVO.setStorePictureId(rs.getString("STORE_PICTURE_ID"));
+				restaurantPictureVO.setStorePicture(rs.getBytes("STORE_PICTURE"));
+				restaurantPictureVO.setStoreId(rs.getString("STORE_ID"));
+				list.add(restaurantPictureVO); // Store the row in the list
+			}
+			
 			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
