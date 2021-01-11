@@ -75,22 +75,23 @@
 </head>
 <style>
 .ratings {
-position: relative;
-vertical-align: middle;
-display: inline-block;
-color: #ddd; /*背景星星顏色*/
-overflow: hidden;
-font-size: 20px; /*調整字體大小可放大縮小星星*/
-text-shadow: 0px 1px 0 #999;
+	position: relative;
+	vertical-align: middle;
+	display: inline-block;
+	color: #ddd; /*背景星星顏色*/
+	overflow: hidden;
+	font-size: 20px; /*調整字體大小可放大縮小星星*/
+	text-shadow: 0px 1px 0 #999;
 }
+
 .full_star {
- /*調整寬度可變更星等*/
-position: absolute;
-left: 0;
-top: 0;
-white-space: nowrap;
-overflow: hidden;
-color: #F5E960; /*前景星星顏色*/
+	/*調整寬度可變更星等*/
+	position: absolute;
+	left: 0;
+	top: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #F5E960; /*前景星星顏色*/
 }
 </style>
 <body>
@@ -139,13 +140,17 @@ color: #F5E960; /*前景星星顏色*/
 			</div>
 		</div>
 		<!--  搜尋Bar 套用bootStrap  -->
-		<div class="search">
-			<input type="text" class="searchTerm"
-				placeholder="What are you looking for?">
-			<button type="submit" class="searchButton">
-				<i class="fa fa-search"></i>
-			</button>
-		</div>
+		<FORM METHOD="post"
+			ACTION="<%=request.getContextPath()%>/back-end/restaurant/restaurant.do"
+			name="form1">
+			<div class="search">
+				<input type="text" class="searchTerm" placeholder="What are you looking for?">
+				<button type="submit" class="searchButton">
+					<i class="fa fa-search"></i> 
+				</button>
+				<input type="hidden" name="action" value="listRestaurants_ByCompositeQuery">
+			</div>
+		</FORM>
 
 		<!-- 分類 -->
 		<div class="searchByStoreChar">
@@ -216,12 +221,12 @@ color: #F5E960; /*前景星星顏色*/
 							alt="" /> <span><p>餐廳名稱:${restaurantVO.storeName}</p></span></li>
 						<li><img
 							src="<%=request.getContextPath()%>/front-customer-end/restaurant/img/ICON/star-solid.svg"
-							alt="" /> <span><p>餐廳評分:
-									<span class="ratings">
-									<span class="empty_star">★★★★★</span>
-									<span class="full_star" style="width:${restaurantVO.storeRatingTotal}%">★★★★★</span>
-									</span></p>
-								</span></li>
+							alt="" /> <span><p>
+									餐廳評分: <span class="ratings"> <span class="empty_star">★★★★★</span>
+										<span class="full_star"
+										style="width:${restaurantVO.storeRatingTotal}%">★★★★★</span>
+									</span>
+								</p> </span></li>
 						<li><img
 							src="<%=request.getContextPath()%>/front-customer-end/restaurant/img/ICON/phone-solid.svg"
 							alt="" /> <span><p>餐廳電話:${restaurantVO.storePhone}</p></span></li>
@@ -229,7 +234,8 @@ color: #F5E960; /*前景星星顏色*/
 							src="<%=request.getContextPath()%>/front-customer-end/restaurant/img/ICON/map-marker-alt-solid.svg"
 							alt="" /> <span><p>餐廳地址:${restaurantVO.storeAddress}</p></span></li>
 					</ul>
-					<button class="btn btn--block card__btn" onclick="window.location.href='<%=request.getContextPath()%>/front-customer-end/menu/menuindex.jsp?storeId=${restaurantVO.storeId}'">查看更多</button>
+					<button class="btn btn--block card__btn"
+						onclick="window.location.href='<%=request.getContextPath()%>/front-customer-end/menu/menuindex.jsp?storeId=${restaurantVO.storeId}'">查看更多</button>
 				</div>
 			</div>
 		</c:forEach>
