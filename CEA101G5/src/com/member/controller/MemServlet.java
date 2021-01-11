@@ -496,6 +496,7 @@ public class MemServlet extends HttpServlet {
 //				jedis.auth("123456");
 //				
 //				jedis.set(memPhone,memAuthCode);
+//				jedis.expire(memPhone, 300);
 //				
 //				System.out.println(memAuthCode);
 //				String messageText = "HI！ " + memName + " 歡迎加入Enak，你要的美食都在這裡。" + "驗證碼：" + memAuthCode;
@@ -508,9 +509,9 @@ public class MemServlet extends HttpServlet {
 //				
 //				jedis.close();
 //				
-				req.setAttribute("memVO", memVO); 
 //				String url = "/front-customer-end/member/SMSAuth.jsp";
 				String url = "/front-customer-end/member/JoinSuccess.jsp";
+				req.setAttribute("memVO", memVO); 
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
