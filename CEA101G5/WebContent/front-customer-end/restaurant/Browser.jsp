@@ -212,7 +212,7 @@
 			items="${listRestaurants_ByCompositeQuery}">
 			<div class="store-container">
 				<div class="store-img">
-					<img src="img/ICON/Louisa_Coffee_logo.jpg" alt="">
+					<img style="width:100px;" src="<%=request.getContextPath() %>/restaurantPicture/restaurantPicture.do?storePicId=${restaurantPictureVO.storePictureId}&action=getOne_For_Display">
 				</div>
 				<div class="store-text">
 					<ul>

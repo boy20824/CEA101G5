@@ -40,8 +40,7 @@ public class RestaurantPictureServlet extends HttpServlet {
 			res.getOutputStream().write(storePic);
 			res.getOutputStream().flush();
 			return;
-		}
-		
+		}		
 
 		if ("insert".equals(action)) {
 			//從req取得part物件

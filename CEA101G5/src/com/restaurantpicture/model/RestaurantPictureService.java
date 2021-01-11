@@ -49,9 +49,14 @@ public class RestaurantPictureService {
 		return dao.findByPrimaryKey(storePictureId);
 	}
 
-	public RestaurantPictureVO getOneStorePicByStoreId(String storeId) {
-		return dao.findByPrimaryKey(storeId);
+	public List<RestaurantPictureVO> getStorePicByStoreId(String storeId) {
+		return dao.findByStoreId(storeId);
 	}
+	
+	public RestaurantPictureVO getOneStorePicByStoreId(String storeId) {
+		return dao.findOneByStoreId(storeId);
+	}
+	
 
 	public List<RestaurantPictureVO> getAll() {
 		return dao.getAll();

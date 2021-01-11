@@ -12,4 +12,5 @@ public interface RestaurantPicture_interface {
 	public List<RestaurantPictureVO> findByStoreId(String storeId);
 	public void delete(String storePictureId);
 	public List<RestaurantPictureVO> getAll();
+	public RestaurantPictureVO findOneByStoreId(String storeId);
 }

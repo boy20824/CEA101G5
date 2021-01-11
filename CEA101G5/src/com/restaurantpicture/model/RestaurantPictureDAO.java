@@ -17,10 +17,7 @@ import javax.sql.DataSource;
 
 import com.emp.model.EmpVO;
 
-
-
-
-public class RestaurantPictureDAO implements RestaurantPicture_interface{
+public class RestaurantPictureDAO implements RestaurantPicture_interface {
 	private static DataSource ds = null;
 	static {
 		try {
@@ -45,16 +42,16 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 		PreparedStatement pstmt = null;
 
 		try {
-			
+
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			
-			for(RestaurantPictureVO restaurantPictureVO : list) {
-			
-			pstmt.setString(1, restaurantPictureVO.getStoreId());
-			pstmt.setBytes(2, restaurantPictureVO.getStorePicture());
-			
-			pstmt.executeUpdate();
+
+			for (RestaurantPictureVO restaurantPictureVO : list) {
+
+				pstmt.setString(1, restaurantPictureVO.getStoreId());
+				pstmt.setBytes(2, restaurantPictureVO.getStorePicture());
+
+				pstmt.executeUpdate();
 			}
 
 			// Handle any driver errors
@@ -79,7 +76,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 		}
 		return list;
 	}
-	
+
 	// 新增
 	@Override
 	public void insert(RestaurantPictureVO restaurantPictureVO) {
@@ -93,9 +90,8 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 			pstmt.setString(1, restaurantPictureVO.getStoreId());
 			pstmt.setBytes(2, restaurantPictureVO.getStorePicture());
-			
+
 			pstmt.executeUpdate();
-			
 
 			// Handle any driver errors
 		} catch (SQLException se) {
@@ -118,8 +114,8 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			}
 		}
 	}
-	
-	public void insertWithStore (RestaurantPictureVO restaurantPictureVO , Connection con) {
+
+	public void insertWithStore(RestaurantPictureVO restaurantPictureVO, Connection con) {
 
 		PreparedStatement pstmt = null;
 
@@ -129,7 +125,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 			pstmt.setString(1, restaurantPictureVO.getStoreId());
 			pstmt.setBytes(2, restaurantPictureVO.getStorePicture());
-			
+
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -141,12 +137,10 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 					System.err.println("rolled back-由-emp");
 					con.rollback();
 				} catch (SQLException excep) {
-					throw new RuntimeException("rollback error occured. "
-							+ excep.getMessage());
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
 				}
 			}
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -160,7 +154,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 	}
 
-	//修改
+	// 修改
 	@Override
 	public void update(RestaurantPictureVO restaurantPictureVO) {
 		Connection con = null;
@@ -201,7 +195,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 
 	@Override
 	public RestaurantPictureVO findByPrimaryKey(String storePictureId) {
-		RestaurantPictureVO restaurantPictureVO=null;
+		RestaurantPictureVO restaurantPictureVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -214,15 +208,13 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			pstmt.setString(1, storePictureId);
 
 			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				restaurantPictureVO = new RestaurantPictureVO();
-				restaurantPictureVO.setStorePictureId(rs.getString("STORE_PICTURE_ID"));
-				restaurantPictureVO.setStorePicture(rs.getBytes("STORE_PICTURE"));
-				restaurantPictureVO.setStoreId(rs.getString("STORE_ID"));
 			
+			while (rs.next()) {
+			restaurantPictureVO = new RestaurantPictureVO();
+			restaurantPictureVO.setStorePictureId(rs.getString("STORE_PICTURE_ID"));
+			restaurantPictureVO.setStorePicture(rs.getBytes("STORE_PICTURE"));
+			restaurantPictureVO.setStoreId(rs.getString("STORE_ID"));
 			}
-
 			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -252,7 +244,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 		}
 		return restaurantPictureVO;
 	}
-	
+
 	@Override
 	public List<RestaurantPictureVO> findByStoreId(String storeId) {
 		List<RestaurantPictureVO> list = new ArrayList<RestaurantPictureVO>();
@@ -263,11 +255,11 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 		ResultSet rs = null;
 
 		try {
-
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_PIC_BYSTORE_STMT);
-			
+
 			pstmt.setString(1, storeId);
-			
+
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -307,31 +299,26 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 		}
 		return list;
 	}
-	
+
 	public RestaurantPictureVO findOneByStoreId(String storeId) {
-		RestaurantPictureVO list = new ArrayList<RestaurantPictureVO>();
-		RestaurantPictureVO restaurantPictureVO = null;
-		
+		RestaurantPictureVO restaurantPictureVO = new RestaurantPictureVO();
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
-			
-			pstmt = con.prepareStatement(GET_PIC_BYSTORE_STMT);
-			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONEPIC_BYSTORE_STMT);
 			pstmt.setString(1, storeId);
-			
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
-				restaurantPictureVO = new RestaurantPictureVO();
-				restaurantPictureVO.setStorePictureId(rs.getString("STORE_PICTURE_ID"));
-				restaurantPictureVO.setStorePicture(rs.getBytes("STORE_PICTURE"));
-				restaurantPictureVO.setStoreId(rs.getString("STORE_ID"));
-				list.add(restaurantPictureVO); // Store the row in the list
+			restaurantPictureVO = new RestaurantPictureVO();
+			restaurantPictureVO.setStorePictureId(rs.getString("STORE_PICTURE_ID"));
+			restaurantPictureVO.setStorePicture(rs.getBytes("STORE_PICTURE"));
+			restaurantPictureVO.setStoreId(rs.getString("STORE_ID"));
 			}
-			
 			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -359,9 +346,9 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 				}
 			}
 		}
-		return list;
+		return restaurantPictureVO;
 	}
-	
+
 	@Override
 	public List<RestaurantPictureVO> getAll() {
 		List<RestaurantPictureVO> list = new ArrayList<RestaurantPictureVO>();
@@ -414,8 +401,7 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 		}
 		return list;
 	}
-	
-	
+
 	@Override
 	public void delete(String storePictureId) {
 		Connection con = null;
@@ -451,11 +437,11 @@ public class RestaurantPictureDAO implements RestaurantPicture_interface{
 			}
 		}
 	}
-	
+
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(path);
-		byte[] buffer = new byte[fis.available()];//資料流源頭(來源檔案)的大小 byte陣列會依照檔案大小產生
-		fis.read(buffer);//fis會依照陣列大小讀取並放入buffer這個byte[]裡面
+		byte[] buffer = new byte[fis.available()];// 資料流源頭(來源檔案)的大小 byte陣列會依照檔案大小產生
+		fis.read(buffer);// fis會依照陣列大小讀取並放入buffer這個byte[]裡面
 		fis.close();
 		return buffer;
 	}
