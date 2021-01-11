@@ -49,7 +49,15 @@
 					</ul>
 				</li>
 				<li>外帶選項設定</li>
-				<li>取號選項設定</li>
+				<li>取號選項設定
+				<ul>
+						<li>
+						<a href="<%=request.getContextPath()%>/front-store-end/queue/queuePeriod/editQuePeriod.jsp">時段管理</a>
+						</li>
+						<li>
+						<a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/editQueTable.jsp">餐桌管理</a>
+						</li>
+					</ul></li>
 				<li>定位選項設定</li>
 			</ul>
 		</span>
