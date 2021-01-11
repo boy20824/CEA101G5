@@ -32,19 +32,19 @@ $('document').ready(function(){
                               </li>
                               <li class="bth">
                               <input type="button" value="餐店備註">
-                                <select  class="quantity"  name="quantity">
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
+                              <input type="button" value="-" class="del" style="font-size: 20px;" />
+                              <span name="quantity">1</span>
+                              <input type="button" value="+" class="addd"style="font-size: 20px;" />
                               <input type="button" value="加入購物車"  class="add"/>
                               </li>
                             </ul>
                           </div> </div>`
+                                
             	}
-              
+            
             }
+        
+            
             list.innerHTML=str;
             // 註冊餐點的加入購物車
             
@@ -57,27 +57,50 @@ $('document').ready(function(){
     		}
             
             let add =document.querySelectorAll(".add")// 註冊每個餐點的按鈕
-            let quantity =document.querySelectorAll(".quantity")
+          
             let memberId =document.querySelector(".memberId") 
             
             // 點擊按鈕後觸發加入購物車事件
+            
             for(let i=0;i<add.length;i++){
             	add[i].addEventListener('click', function(){
          
             		$.ajax({
-            			url:'/CEA101G5//menu/MenuServlet.do?menuId='+data[menuNumber[i]].menuId+'&quantity='+quantity[i].value+'&action=add',
+            			url:'/CEA101G5//menu/MenuServlet.do?menuId='+data[menuNumber[i]].menuId+'&quantity='+quantity[i].innerText+'&action=add',
             			type : "GET",
             			dataType : "json",
             			success : function(data) { 
                     	showCar(data);
-
+                    	quantity[i].innerText=1;
             			}
             		})     		         		
             	})
             	
-            }        
+            }     
+            
+            let quantity =document.querySelectorAll('span[name="quantity"]')
+            let del =document.querySelectorAll('.del')
+            let addd =document.querySelectorAll('.addd')
+             for(let i=0;i<quantity.length;i++){
+            	 del[i].addEventListener('click',function(){
+            		 var num=parseInt(quantity[i].innerText)-1;
+                  	if(num<1){
+                  		quantity[i].innerText=1;
+                  	}else{
+                  		quantity[i].innerText=num;
+                  	}
+            	 })
+            	addd[i].addEventListener('click',function(){
+            		var num=parseInt(quantity[i].innerText)+1;
+                 	quantity[i].innerText=num;
+            	})
+                 
+             }
             
         }
+    	
+    
+    
     
     // 餐點分類點擊顏色轉化事件並搭配餐點切換事件
     let menuChar = document.querySelectorAll('.menuChar')
@@ -101,6 +124,7 @@ $('document').ready(function(){
 
     // 購物車添加
     function showCar(data){
+    	
     	var dom = document.getElementById(data.menuId);
     	if(dom != null) {
     		dom.querySelector('.item-quantity').innerText = "Quantity:"+data.quantity;
@@ -130,6 +154,15 @@ $('document').ready(function(){
     
 // 點擊購物車按鈕
     $('.shopCard').click( function(){
+//    	清除不同餐廳要先清空購物車
+    	let storeId = document.querySelector('.storeId');
+    	$.ajax({
+			url:'/CEA101G5//menu/MenuServlet.do?action=clear&storeId='+storeId.value,
+			type : "GET",
+			dataType : "json",
+			success : function(data) { 
+			}
+		})     		
     	 // 點擊購物車移除觸發刪除事件
         let remove = document.querySelectorAll('.item-remove');
         let getMenuId =document.querySelectorAll('.carlist')

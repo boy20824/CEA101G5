@@ -86,6 +86,18 @@ public class MenuServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		if ("clear".equals(action)) {
+			HttpSession session = req.getSession();
+			List<MenuVO> list = (ArrayList<MenuVO>) session.getAttribute("memuList");
+			String storeId=req.getParameter("storeId");
+			if(list.size()!= 0) {
+				if(list.get(0).getStoreId()!=storeId) {
+					list.clear();
+				}
+			}
+		}
+		
 
 		if ("add".equals(action)) {
 //			//原本想用redis處理
@@ -116,13 +128,21 @@ public class MenuServlet extends HttpServlet {
 				list = new ArrayList<>();
 				list.add(menuVO);
 			} else {
+				
 //				確認該餐點物件是否存在
 				if (list.contains(menuVO)) {
 					for (MenuVO vo : list) {
 //						判斷餐店編號是否存在
 						if (vo.getMenuId().equals(menuVO.getMenuId())) {
 //						如果存在只要更新數量
-							vo.setQuantity(Integer.parseInt(quantity));
+							vo.setQuantity(vo.getQuantity()+Integer.parseInt(quantity));
+							JSONObject menuVO1 = new JSONObject(vo);
+							res.setContentType("text/plain");
+							res.setCharacterEncoding("UTF-8");
+							PrintWriter out = res.getWriter();
+							out.print(menuVO1);
+							out.flush();
+							out.close();
 							break;
 						}
 					}
@@ -134,6 +154,7 @@ public class MenuServlet extends HttpServlet {
 			}
 //			將購物車集合存入session
 			session.setAttribute("memuList", list);
+			
 //			將餐點物件包裝成JSON資料型態傳送給前端使用
 			JSONObject menuVO1 = new JSONObject(menuVO);
 
