@@ -28,7 +28,7 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/customerPickupNo.css" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/restaurant/css/css.css" />
 <title>addQueperiod.jsp</title>
 
 

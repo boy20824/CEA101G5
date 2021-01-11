@@ -1,9 +1,9 @@
 div.row.reserve {
-  border: 1px white solid;
+/*   border: 1px solid; */
   height: 75px;
 }
 div.row.reserve1 {
-  border: 1px white solid;
+/*   border: 1px white solid; */
   height: 20px;
 }
 form {
