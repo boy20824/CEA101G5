@@ -4,11 +4,23 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.productcategory.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
+	String nameSearch = request.getParameter("nameSearch");
+	if (nameSearch != null){	//第一頁從input來的參數不會=null, 所以存到session裡
+		session.setAttribute("nameSearch", nameSearch);
+	}else{					//第二頁從input來的參數不見了, 所以要取剛剛存到session裡的參數
+		nameSearch = (String) session.getAttribute("nameSearch");
+	}
+	
+	//這樣寫是為了 再查詢頁面修改完, 還能保有搜尋條件回到查詢頁面, 而不是回到listAll
+	String turn = (String) request.getAttribute("turn");
+	if (turn == null){	//如果是第一次才將???轉碼, 如果按下修改經過控制器則不進入if區塊轉碼
+		nameSearch = new String(nameSearch.getBytes("ISO-8859-1"),"UTF-8");
+	}
 	ProductService pSvc = new ProductService();
-    List<ProductVO> list = pSvc.getAllProducts();
+	List<ProductVO> list = null;
+    list = pSvc.getAllByKeywordSearch(nameSearch);
     pageContext.setAttribute("list",list);
 %>
 
@@ -83,8 +95,7 @@
 </head>
 <body bgcolor='white'>
 
-<a href="<%=request.getContextPath() %>/back-end/shopProductAddProduct.jsp" class="button">新增商品</a>
-<br>
+
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -94,15 +105,13 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
-<div class="tableborder">
+<a href="<%=request.getContextPath() %>/back-end/product/listAllProduct.jsp" class="button">回所有商品列表</a>
 <%@ include file="/front-end/util/page1.file" %>
-
+<div class="tableborder">
 <table class="info">
 	<tr>
 		<th>商品編號</th>
 		<th>商品名稱</th>
-		<th>商品圖片</th>
 		<th>商品描述</th>
 		<th>商品原價</th>
 		<th>商品售價</th>
@@ -117,7 +126,6 @@
 			<tr>
 				<td>${pVO.productId}</td>
 				<td>${pVO.productName}</td>
-				<td><img src="<%=request.getContextPath()%>/shop/productphotoreader.do?productId=${pVO.getProductId()}" class="card-img-top" alt="..." width="100" height="100"></td>
 				<td><input type="text" name="productDescription" value="${pVO.productDescription}"></td>
 				<td><input type="text" name="productMSRP"  value="${pVO.productMSRP}" style="width: 50px;"/></td>
 				<td><input type="text" name="productPrice" value="${pVO.productPrice}" style="width: 50px;"/></td>
@@ -133,15 +141,14 @@
 							<option value=1>上架中</option>
 							<option value=0>停售</option>
 						</c:if>
-						<!-- 有狀態2 = 暫時售完的選項嗎?有的話到時候要加上去 -->
 					</select>
 				</td>
 				<td>
 						<input type="submit" value="送出修改	" class="button" id="openp">
 					    <input type="hidden" name="action" value="updateProduct">
-					    
+					    <input type="hidden" name="searchyn" value="yes">
 					    <input type="hidden" name="productId" value="${pVO.productId}">
-				    
+				    	<input type="hidden" name="nameSearch" value="<%=nameSearch %>">
 				</td>
 			</tr>
 		</FORM>
@@ -150,7 +157,7 @@
 
 </div>
 <%@ include file="/front-end/util/page2.file" %>
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/shopProductListAllByName.jsp" >
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/product/listAllByName.jsp" >
 	<b>依商品名稱搜尋:</b>
 	<input type="text" name="nameSearch">
 	<input type="submit" value="送出" class="button">
