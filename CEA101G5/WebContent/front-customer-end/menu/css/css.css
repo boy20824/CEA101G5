@@ -570,7 +570,7 @@ width: 90%;
   right:0;
 }
 .bth input:first-child{
-  margin-right: 22em;
+  margin-right: 16em;
 }
 .bth select{
   height: 2em;
@@ -711,4 +711,25 @@ width: 90%;
  .slick-initialized .slick-slide .dog{
   margin-right: 1em;
   font-size:24px;
+}
+
+input.addd{
+	background: black;
+    border-radius: 100%;
+    padding: 1em;
+    margin-right: 2em;
+    border: none;
+}
+input.del{
+	background: black;
+    border-radius: 100%;
+    padding: 1em;
+    margin-right: 1em;
+    border: none;
+}
+span[name="quantity"]{
+	font-size: 30px;
+    padding-right: 0.5em;
+    padding-top: 0.5em;
+	
 }

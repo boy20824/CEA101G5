@@ -8,10 +8,14 @@
 
 <%
 	RestaurantService restaurantSvc = new RestaurantService(); //創建 實體
-	RestaurantVO restaurantVO = restaurantSvc.getOneRestaurant(request.getParameter("storeId")); //呼叫DAO並執行getAll()取得VO為每一列資訊的所有欄位並裝入List集合<泛型只能裝取該VO型別>;
-	request.setAttribute("restaurantVO", restaurantVO);
-%>
+	if(request.getParameter("storeId")==null){
+		RestaurantVO restaurantVO = restaurantSvc.getOneRestaurant(((RestaurantVO)session.getAttribute("restaurantVO")).getStoreId());
+	}else{
+		RestaurantVO restaurantVO = restaurantSvc.getOneRestaurant(request.getParameter("storeId")); //呼叫DAO並執行getAll()取得VO為每一列資訊的所有欄位並裝入List集合<泛型只能裝取該VO型別>;
+		session.setAttribute("restaurantVO", restaurantVO);
+	}
 
+%>
 <%
 // 防止快取
 response.setHeader("Cache-Control","no-store");
@@ -60,6 +64,7 @@ response.setDateHeader("Expires", 0);
 
 </head>
 <body>
+
 	<!--存放外會員進來的參數以及餐點編號 -->
 	<input type="hidden" class="storeId" value="${restaurantVO.storeId}" />
 	<% MemVO memberPhone =(MemVO)session.getAttribute("memLogin");%>
@@ -115,7 +120,7 @@ response.setDateHeader("Expires", 0);
 			
 			<!--end shopping-cart-header -->
 
-			<div class="forCar" style="overflow: auto; height: 500px;width:300px;">
+			<div class="forCar" style="overflow: auto; height: 500px;width:320px;">
 				<c:forEach var="item" items="${memuList}">
 					<div id="${item.menuId}" class="carlist">
 						<ul class="shopping-cart-items">
@@ -130,7 +135,7 @@ response.setDateHeader("Expires", 0);
 				<a href="<%=request.getContextPath()%>/front-customer-end/foodorder/foodorder.jsp" class="button">結帳</a>
 			</div>
 		</div>
-
+		
 		<!-- 餐點內容 -->
 		<div class="container">
 			<div class="restaurantInfo">
@@ -178,7 +183,11 @@ response.setDateHeader("Expires", 0);
 					</ul>
 				</div>
 				<div class="functionPick">
-					<input type="button" value="線上取號" class="orderNum" />
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do" >
+       <input type="hidden" name="storeid" value="S000001">
+       <input type="hidden" name="action" value="getQueNo">       
+					<input type="submit" value="線上取號" class="orderNum" />
+     </FORM>
 					<input type="button" value="預約定位" class="orderSet" />
 				</div>
 			</div>

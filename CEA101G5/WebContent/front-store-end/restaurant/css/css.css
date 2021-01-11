@@ -9,7 +9,7 @@ body {
 }
 
 .sidebar {
-    height: 100%;
+	height: 100%;
     width: 100px;
     position: fixed;
     z-index: 1;
@@ -21,6 +21,9 @@ body {
     transform: translateX(-100%);
     transition: 0.5s;
     box-sizing: content-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 #side-menu-switch:checked+.sidebar {
@@ -231,7 +234,7 @@ font {
 }
 
 
-/* 沒有商家權限 */
+/* 瘝��振甈�� */
 
 .noAuthBlock img {
     width: 45%;
@@ -261,7 +264,7 @@ font {
 }
 
 
-/* 歡迎頁面 */
+/* 甇∟�� */
 
 .welcomePageBlock img {
     width: 35%;

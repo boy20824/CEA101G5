@@ -40,11 +40,11 @@ pageContext.setAttribute("queuetableid", queuetableid);
 		<form METHOD="post" ACTION="queueTable.do" name="form1">
 			<div class="form-group">
 				<div class="row">
-					<div class="col-3"></div>
+					<div class="col-2"></div>
 					<div class="col-3">
 						<label for="exampleFormControlSelect1"><b>餐桌類型：</b></label>
 					</div>
-					<div class="c○l-6">
+					<div class="c○l-3">
 					<c:choose><c:when test="${queuetableid==1 }">
 					<input class="form-control" value="二人桌" readonly>
 						</c:when>
@@ -63,7 +63,7 @@ pageContext.setAttribute("queuetableid", queuetableid);
 			</div>
 			<div class="form-group">
 				<div class="row">
-					<div class="col-3"></div>
+					<div class="col-2"></div>
 					<div class="col-3">
 						<label for="exampleInputPassword1"><b>請設定桌數：</b></label>
 					</div>
@@ -80,7 +80,7 @@ pageContext.setAttribute("queuetableid", queuetableid);
 			</div>
 			<div class="form-group">
 				<div class="row">
-					<div class="col-3"></div>
+					<div class="col-2"></div>
 					<div class="col-3">
 						<label for="exampleInputPassword1"><b>請設定開放桌數：</b></label>
 					</div>
