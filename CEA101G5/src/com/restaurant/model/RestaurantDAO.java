@@ -496,9 +496,13 @@ public class RestaurantDAO implements Restaurant_interface {
 		try {
 			
 			con = ds.getConnection();
-			String finalSQL = "select * from Restaurant "
+			String finalSQL = "SELECT RESTAURANT.STORE_ID, MEM_PHONE, STORE_CHAR, STORE_INFO, STORE_NAME, STORE_PHONE,STORE_ADDRESS, "
+				  + "STORE_STATUS, STORE_FINAL_RESERVDATE, STORE_ORDER_CONDITION, STORE_RESERV_CONDITION,STORE_QUEUE_CONDITION,STORE_ORDER_WAITTIME, STORE_OPENTIME, STORE_CLOSETIME, "
+				  + "STORE_START_ORDERDATE, STORE_END_ORDERDATE, ACCEPT_GROUPS, NUM_OF_GROUPS,STORE_PEOPLE_TOTAL, STORE_RATING_TOTAL "
+				  + "FROM RESTAURANT "
+				  + "JOIN MENU ON (RESTAURANT.STORE_ID = MENU.STORE_ID)"
 		          + jdbcUtil_CompositeQuery_Restaurant.get_WhereCondition(map)
-		          + "order by store_Id";
+		          + "ORDER BY STORE_ID";
 			pstmt = con.prepareStatement(finalSQL);
 			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
 			rs = pstmt.executeQuery();
