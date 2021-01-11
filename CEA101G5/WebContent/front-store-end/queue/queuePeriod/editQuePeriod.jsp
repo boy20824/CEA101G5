@@ -11,7 +11,7 @@
 	pageContext.setAttribute("list", list);
 	String storeid = (String) request.getAttribute("storeid");
 %>
-<%@include file="../../selectpage/selectstorepage.jsp" %>
+<%@include file="../sidebar.jsp" %>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -27,7 +27,6 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/restaurant/css/css.css" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>editQuePeriod.jsp</title>
-
 
 </head>
 <body bgcolor='white'>
@@ -57,6 +56,10 @@
 				<%
 					int count = 1;// 序列號
 				%>
+<%-- 				<jsp:useBean id="quePeriodSvc" scope="page" class="com.queueperiod.model.QuePeriodService" /> --%>
+<%-- <c:forEach var="quePeriodVO" items="${quePeriodSvc.all}"> --%>
+<%-- <c:choose> --%>
+<%-- <c:when test="${quePeriodVO.storeid='S000001' }"> --%>
 				<c:forEach var="quePeriodVO" items="${list}">
 					<tr>
 						<td scope="row"><%=count%></td>
@@ -96,6 +99,8 @@
 					<%
 						count++;
 					%>
+<%-- 					</c:when> --%>
+<%-- 					</c:choose> --%>
 				</c:forEach>
 			</tbody>
 		</table>

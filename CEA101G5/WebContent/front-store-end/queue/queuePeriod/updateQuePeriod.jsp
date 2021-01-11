@@ -11,8 +11,6 @@ pageContext.setAttribute("storeid", storeid);
 pageContext.setAttribute("queueperiodid", queueperiodid);
 
 %>
-<%=storeid %>
-<%=queueperiodid%>
 
 <html lang="en">
 <head>
@@ -26,6 +24,7 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/bootstrap-reboot.min.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/customerPickupNo.css" />
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/restaurant/css/css.css" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>addQuePeriod.jsp</title>
 
@@ -35,7 +34,7 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
 <div class="container">
 
 	
-		<div class="row reserve"></div>
+		<div class="row reserve1"></div>
 		<form METHOD="post" ACTION="queuePeriod.do" name="form1">
 			<div class="form-group">
 				<div class="row">

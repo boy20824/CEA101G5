@@ -9,6 +9,8 @@
 	class="com.restaurant.model.RestaurantService" />
 <jsp:useBean id="restPicSvc" scope="page"
 	class="com.restaurantpicture.model.RestaurantPictureService" />
+<jsp:useBean id="restaurantPictureVO" scope="page"
+	class="com.restaurantpicture.model.RestaurantPictureVO" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +82,7 @@
 	display: inline-block;
 	color: #ddd; /*背景星星顏色*/
 	overflow: hidden;
-	font-size: 20px; /*調整字體大小可放大縮小星星*/
+	font-size: 16px; /*調整字體大小可放大縮小星星*/
 	text-shadow: 0px 1px 0 #999;
 }
 
@@ -144,11 +146,13 @@
 			ACTION="<%=request.getContextPath()%>/back-end/restaurant/restaurant.do"
 			name="form1">
 			<div class="search">
-				<input type="text" class="searchTerm" placeholder="What are you looking for?">
+				<input type="text" class="searchTerm"
+					placeholder="What are you looking for?">
 				<button type="submit" class="searchButton">
-					<i class="fa fa-search"></i> 
+					<i class="fa fa-search"></i>
 				</button>
-				<input type="hidden" name="action" value="listRestaurants_ByCompositeQuery">
+				<input type="hidden" name="action"
+					value="listRestaurants_ByCompositeQuery">
 			</div>
 		</FORM>
 
@@ -212,27 +216,34 @@
 			items="${listRestaurants_ByCompositeQuery}">
 			<div class="store-container">
 				<div class="store-img">
-					<img style="width:100px;" src="<%=request.getContextPath() %>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantPictureVO.storeId}&action=getOne_For_Display">
+					<img style="width: 250px; height: 280px;"
+						src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantVO.storeId}&action=getOne_For_Display">
 				</div>
 				<div class="store-text">
 					<ul>
-						<li><img
-							src="<%=request.getContextPath()%>/front-customer-end/restaurant/img/ICON/utensils-solid.svg"
-							alt="" /> <span><p>餐廳名稱:${restaurantVO.storeName}</p></span></li>
-						<li><img
-							src="<%=request.getContextPath()%>/front-customer-end/restaurant/img/ICON/star-solid.svg"
-							alt="" /> <span><p>
-									餐廳評分: <span class="ratings"> <span class="empty_star">★★★★★</span>
-										<span class="full_star"
-										style="width:${restaurantVO.storeRatingTotal}%">★★★★★</span>
-									</span>
-								</p> </span></li>
-						<li><img
-							src="<%=request.getContextPath()%>/front-customer-end/restaurant/img/ICON/phone-solid.svg"
-							alt="" /> <span><p>餐廳電話:${restaurantVO.storePhone}</p></span></li>
-						<li><img
-							src="<%=request.getContextPath()%>/front-customer-end/restaurant/img/ICON/map-marker-alt-solid.svg"
-							alt="" /> <span><p>餐廳地址:${restaurantVO.storeAddress}</p></span></li>
+						<li><div>
+								<p>
+									<i class="fas fa-utensils"></i> 
+									<span class="store-text-word">餐廳名稱:${restaurantVO.storeName}</span>
+								</p>
+							</div></li>
+						<li><div>
+								<p>
+									<i class="fas fa-star"></i> <span class="store-text-word">餐廳評分: <span class="ratings">
+										<span class="empty_star">★★★★★</span> <span class="full_star"
+										style="width:${restaurantVO.storeRatingTotal}%">★★★★★</span></span></span>
+								</p>
+							</div></li>
+						<li><div>
+								<p>
+									<i class="fas fa-phone"></i> <span class="store-text-word">餐廳電話:${restaurantVO.storePhone}</span>
+								</p>
+							</div></li>
+						<li><div>
+								<p>
+									<i class="fas fa-thumbtack"></i><span class="store-text-word">餐廳地址:${restaurantVO.storeAddress}</span>
+								</p>
+							</div></li>
 					</ul>
 					<button class="btn btn--block card__btn"
 						onclick="window.location.href='<%=request.getContextPath()%>/front-customer-end/menu/menuindex.jsp?storeId=${restaurantVO.storeId}'">查看更多</button>

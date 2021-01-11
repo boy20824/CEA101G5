@@ -50,10 +50,10 @@
 				<li>取號選項設定
 				<ul>
 						<li>
-						<a href="<%=request.getContextPath()%>/front-store-end/queue/queuePeriod/editQuePeriod.jsp">時段管理</a>
+						<a href="<%=request.getContextPath()%>/front-store-end/queue/queuePeriod/queuePeriod.do?action=getOne_Store&storeid=<%="S000001" %>">時段管理</a>
 						</li>
 						<li>
-						<a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/editQueTable.jsp">餐桌管理</a>
+						<a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/queueTable.do?action=list_One_Store&storeid=<%="S000001" %>">餐桌管理</a>
 						</li>
 					</ul></li>
 				<li>定位選項設定</li>
@@ -105,7 +105,7 @@
             <img src="<%=request.getContextPath()%>/front-store-end/restaurant/img/welcomeLogo.png" alt="">
         </div>
         <div class="welcomePageBtn">
-            <button type="submit">餐廳資訊管理</button>
+            <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/restaurant/addrestaurant.jsp'">餐廳資訊管理</button>
             <button type="submit">外帶訂單管理</button>
             <button type="submit">取號管理</button>
             <button type="submit">訂位管理</button>
