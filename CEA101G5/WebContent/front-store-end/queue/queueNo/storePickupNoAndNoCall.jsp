@@ -28,6 +28,7 @@
 	Integer pickupNo = (Integer) session.getAttribute("pickupNo");
 	String storeid = (String) session.getAttribute("storeid");
 %>
+<%=storeid %>
 <c:if test="${not empty errorMsgs}">
 	<font style="color: red">請修正以下錯誤:</font>
 	<ul>
@@ -52,7 +53,6 @@
 </head>
 <body>
 	<div class="container">
-		<input name="storeid" id="storeid" value="${storeid }" hidden="hidden" />
 		<!-- <div class="row reserve1"></div> -->
 		<div class="row">
 			<div class="col-4 left">
@@ -150,12 +150,12 @@
 							<h3>預計取號</h3>
 
 						</div>
+		<input name="storeid" id="storeid" value="${storeid }" hidden="hidden" />
 						<input name="queuenum" type="text" class="form-control" value="<%=pickupNo%>" aria-label="Amount (to the nearest dollar)" readonly> 
 						<input type="hidden" id="queuenotime" name="queuenotime" class="quenotime"> 
 						<input type="hidden" id="queuetableid" name="queuetableid" value="1">
 						<input type="hidden" id="queuelineno" name="queuelineno" value="1">
 						<input type="hidden" name="action" value="storeInsert">						
-						<button id="" type="button" class="btn btn-primary" value="新增">新增取號資訊</button>
 						<button id="submit" type="submit" class="btn btn-primary"
 							value="送出新增">新增取號</button>
 					</div>

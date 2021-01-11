@@ -283,7 +283,7 @@ public class QueNoServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				/*********************** 1.?��?��請�?��?�數 - 輸入?��式�?�錯誤�?��?? *************************/
 				Integer queuenum = new Integer(req.getParameter("queuenum"));
 				String memphone = req.getParameter("memphone").trim();
@@ -294,14 +294,14 @@ public class QueNoServlet extends HttpServlet {
 				}
 				Integer party = null;
 				try {
-					party = new Integer(req.getParameter("party"));
+					party = new Integer(req.getParameter("party").trim());
 				} catch (NumberFormatException e) {
 					errorMsgs.add("??��?�到party");
 				}
-				System.out.println(req.getParameter("queuenotime"));
 				Timestamp queuenotime = null;
 				try {
 					queuenotime = strToTsp(req.getParameter("queuenotime"));
+					System.out.println(queuenotime);
 				} catch (IllegalArgumentException e) {
 					errorMsgs.add("?��??�到?��???!");
 				}
@@ -309,53 +309,88 @@ public class QueNoServlet extends HttpServlet {
 				Integer queueperiodid = new Integer(req.getParameter("queueperiodid").trim());
 				Integer queuelineno = new Integer(req.getParameter("queuelineno").trim());
 				Integer queuetableid = new Integer(req.getParameter("queuetableid").trim());
-				QueNoVO queNoVO = new QueNoVO();
-				queNoVO.setQueuenum(queuenum);
-				queNoVO.setMemphone(memphone);
-				queNoVO.setParty(party);
-				queNoVO.setQueuenotime(queuenotime);
-				queNoVO.setQueueperiodid(queueperiodid);
-
-				queNoVO.setQueuelineno(queuelineno);
-
-				queNoVO.setQueuetableid(queuetableid);
-
-				queNoVO.setStoreid(storeid);
+								
+				QueNoVO queNoVO1 = new QueNoVO();
+				queNoVO1.setQueuenum(queuenum);
+				queNoVO1.setMemphone(memphone);
+				queNoVO1.setParty(party);
+				queNoVO1.setQueuenotime(queuenotime);
+				queNoVO1.setQueueperiodid(queueperiodid);
+				queNoVO1.setQueuelineno(queuelineno);
+				queNoVO1.setQueuetableid(queuetableid);
+				queNoVO1.setStoreid(storeid);
+				
+				System.out.println("幹"+queNoVO1.getParty());
+//----------------------------------------------------------------------------
+//String storeid = req.getParameter("storeid");
+				
+				QuePeriodService quePeriodSvc = new QuePeriodService();
+				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
+				periodCheck(quePeriodVO);//超過最後取號時間不得選取
+				
+				QueTableService queTableSvc = new QueTableService();
+				List<QueTableVO> queTableVO = queTableSvc.getStoreQueTable(storeid);
+				
+				QueLineService queLineSvc = new QueLineService();
+				List<QueLineVO> queLineVO = queLineSvc.getStoreQueNo(storeid);
+				
+				QueNoService queNoSvc = new QueNoService();
+				
+				List<QueNoVO> queNoVO = queNoSvc.getQueNoByStoreId(storeid);
+				System.out.println("-----");
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("queNoVO", queNoVO);
 					RequestDispatcher failureView = req.getRequestDispatcher(
 							req.getContextPath() + "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
 					failureView.forward(req, res);
-
 					return;
 				}
+//-------------------------------------------------------------------------------
 //				System.out.print("??��?��?��??");
 
 				/*************************** 2.??��?�新增�?��?? ***************************************/
 				// ?��增至資�?�庫
-				QueNoService queNoSvc = new QueNoService();
-				queNoVO = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
+//				QueNoService queNoSvc = new QueNoService();
+				queNoVO1 = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
 						queuetableid);
-				// 顯示桌種??��?��?�碼?��
-				List<QueNoVO> list = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
+				// 顯示桌種??��?��?�碼?��	
+//				List<QueNoVO> list = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
 //				storeInsert = count;
 				/*************************** 3.?��增�?��??,準�?��?�交(Send the Success view) ***********/
 //				HttpSession session = req.getSession();
 //				session.setAttribute("queNoVO", queNoVO);
-				req.setAttribute("queNoVO", queNoVO);
-				req.setAttribute("queNoVOList", list);
-				RequestDispatcher succesView = req
-						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
-				succesView.forward(req, res);
+				//----------------------------
+//				req.setAttribute("queNoVO", queNoVO);
+//				req.setAttribute("queNoVOList", list);
+//				RequestDispatcher succesView = req
+//						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
+//				succesView.forward(req, res);
+				//----------------------------
+				
+				HttpSession session = req.getSession();
+//				session.setAttribute("pickupNo", ((TreeSet<Integer>) countSet).last());
+					session.setAttribute("quePeriodVO", quePeriodVO);
+					session.setAttribute("queTableVO", queTableVO);
+					session.setAttribute("queLineVO", queLineVO);
+					session.setAttribute("queNoVO", queNoVO);
+					session.setAttribute("storeid", storeid);
+					count++;// 計數+1
+					session.setAttribute("pickupNo", count);
+//				req.setAttribute("pickupNo", count);
+//				req.setAttribute("quePeriodVO", quePeriodVO);
+//				count++;
+				String url = "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
 
 				/*************************** ?��他可?��??�錯誤�?��?? **********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-//				res.sendRedirect((req.getContextPath() + "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp"));
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage());
+////				res.sendRedirect((req.getContextPath() + "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp"));
+//				RequestDispatcher failureView = req
+//						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 
 		if ("insert".equals(action)) {
