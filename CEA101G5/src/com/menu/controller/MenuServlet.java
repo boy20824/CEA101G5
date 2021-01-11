@@ -92,8 +92,9 @@ public class MenuServlet extends HttpServlet {
 			List<MenuVO> list = (ArrayList<MenuVO>) session.getAttribute("memuList");
 			String storeId=req.getParameter("storeId");
 			if(list.size()!= 0) {
-				if(list.get(0).getStoreId()!=storeId) {
+				if(!(list.get(0).getStoreId()).equals(storeId)) {
 					list.clear();
+					session.setAttribute("memuList", list);
 				}
 			}
 		}
@@ -110,7 +111,6 @@ public class MenuServlet extends HttpServlet {
 			String menuId = req.getParameter("menuId");
 			String quantity = req.getParameter("quantity");
 //			String memberId = req.getParameter("memberId");
-
 //			開始查詢該比訂單資訊
 			MenuService menuSvc = new MenuService();
 
@@ -123,6 +123,7 @@ public class MenuServlet extends HttpServlet {
 			// session 將購物車資訊存入sessionScope
 			HttpSession session = req.getSession();
 			List<MenuVO> list = (ArrayList<MenuVO>) session.getAttribute("memuList");
+			JSONObject menuVO1 = null;
 //			先確認session有無購物車集合物件(沒有則進入迴圈並產生新的購物車集合並且加入產品)
 			if (list == null) {
 				list = new ArrayList<>();
@@ -136,13 +137,8 @@ public class MenuServlet extends HttpServlet {
 						if (vo.getMenuId().equals(menuVO.getMenuId())) {
 //						如果存在只要更新數量
 							vo.setQuantity(vo.getQuantity()+Integer.parseInt(quantity));
-							JSONObject menuVO1 = new JSONObject(vo);
-							res.setContentType("text/plain");
-							res.setCharacterEncoding("UTF-8");
-							PrintWriter out = res.getWriter();
-							out.print(menuVO1);
-							out.flush();
-							out.close();
+							menuVO.setQuantity(vo.getQuantity());
+							menuVO1 = new JSONObject(menuVO);
 							break;
 						}
 					}
@@ -150,13 +146,14 @@ public class MenuServlet extends HttpServlet {
 //					餐點不存在所以新增數量並且加入購物車
 					menuVO.setQuantity(Integer.parseInt(quantity));
 					list.add(menuVO);
+					 menuVO1 = new JSONObject(menuVO);
 				}
 			}
 //			將購物車集合存入session
 			session.setAttribute("memuList", list);
 			
 //			將餐點物件包裝成JSON資料型態傳送給前端使用
-			JSONObject menuVO1 = new JSONObject(menuVO);
+			
 
 			// 傳送給前端
 			res.setContentType("text/plain");

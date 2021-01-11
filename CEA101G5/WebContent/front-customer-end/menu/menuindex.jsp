@@ -64,6 +64,7 @@ response.setDateHeader("Expires", 0);
 
 </head>
 <body>
+
 	<!--存放外會員進來的參數以及餐點編號 -->
 	<input type="hidden" class="storeId" value="${restaurantVO.storeId}" />
 	<% MemVO memberPhone =(MemVO)session.getAttribute("memLogin");%>

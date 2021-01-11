@@ -59,7 +59,7 @@ $('document').ready(function(){
             let add =document.querySelectorAll(".add")// 註冊每個餐點的按鈕
           
             let memberId =document.querySelector(".memberId") 
-            
+            let quantity =document.querySelectorAll('span[name="quantity"]')
             // 點擊按鈕後觸發加入購物車事件
             
             for(let i=0;i<add.length;i++){
@@ -77,8 +77,7 @@ $('document').ready(function(){
             	})
             	
             }     
-            
-            let quantity =document.querySelectorAll('span[name="quantity"]')
+           
             let del =document.querySelectorAll('.del')
             let addd =document.querySelectorAll('.addd')
              for(let i=0;i<quantity.length;i++){
