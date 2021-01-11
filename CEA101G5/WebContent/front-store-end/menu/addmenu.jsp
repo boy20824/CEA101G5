@@ -52,6 +52,23 @@ position:absolute;
 top:1%;
 left:25%;
 }
+.sidebar {
+	height: 100%;
+    width: 100px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #404040;
+    transition: 0.5s;
+    padding-top: 10px;
+    transform: translateX(-100%);
+    transition: 0.5s;
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 </style>
 </head>
 <body>

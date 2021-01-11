@@ -67,7 +67,7 @@ table {
     margin-left: 15vw;
 }
 .detail{
-    margin-left: 3vw;
+    margin-left: -2em;
 }
 .detail-word{
     margin-left: 15vw;
@@ -87,8 +87,8 @@ table {
     display: flex;
     flex-direction: row-reverse;
     position: absolute;
-    top:9em;
-    left:59em;
+    top:8em;
+    left:87em;
 }
 .price img{
     width: 4vw;
@@ -108,5 +108,7 @@ table {
     margin-top: 3vh;
     margin-left: 1vw;
 }
-
+.table2{
+	margin-left:30em;
+}
 

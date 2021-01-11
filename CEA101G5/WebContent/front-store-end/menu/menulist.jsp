@@ -57,7 +57,7 @@
 		  <input type="hidden" name="action"	value="getOne_For_Update">
           </form>
           
-          <FORM name="form2" method="post" action="<%=request.getContextPath()%>/menu/MenuServlet.do"  enctype="multipart/form-data">
+          <FORM name="form2" method="post" class="table2" action="<%=request.getContextPath()%>/menu/MenuServlet.do"  enctype="multipart/form-data">
            <input type="hidden" name="menuDetail" value="${menuVO.menuDetail}">
            <input type="hidden" name="menuPrice" value="${menuVO.menuPrice}">
            <input type="hidden" name="menuName" value="${menuVO.menuName}">
