@@ -1,20 +1,20 @@
-        /*��摮��*/
+        /*嚙踝�蕭��謅蕭嚙�*/
         @font-face {
-            font-family: 敺株�迤暺��;
+            font-family: ��嚙踐�縣��嚙踝蕭;
             /*         src: url('../fonts/Minecraft-Regular.otf'); */
         }
         *{
             box-sizing: border-box;
         }
 
-        /*���憛�*/
+        /*嚙踐嚙踝蕭���嚙踐�*/
         body {
             font-family: "Lato", sans-serif;
             background-color: #FFFFFF;
             font-size: 0;
         }
 
-        /*撌血���*/
+        /*���蹓蕭嚙踝蕭*/
         .sidebar {
 
             height: 100%;
@@ -30,7 +30,7 @@
 
         }
 
-        /*撌阡�CON*/
+        /*��嚙踝�ON*/
         .sidebar svg {
             width: 50px;
             height: 50px;
@@ -47,7 +47,7 @@
         }
 
 
-        /*霈��镼輻�� ��閬撌勗����*/
+        /*��嚙踐��蕭豰頛鳴蕭嚙� 嚙踝蕭�蹓橘���蕭��蕭��蕭嚙�*/
         #main {
             font-size: 16px;
             border:1px solid black;
@@ -113,7 +113,7 @@
             font-size: 20px;  
         }
        
-        /* 蝮桀������ */
+        /* �獢�嚙踐嚙踐�蕭��蕭��蕭嚙� */
         @media screen and (max-height: 450px) {
             .sidebar {
                 padding-top: 15px;
@@ -122,7 +122,7 @@
                 font-size: 18px;
             }
         }
-        /*銝剝�之���*/
+        /*���蕭�銋蕭嚙踝蕭*/
         /* #main img {
             position: relative;
             left: 50%;
@@ -130,7 +130,7 @@
             height: auto;
             transform: translateX(-50%);
         } */
-        /*擐�����見撘�*/
+        /*���嚙踐撩嚙踝��蕭嚙踝嚙踐���蕭*/
         .main_btn button {
             width: 9.5vw;
             height: 2.7vw;
@@ -140,7 +140,7 @@
             color: white;
             font-size: 1.1vw;
         }
-        /*隤踵擐������蔭*/
+        /*�頦蛔���嚙踐撩嚙踝��蕭嚙踝嚙踐�蕭��*/
         .main_btn {
 
             text-align: center;

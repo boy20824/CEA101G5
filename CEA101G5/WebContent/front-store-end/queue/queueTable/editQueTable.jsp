@@ -10,7 +10,7 @@
 	pageContext.setAttribute("list", list);
 	String storeid = (String) request.getAttribute("storeid");
 %> 
-<%=list == null%>
+<%@include file="../../selectpage/selectstorepage.jsp" %>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -29,16 +29,6 @@
 
 </head>
 <body bgcolor='white'>
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>S000001:</h3>
-				<h4>
-					<a href="select_page.jsp">回首頁</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">

@@ -59,7 +59,8 @@
 					</ul>
 				</li>
 				<li>外帶選項設定</li>
-				<li>取號選項設定</li>
+				<li>取號選項設定
+				</li>
 				<li>定位選項設定</li>
 			</ul>
 		</span> <span> <svg aria-hidden="true" focusable="false"
