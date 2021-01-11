@@ -9,10 +9,20 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back-end/emp/css/css.css">
+<style>
+.main {
+	width: 85%;
+	margin-left: 250px;
+	margin-top: 20px;
+}
+</style>
 
 <title>員工資料</title>
 </head>
@@ -55,9 +65,9 @@
 
 	</div>
 	<div id=backSidebar></div>
-
+<div class="main">
 <table class="table  table-striped">
-	<tr>
+	<tr class="bg-danger">
 		<th>員工編號</th>
 		<th>員工姓名</th>
 		<th>帳號</th>
@@ -79,8 +89,9 @@
 <%-- 		<td><%=empVO.getEmp_pic()%></td> --%>
 	</tr>
 </table>
+</div>
 <div align="center">
-<a href="<%=request.getContextPath()%>/back-end/back-empselect.jsp" class="btn btn-danger">回首頁</a>
+<a href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp" class="btn btn-danger">回前頁</a>
 </div>
 </body>
 </html>
