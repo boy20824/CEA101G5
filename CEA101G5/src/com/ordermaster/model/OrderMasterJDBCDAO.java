@@ -28,6 +28,8 @@ public class OrderMasterJDBCDAO implements OrderMasterDAO_Interface {
 	
 	private static final String UPDATEOM = 
 		"UPDATE ORDER_MASTER SET ORDER_STATUS = ? WHERE ORDER_ID = ?";
+	private static final String GET_ALL_BYMEMPHONE = 
+		"SELECT * FROM ORDER_MASTER WHERE MEM_PHONE = ?";
 
 	@Override
 	public void insert(OrderMasterVO orderMasterVO) {
@@ -366,6 +368,71 @@ public class OrderMasterJDBCDAO implements OrderMasterDAO_Interface {
 		}
 	}	
 	
+	public List<OrderMasterVO> getAllByMemPhone(String memPhone) {
+		List<OrderMasterVO> list = new ArrayList<OrderMasterVO>();
+		OrderMasterVO orderMasterVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(Util.DRIVER);
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(GET_ALL_BYMEMPHONE);
+			pstmt.setString(1, memPhone);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				orderMasterVO = new OrderMasterVO();
+				orderMasterVO.setOrderId(rs.getInt("ORDER_ID"));
+				orderMasterVO.setOrderDate(rs.getDate("ORDER_DATE"));
+				orderMasterVO.setMemPhone(rs.getString("MEM_PHONE"));
+				orderMasterVO.setRecipientName(rs.getString("RECIPIENT_NAME"));
+				orderMasterVO.setRecipientMobNumber(rs.getString("RECIPIENT_MOB_NUMBER"));
+				orderMasterVO.setRecipientTelNumber(rs.getString("RECIPIENT_TEL_NUMBER"));
+				orderMasterVO.setRecipientEmail(rs.getString("RECIPIENT_EMAIL"));
+				orderMasterVO.setBusinessNumber(rs.getString("BUSINESS_NUMBER"));
+				orderMasterVO.setDeliveryMethod(rs.getInt("DELIVERY_METHOD"));
+				orderMasterVO.setDeliveryAddress(rs.getString("DELIVERY_ADDRESS"));
+				orderMasterVO.setOrderMemo(rs.getNString("ORDER_MEMO"));
+				orderMasterVO.setInvoicePrice(rs.getString("INVOICE_PRICE"));
+				orderMasterVO.setInvoicePaidDate(rs.getDate("INVOICE_PAID_DATE"));
+				orderMasterVO.setDeliveryTime(rs.getDate("DELIVERY_TIME"));
+				orderMasterVO.setOrderStatus(rs.getInt("ORDER_STATUS"));
+				list.add(orderMasterVO);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return list;
+	}
+	
 	public static void main(String[] args) {
 		OrderMasterJDBCDAO dao = new OrderMasterJDBCDAO();
 		
@@ -472,6 +539,27 @@ public class OrderMasterJDBCDAO implements OrderMasterDAO_Interface {
 //		
 //		dao.insertWithOrderDetail(orderMasterVO, buyList);
 //		System.out.println("Statement Processed...");
+		
+//		testing : getAllByMemPhone()
+		List<OrderMasterVO> list = dao.getAllByMemPhone("0921842851");
+		for (OrderMasterVO orderMasterVO : list) {
+			System.out.println("ORDER_ID: " + orderMasterVO.getOrderId());
+			System.out.println("ORDER_DATE: " + orderMasterVO.getOrderDate());
+			System.out.println("MEM_PHONE: " + orderMasterVO.getMemPhone());
+			System.out.println("RECIPIENT_NAME: " + orderMasterVO.getRecipientName());
+			System.out.println("RECIPIENT_MOB_NUMBER: " + orderMasterVO.getRecipientMobNumber());
+			System.out.println("RECIPIENT_TEL_NUMBER: " + orderMasterVO.getRecipientTelNumber());
+			System.out.println("RECIPIENT_EMAIL: " + orderMasterVO.getRecipientEmail());
+			System.out.println("BUSINESS_NUMBER: " + orderMasterVO.getBusinessNumber());
+			System.out.println("DELIVERY_METHOD: " + orderMasterVO.getDeliveryMethod());
+			System.out.println("DELIVERY_ADDRESS: " + orderMasterVO.getDeliveryAddress());
+			System.out.println("ORDER_MEMO: " + orderMasterVO.getOrderMemo());
+			System.out.println("INVOICE_PRICE: " + orderMasterVO.getInvoicePrice());
+			System.out.println("INVOICE_PAID_DATE: " + orderMasterVO.getInvoicePaidDate());
+			System.out.println("DELIVERY_TIME: " + orderMasterVO.getDeliveryTime());
+			System.out.println("ORDER_STATUS: " + orderMasterVO.getOrderStatus());
+			System.out.println("-----------------------------------");
+		}
 		
 	}
 

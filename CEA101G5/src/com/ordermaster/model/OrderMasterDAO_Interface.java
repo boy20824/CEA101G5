@@ -13,4 +13,5 @@ public interface OrderMasterDAO_Interface {
 	
 	public void insertWithOrderDetail(OrderMasterVO orderMasterVO, List<ProductVO> list);
 	public void updateOM(Integer orderStatus,Integer orderId);
+	public List<OrderMasterVO> getAllByMemPhone(String memPhone);
 }

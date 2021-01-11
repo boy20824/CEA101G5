@@ -43,6 +43,8 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 	
 	private static final String UPDATEOM = 
 		"UPDATE ORDER_MASTER SET ORDER_STATUS = ? WHERE ORDER_ID = ?";
+	private static final String GET_ALL_BYMEMPHONE = 
+		"SELECT * FROM ORDER_MASTER WHERE MEM_PHONE = ?";
 
 	@Override
 	public void insert(OrderMasterVO orderMasterVO) {
@@ -361,7 +363,69 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 				}
 			}
 		}
-	}	
+	}
+	
+	public List<OrderMasterVO> getAllByMemPhone(String memPhone) {
+		List<OrderMasterVO> list = new ArrayList<OrderMasterVO>();
+		OrderMasterVO orderMasterVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_BYMEMPHONE);
+			pstmt.setString(1, memPhone);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				orderMasterVO = new OrderMasterVO();
+				orderMasterVO.setOrderId(rs.getInt("ORDER_ID"));
+				orderMasterVO.setOrderDate(rs.getDate("ORDER_DATE"));
+				orderMasterVO.setMemPhone(rs.getString("MEM_PHONE"));
+				orderMasterVO.setRecipientName(rs.getString("RECIPIENT_NAME"));
+				orderMasterVO.setRecipientMobNumber(rs.getString("RECIPIENT_MOB_NUMBER"));
+				orderMasterVO.setRecipientTelNumber(rs.getString("RECIPIENT_TEL_NUMBER"));
+				orderMasterVO.setRecipientEmail(rs.getString("RECIPIENT_EMAIL"));
+				orderMasterVO.setBusinessNumber(rs.getString("BUSINESS_NUMBER"));
+				orderMasterVO.setDeliveryMethod(rs.getInt("DELIVERY_METHOD"));
+				orderMasterVO.setDeliveryAddress(rs.getString("DELIVERY_ADDRESS"));
+				orderMasterVO.setOrderMemo(rs.getNString("ORDER_MEMO"));
+				orderMasterVO.setInvoicePrice(rs.getString("INVOICE_PRICE"));
+				orderMasterVO.setInvoicePaidDate(rs.getDate("INVOICE_PAID_DATE"));
+				orderMasterVO.setDeliveryTime(rs.getDate("DELIVERY_TIME"));
+				orderMasterVO.setOrderStatus(rs.getInt("ORDER_STATUS"));
+				list.add(orderMasterVO);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return list;
+	}
 	
 	public static void main(String[] args) {
 		OrderMasterJNDIDAO dao = new OrderMasterJNDIDAO();

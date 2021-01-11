@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.member.model.MemVO;
 import com.ordermaster.model.*;
 import com.product.model.*;
 import com.promotiondetail.model.*;
@@ -35,6 +36,7 @@ public class OrderMasterServlet extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		Vector<ProductVO> buyList = (Vector<ProductVO>)session.getAttribute("buyList"); 
+		MemVO memVO = (MemVO)session.getAttribute("memLogin");
 		
 		// Add To Cart
 		if ("addToCart".equals(action)) {
@@ -183,7 +185,23 @@ public class OrderMasterServlet extends HttpServlet {
 				successView.forward(req, res);
 			}
 		}
+		
+		if ("orderHistoryQuery".equals(action)) {
+			String memPhone = memVO.getMemPhone();
+			
+			OrderMasterService orderMasterService = new OrderMasterService();
+			List<OrderMasterVO> orderMasterVOList = orderMasterService.getAllByMemPhone(memPhone);
+			
+			req.setAttribute("orderMasterVOList", orderMasterVOList);
+			
+			String url = "/front-end/shopOrderHistory.jsp";
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher(url);
+			requestDispatcher.forward(req, res);
+		}
+		
 	}
+	
+
 	
 	private ProductVO getProductVO(HttpServletRequest req) {
 		String productId = req.getParameter("productId");

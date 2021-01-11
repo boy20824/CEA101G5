@@ -60,6 +60,10 @@ public class OrderMasterService {
 	public void updateOM(Integer orderStatus,Integer orderId) {
 		dao.updateOM(orderStatus,orderId);
 	}
+	
+	public List<OrderMasterVO> getAllByMemPhone(String memPhone) {
+		return dao.getAllByMemPhone(memPhone);
+	}
 		
 	public static void main(String[] args) {
 		OrderMasterService orderMasterService = new OrderMasterService();

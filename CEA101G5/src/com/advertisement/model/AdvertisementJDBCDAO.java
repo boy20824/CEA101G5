@@ -241,27 +241,27 @@ public class AdvertisementJDBCDAO implements AdvertisementDAO_Interface {
 		AdvertisementJDBCDAO dao = new AdvertisementJDBCDAO();
 		
 //		testing : insert()
-//		AdvertisementVO advertisementVO = new AdvertisementVO();
-//		advertisementVO.setProductId("ENP0001");
-//		advertisementVO.setAdTitle("´ú¸Õ¼s§i¥DÃD");
-//		advertisementVO.setAdContentTxt("´ú¸Õ¼s§i¤º®e");
-//		try {
-//			advertisementVO.setAdContentImg(getPictureByteArray("/Users/jordan/desktop/cat.png"));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		advertisementVO.setAdStartDate(java.sql.Date.valueOf("2020-12-1"));
-//		advertisementVO.setAdEndDate(java.sql.Date.valueOf("2020-12-1"));
-//		advertisementVO.setAdStatus(1);
-//		dao.insert(advertisementVO);
-//		System.out.println("Statement Processed...");
+		AdvertisementVO advertisementVO = new AdvertisementVO();
+		advertisementVO.setProductId("ENP0001");
+		advertisementVO.setAdTitle("æ¸¬è©¦ä¸»é¡Œ");
+		advertisementVO.setAdContentTxt("æ¸¬è©¦å…§å®¹");
+		try {
+			advertisementVO.setAdContentImg(getPictureByteArray("/Users/jordan/desktop/cat.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		advertisementVO.setAdStartDate(java.sql.Date.valueOf("2020-12-1"));
+		advertisementVO.setAdEndDate(java.sql.Date.valueOf("2021-1-31"));
+		advertisementVO.setAdStatus(1);
+		dao.insert(advertisementVO);
+		System.out.println("Statement Processed...");
 		
 //		testing : update()
 //		AdvertisementVO advertisementVO = new AdvertisementVO();
 //		advertisementVO.setAdId(1);
 //		advertisementVO.setProductId("ENP0010");
-//		advertisementVO.setAdTitle("´ú¸Õ¼s§i¥DÃDXX");
-//		advertisementVO.setAdContentTxt("´ú¸Õ¼s§i¤º®eXX");
+//		advertisementVO.setAdTitle("ï¿½ï¿½ï¿½Õ¼sï¿½iï¿½Dï¿½DXX");
+//		advertisementVO.setAdContentTxt("ï¿½ï¿½ï¿½Õ¼sï¿½iï¿½ï¿½ï¿½eXX");
 //		try {
 //			advertisementVO.setAdContentImg(getPictureByteArray("/Users/jordan/desktop/cat.png"));
 //		} catch (IOException e) {

@@ -24,7 +24,7 @@ pageContext.setAttribute("list", list);
 <body>
 	<div id="mySidebar" class="sidebar">
 		<div>
-			<img id="logo" src="./image/Logo2 (2).png" class="img-circle"
+			<img id="logo" src="<%=request.getContextPath()%>/front-end/shared/logoMain2.png" class="img-circle"
 				alt="User Image">
 		</div>
 		<br><br><br><br><br>
