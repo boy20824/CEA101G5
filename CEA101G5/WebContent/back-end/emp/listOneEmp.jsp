@@ -1,18 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.member.model.*"%>
+<%@ page import="com.emp.model.*"%>
+<%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-	MemService memSvc = new MemService();
-List<MemVO> list = memSvc.getAll();
-pageContext.setAttribute("list", list);
+  EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
 %>
 
-
-<!DOCTYPE html>
 <html>
-
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -21,10 +16,16 @@ pageContext.setAttribute("list", list);
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back-end/emp/css/css.css">
-</head>
-<header id="header" class=""> </header>
-<!-- /header -->
+<style>
+.main {
+	width: 85%;
+	margin-left: 250px;
+	margin-top: 20px;
+}
+</style>
 
+<title>員工資料</title>
+</head>
 <body bgcolor='white'>
 	<div id="mySidebar" class="sidebar">
 		<div>
@@ -64,32 +65,33 @@ pageContext.setAttribute("list", list);
 
 	</div>
 	<div id=backSidebar></div>
-	<div class="main">
-	<%-- 錯誤表列 --%>
-		<div id="LoginBlock">
-			<div id="Login">
-			<div align="center">
-			<c:if test="${not empty errorMsgs}">
-					<c:forEach var="message" items="${errorMsgs}">
-						<div style="color: red">${message}</div>
-					</c:forEach>
-			</c:if>
-		</div>
-				<form METHOD="get"
-					ACTION="<%=request.getContextPath()%>/back-end/emp/emp.do">
-					<label for="fname">管理員帳號</label> <input type="text" id="fname"
-						name="empAccount" placeholder="Your account.."> <label
-						for="lname">管理員密碼</label> <input type="password" id="lname"
-						name="empPwd" placeholder="Your password.."> <input
-						type="hidden" name="action" value="login"> <input
-						type="submit" value="登入">
-
-				</form>
-			</div>
-		</div>
-	</div>
-
-
+<div class="main">
+<table class="table  table-striped">
+	<tr class="bg-danger">
+		<th>員工編號</th>
+		<th>員工姓名</th>
+		<th>帳號</th>
+		<th>密碼</th>
+		<th>到職日</th>
+		<th>員工狀態</th>
+		<th>圖片</th>
+		
+	</tr>
+	<tr>
+		<td>${empVO.emp_id}</td>
+		<td>${empVO.emp_name}</td>
+		<td>${empVO.emp_account}</td>
+		<td>${empVO.emp_password}</td>
+		<td>${empVO.emp_date}</td>
+		<td>${empVO.emp_status}</td>
+		<td ><img width=100 height=100
+       src="<%=request.getContextPath()%>/back-end/emp/emp.do?emp_id=${empVO.emp_id}&action=getEmpPic"></td>
+<%-- 		<td><%=empVO.getEmp_pic()%></td> --%>
+	</tr>
+</table>
+</div>
+<div align="center">
+<a href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp" class="btn btn-danger">回前頁</a>
+</div>
 </body>
-
 </html>

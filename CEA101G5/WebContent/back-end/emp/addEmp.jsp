@@ -40,8 +40,9 @@
 			href="#">促銷活動設置 </a>
 		</span> <span id="empStore">餐廳管理<br> <a
 			href="<%=request.getContextPath()%>/back-end/storeChar/listAllStoreChar.jsp">
-				餐廳分類管理 </a> <a href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp"> 餐廳資訊管理 </a> 
-				<a href="#"> 餐廳申請審核 </a>
+				餐廳分類管理 </a> <a
+			href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp">
+				餐廳資訊管理 </a> <a href="#"> 餐廳申請審核 </a>
 		</span> <span id="empMem">會員管理<br> <a
 			href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">
 				會員資料管理 </a> <a
@@ -49,12 +50,20 @@
 				商家註冊審核 </a>
 		</span> <span id="empBack">後台管理<br> <a
 			href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp">
-				員工管理 </a>
-				<a href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理 </a>
+				員工管理 </a> <a
+			href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理
+		</a>
 		</span>
 	</div>
 	<div>
-		<a href="#" id="sidebarlogin"> 員工登入/登出 </a>
+		<c:if test="${empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/EmpLogin.jsp"
+				id="sidebarlogin"> 員工登入/登出 </a>
+		</c:if>
+		<c:if test="${not empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin">員工登入/登出 </a>
+		</c:if>
+
 	</div>
 	<div id=backSidebar></div>
 	<div class="addEmpBlock">
@@ -154,7 +163,8 @@ try {
                                 timepicker: false, //timepicker:true,
                                 step: 1, //step: 60 (這是timepicker的預設間隔60分鐘)
                                 format: 'Y-m-d', //format:'Y-m-d H:i:s',
-                                value: '<%=emp_date%>', // value:   new Date(),
+                                value: '<%=emp_date%>
+	', // value:   new Date(),
 	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 	//startDate:	            '2017/07/10',  // 起始日
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前

@@ -310,7 +310,6 @@
 	<filter-mapping>
 		<filter-name>EmploginFilter</filter-name>
 		<url-pattern>/back-end/emp/EmpNoAuth.jsp</url-pattern>
-		<url-pattern>/back-end/emp/listAllEmp.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>

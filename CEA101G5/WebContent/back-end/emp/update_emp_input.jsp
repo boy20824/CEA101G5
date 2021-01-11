@@ -14,45 +14,48 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>員工資料修改 - update_emp_input.jsp</title>
-
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
+<title>員工資料修改</title>
 
 </head>
 <body bgcolor='white'>
+	<div id="mySidebar" class="sidebar">
+		<div>
+			<img id="logo" src="./image/Logo2 (2).png" class="img-circle"
+				alt="User Image">
+		</div>
+		<br> <br> <br> <br> <br> <span id="empFront">首頁<br>
+			<a href="#"> FAQ</a> <a href="#"> 評論檢舉審核</a> <a href="#"> 最新消息管理</a>
+		</span> <span id="empShop">商城管理<br> <a href="#"> 商品管理</a> <a
+			href="#">訂單處理 </a> <a href="#">回覆買家留言 </a> <a href="#">廣告設置管理 </a> <a
+			href="#">促銷活動設置 </a>
+		</span> <span id="empStore">餐廳管理<br> <a
+			href="<%=request.getContextPath()%>/back-end/storeChar/listAllStoreChar.jsp">
+				餐廳分類管理 </a> <a
+			href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp">
+				餐廳資訊管理 </a> <a href="#"> 餐廳申請審核 </a>
+		</span> <span id="empMem">會員管理<br> <a
+			href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">
+				會員資料管理 </a> <a
+			href="<%=request.getContextPath()%>/back-end/member/storeapply.jsp">
+				商家註冊審核 </a>
+		</span> <span id="empBack">後台管理<br> <a
+			href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp">
+				員工管理 </a> <a
+			href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理
+		</a>
+		</span>
+	</div>
+	<div>
+		<c:if test="${empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/EmpLogin.jsp"
+				id="sidebarlogin"> 員工登入/登出 </a>
+		</c:if>
+		<c:if test="${not empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin"/>員工登入/登出 </a>
+		</c:if>
 
-
-<h3 align="center">資料修改:</h3>
+	</div>
+	<div id=backSidebar></div>
 
 <%-- 錯誤表列 --%>
 <div align="center">
