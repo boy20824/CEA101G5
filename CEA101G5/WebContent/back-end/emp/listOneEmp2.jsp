@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.emp.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
@@ -13,51 +14,47 @@
 
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-<title>員工資料 - listOneEmp.jsp</title>
-
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 600px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-</style>
-
+<title>員工資料</title>
 </head>
 <body bgcolor='white'>
+	<div id="mySidebar" class="sidebar">
+		<div>
+			<img id="logo" src="./image/Logo2 (2).png" class="img-circle"
+				alt="User Image">
+		</div>
+		<br> <br> <br> <br> <br> <span id="empFront">首頁<br>
+			<a href="#"> FAQ</a> <a href="#"> 評論檢舉審核</a> <a href="#"> 最新消息管理</a>
+		</span> <span id="empShop">商城管理<br> <a href="#"> 商品管理</a> <a
+			href="#">訂單處理 </a> <a href="#">回覆買家留言 </a> <a href="#">廣告設置管理 </a> <a
+			href="#">促銷活動設置 </a>
+		</span> <span id="empStore">餐廳管理<br> <a
+			href="<%=request.getContextPath()%>/back-end/storeChar/listAllStoreChar.jsp">
+				餐廳分類管理 </a> <a
+			href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp">
+				餐廳資訊管理 </a> <a href="#"> 餐廳申請審核 </a>
+		</span> <span id="empMem">會員管理<br> <a
+			href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">
+				會員資料管理 </a> <a
+			href="<%=request.getContextPath()%>/back-end/member/storeapply.jsp">
+				商家註冊審核 </a>
+		</span> <span id="empBack">後台管理<br> <a
+			href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp">
+				員工管理 </a> <a
+			href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理
+		</a>
+		</span>
+	</div>
+	<div>
+		<c:if test="${empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/EmpLogin.jsp"
+				id="sidebarlogin"> 員工登入/登出 </a>
+		</c:if>
+		<c:if test="${not empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin">員工登入/登出 </a>
+		</c:if>
 
-<!-- <h4>此頁暫練習採用 Script 的寫法取值:</h4> -->
-<!-- <table id="table-1"> -->
-<!-- 	<tr><td> -->
-<!-- 		 <h3>員工資料 - ListOneEmp.jsp</h3> -->
-<!-- 		 <h4><a href="select_emp_page.jsp"><img src="images/2.jpg" width="100" height="32" border="0">回首頁</a></h4> -->
-<!-- 	</td></tr> -->
-<!-- </table> -->
+	</div>
+	<div id=backSidebar></div>
 
 <table class="table  table-striped">
 	<tr>

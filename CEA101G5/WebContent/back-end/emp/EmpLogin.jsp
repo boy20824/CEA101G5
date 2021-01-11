@@ -59,14 +59,22 @@ pageContext.setAttribute("list", list);
 				id="sidebarlogin"> 員工登入/登出 </a>
 		</c:if>
 		<c:if test="${not empty sessionScope.empLogin}">
-			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin"/>員工登入/登出 </a>
+			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin">員工登入/登出 </a>
 		</c:if>
 
 	</div>
 	<div id=backSidebar></div>
 	<div class="main">
+	<%-- 錯誤表列 --%>
 		<div id="LoginBlock">
 			<div id="Login">
+			<div align="center">
+			<c:if test="${not empty errorMsgs}">
+					<c:forEach var="message" items="${errorMsgs}">
+						<div style="color: red">${message}</div>
+					</c:forEach>
+			</c:if>
+		</div>
 				<form METHOD="get"
 					ACTION="<%=request.getContextPath()%>/back-end/emp/emp.do">
 					<label for="fname">管理員帳號</label> <input type="text" id="fname"

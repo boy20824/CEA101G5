@@ -61,7 +61,7 @@
 				id="sidebarlogin"> 員工登入/登出 </a>
 		</c:if>
 		<c:if test="${not empty sessionScope.empLogin}">
-			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin"/>員工登入/登出 </a>
+			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin">員工登入/登出 </a>
 		</c:if>
 
 	</div>

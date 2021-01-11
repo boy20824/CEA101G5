@@ -61,7 +61,9 @@
 				id="sidebarlogin"> 員工登入/登出 </a>
 		</c:if>
 		<c:if test="${not empty sessionScope.empLogin}">
-			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin"/>員工登入/登出 </a>
+			<a
+				href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout"
+				id="sidebarlogin">員工登入/登出 </a>
 		</c:if>
 
 	</div>
@@ -70,7 +72,7 @@
 		<img style="margin-left: 600px;"
 			src="<%=request.getContextPath()%>/back-end/emp/image/Logo2 (2).png"
 			alt="">
-		<p style="margin-left: 620px; font-size:40px;font-weight:bold;">歡迎來到管理者後台</p>
+		<p style="margin-left: 620px; font-size: 40px; font-weight: bold;">歡迎來到管理者後台</p>
 	</div>
 
 </body>
