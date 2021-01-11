@@ -321,30 +321,27 @@ nav a+a::before {
 	height: 300px;
 }
 
-
-
 .store-text li p {
 	font-size: 20px;
 	text-align: left;
+	margin-top:5px;
 }
 
 .store-text li i {
 	font-size: 30px;
-	width:40px;
-	height:40px;
+	width: 40px;
+	height: 40px;
 	text-align: center;
+	float: left;
 }
 
-.store-text-word{
-	padding: 0px 10px 10px 10px;
+.store-text-word {
+	
 }
-
-
-
 
 /* 進店看看按鈕 */
 .store-text .btn {
-	background-color: white;
+	background-color: red;
 	border: 1px solid@gray-light; //
 	border-radius: 1rem;
 	color: @gray-dark;
