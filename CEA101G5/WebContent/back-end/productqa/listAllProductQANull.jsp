@@ -95,7 +95,7 @@ list-style-type:none;
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/productqa/productqa.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="回覆" class="btn btn-info">
 			     <input type="hidden" name="pqaId"  value="${productQAVO.pqaId}">
-			     <input type="hidden" name="action" value="reply"></FORM>
+			     <input type="hidden" name="action" value="getOne_For_Update"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/productqa/productqa.do" style="margin-bottom: 0px;">
