@@ -325,6 +325,7 @@ nav a+a::before {
 	font-size: 20px;
 	text-align: left;
 	margin-top:5px;
+	font-weight:bold;
 }
 
 .store-text li i {
@@ -341,11 +342,11 @@ nav a+a::before {
 
 /* 進店看看按鈕 */
 .store-text .btn {
-	background-color: red;
+	background-color: #FF615F;
 	border: 1px solid@gray-light; //
 	border-radius: 1rem;
-	color: @gray-dark;
-	padding: 0.5rem;
+	color: white;
+	padding: 0.7rem;
 	text-transform: lowercase;
 }
 
