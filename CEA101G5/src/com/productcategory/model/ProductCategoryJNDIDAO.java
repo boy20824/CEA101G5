@@ -37,6 +37,9 @@ public class ProductCategoryJNDIDAO implements ProductCategoryDAO_Interface {
 	private static final String GET_ALL_STMT = 
 		"SELECT * FROM PRODUCT_CATEGORY ORDER BY CATEGORY_ID";
 	
+	private static final String ADD = 
+		"INSERT INTO PRODUCT_CATEGORY (CATEGORY_ID, CATEGORY_NAME, CATEGORY_STATUS) VALUES (SEQ_PRODUCT_CATEGORY_ID.NEXTVAL, ?, 1)";
+	
 	@Override
 	public void insert(ProductCategoryVO productCategoryVO) {
 		Connection con = null;
@@ -208,6 +211,43 @@ public class ProductCategoryJNDIDAO implements ProductCategoryDAO_Interface {
 		
 		return list;
 	}
+	
+	@Override
+	public void add(ProductCategoryVO productCategoryVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(Util.DRIVER);
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(ADD);
+			
+			pstmt.setString(1, productCategoryVO.getCategoryName());
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 
 	public static void main(String[] args) {
 		ProductCategoryJNDIDAO dao = new ProductCategoryJNDIDAO();

@@ -14,4 +14,7 @@ public interface ProductDAO_Interface {
 	public List<ProductVO> getAllByKeywordSearch(String keyword);
 	public List<ProductVO> getAllByPriceLTH();
 	public List<ProductVO> getAllByPriceHTL();
+	
+	public void testU(String productId, String productDescription, Integer productMSRP, Integer productPrice, Integer productStatus);
+	public void add(ProductVO productVO);
 }

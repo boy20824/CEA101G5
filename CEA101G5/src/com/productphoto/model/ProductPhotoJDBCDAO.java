@@ -239,7 +239,7 @@ public class ProductPhotoJDBCDAO implements ProductPhotoDAO_Interface {
 		productPhotoVO.setProductId("ENP0010");
 		try {
 			productPhotoVO.setProductPhoto(getPictureByteArray
-				("/Users/jordan/desktop/EatNAK_Shop_Dummy/ENP0010/8243289_R.jpg"));
+				("/Users/jordan/desktop/123.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

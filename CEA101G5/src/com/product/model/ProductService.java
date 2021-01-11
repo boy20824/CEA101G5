@@ -70,6 +70,26 @@ public class ProductService {
 		return dao.getAllByPriceHTL();
 	}
 	
+	public void testU(String productId, String productDescription, Integer productMSRP, Integer productPrice, Integer productStatus) {
+		dao.testU(productId,productDescription,productMSRP,productPrice,productStatus);
+		
+	}
+	
+	public ProductVO add(String productName, String productDescription, Integer productMSRP, Integer productPrice, Integer productQtySold, Integer categoryId, Integer productStatus) {
+		ProductVO productVO = new ProductVO();
+		
+		productVO.setProductName(productName);
+		productVO.setProductDescription(productDescription);
+		productVO.setProductMSRP(productMSRP);
+		productVO.setProductPrice(productPrice);
+		productVO.setProductQtySold(productQtySold);
+		productVO.setCategoryId(categoryId);
+		productVO.setProductStatus(productStatus);
+		dao.add(productVO);
+		
+		return productVO;
+	}
+	
 	public static void main(String[] args) {
 		ProductService productService = new ProductService();
 		

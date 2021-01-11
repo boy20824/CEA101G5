@@ -39,6 +39,15 @@ public class ProductCategoryService {
 		return dao.getAll();
 	}
 	
+	public ProductCategoryVO add(String categoryName) {
+		ProductCategoryVO productCategoryVO = new ProductCategoryVO();
+		
+		productCategoryVO.setCategoryName(categoryName);
+		dao.add(productCategoryVO);
+		
+		return productCategoryVO;
+	}
+	
 	public static void main(String[] args) {
 		ProductCategoryService productCategoryService = new ProductCategoryService();
 		

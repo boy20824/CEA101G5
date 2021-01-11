@@ -198,6 +198,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>ProductCategoryServlet</servlet-name>
+		<servlet-class>com.productcategory.controller.ProductCategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductCategoryServlet</servlet-name>
+		<url-pattern>/shop/productcategory.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>QueTableServlet</servlet-name>
 		<servlet-class>com.queuetable.controller.QueTableServlet</servlet-class>
 	</servlet>

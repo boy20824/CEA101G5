@@ -31,6 +31,11 @@ public class ProductJDBCDAO implements ProductDAO_Interface {
 			"SELECT * FROM PRODUCT ORDER BY PRODUCT_PRICE";
 		private static final String GET_ALL_BY_PRICEHTL = 
 			"SELECT * FROM PRODUCT ORDER BY PRODUCT_PRICE DESC";
+		
+		private static final String TESTU = 
+				"UPDATE PRODUCT SET PRODUCT_DESCRIPTION = ?, PRODUCT_MSRP = ?, PRODUCT_PRICE = ?, PRODUCT_STATUS = ? WHERE PRODUCT_ID = ?";
+		private static final String ADD = 
+				"INSERT INTO PRODUCT (PRODUCT_ID, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_MSRP, PRODUCT_PRICE, PRODUCT_QTY_SOLD, CATEGORY_ID, PRODUCT_STATUS) VALUES ('ENP' || LPAD(SEQ_PRODUCT_ID.NEXTVAL,4,'0'), ?, ?, ?, ?, ?, ?, ?)";
 
 	@Override
 	public void insert(ProductVO productVO) {
@@ -530,6 +535,88 @@ public class ProductJDBCDAO implements ProductDAO_Interface {
 		return list;
 	}
 	
+	@Override
+	public void testU(String productId, String productDescription, Integer productMSRP, Integer productPrice, Integer productStatus) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(Util.DRIVER);
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(TESTU);
+			
+			pstmt.setString(1, productDescription);
+			pstmt.setInt(2, productMSRP);
+			pstmt.setInt(3, productPrice);
+			pstmt.setInt(4, productStatus);
+			pstmt.setString(5, productId);
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void add(ProductVO productVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(Util.DRIVER);
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(ADD);
+			
+			pstmt.setString(1, productVO.getProductName());
+			pstmt.setString(2, productVO.getProductDescription());
+			pstmt.setInt(3, productVO.getProductMSRP());
+			pstmt.setInt(4, productVO.getProductPrice());
+			pstmt.setInt(5, productVO.getProductQtySold());
+			pstmt.setInt(6, productVO.getCategoryId());
+			pstmt.setInt(7, productVO.getProductStatus());
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	
 	public static void main(String[] args) {
 		ProductJDBCDAO dao = new ProductJDBCDAO();
@@ -537,8 +624,8 @@ public class ProductJDBCDAO implements ProductDAO_Interface {
 //		testing : insert()
 //		ProductVO product = new ProductVO();
 //		product.setProductId("ENP0012");
-//		product.setProductName("´ú¸Õ²£«~");
-//		product.setProductDescription("´ú¸Õ²£«~±Ô­z");
+//		product.setProductName("ï¿½ï¿½ï¿½Õ²ï¿½ï¿½~");
+//		product.setProductDescription("ï¿½ï¿½ï¿½Õ²ï¿½ï¿½~ï¿½Ô­z");
 //		product.setProductMSRP(111);
 //		product.setProductPrice(222);
 //		product.setProductQtySold(333);
@@ -550,8 +637,8 @@ public class ProductJDBCDAO implements ProductDAO_Interface {
 //		testing : update()
 //		ProductVO product = new ProductVO();
 //		product.setProductId("ENP0012");
-//		product.setProductName("´ú¸Õ²£«~");
-//		product.setProductDescription("´ú¸Õ²£«~±Ô­z");
+//		product.setProductName("ï¿½ï¿½ï¿½Õ²ï¿½ï¿½~");
+//		product.setProductDescription("ï¿½ï¿½ï¿½Õ²ï¿½ï¿½~ï¿½Ô­z");
 //		product.setProductMSRP(555);
 //		product.setProductPrice(666);
 //		product.setProductQtySold(777);
