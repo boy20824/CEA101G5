@@ -212,7 +212,7 @@
 			items="${listRestaurants_ByCompositeQuery}">
 			<div class="store-container">
 				<div class="store-img">
-					<img style="width:100px;" src="<%=request.getContextPath() %>/restaurantPicture/restaurantPicture.do?storePicId=${restaurantPictureVO.storePictureId}&action=getOne_For_Display">
+					<img style="width:100px;" src="<%=request.getContextPath() %>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantPictureVO.storeId}&action=getOne_For_Display">
 				</div>
 				<div class="store-text">
 					<ul>
