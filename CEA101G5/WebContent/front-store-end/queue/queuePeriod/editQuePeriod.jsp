@@ -56,6 +56,10 @@
 				<%
 					int count = 1;// 序列號
 				%>
+<%-- 				<jsp:useBean id="quePeriodSvc" scope="page" class="com.queueperiod.model.QuePeriodService" /> --%>
+<%-- <c:forEach var="quePeriodVO" items="${quePeriodSvc.all}"> --%>
+<%-- <c:choose> --%>
+<%-- <c:when test="${quePeriodVO.storeid='S000001' }"> --%>
 				<c:forEach var="quePeriodVO" items="${list}">
 					<tr>
 						<td scope="row"><%=count%></td>
@@ -95,6 +99,8 @@
 					<%
 						count++;
 					%>
+<%-- 					</c:when> --%>
+<%-- 					</c:choose> --%>
 				</c:forEach>
 			</tbody>
 		</table>

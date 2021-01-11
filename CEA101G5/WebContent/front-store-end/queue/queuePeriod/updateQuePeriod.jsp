@@ -11,8 +11,6 @@ pageContext.setAttribute("storeid", storeid);
 pageContext.setAttribute("queueperiodid", queueperiodid);
 
 %>
-<%=storeid %>
-<%=queueperiodid%>
 
 <html lang="en">
 <head>
@@ -36,7 +34,7 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
 <div class="container">
 
 	
-		<div class="row reserve"></div>
+		<div class="row reserve1"></div>
 		<form METHOD="post" ACTION="queuePeriod.do" name="form1">
 			<div class="form-group">
 				<div class="row">

@@ -60,10 +60,10 @@
 				<li>外帶選項設定</li>
 				<li>取號選項設定
 				<ul><li>
-						<a href="<%=request.getContextPath()%>/front-store-end/queue/queuePeriod/editQuePeriod.jsp">時段管理</a>
+						<a href="<%=request.getContextPath()%>/front-store-end/queue/queuePeriod/queuePeriod.do?action=getOne_Store&storeid=<%="S000001" %>">時段管理</a>
 						</li>
 						<li>
-						<a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/editQueTable.jsp">餐桌管理</a>
+						<a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/queueTable.do?action=list_One_Store&storeid=<%="S000001" %>">餐桌管理</a>
 						</li></ul>
 				</li>
 				<li>定位選項設定</li>

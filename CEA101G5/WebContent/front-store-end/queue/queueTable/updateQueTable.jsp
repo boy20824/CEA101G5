@@ -10,8 +10,6 @@ pageContext.setAttribute("storeid", storeid);
 pageContext.setAttribute("queuetableid", queuetableid);
 
 %>
-<%=storeid %>
-<%=queuetableid%>
 
 <html lang="en">
 <head>
