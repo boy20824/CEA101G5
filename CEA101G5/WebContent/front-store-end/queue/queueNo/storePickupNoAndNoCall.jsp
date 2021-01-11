@@ -28,7 +28,6 @@
 	Integer pickupNo = (Integer) session.getAttribute("pickupNo");
 	String storeid = (String) session.getAttribute("storeid");
 %>
-<%=pickupNo == null%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color: red">請修正以下錯誤:</font>
 	<ul>
@@ -52,10 +51,8 @@
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/storePickupNoAndNoCall.css" />
 </head>
 <body>
-	<a href="select_page.jsp">首頁</a>
 	<div class="container">
 		<input name="storeid" id="storeid" value="${storeid }" hidden="hidden" />
-		<div class="row reserve"></div>
 		<!-- <div class="row reserve1"></div> -->
 		<div class="row">
 			<div class="col-4 left">
@@ -169,7 +166,7 @@
 			<!-- 第一種桌子 -->
 			<div class="col-8 right">
 				<c:forEach var="queTableVO" items="${queTableVO}">
-					<div class="row right-li">
+					<div class="row right-li tabledata">
 						<div class="col-2">
 							<div class="tabletype">桌位</div>
 							<c:choose>
@@ -581,9 +578,9 @@
 		//建立好Get連接
 		var url = "tableUpdate.jsp?storeid="
 				+ document.getElementById("storeid").value 
-				+ "&queuetableid="	+ $(e.target).parent().prev().prev().prev().prev().children(".queuetableid").val() 
-				+ "&queuetableocc=" + $(e.target).parent().prev().prev().prev().children(".queuetableocc").val()
-				+ "&queuetableusable=" + $(e.target).parent().prev().prev().prev().children(".quetableusable").val()	
+				+ "&queuetableid="	+ $(e.target).parents(".tabledata").find(".queuetableid").val() 
+				+ "&queuetableocc=" + $(e.target).parents(".tabledata").find(".queuetableocc").val()
+				+ "&queuetableusable=" + $(e.target).parents(".tabledata").find(".quetableusable").val()	
 		xhr.open("Get", url, true);
 		//送出請求 
 		xhr.send();

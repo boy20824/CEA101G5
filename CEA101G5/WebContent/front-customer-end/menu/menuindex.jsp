@@ -183,7 +183,11 @@ response.setDateHeader("Expires", 0);
 					</ul>
 				</div>
 				<div class="functionPick">
-					<input type="button" value="線上取號" class="orderNum" />
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do" >
+       <input type="hidden" name="storeid" value="S000001">
+       <input type="hidden" name="action" value="getQueNo">       
+					<input type="submit" value="線上取號" class="orderNum" />
+     </FORM>
 					<input type="button" value="預約定位" class="orderSet" />
 				</div>
 			</div>
