@@ -6,6 +6,7 @@
 <%@ page import="com.foodorder.model.*"%>
 <%@ page import="com.restaurant.model.*"%>
 <%@ page import="com.member.model.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
 	FoodOrderService foodOrderSvc = new FoodOrderService();
@@ -74,7 +75,7 @@
 				<c:forEach var="foodOrderDetailVO" items="${foodOrderDetailSvc.getAll(foodOrderVO.getFoodOrderId())}">
 					<c:set var="total" value="${total + foodOrderDetailVO.menuNum * foodOrderDetailVO.menuPrice}" />
 				</c:forEach>
-                <p><span>電話:<span>${foodOrderVO.memPhone}</span></span><span>會員名稱:<span>${memSvc.getOneMem(foodOrderVO.memPhone).memName }</span></span><span>訂單總價:$<span>${total}</span></span>時間:<span>2020/12/30 08:12:24</span></p>
+                <p><span>電話:<span>${foodOrderVO.memPhone}</span></span><span>會員名稱:<span>${memSvc.getOneMem(foodOrderVO.memPhone).memName }</span></span><span>訂單總價:$<span>${total}</span></span>時間:<span style="width:10em;"><fmt:formatDate value="${foodOrderVO.foodOrderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span></p>
                 <table>
                     <tr>
                         <th>餐點名稱:</th>

@@ -68,7 +68,11 @@
          
         </svg>
 			<p>外帶</p>
-
+			<ul>
+			<li>
+				<a href="<%=request.getContextPath()%>/front-store-end/foodorder/orderlist.jsp">外帶管理</a>
+			</li>
+			</ul>
 		</span>
             <span> <svg aria-hidden="true" focusable="false"
 				data-prefix="fas" data-icon="vote-yea"
