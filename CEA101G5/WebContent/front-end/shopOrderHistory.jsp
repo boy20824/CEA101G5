@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.product.model.*"%>
 
+<jsp:useBean id="orderDetailService" scope="page" class="com.orderdetail.model.OrderDetailService"/>
+<jsp:useBean id="productService" scope="page" class="com.product.model.ProductService"/>
+
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
@@ -200,24 +203,20 @@
 			</div>
 			<div class="orderHistoryItems">
 				<table>
-					<tr style="background-color: #f9f9ff;">
-						<td class="formTitleColor">訂單商品</td>					
-						<td class="formTitleColor">商品名稱</td>
-						<td class="formTitleColor tdAlignCenter">單價</td>
-						<td class="formTitleColor tdAlignCenter">數量</td>
-					</tr>
-					<tr>
-						<td class="tdAlignCenter"><img src="https://s.yimg.com/zp/MerchandiseImages/A0AA7EE89C-SP-6851379.jpg"></td>					
-						<td>GreeGreen不鏽鋼泡麵碗 附保鮮蓋 1300ML 可直接爐上加熱</td>
-						<td class="tdAlignCenter">$199</td>
-						<td class="tdAlignCenter">1</td>
-					</tr>
-					<tr>
-						<td class="tdAlignCenter"><img src="https://s.yimg.com/zp/MerchandiseImages/A0AA7EE89C-SP-6851379.jpg"></td>					
-						<td>GreeGreen不鏽鋼泡麵碗 附保鮮蓋 1300ML 可直接爐上加熱</td>
-						<td class="tdAlignCenter">$199</td>
-						<td class="tdAlignCenter">1</td>
-					</tr>
+						<tr style="background-color: #f9f9ff;">
+							<td class="formTitleColor">訂單商品</td>					
+							<td class="formTitleColor">商品名稱</td>
+							<td class="formTitleColor tdAlignCenter">單價</td>
+							<td class="formTitleColor tdAlignCenter">數量</td>
+						</tr>
+					<c:forEach var="orderDetailVO" items="${orderDetailService.getAllOrderDetail(orderMasterVO.getOrderId())}">
+						<tr>
+							<td class="tdAlignCenter"><img src="<%=request.getContextPath()%>/shop/productphotoreader.do?productId=${orderDetailVO.getProductId()}"></td>					
+							<td>${productService.getProductById(orderDetailVO.getProductId()).getProductName()}</td>
+							<td class="tdAlignCenter">$${orderDetailVO.getProductPrice()}</td>
+							<td class="tdAlignCenter">${orderDetailVO.getQuantity()}</td>
+						</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</c:forEach>

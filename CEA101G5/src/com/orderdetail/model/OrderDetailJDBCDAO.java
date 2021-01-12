@@ -515,20 +515,20 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 //		System.out.println("Statement Processed...");
 		
 //		testing : update()
-		OrderDetailVO orderDetailVO = new OrderDetailVO();
-		orderDetailVO.setOrderId(4);
-		orderDetailVO.setProductId("ENP0009");
-		orderDetailVO.setProductPrice(1400);
-		orderDetailVO.setQuantity(1);
-		orderDetailVO.setProductReview("�K�y������, �H��@�w�|�b�^�ʡI�I");
-		try {
-			orderDetailVO.setProductReviewPhoto(getPictureByteArray("/Users/jordan/desktop/boxing-day-offer-banner.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailVO.setProductReviewStatus(1);
-		dao.update(orderDetailVO);
-		System.out.println("Statement Processed...");
+//		OrderDetailVO orderDetailVO = new OrderDetailVO();
+//		orderDetailVO.setOrderId(4);
+//		orderDetailVO.setProductId("ENP0009");
+//		orderDetailVO.setProductPrice(1400);
+//		orderDetailVO.setQuantity(1);
+//		orderDetailVO.setProductReview("�K�y������, �H��@�w�|�b�^�ʡI�I");
+//		try {
+//			orderDetailVO.setProductReviewPhoto(getPictureByteArray("/Users/jordan/desktop/boxing-day-offer-banner.jpg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailVO.setProductReviewStatus(1);
+//		dao.update(orderDetailVO);
+//		System.out.println("Statement Processed...");
 		
 //		testing : getOne()
 //		OrderDetailVO orderDetailVO = dao.getOne(4, "ENP0006");
@@ -542,18 +542,18 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 //		System.out.println("PRODUCT_REVIEW_STATUS: " +  orderDetailVO.getProductReviewStatus());
 		
 //		testing : getAll()
-//		List<OrderDetailVO> list = dao.getAll(1);
-//		for (OrderDetailVO orderDetailVO : list) {
-//			System.out.println("ORDER_ID: " + orderDetailVO.getOrderId());
-//			System.out.println("PRODUCT_ID: " + orderDetailVO.getProductId() );
-//			System.out.println("PRODUCT_PRICE: " + orderDetailVO.getProductPrice());
-//			System.out.println("QUANTITY: " + orderDetailVO.getQuantity());
-//			System.out.println("PRODUCT_REVIEW: " + orderDetailVO.getProductReview());
-//			System.out.println("PRODUCT_REVIEW_PHOTO: " + orderDetailVO.getProductReviewPhoto());
-//			System.out.println("PRODUCT_REVIEW_TS: " + orderDetailVO.getProductReviewTS());
-//			System.out.println("PRODUCT_REVIEW_STATUS: " +  orderDetailVO.getProductReviewStatus());
-//			System.out.println("-----------------------------------");
-//		}	
+		List<OrderDetailVO> list = dao.getAll(4);
+		for (OrderDetailVO orderDetailVO : list) {
+			System.out.println("ORDER_ID: " + orderDetailVO.getOrderId());
+			System.out.println("PRODUCT_ID: " + orderDetailVO.getProductId() );
+			System.out.println("PRODUCT_PRICE: " + orderDetailVO.getProductPrice());
+			System.out.println("QUANTITY: " + orderDetailVO.getQuantity());
+			System.out.println("PRODUCT_REVIEW: " + orderDetailVO.getProductReview());
+			System.out.println("PRODUCT_REVIEW_PHOTO: " + orderDetailVO.getProductReviewPhoto());
+			System.out.println("PRODUCT_REVIEW_TS: " + orderDetailVO.getProductReviewTS());
+			System.out.println("PRODUCT_REVIEW_STATUS: " +  orderDetailVO.getProductReviewStatus());
+			System.out.println("-----------------------------------");
+		}	
 		
 //		testing : getReviewByProductId()
 //		List<OrderDetailVO> list = dao.getReviewByProductId("ENP0003");

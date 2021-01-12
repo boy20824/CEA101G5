@@ -154,7 +154,7 @@ public class OrderMasterServlet extends HttpServlet {
 			buyList.clear();
 			session.setAttribute("buyList", buyList);
 			
-			String url = req.getContextPath() + "/front-end/shopMain.jsp";
+			String url = req.getContextPath() + "/front-end/shopOrderHistory.jsp";
 			res.sendRedirect(url);
 		}
 		
@@ -200,8 +200,6 @@ public class OrderMasterServlet extends HttpServlet {
 		}
 		
 	}
-	
-
 	
 	private ProductVO getProductVO(HttpServletRequest req) {
 		String productId = req.getParameter("productId");

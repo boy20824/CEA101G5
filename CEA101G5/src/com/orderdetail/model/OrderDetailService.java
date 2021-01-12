@@ -9,7 +9,7 @@ public class OrderDetailService {
 	private OrderDetailDAO_Interface dao;
 	
 	public OrderDetailService() {
-		dao = new OrderDetailJNDIDAO();
+		dao = new OrderDetailJDBCDAO();
 	}
 	
 	public OrderDetailVO addOrderDetail(Integer orderId, String productId, Integer productPrice, Integer quantity, String productReview, byte[] productReviewPhoto, Integer productReviewStatus) {
@@ -107,21 +107,7 @@ public class OrderDetailService {
 //		System.out.println("PRODUCT_REVIEW_STATUS: " +  orderDetailVO.getProductReviewStatus());
 		
 //		testing : getAllOrderDetail()
-//		List<OrderDetailVO> list = orderDetailService.getAllOrderDetail(1);
-//		for (OrderDetailVO orderDetailVO : list) {
-//			System.out.println("ORDER_ID: " + orderDetailVO.getOrderId() );
-//			System.out.println("PRODUCT_ID: " + orderDetailVO.getProductId() );
-//			System.out.println("PRODUCT_PRICE: " + orderDetailVO.getProductPrice());
-//			System.out.println("QUANTITY: " + orderDetailVO.getQuantity());
-//			System.out.println("PRODUCT_REVIEW: " + orderDetailVO.getProductReview());
-//			System.out.println("PRODUCT_REVIEW_PHOTO: " + orderDetailVO.getProductReviewPhoto());
-//			System.out.println("PRODUCT_REVIEW_TS: " + orderDetailVO.getProductReviewTS());
-//			System.out.println("PRODUCT_REVIEW_STATUS: " +  orderDetailVO.getProductReviewStatus());
-//			System.out.println("-----------------------------------");
-//		}
-		
-//		testing : getAllReviewByProductId()
-		List<OrderDetailVO> list = orderDetailService.getAllReviewByProductId("ENP0001");
+		List<OrderDetailVO> list = orderDetailService.getAllOrderDetail(4);
 		for (OrderDetailVO orderDetailVO : list) {
 			System.out.println("ORDER_ID: " + orderDetailVO.getOrderId() );
 			System.out.println("PRODUCT_ID: " + orderDetailVO.getProductId() );
@@ -133,6 +119,20 @@ public class OrderDetailService {
 			System.out.println("PRODUCT_REVIEW_STATUS: " +  orderDetailVO.getProductReviewStatus());
 			System.out.println("-----------------------------------");
 		}
+		
+//		testing : getAllReviewByProductId()
+//		List<OrderDetailVO> list = orderDetailService.getAllReviewByProductId("ENP0001");
+//		for (OrderDetailVO orderDetailVO : list) {
+//			System.out.println("ORDER_ID: " + orderDetailVO.getOrderId() );
+//			System.out.println("PRODUCT_ID: " + orderDetailVO.getProductId() );
+//			System.out.println("PRODUCT_PRICE: " + orderDetailVO.getProductPrice());
+//			System.out.println("QUANTITY: " + orderDetailVO.getQuantity());
+//			System.out.println("PRODUCT_REVIEW: " + orderDetailVO.getProductReview());
+//			System.out.println("PRODUCT_REVIEW_PHOTO: " + orderDetailVO.getProductReviewPhoto());
+//			System.out.println("PRODUCT_REVIEW_TS: " + orderDetailVO.getProductReviewTS());
+//			System.out.println("PRODUCT_REVIEW_STATUS: " +  orderDetailVO.getProductReviewStatus());
+//			System.out.println("-----------------------------------");
+//		}
 	}
 		
 }
