@@ -123,16 +123,17 @@
 				<td><input type="text" name="productPrice" value="${pVO.productPrice}" style="width: 50px;"/></td>
 				<td>${pVO.productQtySold}</td>
 				<td>	
-				<select name="categoryId">
-						<c:if test="${pVO.categoryId==1}">
-							<option value=1 >環保餐具</option>
-							<option value=2>美食餐卷</option>
-						</c:if>
-						<c:if test="${pVO.categoryId==2}">
-							<option value=2 >美食餐卷</option>
-							<option value=1>環保餐具</option>
-						</c:if>
-					</select></td>
+					<select name="categoryId" class="qq">
+						<c:forEach var="pcVO" items="${pcSvc.allCategories}">
+							<c:if test="${pVO.categoryId == pcVO.categoryId}">
+								<option value="${pcVO.categoryId }" selected>${pcVO.categoryName}</option>
+							</c:if>
+							<c:if test="${pVO.categoryId != pcVO.categoryId}">
+								<option value="${pcVO.categoryId }">${pcVO.categoryName}</option>
+							</c:if>
+						</c:forEach>
+					</select>
+				</td>
 				<td>
 					<select name="productStatus">
 						<c:if test="${pVO.productStatus==0}">
