@@ -81,7 +81,7 @@ pageContext.setAttribute("list", list);
 			<a href="<%=request.getContextPath()%>/back-end/emp/addEmp.jsp">新增員工</a>
 		</button>
 		<button class="btn btn-danger">
-			<a href="">修改員工權限</a>
+			<a href="<%=request.getContextPath()%>/back-end/empauth/listAllEmpAuth.jsp">修改員工權限</a>
 		</button>
 		<span>
 		<jsp:useBean id="empSvc2" scope="page" class="com.emp.model.EmpService" />
