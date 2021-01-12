@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.restaurant.model.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
 RestaurantService restSvc = new RestaurantService();
@@ -94,8 +95,8 @@ pageContext.setAttribute("list", list);
 					<td>${restaurantVO.storeAddress}</td>
 					<td>${restaurantVO.storePhone}</td>
 					<td>${restaurantVO.storeChar}</td>
-					<td>${restaurantVO.storeOpenTime}</td>
-					<td>${restaurantVO.storeCloseTime}</td>
+					<td><fmt:formatDate value="${restaurantVO.storeOpenTime}" pattern="HH:mm"/></td>
+					<td><fmt:formatDate value="${restaurantVO.storeCloseTime}" pattern="HH:mm"/></td>
 					<td>
 					<FORM METHOD="post"
 							ACTION="<%=request.getContextPath()%>/back-end"
