@@ -50,7 +50,7 @@
                     <ul class="navbar-nav">
                     	<c:if test = "${memLogin != null}">
 	                    	<li class="nav-item">
-    	                        <a class="nav-link active" aria-current="page" id="memLogOut" href="<%=request.getContextPath()%>/back-end/member/mem.do?action=logout">登出</a>
+    	                        <a class="nav-link active" aria-current="page" id="memLogOut" href="<%=request.getContextPath()%>/back-end/member/mem.do?action=shopLogout">登出</a>
         	                </li>
 						</c:if>
 						<c:if test = "${memLogin == null}">
@@ -116,7 +116,7 @@
         <div id="signInContainer" class="container">
             <button id="signInCloseButton" type="button" class="btn-close" aria-label="Close"></button>
             <main class="form-signin">
-                <form method="POST" action="<%=request.getContextPath()%>/back-end/member/mem.do">
+                <form method="POST" action="<%=request.getContextPath()%>/back-end/member/mem.do?">
                     <img class="mb-4" src="<%=request.getContextPath()%>/front-end/shared/logoMain2.png" alt="" width="125" height="125">
                     <h1 class="h3 mb-3 fw-normal">登入</h1>
                     <div class="form-group">
@@ -124,7 +124,7 @@
                         <input type="text" name="memPhone" id="inputText" class="form-control" placeholder="電話號碼" required autofocus>
                         <label for="inputPassword" class="visually-hidden">Password</label>
                         <input type="password" name="memPwd" id="inputPassword" class="form-control" placeholder="密碼" required>
-                        <input type="hidden" name="action" value="login">
+                        <input type="hidden" name="action" value="shopLogin">
                         <div class="checkbox mb-3">
                             <label>
                                 <input type="checkbox" value="remember-me"> Remember me

@@ -66,7 +66,7 @@
                     <ul class="navbar-nav">
                     	<c:if test = "${memLogin != null}">
 	                    	<li class="nav-item">
-    	                        <a class="nav-link active" aria-current="page" id="memLogOut" href="<%=request.getContextPath()%>/back-end/member/mem.do?action=logout">登出</a>
+    	                        <a class="nav-link active" aria-current="page" id="memLogOut" href="<%=request.getContextPath()%>/back-end/member/mem.do?action=shopLogout">登出</a>
         	                </li>
 						</c:if>
 						<c:if test = "${memLogin == null}">
@@ -140,7 +140,7 @@
                         <input type="text" name="memPhone" id="inputText" class="form-control" placeholder="電話號碼" required autofocus>
                         <label for="inputPassword" class="visually-hidden">Password</label>
                         <input type="password" name="memPwd" id="inputPassword" class="form-control" placeholder="密碼" required>
-                        <input type="hidden" name="action" value="login">
+                        <input type="hidden" name="action" value="shopLogin">
                         <div class="checkbox mb-3">
                             <label>
                                 <input type="checkbox" value="remember-me"> Remember me
