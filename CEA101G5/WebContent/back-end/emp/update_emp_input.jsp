@@ -8,41 +8,48 @@
 <%-- <%= empVO==null %>--${empVO.deptno}-- --%>
 <html>
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>員工資料修改</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back-end/emp/css/css.css">
+<title>員工資料新增</title>
 
 </head>
-<body bgcolor='white'>
+<body>
 	<div id="mySidebar" class="sidebar">
 		<div>
-			<img id="logo" src="./image/Logo2 (2).png" class="img-circle"
+			<img id="logo" src="<%=request.getContextPath()%>/front-end/shared/logoMain2.png" class="img-circle"
 				alt="User Image">
 		</div>
-		<br> <br> <br> <br> <br> <span id="empFront">首頁<br>
-			<a href="#"> FAQ</a> <a href="#"> 評論檢舉審核</a> <a href="#"> 最新消息管理</a>
-		</span> <span id="empShop">商城管理<br> <a href="#"> 商品管理</a> <a
-			href="#">訂單處理 </a> <a href="#">回覆買家留言 </a> <a href="#">廣告設置管理 </a> <a
-			href="#">促銷活動設置 </a>
-		</span> <span id="empStore">餐廳管理<br> <a
-			href="<%=request.getContextPath()%>/back-end/storeChar/listAllStoreChar.jsp">
-				餐廳分類管理 </a> <a
-			href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp">
-				餐廳資訊管理 </a> <a href="#"> 餐廳申請審核 </a>
-		</span> <span id="empMem">會員管理<br> <a
-			href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">
-				會員資料管理 </a> <a
-			href="<%=request.getContextPath()%>/back-end/member/storeapply.jsp">
-				商家註冊審核 </a>
-		</span> <span id="empBack">後台管理<br> <a
-			href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp">
-				員工管理 </a> <a
-			href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理
-		</a>
+		<br><br><br><br><br>
+		<span id="empFront">首頁<br>
+			<a href="#"> FAQ</a>
+			<a href="#"> 評論審核</a>
+			<a href="#"> 最新消息管理</a>
+		</span> 
+		<span id="empShop">商城管理<br>
+			<a href="<%=request.getContextPath()%>/back-end/shopOrderMasterListAll.jsp">訂單處理</a> 
+			<a href="<%=request.getContextPath()%>/back-end/shopProductListAll.jsp"> 商品管理</a>
+			<a href="<%=request.getContextPath()%>/back-end/productqa/select_productqa_page.jsp">商品問與答</a>
+			<a href="<%=request.getContextPath()%>/back-end/shopProductReviewListAll.jsp"> 商品評價管理</a>
+			<a href="#">廣告設置管理 </a> 
+			<a href="#">促銷活動設置 </a>
+		</span>
+		<span id="empStore">餐廳管理<br> 
+			<a href="<%=request.getContextPath()%>/back-end/storeChar/listAllStoreChar.jsp">餐廳分類管理</a> 
+			<a href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp"> 餐廳資訊管理 </a>
+			<a href="<%=request.getContextPath()%>/back-end/restaurant/storeapply.jsp"> 餐廳申請審核 </a>
+		</span> 
+		<span id="empMem">會員管理<br> 
+			<a href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">會員資料管理</a>
+			<a href="#">會員儲值管理</a>
+		</span>
+		<span id="empBack">後台管理<br> 
+			<a href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp"> 員工管理 </a>
+			<a href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理</a>
 		</span>
 	</div>
 	<div>
@@ -51,7 +58,7 @@
 				id="sidebarlogin"> 員工登入/登出 </a>
 		</c:if>
 		<c:if test="${not empty sessionScope.empLogin}">
-			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin"/>員工登入/登出 </a>
+			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin">員工登入/登出 </a>
 		</c:if>
 
 	</div>
@@ -87,9 +94,14 @@
 		<td><input type="TEXT" name="emp_pwd" size="45"	value="<%=empVO.getEmp_password()%>" /></td>
 	</tr>
 	<tr>
-		<td>雇用日期:</td>
-		<td><input name="emp_date" id="f_date1" type="date" ></td>
-	</tr>
+					<td>員工狀態</td>
+					<td><select name="emp_status">
+							<option>員工狀態</option>
+							<option value="0">在職中</option>
+							<option value="1">已離職</option>
+							<option value="2">留職停薪</option>
+					</select>
+				</tr>
 	
 	<tr>
 		<td>員工狀態:</td>
@@ -106,7 +118,6 @@
 <input type="hidden" name="emp_id" value="<%=empVO.getEmp_id()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
-<br><br><br><br><br><br>
 <div align="center">
 <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/back-end/back-empselect.jsp">回首頁</a></button>
 </div>

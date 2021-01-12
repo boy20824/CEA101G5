@@ -154,7 +154,7 @@ public class OrderMasterServlet extends HttpServlet {
 			buyList.clear();
 			session.setAttribute("buyList", buyList);
 			
-			String url = req.getContextPath() + "/front-end/shopOrderHistory.jsp";
+			String url = req.getContextPath() + "/shop/ordermaster.do?action=orderHistoryQuery";
 			res.sendRedirect(url);
 		}
 		
@@ -175,12 +175,12 @@ public class OrderMasterServlet extends HttpServlet {
 			
 			String searchyn = req.getParameter("searchyn");
 			if ("yes".equals(searchyn)) {
-				String url = "/back-end/orderMaster/listOneOrderMaster.jsp";
+				String url = "/back-end/shopOrderMasterListOne.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
 			else {
-				String url = "/back-end/orderMaster/listAllOrderMaster.jsp";
+				String url = "/back-end/shopOrderMasterListAll.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}

@@ -21,8 +21,8 @@ body {
 /* NavBar */
 #navbarUserIcon {
     width: 30px;
-    height: 24px;  
-    margin-right: 5px;
+    height: 25px;  
+    margin: 7px 2px 0px 2px;
 }
 
 #navbarUserIcon:hover {
@@ -32,7 +32,8 @@ body {
 
 #navbarCartIcon {
     width: 33px;
-    height: 26.4px;
+    height: 28px;
+    margin: 6px 2px 0px 2px;
 }
 
 #navbarCartIcon:hover {
@@ -42,6 +43,11 @@ body {
 
 .navbarDisplayController {
     opacity: 70%;
+}
+
+#memLogOut {
+	font-size: 17px;
+	margin: 3px 2px 0px 2px;
 }
 
 /* Signing In */

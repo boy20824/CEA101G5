@@ -3,13 +3,21 @@
 <%@ page import="com.queueperiod.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.restaurant.model.*"%>
 
 <%
-	// 取出servlet request 再設定pagecontext供查詢
+QuePeriodService quePeriodSvc = new QuePeriodService(); //創建 實體
+RestaurantService restSvc = new RestaurantService();
+
+String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
+
 	List<QuePeriodVO> list = new ArrayList<QuePeriodVO>();
-	list = (List<QuePeriodVO>) request.getAttribute("quePeriodVO");
+	list = quePeriodSvc.getOneQuePeriod(storeid);
+	// 取出servlet request 再設定pagecontext供查詢
+// 	list = (List<QuePeriodVO>) request.getAttribute("quePeriodVO");
 	pageContext.setAttribute("list", list);
-	String storeid = (String) request.getAttribute("storeid");
+	pageContext.setAttribute("storeid", storeid);
+// 	String storeid = (String) request.getAttribute("storeid");
 %>
 <%@include file="../sidebar.jsp" %>
 <html lang="en">
@@ -106,6 +114,7 @@
 		</table>
 		<div class="row">
 			<div class="col-3"></div>
+			<input id="storeid4Ajax" value="${storeid }" type="hidden">
 			<input id="add" onClick="showAddPage()" name="add" value="新增時段"
 				type="button" class="btn btn-primary">
 			<div class="col-2"></div>
@@ -132,11 +141,8 @@
 			async : false, //同步请求
 			url : "addQuePeriodf.jsp",
 			data : {
-				storeid : $("#storeid").val(),
-				queueperiodid :
-<%=count%>
-	,
-
+				storeid : $("#storeid4Ajax").val(),
+				queueperiodid :<%=count%>,
 			},
 			success : function(dates) {
 				//alert(dates);
@@ -157,7 +163,7 @@
 			async : false, //同步请求
 			url : "updateQuePeriod.jsp",
 			data : {
-				storeid : $("#storeid").val(),
+				storeid : $("#storeid4Ajax").val(),
 				queueperiodid : $(e.target).prev($(".queueperiodid")).val(),
 
 			},

@@ -98,7 +98,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-<a href="<%=request.getContextPath() %>/back-end/orderMaster/listAllOrderMaster.jsp" class="button">回商品訂單列表</a>
+<a href="<%=request.getContextPath() %>/back-end/shopOrderMasterListAll.jsp" class="button">回商品訂單列表</a>
 <%@ include file="/front-end/util/page1.file" %>
 <div class="tableborder">
 <table class="info">

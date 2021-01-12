@@ -51,7 +51,8 @@ public class ProductJNDIDAO implements ProductDAO_Interface {
 				"UPDATE PRODUCT SET PRODUCT_NAME=?, PRODUCT_DESCRIPTION = ?, PRODUCT_MSRP = ?, PRODUCT_PRICE = ?,CATEGORY_ID=?, PRODUCT_STATUS = ? WHERE PRODUCT_ID = ?";
 		private static final String ADD = 
 				"INSERT INTO PRODUCT (PRODUCT_ID, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_MSRP, PRODUCT_PRICE, PRODUCT_QTY_SOLD, CATEGORY_ID, PRODUCT_STATUS) VALUES ('ENP' || LPAD(SEQ_PRODUCT_ID.NEXTVAL,4,'0'), ?, ?, ?, ?, ?, ?, ?)";
-
+		private static final String GETPID ="SELECT LAST_NUMBER -1 AS QQ FROM ALL_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_PRODUCT_ID'";
+		
 	@Override
 	public void insert(ProductVO productVO) {
 		Connection con = null;
@@ -598,6 +599,45 @@ public class ProductJNDIDAO implements ProductDAO_Interface {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public String getPID() {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String seq = null;
+		
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(GETPID);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				seq = rs.getString("QQ");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return seq;
 	}
 	
 	

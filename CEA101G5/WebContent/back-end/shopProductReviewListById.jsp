@@ -99,7 +99,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-<a href="<%=request.getContextPath() %>/back-end/orderDetail/listAllReview.jsp" class="button">回所有評論列表</a>
+<a href="<%=request.getContextPath() %>/back-end/shopProductReviewListAll.jsp" class="button">回所有評論列表</a>
 <%@ include file="/front-end/util/page1.file" %>
 <div class="tableborder">
 <table class="info">
@@ -117,6 +117,7 @@
 			<tr>
 				<td>${odVO.orderId}</td>
 				<td>${odVO.productId}</td>
+				<td><img src="<%=request.getContextPath()%>/shop/orderdetailphotoreader.do?&productId=${odVO.getProductId()}&orderId=${odVO.getOrderId()}" class="card-img-top" alt="..." width="100" height="100"></td>
 				<td>${odVO.productReview}</td>
 				<td><fmt:formatDate value="${odVO.productReviewTS}" pattern="yyyy-MM-dd HH:mm"/></td>
 				<td>
@@ -147,8 +148,8 @@
 
 </div>
 <%@ include file="/front-end/util/page2.file" %>
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/orderDetail/listReviewById.jsp" >
-	<b>依商品名稱搜尋:</b>
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/shopProductReviewListById.jsp" >
+	<b>依商品編號搜尋:</b>
 	<input type="text" name="nameSearch">
 	<input type="submit" value="送出" class="button">
 </FORM>

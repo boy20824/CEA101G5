@@ -105,7 +105,7 @@ public class QueNoServlet extends HttpServlet {
 				
 				QuePeriodService quePeriodSvc = new QuePeriodService();
 				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
-				periodCheck(quePeriodVO);//超過最後取號時間不得選取
+				periodCheck(quePeriodVO);
 				
 				QueTableService queTableSvc = new QueTableService();
 				List<QueTableVO> queTableVO = queTableSvc.getStoreQueTable(storeid);
@@ -283,7 +283,7 @@ public class QueNoServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try {
+			try {
 				/*********************** 1.?��?��請�?��?�數 - 輸入?��式�?�錯誤�?��?? *************************/
 				Integer queuenum = new Integer(req.getParameter("queuenum"));
 				String memphone = req.getParameter("memphone").trim();
@@ -320,7 +320,6 @@ public class QueNoServlet extends HttpServlet {
 				queNoVO1.setQueuetableid(queuetableid);
 				queNoVO1.setStoreid(storeid);
 				
-				System.out.println("幹"+queNoVO1.getParty());
 //----------------------------------------------------------------------------
 //String storeid = req.getParameter("storeid");
 				
@@ -382,15 +381,19 @@ public class QueNoServlet extends HttpServlet {
 				String url = "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-
+				if(errorMsgs.isEmpty()) {
+				req.setAttribute("check", "check");
+				}else {
+					req.setAttribute("check", "no");
+				}
 				/*************************** ?��他可?��??�錯誤�?��?? **********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-////				res.sendRedirect((req.getContextPath() + "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp"));
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+//				res.sendRedirect((req.getContextPath() + "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp"));
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
+				failureView.forward(req, res);
+			}
 		}
 
 		if ("insert".equals(action)) {

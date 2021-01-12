@@ -709,5 +709,94 @@ public class MemServlet extends HttpServlet {
 				e.printStackTrace(System.err);
 			}
 		}
+		
+//		Logging In & Out For Shop
+		if ("shopLogin".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println(req.getParameter("memPhone"));
+			
+			String refererUrlRaw = req.getHeader("referer");
+			String refererUrl = refererUrlRaw.substring(refererUrlRaw.indexOf("CEA101G5") + 8);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String memPhone = req.getParameter("memPhone");
+				if (memPhone == null || memPhone.trim().length() == 0) {
+					errorMsgs.add("手機號碼不得為空");
+				}
+
+				String memPwd = req.getParameter("memPwd").trim();
+				if (memPwd == null || memPwd.trim().length() == 0) {
+					errorMsgs.add("會員密碼請勿空白");
+				}
+
+				if (memPhone.equals("admin") && memPwd.equals("admin")) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/emp/EmpLogin.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/member/MemLogin.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				/*************************** 2.開始查詢資料 *****************************************/
+				MemService memSvc = new MemService();
+				MemVO memLogin = memSvc.getOneMem(memPhone);
+
+				if (memLogin == null || !memLogin.getMemPhone().equals(memPhone)) {
+					errorMsgs.add("查無此帳號!");
+				}
+
+				if (memLogin == null || !memLogin.getMemPwd().equals(memPwd)) {
+					errorMsgs.add("密碼錯誤!");
+				}
+
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/member/MemLogin.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				RestaurantService restSvc = new RestaurantService();
+				List<RestaurantVO> list = restSvc.getAll();
+
+				RestaurantVO storeLogin = null;
+				for (RestaurantVO RestaurantVO : list) {
+					if (RestaurantVO.getMemPhone().equals(memPhone)) {
+						String nowStoreId = RestaurantVO.getStoreId();
+						storeLogin = restSvc.getOneRestaurant(nowStoreId);
+					}
+				}
+
+				session.setAttribute("storeLogin", storeLogin);
+				session.setAttribute("memLogin", memLogin);
+
+				res.sendRedirect(req.getContextPath() + refererUrl);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("沒有此帳號!!!");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/member/MemLogin.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("shopLogout".equals(action)) {
+			
+			try {
+				session.invalidate();
+				res.sendRedirect(req.getContextPath() + "/front-end/shopMain.jsp");
+				
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+//		Logging In & Out For Shop
+		
 	}
 }

@@ -105,13 +105,14 @@
 		</c:forEach>
 	</ul>
 </c:if>
-<a href="<%=request.getContextPath() %>/back-end/product/listAllProduct.jsp" class="button">回所有商品列表</a>
+<a href="<%=request.getContextPath() %>/back-end/shopProductListAll.jsp" class="button">回所有商品列表</a>
 <%@ include file="/front-end/util/page1.file" %>
 <div class="tableborder">
 <table class="info">
 	<tr>
 		<th>商品編號</th>
 		<th>商品名稱</th>
+		<th>商品圖片</th>
 		<th>商品描述</th>
 		<th>商品原價</th>
 		<th>商品售價</th>
@@ -125,12 +126,24 @@
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop/product.do" style="margin-bottom: 0px;">
 			<tr>
 				<td>${pVO.productId}</td>
-				<td>${pVO.productName}</td>
+				<td><input type="text" name="productName" value="${pVO.productName}" style="height: 100px; "></td>
+				<td><img src="<%=request.getContextPath()%>/shop/productphotoreader.do?productId=${pVO.getProductId()}" class="card-img-top" alt="..." width="100" height="100"></td>
 				<td><input type="text" name="productDescription" value="${pVO.productDescription}"></td>
 				<td><input type="text" name="productMSRP"  value="${pVO.productMSRP}" style="width: 50px;"/></td>
 				<td><input type="text" name="productPrice" value="${pVO.productPrice}" style="width: 50px;"/></td>
 				<td>${pVO.productQtySold}</td>
-				<td>${pcSvc.getCategoryById(pVO.categoryId).categoryName}</td>
+				<td>
+					<select name="categoryId" class="qq">
+						<c:forEach var="pcVO" items="${pcSvc.allCategories}">
+							<c:if test="${pVO.categoryId == pcVO.categoryId}">
+								<option value="${pcVO.categoryId }" selected>${pcVO.categoryName}</option>
+							</c:if>
+							<c:if test="${pVO.categoryId != pcVO.categoryId}">
+								<option value="${pcVO.categoryId }">${pcVO.categoryName}</option>
+							</c:if>
+						</c:forEach>
+					</select>
+				</td>
 				<td>
 					<select name="productStatus">
 						<c:if test="${pVO.productStatus==0}">
@@ -157,7 +170,7 @@
 
 </div>
 <%@ include file="/front-end/util/page2.file" %>
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/product/listAllByName.jsp" >
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/shopProductListAllByName.jsp" >
 	<b>依商品名稱搜尋:</b>
 	<input type="text" name="nameSearch">
 	<input type="submit" value="送出" class="button">

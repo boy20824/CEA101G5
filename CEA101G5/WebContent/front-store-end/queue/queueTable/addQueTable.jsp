@@ -1,8 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import="com.queuetable.model.*"%>
 <%@ page import="java.util.*"%>
 
+<% 
+String storeid = request.getParameter("storeid");
+pageContext.setAttribute("storeid", storeid);
+QueTableService queTableSv = new QueTableService();
+List<QueTableVO> list = queTableSv.getStoreQueTable(storeid);
+pageContext.setAttribute("list", list);
+%>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -27,7 +35,10 @@
 
 	<jsp:useBean id="queTableSvc" scope="session"
 		class="com.queuetable.model.QueTableService" />
-
+		
+<c:forEach var="queTableVO" items="${list}">
+	<input class="testValue" value="${queTableVO.queuetableid }" type="hidden">
+</c:forEach>
 	
 		<div class="row reserve"></div>
 		<form METHOD="post" ACTION="queueTable.do" name="form1">
@@ -81,7 +92,7 @@
 				</div>
 			</div>
 			<div class="row reserve1"></div>
-			<input name="storeid" value="S000001" hidden="hidden"> 		
+			<input name="storeid" value="${storeid }" hidden="hidden"> 		
 			<input
 				type="hidden" name="action" value="insert"> 
 				<input
@@ -113,6 +124,28 @@
 		document.getElementById("queuetableusable").value = $(
 				"#formControlUsable").val();
 	}
+</script>
+<script>
+
+// $(document).ready(function(){
+// 	let numArr = [];
+// 	let arr = document.getElementsByClassName("testValue");
+// 	for(let i =0; i<arr.length; i++){
+// 		numArr.push(arr[i].value);
+// 		console.log(numArr);
+// 	}
+// 	if(numArr!=null){
+// 	if(!numArr.includes("1")){
+// 		if(!nunArr.includes("2")){
+// 			if(!numArr.includes("3")){
+				
+// 			}
+// 		}
+// 		console.log("aa");
+// 	}else(!numArr.includes("2")){
+		
+// 	}}
+// });
 </script>
 </html>
 

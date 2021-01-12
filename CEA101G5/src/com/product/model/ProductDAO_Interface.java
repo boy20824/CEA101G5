@@ -17,4 +17,5 @@ public interface ProductDAO_Interface {
 	
 	public void testU(String productId,String productName, String productDescription, Integer productMSRP, Integer productPrice,Integer categoryId, Integer productStatus);
 	public void add(ProductVO productVO);
+	public String getPID();
 }

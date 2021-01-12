@@ -4,11 +4,17 @@
 <%@ page import="java.util.*"%>
 
 <%
+	QueTableService queTableSvc = new QueTableService();
+RestaurantService restSvc = new RestaurantService();
+
+String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
 	// 取出servlet request 再設定pagecontext供查詢
 	List<QueTableVO> list = new ArrayList<QueTableVO>();
-	list = (List<QueTableVO>) request.getAttribute("queTableVO");
+	list = queTableSvc.getStoreQueTable(storeid);
 	pageContext.setAttribute("list", list);
-	String storeid = (String) request.getAttribute("storeid");
+	pageContext.setAttribute("storeid", storeid);
+
+// 	String storeid = (String) request.getAttribute("storeid");
 %> 
 <%@include file="../sidebar.jsp" %>
 <html lang="en">
@@ -76,10 +82,10 @@
 						<td>${queTableVO.queuetablettl}</td>
 						<td>${queTableVO.queuetableusable}</td>
 						<td><input id="storeid" name="storeid" value="${storeid }"
-							type="hidden"> <input id="queuetableid"
+							type="hidden"> <input
 							class="queuetableid" name="queuetableid"
 							value="${queTableVO.queuetableid }" type="hidden"> <input
-							name="update" value="修改桌數" type="button" class="btn btn-primary"></td>
+							name="update" value="修改桌數" type="button" class="edit btn btn-primary"></td>
 							<td><form method="post" action="queueTable.do" style="width:100px;">
 						<input id="storeid" name="storeid" value="${storeid }"
 							type="hidden"> <input id="queuetalbeid"
@@ -87,7 +93,7 @@
 							value="${queTableVO.queuetableid}" type="hidden">
 							<input name="action" value="delete" type="hidden">
 							<input
-							name="delete" value="時段刪除" type="submit" class="btn btn-primary"></form></td>
+							name="delete" value="時段刪除" type="submit" class="delete btn btn-primary"></form></td>
 					</tr>
 					<%
 						count++;
@@ -97,6 +103,7 @@
 		</table>
 		<div class="row">
 			<div class="col-4"></div>
+			<input id="storeid4Ajax" value="${storeid }" type="hidden">
 			<input id="add" onClick="showAddPage()" name="add" value="新增桌型"
 				type="button" class="btn btn-primary">
 		</div>
@@ -119,6 +126,9 @@
 			type : "get",
 			async : false, //同步请求
 			url : "addQueTable.jsp",
+			data:{
+				storeid :  $("#storeid4Ajax").val()
+			},
 			success : function(dates) {
 				//alert(dates);
 				$("#showPage").html(dates);//要刷新的div
@@ -129,7 +139,7 @@
 		});
 	}
 	// 	function showUpdatePage(e) {
-	$(".btn").click(function(e) {
+	$(".edit").click(function(e) {
 		var url = "address";
 		// 		var target = $(e.target);
 		$.ajax({
@@ -137,7 +147,7 @@
 			async : false, //同步请求
 			url : "updateQueTable.jsp",
 			data : {
-				storeid : $("#storeid").val(),
+				storeid : $("#storeid4Ajax").val(),
 				queuetableid : $(e.target).prev($(".queuetableid")).val(),
 
 			},

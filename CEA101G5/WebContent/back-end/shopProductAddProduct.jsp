@@ -87,7 +87,7 @@
 </head>
 <body bgcolor='white'>
 
-<a href="<%=request.getContextPath() %>/back-end/product/listAllProduct.jsp" class="button">回首頁</a>
+<a href="<%=request.getContextPath() %>/back-end/shopProductListAll.jsp" class="button">回首頁</a>
 <br>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -106,7 +106,7 @@ ${message}
 			</td>
 		</tr>
 	</FORM>
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/shop/product.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/shop/product.do" name="form1" enctype="multipart/form-data">
 	<tr>
 		<td>商品分類
 		<jsp:useBean id="pcSvc" scope="page" class="com.productcategory.model.ProductCategoryService"/>
@@ -120,15 +120,15 @@ ${message}
 			
 		</td>
 	</tr>
-<!-- 	<tr> -->
-<!-- 		<td> -->
+	<tr>
+		<td>
 <!-- 			<div display="block"> -->
 <!-- 				<div id="photoArea"> -->
 <!-- 					<div id="display" style="width: 100px;"></div> -->
 <!-- 				</div> -->
 <!-- 			</div> -->
-<!-- 	<input type="file" id="productPhoto" name="productPhoto" size="45" multiple="multiple" /></td> -->
-<!-- 	</tr> -->
+	<input type="file" id="productPhoto" name="productPhoto" accept="image/*" size="45" multiple="multiple" /></td>
+	</tr>
 	<tr>
 		<td>商品名稱 <input type="text" name="productName" value="${pVO.getProductName()}" /></td>
 	</tr>
