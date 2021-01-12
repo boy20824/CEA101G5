@@ -210,7 +210,7 @@ public class ProductServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			System.out.println("�脣�憓���");
+			System.out.println("ADD");
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
@@ -337,14 +337,14 @@ public class ProductServlet extends HttpServlet {
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/back-end/shopProductListAll.jsp";
-				System.out.println("����&���憓���");
+				System.out.println("新增成功");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				System.out.println("PServlet add��");
+				System.out.println("新增失敗");
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/back-end/shopProductListAll.jsp");
 				failureView.forward(req, res);
