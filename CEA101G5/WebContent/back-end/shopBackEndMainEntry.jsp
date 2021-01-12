@@ -43,25 +43,27 @@ pageContext.setAttribute("list", list);
 		</span>
 		<span id="empStore">餐廳管理<br> 
 			<a href="<%=request.getContextPath()%>/back-end/storeChar/listAllStoreChar.jsp">餐廳分類管理</a> 
-			<a href="#"> 餐廳資訊管理 </a>
-			<a href="#"> 餐廳申請審核 </a>
+			<a href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp"> 餐廳資訊管理 </a>
+			<a href="<%=request.getContextPath()%>/back-end/restaurant/storeapply.jsp"> 餐廳申請審核 </a>
 		</span> 
 		<span id="empMem">會員管理<br> 
 			<a href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">會員資料管理</a>
-			<a href="#"> 商家註冊審核 </a> 
-			<a href="#"> </a>
+			<a href="#">會員儲值管理</a>
 		</span>
 		<span id="empBack">後台管理<br> 
-			<a href="#"> 員工管理 </a>
-			<a href="#"> </a>
-			<a href="#"> </a>
+			<a href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp"> 員工管理 </a>
+			<a href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理</a>
 		</span>
 	</div>
 	<div>
-		<script>
-			
-		</script>
-		<a href="#" id="login"> 員工登入/登出 </a>
+		<c:if test="${empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/EmpLogin.jsp"
+				id="sidebarlogin"> 員工登入/登出 </a>
+		</c:if>
+		<c:if test="${not empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin">員工登入/登出 </a>
+		</c:if>
+
 	</div>
 	<div id=backSidebar></div>
 	<div class="main">
