@@ -292,6 +292,8 @@ public class QueNoServlet extends HttpServlet {
 				Integer queuelineno = new Integer(req.getParameter("queuelineno").trim());
 				Integer queuetableid = new Integer(req.getParameter("queuetableid").trim());
 				String psw = "Enak1234";
+				
+				// 新增用VO
 				QueNoVO queNoVO1 = new QueNoVO();
 				queNoVO1.setQueuenum(queuenum);
 				queNoVO1.setMemphone(memphone);
@@ -304,18 +306,6 @@ public class QueNoServlet extends HttpServlet {
 				
 //----------------------------------------------------------------------------
 //String storeid = req.getParameter("storeid");
-				MemService memSvc = new MemService();
-				List<MemVO> memVO = memSvc.getAll();
-				for(int i = 0 ; i<memVO.size();i++) {
-					if(memVO.get(i).getMemPhone().equals(memphone)) {
-						req.setAttribute("check", "no");
-						break;
-					}else {
-						
-						req.setAttribute("check", "check");
-						count++;// 計數+1
-					}}
-				memSvc.easyAddMem(memphone, psw, memName);
 				
 				QuePeriodService quePeriodSvc = new QuePeriodService();
 				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
@@ -328,16 +318,41 @@ public class QueNoServlet extends HttpServlet {
 				List<QueLineVO> queLineVO = queLineSvc.getStoreQueNo(storeid);
 				
 				QueNoService queNoSvc = new QueNoService();
-				
 				List<QueNoVO> queNoVO = queNoSvc.getQueNoByStoreId(storeid);
+				// 用來檢查是否有取過號
+				List<String> noList = new ArrayList<String>();
+				for(int i = 0; i<queNoVO.size();i++) {
+					noList.add(queNoVO.get(i).getMemphone());
+				}
+				
+				MemService memSvc = new MemService();
+				List<MemVO> memVO = memSvc.getAll();
+				// 用來檢查是否有註冊電話
+				List<String> memList = new ArrayList<String>();
+				for(int i = 0 ; i<memVO.size();i++) {
+					memList.add(memVO.get(i).getMemPhone());
+				}
+				if(noList.contains(memphone)){
+					req.setAttribute("check", "deny");
+				}else {
+					if(memList.contains(memphone)) {
+						// 已有會員該店尚未取過號-->>新增取號
+						req.setAttribute("check", "addNo");
+						queNoVO1 = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno, queuetableid);
+						count++;
+					}else {
+						memSvc.easyAddMem(memphone, psw, memName);
+						queNoVO1 = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno, queuetableid);
+						req.setAttribute("check", "addNo");
+						count++;
+					}
+				}
 //-------------------------------------------------------------------------------
 //				System.out.print("??��?��?��??");
 
 				/*************************** 2.??��?�新增�?��?? ***************************************/
 				// ?��增至資�?�庫
 //				QueNoService queNoSvc = new QueNoService();
-				queNoVO1 = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
-						queuetableid);
 				// 顯示桌種??��?��?�碼?��	
 //				List<QueNoVO> list = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
 //				storeInsert = count;
@@ -352,14 +367,19 @@ public class QueNoServlet extends HttpServlet {
 //				succesView.forward(req, res);
 				//----------------------------
 //				session.setAttribute("pickupNo", ((TreeSet<Integer>) countSet).last());
-				HttpSession session = req.getSession();
-					session.setAttribute("quePeriodVO", quePeriodVO);
-					session.setAttribute("queTableVO", queTableVO);
-					session.setAttribute("queLineVO", queLineVO);
-					session.setAttribute("queNoVO", queNoVO);
-					session.setAttribute("storeid", storeid);
-					
-					session.setAttribute("pickupNo", count);
+//				HttpSession session = req.getSession();
+//					session.setAttribute("quePeriodVO", quePeriodVO);
+//					session.setAttribute("queTableVO", queTableVO);
+//					session.setAttribute("queLineVO", queLineVO);
+//					session.setAttribute("queNoVO", queNoVO);
+//					session.setAttribute("storeid", storeid);
+//					session.setAttribute("pickupNo", count);
+					req.setAttribute("quePeriodVO", quePeriodVO);
+					req.setAttribute("queTableVO", queTableVO);
+					req.setAttribute("queLineVO", queLineVO);
+					req.setAttribute("queNoVO", queNoVO);
+					req.setAttribute("storeid", storeid);
+					req.setAttribute("pickupNo", count);
 //				req.setAttribute("pickupNo", count);
 //				req.setAttribute("quePeriodVO", quePeriodVO);
 //				count++;
@@ -447,11 +467,13 @@ public class QueNoServlet extends HttpServlet {
 				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
 //				custInsert = count;
 				/*************************** 3.?��增�?��??,準�?��?�交(Send the Success view) ***********/
-				HttpSession session = req.getSession();
-				session.setAttribute("memberName", memberName);
-				session.setAttribute("queNoVO", queNoVO);
-				session.setAttribute("queNoVO2", queNoVO2);
-				session.setAttribute("quePeriodVO", quePeriodVO);
+				
+//				HttpSession session = req.getSession();
+//				session.setAttribute("memberName", memberName);
+//				session.setAttribute("queNoVO", queNoVO);
+//				session.setAttribute("queNoVO2", queNoVO2);
+//				session.setAttribute("quePeriodVO", quePeriodVO);
+				
 //				req.setAttribute("queNoVO", queNoVO);
 //				req.setAttribute("queNoVOList", list);
 
