@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.restaurant.model.*"%>
 
+<%
+RestaurantService restSvc = new RestaurantService();
+
+String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
+pageContext.setAttribute("storeid", storeid);
+%>
     <html>
 
     <head>
@@ -107,7 +114,7 @@
         <div class="welcomePageBtn">
             <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/restaurant/addrestaurant.jsp'">餐廳資訊管理</button>
             <button type="submit">外帶訂單管理</button>
-            <button type="submit">取號管理</button>
+            <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do?action=storeGetQueNo&storeid=${storeid }'">取號管理</button>
             <button type="submit">訂位管理</button>
             <button type="submit">查看營業金流</button>
         </div>

@@ -82,10 +82,10 @@ String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId()
 						<td>${queTableVO.queuetablettl}</td>
 						<td>${queTableVO.queuetableusable}</td>
 						<td><input id="storeid" name="storeid" value="${storeid }"
-							type="hidden"> <input id="queuetableid"
+							type="hidden"> <input
 							class="queuetableid" name="queuetableid"
 							value="${queTableVO.queuetableid }" type="hidden"> <input
-							name="update" value="修改桌數" type="button" class="btn btn-primary"></td>
+							name="update" value="修改桌數" type="button" class="edit btn btn-primary"></td>
 							<td><form method="post" action="queueTable.do" style="width:100px;">
 						<input id="storeid" name="storeid" value="${storeid }"
 							type="hidden"> <input id="queuetalbeid"
@@ -93,7 +93,7 @@ String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId()
 							value="${queTableVO.queuetableid}" type="hidden">
 							<input name="action" value="delete" type="hidden">
 							<input
-							name="delete" value="時段刪除" type="submit" class="btn btn-primary"></form></td>
+							name="delete" value="時段刪除" type="submit" class="delete btn btn-primary"></form></td>
 					</tr>
 					<%
 						count++;
@@ -139,7 +139,7 @@ String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId()
 		});
 	}
 	// 	function showUpdatePage(e) {
-	$(".btn").click(function(e) {
+	$(".edit").click(function(e) {
 		var url = "address";
 		// 		var target = $(e.target);
 		$.ajax({

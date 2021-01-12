@@ -162,8 +162,7 @@
 				</form>
 			</div>
 
-			<!-- 表格右邊 -->
-			<!-- 第一種桌子 -->
+			<!------------------------------------------------------>
 			<div class="col-8 right">
 				<c:forEach var="queTableVO" items="${queTableVO}">
 					<div class="row right-li tabledata">
@@ -436,6 +435,7 @@
 </script>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
@@ -610,7 +610,44 @@
 		}
 		
 	});
-	
+</script>
+<script>
+function validateForm(form) {
+	if (!checkmemLice(form.memLice.value)) {
+	window.Swal.fire({
+	title: "錯誤",
+	text: "統一編號為8碼數字，請重新確認",
+	icon: "error",
+
+	});
+	event.preventDefault()
+	return (false);
+	}
+	Swal.fire({
+	title: "申請成功",
+	text: "管理員將會再審核成功後通知您",
+	icon: "success",
+	timer: 1000
+
+	});
+	$('.sign-up-form').on('submit', submit);
+	return (true);
+	}
+
+	function submit(e) {
+	$('.sign-up-container').addClass('submitted');
+	e.preventDefault();
+	$(".thanks-text").fadeIn(8000);
+
+	function checkmemLice(memLice) {
+	if (memLice.trim().length === 0) {
+	return (false);
+	} else if (memLice.trim().length !== 8) {
+	return (false);
+	} else
+	return (true);
+	}
+
 	
 </script>
 </body>
