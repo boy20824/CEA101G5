@@ -131,58 +131,69 @@ footer {
     top: 14%;
 }
 
-/* Order History : Main */
-.orderHistoryOrder td {
-	border: 1px solid #949499;
+/* Promotion */
+
+/* Remove Arrows/Spinners */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
-.orderHistoryItems td {
-	border: 1px solid #949499;
-}
-
-.orderHistoryOrder {
+/* Criteria */
+.searchCriteriaBtnContainer {
 	margin-top: 25px;
+	text-align: center;
 }
 
-.orderHistoryItems {
-	margin-top: 1px;
-	margin-bottom: 30px;
+.searchCriteriaBtnContainer button {
+	margin-right: 25px;
 }
 
-.orderHistoryOrder table {
-	background-color: #fdfdff;
-	margin: auto;
-	width: 900px;;
+.container form {
+	margin: 20px auto;
+	width: 75%;
 }
 
-.orderHistoryItems table {
-	background-color: #fdfdff;
-	margin: auto;
-	width: 900px;;
-}
-
-.orderHistoryOrder table td {
-	padding: 0px 10px;
-	height: 40px;
-}
-
-.orderHistoryItems table td {
-	padding: 0px 10px;
-	height: 40px;
-}
-
-.formTitleColor {
+.container form label {
 	color: #636366;
 	font-size: 14px;
 }
 
-.orderHistoryItems img {
-	height: 150px;
-	margin: 10px 0px;
+.divForPromoPrice {
+	position: relative;
 }
 
-.tdAlignCenter {
+.container form span {
+	position: absolute;
+	left: 7%;
+	top: 55%;
+}
+
+#promoPrice {
+	padding-left: 18px;
+}
+
+/* Table */
+.container table {
+	margin: 30px auto;
+	width: 100%;	
 	text-align: center;
+	background-color: white;
+}
+
+.container table td {
+	padding: 10px;
+}
+
+.container table img {
+	width: 125px;
+	height: 125px;
 }
 
 
