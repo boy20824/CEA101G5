@@ -3,8 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="hibernate.util.HibernateUtil"%>
 <%@ page import="java.math.*" %>
-
-
+<%@ page import="com.restaurant.model.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +20,10 @@ Session session1 = HibernateUtil.getSessionFactory().openSession();
 Transaction tx = null;
 int money[] = new int[12];
 int sumMonthMoney = 0 ; 
+String storeId = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
 String month[]=new String[]{"01","02","03","04","05","06","07","08","09","10","11","12"};
 for(int i =0;i<month.length;i++){
-	Query<Object> query1 = session1.createNativeQuery("select FOODORDER_ID from FOODORDER where to_char(FOODORDER_TIME,'mm')='"+month[i]+"'");
+	Query<Object> query1 = session1.createNativeQuery("select FOODORDER_ID from FOODORDER where Store_ID='"+storeId+"'"+"and to_char(FOODORDER_TIME,'mm')='"+month[i]+"'");
 	List<Object> list1 = query1.getResultList();
 	for (Object FOODORDER_ID : list1) {
 		Query<Object> query2 = session1.createNativeQuery("select sum(MENU_PRICE) as 總金額 from FOODORDER_DETAIL where FOODORDER_ID='"+FOODORDER_ID+"'");
@@ -32,8 +32,6 @@ for(int i =0;i<month.length;i++){
 		for (Object aArray : list2) {
 			BigDecimal bd = (BigDecimal) aArray;
 			sumMonthMoney = sumMonthMoney + bd.intValue();
-// 			System.out.println((String)aArray);
- 			
  		}
 		money[i] +=sumMonthMoney;
 	}
