@@ -103,7 +103,11 @@
        
         </svg>
 			<p>金流</p>
-
+			<ul>
+			<li>
+				<a href="<%=request.getContextPath()%>/front-store-end/cashflow/cashflow.jsp">營收查詢</a>
+			</li>
+			</ul>
 		</span> <label for="side-menu-switch"> <i class="fas fa-angle-right"></i>
 		</label>
 	</div>
