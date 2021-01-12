@@ -333,7 +333,8 @@ public class QueNoServlet extends HttpServlet {
 					memList.add(memVO.get(i).getMemPhone());
 				}
 				if(noList.contains(memphone)){
-					req.setAttribute("check", "deny");
+					// 已取過號
+					req.setAttribute("check", "repeat");
 				}else {
 					if(memList.contains(memphone)) {
 						// 已有會員該店尚未取過號-->>新增取號
@@ -341,6 +342,7 @@ public class QueNoServlet extends HttpServlet {
 						queNoVO1 = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno, queuetableid);
 						count++;
 					}else {
+						// 新增會員-->>新增取號
 						memSvc.easyAddMem(memphone, psw, memName);
 						queNoVO1 = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno, queuetableid);
 						req.setAttribute("check", "addNo");
@@ -367,21 +369,19 @@ public class QueNoServlet extends HttpServlet {
 //				succesView.forward(req, res);
 				//----------------------------
 //				session.setAttribute("pickupNo", ((TreeSet<Integer>) countSet).last());
-//				HttpSession session = req.getSession();
-//					session.setAttribute("quePeriodVO", quePeriodVO);
-//					session.setAttribute("queTableVO", queTableVO);
-//					session.setAttribute("queLineVO", queLineVO);
-//					session.setAttribute("queNoVO", queNoVO);
-//					session.setAttribute("storeid", storeid);
-//					session.setAttribute("pickupNo", count);
-					req.setAttribute("quePeriodVO", quePeriodVO);
-					req.setAttribute("queTableVO", queTableVO);
-					req.setAttribute("queLineVO", queLineVO);
-					req.setAttribute("queNoVO", queNoVO);
-					req.setAttribute("storeid", storeid);
-					req.setAttribute("pickupNo", count);
-//				req.setAttribute("pickupNo", count);
-//				req.setAttribute("quePeriodVO", quePeriodVO);
+				HttpSession session = req.getSession();
+					session.setAttribute("quePeriodVO", quePeriodVO);
+					session.setAttribute("queTableVO", queTableVO);
+					session.setAttribute("queLineVO", queLineVO);
+					session.setAttribute("queNoVO", queNoVO);
+					session.setAttribute("storeid", storeid);
+					session.setAttribute("pickupNo", count);
+//					req.setAttribute("quePeriodVO", quePeriodVO);
+//					req.setAttribute("queTableVO", queTableVO);
+//					req.setAttribute("queLineVO", queLineVO);
+//					req.setAttribute("queNoVO", queNoVO);
+//					req.setAttribute("storeid", storeid);
+//					req.setAttribute("pickupNo", count);
 //				count++;
 				String url = "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);

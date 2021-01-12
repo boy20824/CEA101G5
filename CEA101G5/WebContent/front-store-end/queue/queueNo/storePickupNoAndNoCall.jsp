@@ -52,11 +52,36 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/storePickupNoAndNoCall.css" />
 <%-- 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/restaurant/css/css.css" /> --%>
+<style>
+.header{
+	position: fixed;
+	background-color: #FA7E23;
+	height: 120px;
+	width: 100%;
+	z-index: 2;
+	opacity: 85%;
+	margin-top: -20;
 
+}
+img{
+position: fixed;
+z-index: 4;
+margin-top: 10;
+}
+</style>
 </head>
 <body>
+<div class="header">
+<!-- Just an image -->
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp">
+    <img src="../img/LOGO/Logo3(2).png" width="150" height="100" alt="" loading="lazy">
+  </a>
+</nav>
+<a class="icon" href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp"></a>
+</div>
 	<div class="container">
-		<div class="row reserve2"><a href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp">回設定頁</a></div>
+		<div class="row reserve2"></div>
 		<div class="row">
 			<div class="col-4 left">
 				<div class="row left-top">
@@ -594,14 +619,14 @@
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <c:out value="${check }"></c:out>
-<c:if test="${check=='check' }">
+<c:if test="${check=='addNo' }">
 <script>
 swal("新增成功", "ok", "success");
 </script>
 </c:if>
-<c:if test="${check=='no' }">
+<c:if test="${check=='repeat' }">
 <script>
-swal("新增失敗請重新確認", "fail", "error");
+swal("已取過號，請確認", "fail", "error");
 </script>
 </c:if>
 
