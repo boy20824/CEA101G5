@@ -170,7 +170,7 @@
 
 </div>
 <%@ include file="/front-end/util/page2.file" %>
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/product/listAllByName.jsp" >
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/shopProductListAllByName.jsp" >
 	<b>依商品名稱搜尋:</b>
 	<input type="text" name="nameSearch">
 	<input type="submit" value="送出" class="button">

@@ -110,6 +110,7 @@
 			<tr>
 				<td>${odVO.orderId}</td>
 				<td>${odVO.productId}</td>
+				<td><img src="<%=request.getContextPath()%>/shop/orderdetailphotoreader.do?&productId=${odVO.getProductId()}&orderId=${odVO.getOrderId()}" class="card-img-top" alt="..." width="100" height="100"></td>
 				<td>${odVO.productReview}</td>
 				<td><fmt:formatDate value="${odVO.productReviewTS}" pattern="yyyy-MM-dd HH:mm"/></td>
 				<td>
