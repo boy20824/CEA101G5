@@ -154,7 +154,7 @@ public class OrderMasterServlet extends HttpServlet {
 			buyList.clear();
 			session.setAttribute("buyList", buyList);
 			
-			String url = req.getContextPath() + "/front-end/shopOrderHistory.jsp";
+			String url = req.getContextPath() + "/shop/ordermaster.do?action=orderHistoryQuery";
 			res.sendRedirect(url);
 		}
 		

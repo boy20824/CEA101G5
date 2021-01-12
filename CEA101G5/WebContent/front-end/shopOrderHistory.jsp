@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.product.model.*"%>
 
+<%
+	session.getAttribute("memLogin");
+%>
+
 <jsp:useBean id="orderDetailService" scope="page" class="com.orderdetail.model.OrderDetailService"/>
 <jsp:useBean id="productService" scope="page" class="com.product.model.ProductService"/>
 
@@ -47,15 +51,18 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <img src="<%=request.getContextPath()%>/front-end/shared/user2.svg" alt="" id="navbarUserIcon">
-                            <!-- <a class="nav-link active" aria-current="page" href=""><img src="/images/user2.svg" alt=""
-                                id="navbarUserIcon"></a> -->
-                        </li>
+                    	<c:if test = "${memLogin != null}">
+	                    	<li class="nav-item">
+    	                        <a class="nav-link active" aria-current="page" id="memLogOut" href="<%=request.getContextPath()%>/back-end/member/mem.do?action=logout">登出</a>
+        	                </li>
+						</c:if>
+						<c:if test = "${memLogin == null}">
+	                        <li class="nav-item">
+	                            <img src="<%=request.getContextPath()%>/front-end/shared/user2.svg" alt="" id="navbarUserIcon">
+	                        </li>
+                        </c:if>
                         <li class="nav-item">
                             <img src="<%=request.getContextPath()%>/front-end/shared/cart3.svg" alt="" id="navbarCartIcon">
-                            <!-- <a class="nav-link active" aria-current="page" href=""><img src="/images/cart3.svg" alt=""
-                                id="navbarCartIcon"></a> -->
                         </li>
                     </ul>
                 </div>

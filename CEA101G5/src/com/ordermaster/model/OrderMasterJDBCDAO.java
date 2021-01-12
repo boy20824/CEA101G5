@@ -29,7 +29,7 @@ public class OrderMasterJDBCDAO implements OrderMasterDAO_Interface {
 	private static final String UPDATEOM = 
 		"UPDATE ORDER_MASTER SET ORDER_STATUS = ? WHERE ORDER_ID = ?";
 	private static final String GET_ALL_BYMEMPHONE = 
-		"SELECT * FROM ORDER_MASTER WHERE MEM_PHONE = ?";
+		"SELECT * FROM ORDER_MASTER WHERE MEM_PHONE = ? ORDER BY ORDER_ID DESC";
 
 	@Override
 	public void insert(OrderMasterVO orderMasterVO) {
@@ -541,7 +541,7 @@ public class OrderMasterJDBCDAO implements OrderMasterDAO_Interface {
 //		System.out.println("Statement Processed...");
 		
 //		testing : getAllByMemPhone()
-		List<OrderMasterVO> list = dao.getAllByMemPhone("0921842851");
+		List<OrderMasterVO> list = dao.getAllByMemPhone("0917780721");
 		for (OrderMasterVO orderMasterVO : list) {
 			System.out.println("ORDER_ID: " + orderMasterVO.getOrderId());
 			System.out.println("ORDER_DATE: " + orderMasterVO.getOrderDate());

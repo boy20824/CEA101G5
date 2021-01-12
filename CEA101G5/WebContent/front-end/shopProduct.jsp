@@ -3,6 +3,10 @@
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.member.model.*"%>
 
+<%
+	session.getAttribute("memLogin");
+%>
+
 <jsp:useBean id="promotionDetailService" scope="page" class="com.promotiondetail.model.PromotionDetailService"/>
 <jsp:useBean id="memService" scope="page" class="com.member.model.MemService"/>
 <jsp:useBean id="orderMasterService" scope="page" class="com.ordermaster.model.OrderMasterService"/>
@@ -41,28 +45,34 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="<%=request.getContextPath()%>/front-end/shopProductListing.jsp">商品專區</a>
                         </li>
+                        <c:if test = "${memLogin != null}">	
+                        	<li class="nav-item">
+                            	<a class="nav-link active" href="<%=request.getContextPath()%>/shop/ordermaster.do?action=orderHistoryQuery">查詢訂單</a>
+                        	</li>
+                        </c:if>
                         <li class="nav-item">
                             <a class="nav-link active" href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp" tabindex="-1" aria-disabled="true">訂餐專區</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="">幫助中心</a>
-                        </li>
                     </ul>
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <img src="<%=request.getContextPath()%>/front-end/shared/user2.svg" alt="" id="navbarUserIcon">
-                            <!-- <a class="nav-link active" aria-current="page" href=""><img src="/images/user2.svg" alt=""
-                                id="navbarUserIcon"></a> -->
-                        </li>
+                    	<c:if test = "${memLogin != null}">
+	                    	<li class="nav-item">
+    	                        <a class="nav-link active" aria-current="page" id="memLogOut" href="<%=request.getContextPath()%>/back-end/member/mem.do?action=logout">登出</a>
+        	                </li>
+						</c:if>
+						<c:if test = "${memLogin == null}">
+	                        <li class="nav-item">
+	                            <img src="<%=request.getContextPath()%>/front-end/shared/user2.svg" alt="" id="navbarUserIcon">
+	                        </li>
+                        </c:if>
                         <li class="nav-item">
                             <img src="<%=request.getContextPath()%>/front-end/shared/cart3.svg" alt="" id="navbarCartIcon">
-                            <!-- <a class="nav-link active" aria-current="page" href=""><img src="/images/cart3.svg" alt=""
-                                id="navbarCartIcon"></a> -->
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        
         <!-- Shopping Cart Container -->
         <div id="shoppingCartContainer">
 			<c:if test = "${buyList == null || buyList.size() == 0}">
@@ -113,14 +123,15 @@
         <div id="signInContainer" class="container">
             <button id="signInCloseButton" type="button" class="btn-close" aria-label="Close"></button>
             <main class="form-signin">
-                <form>
+                <form method="POST" action="<%=request.getContextPath()%>/back-end/member/mem.do">
                     <img class="mb-4" src="<%=request.getContextPath()%>/front-end/shared/logoMain2.png" alt="" width="125" height="125">
                     <h1 class="h3 mb-3 fw-normal">登入</h1>
                     <div class="form-group">
-                        <label for="inputEmail" class="visually-hidden">Email address</label>
-                        <input type="email" id="inputEmail" class="form-control" placeholder="電話號碼" required autofocus>
+                        <label for="inputText" class="visually-hidden">Email address</label>
+                        <input type="text" name="memPhone" id="inputText" class="form-control" placeholder="電話號碼" required autofocus>
                         <label for="inputPassword" class="visually-hidden">Password</label>
-                        <input type="password" id="inputPassword" class="form-control" placeholder="密碼" required>
+                        <input type="password" name="memPwd" id="inputPassword" class="form-control" placeholder="密碼" required>
+                        <input type="hidden" name="action" value="login">
                         <div class="checkbox mb-3">
                             <label>
                                 <input type="checkbox" value="remember-me"> Remember me

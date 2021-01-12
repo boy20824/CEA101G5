@@ -44,7 +44,7 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 	private static final String UPDATEOM = 
 		"UPDATE ORDER_MASTER SET ORDER_STATUS = ? WHERE ORDER_ID = ?";
 	private static final String GET_ALL_BYMEMPHONE = 
-		"SELECT * FROM ORDER_MASTER WHERE MEM_PHONE = ?";
+		"SELECT * FROM ORDER_MASTER WHERE MEM_PHONE = ? ORDER BY ORDER_ID DESC";
 
 	@Override
 	public void insert(OrderMasterVO orderMasterVO) {
