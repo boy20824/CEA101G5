@@ -406,6 +406,10 @@ input[type=number] {
 	margin: 0px 10px;
 }
 
+.loginRequiredContainer {
+	margin: 35px 0px;
+}
+
 /* Product To Cart */
 .addToCartPopContainer {
 	background-color: rgba(40, 40, 40, 0.8);
