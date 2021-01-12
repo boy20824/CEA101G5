@@ -593,9 +593,15 @@
 	
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<c:out value="${check }"></c:out>
 <c:if test="${check=='check' }">
 <script>
 swal("新增成功", "ok", "success");
+</script>
+</c:if>
+<c:if test="${check=='no' }">
+<script>
+swal("新增失敗請重新確認", "fail", "error");
 </script>
 </c:if>
 
