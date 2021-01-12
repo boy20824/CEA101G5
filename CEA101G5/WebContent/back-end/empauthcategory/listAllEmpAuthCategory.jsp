@@ -45,7 +45,7 @@ pageContext.setAttribute("list", list);
 		</span> <span id="empMem">會員管理<br> <a
 			href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">
 				會員資料管理 </a> <a href="#"> 商家註冊審核 </a>
-		</span> <span id="empBack">後台管理<br> <a href="#"> 員工管理 </a> <a
+		</span> <span id="empBack">後台管理<br> <a href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp"> 員工管理 </a> <a
 			href="#"> 權限管理 </a>
 		</span>
 	</div>

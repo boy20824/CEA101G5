@@ -119,7 +119,7 @@
 			</table>
 			<br> <input type="hidden" name="action" value="insert">
 			<input type="submit" value="送出新增" class="btn btn-danger"> <a
-				href="<%=request.getContextPath()%>/back-end/back-empselect.jsp"
+				href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp"
 				class="btn btn-danger">回前頁</a>
 		</FORM>
 	</div>
