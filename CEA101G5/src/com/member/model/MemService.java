@@ -9,6 +9,15 @@ public class MemService {
 	public MemService() {
 		dao = new MemDAO();
 	}
+	
+	public MemVO easyAddMem(String memPhone, String memPwd, String memName) {
+		MemVO memVO = new MemVO();
+		memVO.setMemPhone(memPhone);
+		memVO.setMemPwd(memPwd);
+		memVO.setMemName(memName);
+		dao.easyInsert(memVO);
+		return memVO;
+	}
 
 	public MemVO addMem(String memPhone, String memPwd, String memName, String memAdderss, Integer memSex,
 			String memEmail, String memIdentity, Date memBirth, String memNick, Integer memLice , byte[] memPhoto,String memCardNumber,String memCardHolder,String memCardExpirationDate,String memCardCCV) {

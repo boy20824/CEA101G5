@@ -22,6 +22,7 @@ public class MemDAO implements MemDAO_interface {
 		}
 
 		private static final String INSERT_STMT = "INSERT INTO MEMBER (MEM_PHONE, MEM_PWD, MEM_NAME, MEM_ADDRESS, MEM_SEX, MEM_EMAIL, MEM_IDENTITY, MEM_BIRTHDAY, MEM_NICKNAME,MEM_LICENSE,MEM_PHOTO,MEM_CARDNUMBER,MEM_CARDHOLDER,MEM_CARDEXPIRATIONDATE,MEM_CARDCCV) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		private static final String EASY_INSERT_STMT = "INSERT INTO MEMBER (MEM_PHONE, MEM_PWD, MEM_NAME) VALUES (?, ?, ?)";
 		private static final String GET_ALL_STMT = "SELECT MEM_PHONE, MEM_PWD, MEM_NAME, MEM_ADDRESS, MEM_SEX, MEM_EMAIL, MEM_IDENTITY, to_char(MEM_BIRTHDAY,'yyyy-mm-dd') MEM_BIRTHDAY, MEM_NICKNAME, MEM_LICENSE, MEM_CONDITION, MEM_AUTHORITY, RECHARGE_TOTAL,MEM_PHOTO,MEM_CARDNUMBER,MEM_CARDHOLDER,MEM_CARDEXPIRATIONDATE,MEM_CARDCCV FROM MEMBER";
 		private static final String GET_ONE_STMT = "SELECT MEM_PHONE, MEM_PWD, MEM_NAME, MEM_ADDRESS, MEM_SEX, MEM_EMAIL, MEM_IDENTITY, to_char(MEM_BIRTHDAY,'yyyy-mm-dd') MEM_BIRTHDAY, MEM_NICKNAME, MEM_LICENSE, MEM_CONDITION, MEM_AUTHORITY, RECHARGE_TOTAL,MEM_PHOTO,MEM_CARDNUMBER,MEM_CARDHOLDER,MEM_CARDEXPIRATIONDATE,MEM_CARDCCV FROM MEMBER WHERE MEM_PHONE = ?";
 
@@ -32,6 +33,48 @@ public class MemDAO implements MemDAO_interface {
 		private static final String UPDATE_LICENSE = "UPDATE MEMBER SET MEM_LICENSE=?, MEM_CONDITION=? WHERE MEM_PHONE = ?";
 		private static final String UPDATE_CONDITION = "UPDATE MEMBER SET MEM_CONDITION=? WHERE MEM_PHONE = ?";
 
+		
+		public void easyInsert(MemVO memVO) {
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			try {
+				
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(EASY_INSERT_STMT);
+				
+				pstmt.setString(1, memVO.getMemPhone());
+				pstmt.setString(2, memVO.getMemPwd());
+				pstmt.setString(3, memVO.getMemName());
+			
+				
+				pstmt.executeUpdate();
+				
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			
+		}
+		
 		@Override
 		public void insert(MemVO memVO) {
 

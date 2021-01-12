@@ -282,6 +282,7 @@ public class QueNoServlet extends HttpServlet {
 
 //			try {
 				/*********************** 1.?��?��請�?��?�數 - 輸入?��式�?�錯誤�?��?? *************************/
+				String memName= req.getParameter("memName");
 				Integer queuenum = new Integer(req.getParameter("queuenum"));
 				String memphone = req.getParameter("memphone").trim();
 				Integer party = new Integer(req.getParameter("party").trim());
@@ -290,7 +291,7 @@ public class QueNoServlet extends HttpServlet {
 				Integer queueperiodid = new Integer(req.getParameter("queueperiodid").trim());
 				Integer queuelineno = new Integer(req.getParameter("queuelineno").trim());
 				Integer queuetableid = new Integer(req.getParameter("queuetableid").trim());
-								
+				String psw = "Enak1234";
 				QueNoVO queNoVO1 = new QueNoVO();
 				queNoVO1.setQueuenum(queuenum);
 				queNoVO1.setMemphone(memphone);
@@ -305,6 +306,16 @@ public class QueNoServlet extends HttpServlet {
 //String storeid = req.getParameter("storeid");
 				MemService memSvc = new MemService();
 				List<MemVO> memVO = memSvc.getAll();
+				for(int i = 0 ; i<memVO.size();i++) {
+					if(memVO.get(i).getMemPhone().equals(memphone)) {
+						req.setAttribute("check", "no");
+						break;
+					}else {
+						
+						req.setAttribute("check", "check");
+						count++;// 計數+1
+					}}
+				memSvc.easyAddMem(memphone, psw, memName);
 				
 				QuePeriodService quePeriodSvc = new QuePeriodService();
 				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
@@ -340,27 +351,18 @@ public class QueNoServlet extends HttpServlet {
 //						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
 //				succesView.forward(req, res);
 				//----------------------------
-				HttpSession session = req.getSession();
 //				session.setAttribute("pickupNo", ((TreeSet<Integer>) countSet).last());
+				HttpSession session = req.getSession();
 					session.setAttribute("quePeriodVO", quePeriodVO);
 					session.setAttribute("queTableVO", queTableVO);
 					session.setAttribute("queLineVO", queLineVO);
 					session.setAttribute("queNoVO", queNoVO);
 					session.setAttribute("storeid", storeid);
-					count++;// 計數+1
+					
 					session.setAttribute("pickupNo", count);
 //				req.setAttribute("pickupNo", count);
 //				req.setAttribute("quePeriodVO", quePeriodVO);
 //				count++;
-					for(int i = 0 ; i<memVO.size();i++) {
-						System.out.println(memVO.get(i).getMemPhone());
-						System.out.println(memphone);
-					if(memVO.get(i).getMemPhone().equals(memphone)) {
-						req.setAttribute("check", "no");
-						break;
-					}else {
-						req.setAttribute("check", "check");
-					}}
 				String url = "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

@@ -72,7 +72,7 @@
 							</div>
 							<div class="col-sm-1"></div>
 							<div class="col-sm-9">
-								<input class="form-control" id="name">
+								<input name="memName" class="form-control" id="name">
 							</div>
 						</div>
 						<div class="form-group row">

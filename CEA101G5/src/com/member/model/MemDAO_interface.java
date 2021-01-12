@@ -11,5 +11,6 @@ public interface MemDAO_interface {
 		public MemVO findByPrimaryKey(String memPhone);
 		public List<MemVO> getAll();
 		public void updateMemConditionBymemPhone(MemVO memVO);
+		public void easyInsert(MemVO memVO);
 
 }
