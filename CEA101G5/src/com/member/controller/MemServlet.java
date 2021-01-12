@@ -618,6 +618,9 @@ public class MemServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			System.out.println(req.getParameter("memPhone"));
+			
+			String refererUrlRaw = req.getHeader("referer");
+			String refererUrl = refererUrlRaw.substring(refererUrlRaw.indexOf("CEA101G5") + 8);
 
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
@@ -675,18 +678,20 @@ public class MemServlet extends HttpServlet {
 				session.setAttribute("storeLogin", storeLogin);
 				session.setAttribute("memLogin", memLogin);
 
-				try {
-					String location = (String) session.getAttribute("location");
-					if (location != null) {
-						session.removeAttribute("location");
-						res.sendRedirect(location);
-						return;
-					}
-				} catch (Exception ignored) {
-
-				}
-
-				res.sendRedirect(req.getContextPath() + "/front-customer-end/front/front.jsp");
+//				try {
+//					String location = (String) session.getAttribute("location");
+//					if (location != null) {
+//						session.removeAttribute("location");
+//						res.sendRedirect(location);
+//						return;
+//					}
+//				} catch (Exception ignored) {
+//
+//				}
+//
+//				res.sendRedirect(req.getContextPath() + "/front-customer-end/front/front.jsp");
+				
+				res.sendRedirect(req.getContextPath() + refererUrl);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
@@ -701,10 +706,14 @@ public class MemServlet extends HttpServlet {
 		 ************************************************/
 
 		if ("logout".equals(action)) {
+			
+			String refererUrlRaw = req.getHeader("referer");
+			String refererUrl = refererUrlRaw.substring(refererUrlRaw.indexOf("CEA101G5") + 8);
 
 			try {
 				session.invalidate();
-				res.sendRedirect(req.getContextPath() + "/front-customer-end/front/front.jsp");
+//				res.sendRedirect(req.getContextPath() + "/front-customer-end/front/front.jsp");
+				res.sendRedirect(req.getContextPath() + refererUrl);
 			} catch (Exception e) {
 				e.printStackTrace(System.err);
 			}
