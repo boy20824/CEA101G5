@@ -7,6 +7,7 @@ RestaurantService restSvc = new RestaurantService();
 String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
 pageContext.setAttribute("storeid", storeid);
 %>
+<%=storeid %>
     <html>
 
     <head>
@@ -74,19 +75,23 @@ pageContext.setAttribute("storeid", storeid);
 					d="M288 130.54V112h16c8.84 0 16-7.16 16-16V80c0-8.84-7.16-16-16-16h-96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h16v18.54C115.49 146.11 32 239.18 32 352h448c0-112.82-83.49-205.89-192-221.46zM496 384H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
          
         </svg>
+        
 			<p>外帶</p>
+			
+			
 
 		</span>
-            <span> <svg aria-hidden="true" focusable="false"
+            <span> <a href="<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do?action=storeGetQueNo&storeid=${storeid }"><svg aria-hidden="true" focusable="false" id="numPickup"
 				data-prefix="fas" data-icon="vote-yea"
 				class="svg-inline--fa fa-vote-yea fa-w-20" role="img"
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
             <path fill="#9C9C9C"
 					d="M608 320h-64v64h22.4c5.3 0 9.6 3.6 9.6 8v16c0 4.4-4.3 8-9.6 8H73.6c-5.3 0-9.6-3.6-9.6-8v-16c0-4.4 4.3-8 9.6-8H96v-64H32c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32h576c17.7 0 32-14.3 32-32v-96c0-17.7-14.3-32-32-32zm-96 64V64.3c0-17.9-14.5-32.3-32.3-32.3H160.4C142.5 32 128 46.5 128 64.3V384h384zM211.2 202l25.5-25.3c4.2-4.2 11-4.2 15.2.1l41.3 41.6 95.2-94.4c4.2-4.2 11-4.2 15.2.1l25.3 25.5c4.2 4.2 4.2 11-.1 15.2L300.5 292c-4.2 4.2-11 4.2-15.2-.1l-74.1-74.7c-4.3-4.2-4.2-11 0-15.2z"></path>
-        </svg>
-			<p>取號</p>
-
+        </svg></a>
 		</span>
+			<p>取號</p>
+			
+
             <span> <svg aria-hidden="true" focusable="false"
 				data-prefix="far" data-icon="calendar-check"
 				class="svg-inline--fa fa-calendar-check fa-w-14" role="img"
@@ -119,5 +124,4 @@ pageContext.setAttribute("storeid", storeid);
             <button type="submit">查看營業金流</button>
         </div>
     </body>
-
     </html>

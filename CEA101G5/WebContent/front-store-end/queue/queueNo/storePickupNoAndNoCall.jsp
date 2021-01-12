@@ -27,8 +27,9 @@
 
 	Integer pickupNo = (Integer) session.getAttribute("pickupNo");
 	String storeid = (String) session.getAttribute("storeid");
+	
+	
 %>
-<%=storeid %>
 <c:if test="${not empty errorMsgs}">
 	<font style="color: red">請修正以下錯誤:</font>
 	<ul>
@@ -46,43 +47,22 @@
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/bootstrap-grid.min.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/bootstrap.min.css" />
-<link rel="stylesheet"
+<link rel="stylesheet"	
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/bootstrap-reboot.min.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/storePickupNoAndNoCall.css" />
+<%-- 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/restaurant/css/css.css" /> --%>
+
 </head>
 <body>
 	<div class="container">
-		<!-- <div class="row reserve1"></div> -->
+		<div class="row reserve2"><a href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp">回設定頁</a></div>
 		<div class="row">
 			<div class="col-4 left">
 				<div class="row left-top">
 					<div class="row" id="display">
 						<div id="nowTime"></div>
 					</div>
-<!-- 					<div class="row"> -->
-<!-- 							<div class="nocurrent">目前取號</div> -->
-<%-- 							<c:forEach var="quePeriodVO" items="${quePeriodVO}"> --%>
-<%-- 								<c:choose> --%>
-<%-- 									<c:when --%>
-<%-- 										test="${quePeriodVO.queueperiodid ==1}"> --%>
-<%-- 										<div class="no_current">${quePeriodVO.queuenocurrent }</div> --%>
-<%-- 									</c:when> --%>
-<%-- 									<c:when --%>
-<%-- 										test="${quePeriodVO.queueperiodid ==2}"> --%>
-<%-- 										<div class="no_current">${quePeriodVO.queuenocurrent }</div> --%>
-<%-- 									</c:when> --%>
-<%-- 									<c:when --%>
-<%-- 										test="${quePeriodVO.queueperiodid ==3}"> --%>
-<%-- 										<div class="no_current">${quePeriodVO.queuenocurrent }</div> --%>
-<%-- 									</c:when> --%>
-<%-- 									<c:when --%>
-<%-- 										test="${quePeriodVO.queueperiodid ==4}"> --%>
-<%-- 										<div class="no_current">${quePeriodVO.queuenocurrent }</div> --%>
-<%-- 									</c:when> --%>
-<%-- 								</c:choose> --%>
-<%-- 							</c:forEach> --%>
-<!-- 						</div> -->
 				</div>
 				<form id="info">
 					<div class="row left-mid">
@@ -162,7 +142,8 @@
 				</form>
 			</div>
 
-			<!------------------------------------------------------>
+			<!-- 表格右邊 -->
+			<!-- 第一種桌子 -->
 			<div class="col-8 right">
 				<c:forEach var="queTableVO" items="${queTableVO}">
 					<div class="row right-li tabledata">
@@ -389,8 +370,7 @@
 
 	</div>
 </body>
-<script
-	src="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/js/jquery-3.4.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/js/jquery-3.4.1.min.js"></script>
 <script
 	src="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
 <script
@@ -435,7 +415,6 @@
 </script>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
@@ -610,47 +589,15 @@
 		}
 		
 	});
-</script>
-<script>
-function validateForm(form) {
-	if (!checkmemLice(form.memLice.value)) {
-	window.Swal.fire({
-	title: "錯誤",
-	text: "統一編號為8碼數字，請重新確認",
-	icon: "error",
-
-	});
-	event.preventDefault()
-	return (false);
-	}
-	Swal.fire({
-	title: "申請成功",
-	text: "管理員將會再審核成功後通知您",
-	icon: "success",
-	timer: 1000
-
-	});
-	$('.sign-up-form').on('submit', submit);
-	return (true);
-	}
-
-	function submit(e) {
-	$('.sign-up-container').addClass('submitted');
-	e.preventDefault();
-	$(".thanks-text").fadeIn(8000);
-
-	function checkmemLice(memLice) {
-	if (memLice.trim().length === 0) {
-	return (false);
-	} else if (memLice.trim().length !== 8) {
-	return (false);
-	} else
-	return (true);
-	}
-
+	
 	
 </script>
-</body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<c:if test="${check=='check' }">
+<script>
+swal("新增成功", "ok", "success");
+</script>
+</c:if>
 
 
 </html>

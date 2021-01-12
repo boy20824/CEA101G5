@@ -1,5 +1,5 @@
 *{
-	box-sizing: border-box;
+/* 	box-sizing: border-box; */
 
 }
 div.container{
@@ -7,6 +7,10 @@ div.container{
 div.row.reserve {
 /*   border: 1px red solid; */
   height: 75px;
+}
+div.row.reserve2 {
+/*   border: 1px red solid; */
+  height: 50px;
 }
 div.row.reserve1 {
 /*   border: 1px red solid; */
@@ -46,10 +50,12 @@ div.left {
 /*   border: blue 1px solid; */
   height: 800px;
 }
+div.left{
+}
 div.right{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 div.row.right-li{
   text-align: center;
