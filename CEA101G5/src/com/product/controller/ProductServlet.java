@@ -159,10 +159,10 @@ public class ProductServlet extends HttpServlet {
 			try {
 				productMSRP = new Integer(req.getParameter("productMSRP").trim());
 				if (productMSRP != null && productMSRP <= 0) {
-					errorMsgs.add("��隢撓�甇���!");
+					errorMsgs.add("價格請輸入正整數");
 				}
 			}catch (Exception e) {
-				errorMsgs.add("��隢撓�甇���!");
+				errorMsgs.add("價格請輸入正整數!");
 			}
 			
 			Integer categoryId = new Integer(req.getParameter("categoryId").trim());
@@ -171,10 +171,10 @@ public class ProductServlet extends HttpServlet {
 			try {
 				productPrice = new Integer(req.getParameter("productPrice").trim());
 				if (productPrice != null && productPrice <= 0) {
-					errorMsgs.add("��隢撓�甇���!");
+					errorMsgs.add("價格請輸入正整數!");
 				}
 			}catch (Exception e) {
-				errorMsgs.add("��隢撓�甇���!");
+				errorMsgs.add("價格請輸入正整數!");
 			}
 			
 			if (!errorMsgs.isEmpty()) {
@@ -185,7 +185,7 @@ public class ProductServlet extends HttpServlet {
 			}
 			Integer productStatus = new Integer(req.getParameter("productStatus").trim());
 			
-			//������pdate閬策隞��O  ��隞交���惇�折閬et�����
+			//因為原本的update要給他一個VO  所以所有屬性都要set才會過
 			ProductService pSvc = new ProductService();
 			pSvc.testU(productId,productName ,productDescription , productMSRP, productPrice,categoryId,productStatus );
 			
@@ -210,24 +210,24 @@ public class ProductServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			System.out.println("�脣�憓���");
+			System.out.println("ADD");
 
 			try {
-				/***********************1.��隢�� - 頛詨�撘�隤方���*************************/
+				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String productName = req.getParameter("productName").trim();
 				if (productName == null || productName.trim().length() == 0) {
-					errorMsgs.add("����迂: 隢蝛箇");
+					errorMsgs.add("商品名稱: 請勿空白");
 	            }
-				//��閬身摰�����澈銝剔��迂����?
+				//是否要設定不能與資料庫中的名稱重複?
 				
 				Integer productMSRP = null;
 				try {
 					productMSRP = new Integer(req.getParameter("productMSRP").trim());
 					if (productMSRP <= 0) {
-						errorMsgs.add("��隢‵甇���");
+						errorMsgs.add("價格請填正整數");
 					}
 				} catch (NumberFormatException e) {
-					errorMsgs.add("��隢‵甇���");
+					errorMsgs.add("價格請填正整數");
 				}
 				
 				
@@ -235,14 +235,14 @@ public class ProductServlet extends HttpServlet {
 				try {
 					productPrice = new Integer(req.getParameter("productPrice").trim());
 					if (productPrice <= 0) {
-						errorMsgs.add("��隢‵甇���");
+						errorMsgs.add("價格請填正整數");
 					}
 					if (productPrice > productMSRP) {
-						errorMsgs.add("��隢���");
+						errorMsgs.add("售價請低於原價");
 					}
 					
 				} catch (NumberFormatException e) {
-					errorMsgs.add("��隢‵甇���");
+					errorMsgs.add("價格請填正整數");
 				}
 				
 				Integer categoryId = new Integer(req.getParameter("categoryId"));
@@ -260,7 +260,7 @@ public class ProductServlet extends HttpServlet {
 				pVO.setProductDescription(productDescription);
 				
 
-				// Send the use back to the form, if there were errors �閬���遙銝��隤�
+				// Send the use back to the form, if there were errors 只要上面有任一錯誤
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("pVO", pVO); // ���撓��撘隤斤�mpVO�隞�,銋�req(�見���������, addEmp����ORM���雿撓�����)
 					RequestDispatcher failureView = req
@@ -335,16 +335,16 @@ public class ProductServlet extends HttpServlet {
 					}
 				}
 				
-				/***************************3.�憓���,皞��漱(Send the Success view)***********/
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/back-end/shopProductListAll.jsp";
-				System.out.println("����&���憓���");
-				RequestDispatcher successView = req.getRequestDispatcher(url); // �憓����漱listAllEmp.jsp
+				System.out.println("新增成功");
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
-				/***************************�隞���隤方���**********************************/
+				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				System.out.println("PServlet add��");
+				System.out.println("新增失敗");
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/back-end/shopProductListAll.jsp");
 				failureView.forward(req, res);

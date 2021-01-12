@@ -11,6 +11,7 @@ import com.queueline.model.*;
 import com.queueno.model.*;
 import com.queueperiod.model.*;
 import com.queuetable.model.*;
+import com.member.model.*;
 
 public class QueNoServlet extends HttpServlet {
 
@@ -278,33 +279,13 @@ public class QueNoServlet extends HttpServlet {
 
 		if ("storeInsert".equals(action)) {
 			System.out.println("startinsert");
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				/*********************** 1.?��?��請�?��?�數 - 輸入?��式�?�錯誤�?��?? *************************/
 				Integer queuenum = new Integer(req.getParameter("queuenum"));
 				String memphone = req.getParameter("memphone").trim();
-				if (memphone == null || memphone.trim().length() == 0) {
-					errorMsgs.add("請勿空白");
-				} else if (!memphone.trim().matches(memphone)) { // 以�?�練習正???(�?)表示�?(regular-expression)
-					errorMsgs.add("?��?��?��??��?��?�碼");
-				}
-				Integer party = null;
-				try {
-					party = new Integer(req.getParameter("party").trim());
-				} catch (NumberFormatException e) {
-					errorMsgs.add("??��?�到party");
-				}
-				Timestamp queuenotime = null;
-				try {
-					queuenotime = strToTsp(req.getParameter("queuenotime"));
-					System.out.println(queuenotime);
-				} catch (IllegalArgumentException e) {
-					errorMsgs.add("?��??�到?��???!");
-				}
+				Integer party = new Integer(req.getParameter("party").trim());
+				Timestamp queuenotime = strToTsp(req.getParameter("queuenotime"));
 				String storeid = req.getParameter("storeid").trim();
 				Integer queueperiodid = new Integer(req.getParameter("queueperiodid").trim());
 				Integer queuelineno = new Integer(req.getParameter("queuelineno").trim());
@@ -322,6 +303,8 @@ public class QueNoServlet extends HttpServlet {
 				
 //----------------------------------------------------------------------------
 //String storeid = req.getParameter("storeid");
+				MemService memSvc = new MemService();
+				List<MemVO> memVO = memSvc.getAll();
 				
 				QuePeriodService quePeriodSvc = new QuePeriodService();
 				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
@@ -336,14 +319,6 @@ public class QueNoServlet extends HttpServlet {
 				QueNoService queNoSvc = new QueNoService();
 				
 				List<QueNoVO> queNoVO = queNoSvc.getQueNoByStoreId(storeid);
-				System.out.println("-----");
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("queNoVO", queNoVO);
-					RequestDispatcher failureView = req.getRequestDispatcher(
-							req.getContextPath() + "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
-					failureView.forward(req, res);
-					return;
-				}
 //-------------------------------------------------------------------------------
 //				System.out.print("??��?��?��??");
 
@@ -365,7 +340,6 @@ public class QueNoServlet extends HttpServlet {
 //						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
 //				succesView.forward(req, res);
 				//----------------------------
-				
 				HttpSession session = req.getSession();
 //				session.setAttribute("pickupNo", ((TreeSet<Integer>) countSet).last());
 					session.setAttribute("quePeriodVO", quePeriodVO);
@@ -378,22 +352,26 @@ public class QueNoServlet extends HttpServlet {
 //				req.setAttribute("pickupNo", count);
 //				req.setAttribute("quePeriodVO", quePeriodVO);
 //				count++;
+					for(int i = 0 ; i<memVO.size();i++) {
+						System.out.println(memVO.get(i).getMemPhone());
+						System.out.println(memphone);
+					if(memVO.get(i).getMemPhone().equals(memphone)) {
+						req.setAttribute("check", "no");
+						break;
+					}else {
+						req.setAttribute("check", "check");
+					}}
 				String url = "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-				if(errorMsgs.isEmpty()) {
-				req.setAttribute("check", "check");
-				}else {
-					req.setAttribute("check", "no");
-				}
 				/*************************** ?��他可?��??�錯誤�?��?? **********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-//				res.sendRedirect((req.getContextPath() + "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp"));
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage());
+////				res.sendRedirect((req.getContextPath() + "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp"));
+//				RequestDispatcher failureView = req
+//						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 
 		if ("insert".equals(action)) {

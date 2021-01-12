@@ -75,7 +75,7 @@
         <div class="detail">
             <img src="<%=request.getContextPath()%>/front-customer-end/customerorder/餐廳.jpg" alt="">
             <div class="detailMenu">
-                <h1>餐廳名稱</h1>
+                <h1>${restaurantSvc.getOneRestaurant(foodOrderVO.storeId).storeName}</h1>
 				<!--取得總價 -->
                 <c:set var="total" value="${0}" />
 				<c:forEach var="foodOrderDetailVO" items="${foodOrderDetailSvc.getAll(foodOrderVO.getFoodOrderId())}">

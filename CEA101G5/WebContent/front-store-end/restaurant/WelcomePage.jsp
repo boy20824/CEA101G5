@@ -7,7 +7,6 @@ RestaurantService restSvc = new RestaurantService();
 String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
 pageContext.setAttribute("storeid", storeid);
 %>
-<%=storeid %>
     <html>
 
     <head>
@@ -77,9 +76,11 @@ pageContext.setAttribute("storeid", storeid);
         </svg>
         
 			<p>外帶</p>
-			
-			
-
+			<ul>
+			<li>
+				<a href="<%=request.getContextPath()%>/front-store-end/foodorder/orderlist.jsp">外帶管理</a>
+			</li>
+			</ul>
 		</span>
             <span> <a href="<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do?action=storeGetQueNo&storeid=${storeid }"><svg aria-hidden="true" focusable="false" id="numPickup"
 				data-prefix="fas" data-icon="vote-yea"
@@ -109,7 +110,11 @@ pageContext.setAttribute("storeid", storeid);
        
         </svg>
 			<p>金流</p>
-
+			<ul>
+			<li>
+				<a href="<%=request.getContextPath()%>/front-store-end/cashflow/cashflow.jsp">營收查詢</a>
+			</li>
+			</ul>
 		</span> <label for="side-menu-switch"> <i class="fas fa-angle-right"></i>
 		</label>
         </div>

@@ -4,40 +4,68 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.min.css">
+<title>商城問與答</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back-end/emp/css/css.css">
 <style>
-a {
-    color:#FF615E;
+.shopQA{
+ maigin-left:500px;
+
 }
- li {list-style-type:none;
- text-align: center;
- }
-  table#table-1 {
-	width: 450px;
-	background-color: #CCCCFF;
-	margin-top: 5px;
-	margin-bottom: 10px;
-    border: 3px ridge Gray;
-    height: 80px;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+
 </style>
 </head>
-<body bgcolor='white' >
+<body>
+	<div id="mySidebar" class="sidebar">
+		<div>
+			<img id="logo" src="<%=request.getContextPath()%>/front-end/shared/logoMain2.png" class="img-circle"
+				alt="User Image">
+		</div>
+		<br><br><br><br><br>
+		<span id="empFront">首頁<br>
+			<a href="#"> FAQ</a>
+			<a href="#"> 評論審核</a>
+			<a href="#"> 最新消息管理</a>
+		</span> 
+		<span id="empShop">商城管理<br>
+			<a href="<%=request.getContextPath()%>/back-end/shopOrderMasterListAll.jsp">訂單處理</a> 
+			<a href="<%=request.getContextPath()%>/back-end/shopProductListAll.jsp"> 商品管理</a>
+			<a href="<%=request.getContextPath()%>/back-end/productqa/select_productqa_page.jsp">商品問與答</a>
+			<a href="<%=request.getContextPath()%>/back-end/shopProductReviewListAll.jsp"> 商品評價管理</a>
+			<a href="#">廣告設置管理 </a> 
+			<a href="#">促銷活動設置 </a>
+		</span>
+		<span id="empStore">餐廳管理<br> 
+			<a href="<%=request.getContextPath()%>/back-end/storeChar/listAllStoreChar.jsp">餐廳分類管理</a> 
+			<a href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp"> 餐廳資訊管理 </a>
+			<a href="<%=request.getContextPath()%>/back-end/restaurant/storeapply.jsp"> 餐廳申請審核 </a>
+		</span> 
+		<span id="empMem">會員管理<br> 
+			<a href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">會員資料管理</a>
+			<a href="#">會員儲值管理</a>
+		</span>
+		<span id="empBack">後台管理<br> 
+			<a href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp"> 員工管理 </a>
+			<a href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理</a>
+		</span>
+	</div>
+	<div>
+		<c:if test="${empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/EmpLogin.jsp"
+				id="sidebarlogin"> 員工登入/登出 </a>
+		</c:if>
+		<c:if test="${not empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin">員工登入/登出 </a>
+		</c:if>
+
+	</div>
+	<div id=backSidebar></div>
+<div class="shopQA">
 <%-- 錯誤表列 --%>
 <div align="center">
 <c:if test="${not empty errorMsgs}">
@@ -49,25 +77,21 @@ a {
 	</ul>
 </c:if>
 <br><br><br>
-<li><a href='<%=request.getContextPath() %>/back-end/productqa/listAllProductQA.jsp'>查看全部問答 </a>  <br><br></li>
-<li><a href='<%=request.getContextPath() %>/back-end/productqa/listAllProductQANull.jsp'>未回覆 </a>  <br><br></li>
-</div>
-<br><br>
-<ul>
-  
-  <li>
+
+<button class="btn btn-danger"><a href='<%=request.getContextPath() %>/back-end/productqa/listAllProductQA.jsp'>查看全部問答 </a></button>
+<button class="btn btn-danger"><a href='<%=request.getContextPath() %>/back-end/productqa/listAllProductQANull.jsp'>未回覆 </a></button>
+
+  <div>
     <FORM  METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/productqa/productqa.do" >
         <b>輸入問與答編號 (如1):</b>
         <input type="text" name="pqaId">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出" class="btn btn-danger">
     </FORM>
-  </li>
+  </div>
 
   <jsp:useBean id="productQASvc" scope="page" class="com.productqa.model.ProductQAService" />
-     <br>
-       <br>
-  <li>
+  <div>
      <FORM  METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/productqa/productqa.do" >
        <b>選擇問與答編號:</b>
        <select size="1" name="pqaId">
@@ -78,36 +102,15 @@ a {
        <input type="hidden" name="action" value="getOne_For_Display">
        <input type="submit" value="送出" class="btn btn-danger">
     </FORM>
-  </li>
-  
-  <br>
-    <br>
-<!--       <li> -->
-<%--      <FORM  METHOD="post" ACTION="<%=request.getContextPath() %>/back-end/productqa/productqa.do" > --%>
-<!--        <b>選擇員工編號:</b> -->
-<!--        <select size="1" name="pqaId"> -->
-<%--          <c:forEach var="productQAVO" items="${productQASvc.AllQA}" >  --%>
-<%--           <option value="${productQAVO.pqaId}">${productQAVO.productId} --%>
-<%--          </c:forEach>    --%>
-<!--        </select> -->
-<!--        <input type="hidden" name="action" value="getOne_For_Display"> -->
-<!--        <input type="submit" value="送出" class="btn btn-danger"> -->
-<!--     </FORM> -->
-<!--   </li> -->
-</ul>
-<ul>
-  <li><a href='<%=request.getContextPath() %>/back-end/productqa/addProductQA.jsp'>Add</a> a new ProductQA.</li>
-</ul>
+  </div>
+<div>
+  <button class="btn btn-danger"><a href='<%=request.getContextPath() %>/back-end/productqa/addProductQA.jsp'>Add a new ProductQA.</a></button>
+</div>
+</div>
+</div>
 
-<!-- <h3>員工管理</h3> -->
-
-<!-- <ul> -->
-<!--   <li><a href='addEmp2.jsp'>Add</a> a new Emp.</li> -->
-<!-- </ul> -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</body>
-</html>
 </body>
 </html>

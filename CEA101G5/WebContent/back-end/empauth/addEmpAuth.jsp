@@ -18,7 +18,13 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back-end/empauthcategory/css/css.css">
 <title>員工權限資料新增</title>
-
+<style>
+.addEmpAuthBlock {
+	width: 30%;
+	margin-left: 750px;
+	margin-top: 20px;
+}
+</style>
 </head>
 <body>
 	<div id="mySidebar" class="sidebar">
@@ -75,32 +81,41 @@
 			</c:forEach>
 		</ul>
 	</c:if>
+	<div class="addEmpAuthBlock">
+		<FORM METHOD="post"
+			ACTION="<%=request.getContextPath()%>/back-end/empauth/ea.do"
+			name="form1">
+			<table class="table table-striped">
+				<td class="bg-danger" colspan="2"
+					style="color: white; text-align: center;">新增員工權限</td>
+				<tr>
+					<td>員工編號:</td>
+					<jsp:useBean id="empSvc" scope="page"
+						class="com.emp.model.EmpService" />
+					<td><select size="1" name="emp_id">
+							<c:forEach var="empVO" items="${empSvc.all}">
+								<option value="${empVO.emp_id}"
+									${(empAuthVO.emp_id == empVO.emp_id)? 'selected':'' }>${empVO.emp_name}
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+					<td>權限編號:</td>
+					<jsp:useBean id="empAuthCateSvc" scope="page"
+						class="com.empauthcategory.model.EmpAuthCategoryService" />
+					<td><select size="1" name="auth_no">
+							<c:forEach var="empAuthCategoryVO" items="${empAuthCateSvc.all}">
+								<option value="${empAuthCategoryVO.auth_no}"
+									${(empAuthVO.auth_no == empAuthCategoryVO.auth_no)? 'selected':'' }>${empAuthCategoryVO.auth_name}
+							</c:forEach>
+					</select></td>
+				</tr>
 
-	<FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/back-end/empauth/ea.do"
-		name="form1">
-		<table>
-			<tr>
-				<td>員工編號:</td>
-				<td><input type="TEXT" name="emp_id" size="45"
-					value="<%=(eaVO == null) ? "EMP0001" : eaVO.getEmp_id()%>" /></td>
-			</tr>
-			<tr>
-				<td>權限編號:</td>
-				<jsp:useBean id="empAuthCateSvc" scope="page"
-					class="com.empauthcategory.model.EmpAuthCategoryService" />
-				<td><select size="1" name="auth_no">
-						<c:forEach var="empAuthCategoryVO" items="${empAuthCateSvc.all}">
-							<option value="${empAuthCategoryVO.auth_no}"
-								${(empAuthVO.auth_no == empAuthCategoryVO.auth_no)? 'selected':'' }>${empAuthCategoryVO.auth_name}
-						</c:forEach>
-				</select></td>
-			</tr>
-
-		</table>
-		<br> <input type="hidden" name="action" value="insert"> <input
-			type="submit" value="送出新增">
-	</FORM>
+			</table>
+			<br> <input type="hidden" name="action" value="insert">
+			<input type="submit" value="送出新增" class="btn btn-danger" style="text-align:center;">
+		</FORM>
+	</div>
 </body>
 
 

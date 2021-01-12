@@ -20,34 +20,52 @@
 
 </head>
 
-<body bgcolor='white'>
+<body>
 	<div id="mySidebar" class="sidebar">
 		<div>
-			<img id="logo" src="./image/Logo2 (2).png" class="img-circle"
+			<img id="logo" src="<%=request.getContextPath()%>/front-end/shared/logoMain2.png" class="img-circle"
 				alt="User Image">
 		</div>
-		<br> <br> <br> <br> <br> <span id="empFront">首頁<br>
-			<a href="#"> FAQ</a> <a href="#"> 評論審核</a> <a href="#"> 最新消息管理</a>
-		</span> <span id="empShop">商城管理<br> <a href="#"> 商品管理</a> <a
-			href="#">訂單處理 </a> <a href="#">回覆買家留言 </a> <a href="#">廣告設置管理 </a> <a
-			href="#">促銷活動設置 </a>
-		</span> <span id="empStore">餐廳管理<br> <a
-			href="<%=request.getContextPath()%>/back-end/storeChar/listAllStoreChar.jsp">
-				餐廳分類管理 </a> <a href="#"> 餐廳資訊管理 </a> <a href="#"> 餐廳申請審核 </a>
-		</span> <span id="empMem">會員管理<br> <a
-			href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">
-				會員資料管理 </a> <a href="#"> 商家註冊審核 </a>
-		</span> <span id="empBack">後台管理<br> <a href="#"> 員工管理 </a>
+		<br><br><br><br><br>
+		<span id="empFront">首頁<br>
+			<a href="#"> FAQ</a>
+			<a href="#"> 評論審核</a>
+			<a href="#"> 最新消息管理</a>
+		</span> 
+		<span id="empShop">商城管理<br>
+			<a href="<%=request.getContextPath()%>/back-end/shopOrderMasterListAll.jsp">訂單處理</a> 
+			<a href="<%=request.getContextPath()%>/back-end/shopProductListAll.jsp"> 商品管理</a>
+			<a href="<%=request.getContextPath()%>/back-end/productqa/select_productqa_page.jsp">商品問與答</a>
+			<a href="<%=request.getContextPath()%>/back-end/shopProductReviewListAll.jsp"> 商品評價管理</a>
+			<a href="#">廣告設置管理 </a> 
+			<a href="#">促銷活動設置 </a>
+		</span>
+		<span id="empStore">餐廳管理<br> 
+			<a href="<%=request.getContextPath()%>/back-end/storeChar/listAllStoreChar.jsp">餐廳分類管理</a> 
+			<a href="<%=request.getContextPath()%>/back-end/restaurant/listAllStore.jsp"> 餐廳資訊管理 </a>
+			<a href="<%=request.getContextPath()%>/back-end/restaurant/storeapply.jsp"> 餐廳申請審核 </a>
+		</span> 
+		<span id="empMem">會員管理<br> 
+			<a href="<%=request.getContextPath()%>/back-end/member/listAllMem.jsp">會員資料管理</a>
+			<a href="#">會員儲值管理</a>
+		</span>
+		<span id="empBack">後台管理<br> 
+			<a href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp"> 員工管理 </a>
+			<a href="<%=request.getContextPath()%>/back-end/empauthcategory/listAllEmpAuthCategory.jsp">權限管理</a>
 		</span>
 	</div>
 	<div>
+		<c:if test="${empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/EmpLogin.jsp"
+				id="sidebarlogin"> 員工登入/登出 </a>
+		</c:if>
+		<c:if test="${not empty sessionScope.empLogin}">
+			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin">員工登入/登出 </a>
+		</c:if>
 
-		<a href="#" id="login"> 員工登入/登出 </a>
 	</div>
 	<div id=backSidebar></div>
 	<div>
-
-
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">請修正以下錯誤:</font>
@@ -156,7 +174,7 @@
 				<input type="hidden" name="memSex" value="<%=memVO.getMemSex()%>">
 				<input type="hidden" name="memIdentity" value="<%=memVO.getMemIdentity()%>"> 
 				<input type="hidden" name="memBirth" value="<%=memVO.getMemBirth()%>"> 
-				<input type="submit" value="送出修改">
+				<input type="submit" value="送出修改" class="btn btn-danger">
 			</div>
 				
 		</FORM>

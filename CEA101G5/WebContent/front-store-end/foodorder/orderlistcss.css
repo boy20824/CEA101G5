@@ -55,7 +55,7 @@ h1{
     background-color: gray;
     font-size: 1.5em;
     padding: 0.3em;
-    border-radius: 1em; 
+    width:26.5em;
 }
 .orderMenu:hover{
     color:orange;
@@ -65,9 +65,9 @@ span{
     width: 9em;
 }
 .menu{
-    border-radius: 1em;
     border:0.3em solid black;
     display:none;
+    width:40em;
 }
 p{
     display:flex;
