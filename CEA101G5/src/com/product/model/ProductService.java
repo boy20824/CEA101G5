@@ -90,6 +90,10 @@ public class ProductService {
 		return productVO;
 	}
 	
+	public String getPID() {
+		return dao.getPID();
+	}
+	
 	public static void main(String[] args) {
 		ProductService productService = new ProductService();
 		
