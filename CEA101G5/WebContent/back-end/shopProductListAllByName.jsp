@@ -28,7 +28,13 @@
 <html>
 <head>
 <title>所有商品資料</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back-end/emp/css/css.css">
 <style>
 
   table#table-1 {

@@ -1,26 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.product.model.*"%>
-
-<%
-	session.getAttribute("memLogin");
-%>
-
-<jsp:useBean id="orderDetailService" scope="page" class="com.orderdetail.model.OrderDetailService"/>
-<jsp:useBean id="productService" scope="page" class="com.product.model.ProductService"/>
 
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EatNAK | 查詢訂單</title>
+<title>EatNAK | 管理後台</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/shopOrderHistory/shopOrderHistoryCSS.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/shopBackEndPromotion/shopBackEndPromotionCSS.css">
 </head>
 
 <body>
@@ -142,93 +134,123 @@
         </div>
     </div>
 
-	<!-- Order History : Main -->
-	<div class="container orderHistoryContainer">
-		<c:forEach var="orderMasterVO" items="${orderMasterVOList}">
-			<div class="orderHistoryOrder">
-				<table>
-					<tr>
-						<td class="formTitleColor" style="width: 140px;">訂單編號</td>
-						<td>${orderMasterVO.getOrderId()}</td>
-						<td class="formTitleColor" style="width: 88px;">訂購日期</td>
-						<td>${orderMasterVO.getOrderDate()}</td>
-						<td class="formTitleColor" style="width: 88px;">會員編號</td>
-						<td>${orderMasterVO.getMemPhone()}</td>
-					</tr>
-					<tr>
-						<td class="formTitleColor">收件人姓名</td>
-						<td>${orderMasterVO.getRecipientName()}</td>
-						<td class="formTitleColor">行動電話</td>
-						<td>${orderMasterVO.getRecipientMobNumber()}</td>
-						<td class="formTitleColor">室內電話</td>
-						<td>${orderMasterVO.getRecipientTelNumber()}</td>
-					</tr>
-					<tr>
-						<td class="formTitleColor">收件人電子郵件</td>
-						<td colspan="3">${orderMasterVO.getRecipientEmail()}</td>
-						<td class="formTitleColor">統一編號</td>
-						<td>${orderMasterVO.getBusinessNumber()}</td>
-					</tr>
-						<tr>
-						<td class="formTitleColor">配送方式</td>
-						<c:if test = "${orderMasterVO.getDeliveryMethod() == 0}">
-							<td>宅配</td>
-						</c:if>
-						<c:if test = "${orderMasterVO.getDeliveryMethod() == 1}">
-							<td>電子郵件</td>
-						</c:if>
-						<td class="formTitleColor">配送地址</td>
-						<td colspan="4">${orderMasterVO.getDeliveryAddress()}</td>
-					</tr>
-					<tr>
-						<td class="formTitleColor">訂單金額</td>
-						<td>$${orderMasterVO.getInvoicePrice()}</td>
-						<td class="formTitleColor">結帳日期</td>
-						<td>${orderMasterVO.getInvoicePaidDate()}</td>
-						<td class="formTitleColor">訂單狀態</td>
-						<c:if test = "${orderMasterVO.getOrderStatus() == 0}">
-							<td style="color: red;">等待付款中</td>
-						</c:if>
-						<c:if test = "${orderMasterVO.getOrderStatus() == 1}">
-							<td style="color: red;">訂單已確認</td>
-						</c:if>
-						<c:if test = "${orderMasterVO.getOrderStatus() == 2}">
-							<td style="color: red;">訂單處理中</td>
-						</c:if>
-						<c:if test = "${orderMasterVO.getOrderStatus() == 3}">
-							<td style="color: red;">訂單已出貨</td>
-						</c:if>
-						<c:if test = "${orderMasterVO.getOrderStatus() == 4}">
-							<td style="color: red;">取消</td>
-						</c:if>
-					</tr>
-					<tr>
-						<td class="formTitleColor">訂單備註</td>
-						<td colspan="5">${orderMasterVO.getOrderMemo()}</td>
-					</tr>
-				</table>
-			</div>
-			<div class="orderHistoryItems">
-				<table>
-						<tr style="background-color: #f9f9ff;">
-							<td class="formTitleColor">訂單商品</td>					
-							<td class="formTitleColor">商品名稱</td>
-							<td class="formTitleColor tdAlignCenter">單價</td>
-							<td class="formTitleColor tdAlignCenter">數量</td>
-						</tr>
-					<c:forEach var="orderDetailVO" items="${orderDetailService.getAllOrderDetail(orderMasterVO.getOrderId())}">
-						<tr>
-							<td class="tdAlignCenter"><img src="<%=request.getContextPath()%>/shop/productphotoreader.do?productId=${orderDetailVO.getProductId()}"></td>					
-							<td>${productService.getProductById(orderDetailVO.getProductId()).getProductName()}</td>
-							<td class="tdAlignCenter">$${orderDetailVO.getProductPrice()}</td>
-							<td class="tdAlignCenter">${orderDetailVO.getQuantity()}</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
-		</c:forEach>
+	<!-- Promotion -->
+	
+	
+	<div class="container searchCriteriaBtnContainer">
+<!-- 		<div class="btn-group">
+  			<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">商品分類</button>
+  			<ul class="dropdown-menu">
+    			<li><a class="dropdown-item" href="#">環保餐具</a></li>
+    			<li><a class="dropdown-item" href="#">美食餐卷</a></li>
+			    <li><a class="dropdown-item" href="#">跑腿服務</a></li>
+  			</ul>
+		</div> -->
+		<div class="btn-group">
+  			<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">商品編號</button>
+  			<ul class="dropdown-menu">
+    			<li><a class="dropdown-item" href="#">ENP0001</a></li>
+    			<li><a class="dropdown-item" href="#">ENP0002</a></li>
+			    <li><a class="dropdown-item" href="#">ENP0003</a></li>
+  			</ul>
+		</div>
+		<div class="btn-group">
+  			<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">商品名稱</button>
+  			<ul class="dropdown-menu">
+    			<li><a class="dropdown-item" href="#">GreeGreen不鏽鋼餐具套裝8件入</a></li>
+    			<li><a class="dropdown-item" href="#">GreeGreen不鏽鋼泡麵碗 附保鮮蓋 1300ML 可直接爐上加熱</a></li>
+			    <li><a class="dropdown-item" href="#">GreeGreen分離式玻璃泡茶杯 400ML</a></li>
+  			</ul>
+		</div>
+		<div class="btn-group">
+			<button type="button" class="btn btn-danger">加入商品</button>
+		</div>
+		<div class="btn-group">
+			<button type="button" class="btn btn-warning">移除商品</button>
+		</div>
 	</div>
-
+	
+	<div class="container">
+		<form class="row g-3">
+			<div class="col-md-2">
+				<label for="" class="form-label">產品編號</label>
+				<input type="text" readonly class="form-control" value="ENP0001">
+			</div>
+			<div class="col-md-8">
+				<label for="" class="form-label">產品名稱</label>
+				<input type="text" readonly class="form-control" value="GreeGreen不鏽鋼餐具套裝8件入">
+			</div>
+			<div class="col-md-2">
+				<label for="" class="form-label">產品狀態</label>
+				<input type="text" readonly class="form-control" value="開啟">
+			</div>
+			<div class="col-md-3">
+				<label for="" class="form-label">產品分類</label>
+				<input type="text" readonly class="form-control" value="環保餐具">
+			</div>
+			<div class="col-md-3">
+				<label for="" class="form-label">產品原價</label>
+				<input type="text" readonly class="form-control" value="$399">
+			</div>
+			<div class="col-md-3">
+				<label for="" class="form-label">產品售價</label>
+				<input type="text" readonly class="form-control" value="$199">
+			</div>
+			<div class="col-md-3 divForPromoPrice">
+				<label for="" class="form-label" style="color: red;">請輸入產品促銷售價</label>
+				<span>$</span>
+				<input id="promoPrice" type="number" class="form-control" value="">
+			</div>
+		</form>
+	</div>
+	
+	<div class="container tableContainer">
+		<div>
+			<table class="table table-hover caption-top">
+				<caption>促銷產品管理</caption>
+				<tr class="table-success">
+					<td>商品圖片</td>
+					<td>商品編號</td>
+					<td>商品介紹</td>
+					<td>商品原價</td>
+					<td>商品售價</td>
+					<td>商品促銷售價</td>
+				</tr>
+				<tr class="rounded">
+					<td><img class="" src="https://img.feebee.com.tw/ip/372/Q2qsyAwOQQW3C5laqZoDA8M8WjJmdmrJazroMKDmJDg=/https://s.yimg.com/zp/MerchandiseImages/9887EBF613-SP-6973593.jpg"></td>
+					<td>ENP0001</td>
+					<td>GreeGreen不鏽鋼餐具套裝8件入</td>
+					<td>$399</td>
+					<td>$199</td>
+					<td>$149</td>
+				</tr>
+				<tr class="rounded">
+					<td><img class=""  src="https://img.feebee.com.tw/ip/372/Q2qsyAwOQQW3C5laqZoDA8M8WjJmdmrJazroMKDmJDg=/https://s.yimg.com/zp/MerchandiseImages/9887EBF613-SP-6973593.jpg"></td>
+					<td>ENP0001</td>
+					<td>GreeGreen不鏽鋼餐具套裝8件入</td>
+					<td>$399</td>
+					<td>$199</td>
+					<td>$149</td>
+				</tr>
+				<tr class="rounded">
+					<td><img class=""  src="https://img.feebee.com.tw/ip/372/Q2qsyAwOQQW3C5laqZoDA8M8WjJmdmrJazroMKDmJDg=/https://s.yimg.com/zp/MerchandiseImages/9887EBF613-SP-6973593.jpg"></td>
+					<td>ENP0001</td>
+					<td>GreeGreen不鏽鋼餐具套裝8件入</td>
+					<td>$399</td>
+					<td>$199</td>
+					<td>$149</td>
+				</tr>
+				<tr class="table-default">
+					<td><img class="rounded"  src="https://img.feebee.com.tw/ip/372/Q2qsyAwOQQW3C5laqZoDA8M8WjJmdmrJazroMKDmJDg=/https://s.yimg.com/zp/MerchandiseImages/9887EBF613-SP-6973593.jpg"></td>
+					<td>ENP0001</td>
+					<td>GreeGreen不鏽鋼餐具套裝8件入</td>
+					<td>$399</td>
+					<td>$199</td>
+					<td>$149</td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	
     <!-- Footer -->
     <footer class="bd-footer p-3 p-md-5 mt-5 bg-warning text-center text-sm-start">
@@ -253,7 +275,7 @@
     </footer>
 
     <!-- Javascript  -->
-    <script src="<%=request.getContextPath()%>/front-end/shopOrderHistory/shopOrderHistoryScript.js"></script>
+    <script src="<%=request.getContextPath()%>/back-end/shopBackEndPromotion/shopBackEndPromotionScript.js"></script>
     
 </body>
 

@@ -15,68 +15,20 @@
 <html>
 <head>
 <title>所有商品訂單</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back-end/emp/css/css.css">
 <style>
+.main{
+width:89%;
+margin-left:185px;
 
-  table#table-1 {
-	background-color: #f3853d;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
+}
 
-<style>
-  table {
- 	width: 900px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	text-align:center;
-  }
-  table, th, td {
-     border: 1px solid #404040; 
-     border-spacing: 0; 
-     background-color: #F6F6F6;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-  .button{
-	  background-color:#FF615F;
-	  border-radius: 5px;
-	  border:1px;
-	  color:white;
-	  font-family: #606060;
-	  text-decoration:none;
-  }
-  body{
-  	magin:0;
-  	padding:0;
-  	text-align:center;
-/*   	background-image: url("images/r1.jpg"); */
-  	background-size: cover;
-  	background-attachment: fixed;
-  	background-position: center;
-  	background-repeat: no-repeat;
-  }
-  .info{
-  	text-align: center;
-  	margin: 50px auto;
-  }
-  .tableborder{
-  background-color: white;
-  margin:20px;
-  }
 </style>
 
 </head>
@@ -126,7 +78,7 @@
 	</div>
 	<div id=backSidebar></div>
 
-
+<div class="main">
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 		<c:forEach var="message" items="${errorMsgs}">
@@ -137,8 +89,8 @@
 <div class="tableborder">
 <%@ include file="/front-end/util/page1.file" %>
 
-<table class="info">
-	<tr>
+<table class="table table-striped">
+	<tr class="bg-danger">
 		<th>訂單編號</th>
 		<th>訂單日期</th>
 		<th>會員編號</th>
@@ -237,7 +189,7 @@
 					</td>
 				</FORM>
 			</tr>
-			
+		
 		
 	</c:forEach>
 </table>
@@ -249,5 +201,6 @@
 	<input type="text" name="orderId">
 	<input type="submit" value="送出" class="button">
 </FORM>
+</div>
 </body>
 </html>

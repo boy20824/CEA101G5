@@ -283,25 +283,34 @@
 			<script>alert("${message}")</script>
 		</c:forEach>
 	</c:if>
-	
-	<div class="container qaSubmissionContainer">
-		<form id="qaForm" method="POST" action="<%=request.getContextPath()%>/shop/productqa.do">
-			<h5>我要發問</h5>
-			<div>
-				<textarea id="qaSubmissionTextArea" name="productQues" form="qaForm" rows="6" cols="100" maxlength="300" placeholder=""></textarea>
-				<input type="hidden" name="action" value="submitQA">
-				<input type="hidden" name="productId" value="${productVO.getProductId()}">
+	<c:if test="${memLogin != null}">
+		<div class="container qaSubmissionContainer">
+			<form id="qaForm" method="POST" action="<%=request.getContextPath()%>/shop/productqa.do">
+				<h5>我要發問</h5>
+				<div>
+					<textarea id="qaSubmissionTextArea" name="productQues" form="qaForm" rows="6" cols="100" maxlength="300" placeholder=""></textarea>
+					<input type="hidden" name="action" value="submitQA">
+					<input type="hidden" name="productId" value="${productVO.getProductId()}">
+					<input type="hidden" name="memPhone" value="${memLogin.getMemPhone()}">
+				</div>
+				<div class="qaNotesUnderTextArea">
+					<small>私下完成交易受詐風險高，請勿透過 Line 等通訊軟體私下聯絡或匯款，選擇賣場結帳付款交易享最高五萬元保障。</small>
+				</div>
+				<div class="qaTwoButtonGroup">
+					<button id="productQuesResetBtn" type="button" class="btn btn-warning">重設</button>
+					<button type="submit" class="btn btn-warning">提出問題</button>
+				</div>
+			</form>
+		</div>
+	</c:if>
+	<c:if test="${memLogin == null}">
+		<div class="container">
+			<div class="d-grid gap-2 col-3 mx-auto loginRequiredContainer">
+				<button id="loginBtn" class="btn btn-secondary" type="button">請先登入在進行發問</button>
 			</div>
-			<div class="qaNotesUnderTextArea">
-				<small>私下完成交易受詐風險高，請勿透過 Line 等通訊軟體私下聯絡或匯款，選擇賣場結帳付款交易享最高五萬元保障。</small>
-			</div>
-			<div class="qaTwoButtonGroup">
-				<button id="productQuesResetBtn" type="button" class="btn btn-warning">重設</button>
-				<button type="submit" class="btn btn-warning">提出問題</button>
-			</div>
-		</form>
-	</div>
-	
+		</div>
+	</c:if>
+
     <!-- Footer -->
     <footer class="bd-footer p-3 p-md-5 mt-5 bg-warning text-center text-sm-start">
         <div class="container">

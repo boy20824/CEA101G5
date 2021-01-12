@@ -23,6 +23,16 @@ $("#navbarUserIcon").click(function () {
     }
 });
 
+$("#loginBtn").click(function () {
+    if (signInMainVisibility) {
+        $("#signInMain").fadeOut(200);
+        signInMainVisibility = false;
+    } else {
+        $("#signInMain").fadeIn(200);
+        signInMainVisibility = true;
+    }
+});
+
 $("#signInCloseButton").click(function () {
     $("#signInMain").fadeOut(200);
     signInMainVisibility = false;

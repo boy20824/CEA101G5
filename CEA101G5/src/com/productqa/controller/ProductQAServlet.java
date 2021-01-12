@@ -33,12 +33,12 @@ public class ProductQAServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			String productId = req.getParameter("productId");
-			String memPhone = "0921842854";
+			String memPhone = req.getParameter("memPhone");
 			String productQues = req.getParameter("productQues").trim();
 			String productReply = "";
 			
 			if (productQues.length() == 0) {
-				errorMsgs.add("½Ð¤Å¿é¤JªÅ¥Õ¸ê®Æ");
+				errorMsgs.add("請勿輸入空白！");
 			}
 			
 			if (!errorMsgs.isEmpty()) {
