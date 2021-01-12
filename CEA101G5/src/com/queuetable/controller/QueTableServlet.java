@@ -111,11 +111,11 @@ public class QueTableServlet extends HttpServlet{
 			successView.forward(req, res);
 //			String url = "/front-store-end/queue/queueTable/select_page.jsp";
 //			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
+//			successView.forward(req, res);
 			}catch (Exception e) {
-				errorMsgs.add(e.getMessage());
+				errorMsgs.add("重複新增");
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-store-end/queue/queueTable/select_page.jsp");
+						.getRequestDispatcher("/front-store-end/queue/queueTable/editQueTable.jsp");
 				failureView.forward(req, res);
 			}
 		}

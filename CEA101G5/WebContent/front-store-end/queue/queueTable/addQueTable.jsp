@@ -3,6 +3,14 @@
 <%@ page import="com.queuetable.model.*"%>
 <%@ page import="java.util.*"%>
 
+<% 
+String storeid = request.getParameter("storeid");
+pageContext.setAttribute("storeid", storeid);
+QueTableService queTableSv = new QueTableService();
+List<QueTableVO> list = queTableSv.getStoreQueTable(storeid);
+%>
+<%=storeid %>
+<%=list==null %>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -81,7 +89,7 @@
 				</div>
 			</div>
 			<div class="row reserve1"></div>
-			<input name="storeid" value="S000001" hidden="hidden"> 		
+			<input name="storeid" value="${storeid }" hidden="hidden"> 		
 			<input
 				type="hidden" name="action" value="insert"> 
 				<input

@@ -4,11 +4,17 @@
 <%@ page import="java.util.*"%>
 
 <%
+	QueTableService queTableSvc = new QueTableService();
+RestaurantService restSvc = new RestaurantService();
+
+String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
 	// 取出servlet request 再設定pagecontext供查詢
 	List<QueTableVO> list = new ArrayList<QueTableVO>();
-	list = (List<QueTableVO>) request.getAttribute("queTableVO");
+	list = queTableSvc.getStoreQueTable(storeid);
 	pageContext.setAttribute("list", list);
-	String storeid = (String) request.getAttribute("storeid");
+	pageContext.setAttribute("storeid", storeid);
+
+// 	String storeid = (String) request.getAttribute("storeid");
 %> 
 <%@include file="../sidebar.jsp" %>
 <html lang="en">
@@ -97,6 +103,7 @@
 		</table>
 		<div class="row">
 			<div class="col-4"></div>
+			<input id="storeid4Ajax" value="${storeid }" type="hidden">
 			<input id="add" onClick="showAddPage()" name="add" value="新增桌型"
 				type="button" class="btn btn-primary">
 		</div>
@@ -119,6 +126,9 @@
 			type : "get",
 			async : false, //同步请求
 			url : "addQueTable.jsp",
+			data:{
+				storeid :  $("#storeid4Ajax").val()
+			},
 			success : function(dates) {
 				//alert(dates);
 				$("#showPage").html(dates);//要刷新的div
@@ -137,7 +147,7 @@
 			async : false, //同步请求
 			url : "updateQueTable.jsp",
 			data : {
-				storeid : $("#storeid").val(),
+				storeid : $("#storeid4Ajax").val(),
 				queuetableid : $(e.target).prev($(".queuetableid")).val(),
 
 			},
