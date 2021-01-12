@@ -70,8 +70,8 @@ public class ProductService {
 		return dao.getAllByPriceHTL();
 	}
 	
-	public void testU(String productId, String productDescription, Integer productMSRP, Integer productPrice, Integer productStatus) {
-		dao.testU(productId,productDescription,productMSRP,productPrice,productStatus);
+	public void testU(String productId,String productName, String productDescription, Integer productMSRP, Integer productPrice ,Integer categoryId,Integer productStatus) {
+		dao.testU(productId,productName,productDescription,productMSRP,productPrice,categoryId,productStatus);
 		
 	}
 	

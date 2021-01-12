@@ -116,13 +116,23 @@
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop/product.do" style="margin-bottom: 0px;">
 			<tr>
 				<td>${pVO.productId}</td>
-				<td>${pVO.productName}</td>
+				<td><input type="text" name="productName" value="${pVO.productName}" style="height: 100px; "></td>
 				<td><img src="<%=request.getContextPath()%>/shop/productphotoreader.do?productId=${pVO.getProductId()}" class="card-img-top" alt="..." width="100" height="100"></td>
 				<td><input type="text" name="productDescription" value="${pVO.productDescription}"></td>
 				<td><input type="text" name="productMSRP"  value="${pVO.productMSRP}" style="width: 50px;"/></td>
 				<td><input type="text" name="productPrice" value="${pVO.productPrice}" style="width: 50px;"/></td>
 				<td>${pVO.productQtySold}</td>
-				<td>${pcSvc.getCategoryById(pVO.categoryId).categoryName}</td>
+				<td>	
+				<select name="categoryId">
+						<c:if test="${pVO.categoryId==1}">
+							<option value=1 >環保餐具</option>
+							<option value=2>美食餐卷</option>
+						</c:if>
+						<c:if test="${pVO.categoryId==2}">
+							<option value=2 >美食餐卷</option>
+							<option value=1>環保餐具</option>
+						</c:if>
+					</select></td>
 				<td>
 					<select name="productStatus">
 						<c:if test="${pVO.productStatus==0}">

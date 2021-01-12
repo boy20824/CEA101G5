@@ -147,52 +147,55 @@ public class ProductServlet extends HttpServlet {
 		if ("updateProduct".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			
 			String productId = req.getParameter("productId");
 			String productDescription = req.getParameter("productDescription");
+			String productName=req.getParameter("productName");
 			
 			Integer productMSRP = null;
 			try {
 				productMSRP = new Integer(req.getParameter("productMSRP").trim());
 				if (productMSRP != null && productMSRP <= 0) {
-					errorMsgs.add("價格請輸入正整數!");
+					errorMsgs.add("��隢撓�甇���!");
 				}
 			}catch (Exception e) {
-				errorMsgs.add("價格請輸入正整數!");
+				errorMsgs.add("��隢撓�甇���!");
 			}
 			
+			Integer categoryId = new Integer(req.getParameter("categoryId").trim());
 			
 			Integer productPrice = null;
 			try {
 				productPrice = new Integer(req.getParameter("productPrice").trim());
 				if (productPrice != null && productPrice <= 0) {
-					errorMsgs.add("價格請輸入正整數!");
+					errorMsgs.add("��隢撓�甇���!");
 				}
 			}catch (Exception e) {
-				errorMsgs.add("價格請輸入正整數!");
+				errorMsgs.add("��隢撓�甇���!");
 			}
 			
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/back-end/product/listAllProduct.jsp");
 				failureView.forward(req, res);
-				return;//程式中斷
+				return;//蝔�葉�
 			}
 			Integer productStatus = new Integer(req.getParameter("productStatus").trim());
 			
-			//因為原本的update要給他一個VO  所以所有屬性都要set才會過
+			//������pdate閬策隞��O  ��隞交���惇�折閬et�����
 			ProductService pSvc = new ProductService();
-			pSvc.testU(productId, productDescription, productMSRP, productPrice, productStatus);
+			pSvc.testU(productId,productName ,productDescription , productMSRP, productPrice,categoryId,productStatus );
 			
 			String searchyn = req.getParameter("searchyn");
 			if ("yes".equals(searchyn)) {
 				req.setAttribute("turn","turn");
 				String url = "/back-end/shopProductListAll.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url);// ����漱 update_emp_input.jsp
 				successView.forward(req, res);
 			}
 			else {
 				String url = "/back-end/shopProductListAll.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+			RequestDispatcher successView = req.getRequestDispatcher(url);// ����漱 update_emp_input.jsp
 			successView.forward(req, res);
 			}
 			

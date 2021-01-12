@@ -48,7 +48,7 @@ public class ProductJNDIDAO implements ProductDAO_Interface {
 			"SELECT * FROM PRODUCT ORDER BY PRODUCT_PRICE DESC";
 		
 		private static final String TESTU = 
-				"UPDATE PRODUCT SET PRODUCT_DESCRIPTION = ?, PRODUCT_MSRP = ?, PRODUCT_PRICE = ?, PRODUCT_STATUS = ? WHERE PRODUCT_ID = ?";
+				"UPDATE PRODUCT SET PRODUCT_NAME=?, PRODUCT_DESCRIPTION = ?, PRODUCT_MSRP = ?, PRODUCT_PRICE = ?,CATEGORY_ID=?, PRODUCT_STATUS = ? WHERE PRODUCT_ID = ?";
 		private static final String ADD = 
 				"INSERT INTO PRODUCT (PRODUCT_ID, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_MSRP, PRODUCT_PRICE, PRODUCT_QTY_SOLD, CATEGORY_ID, PRODUCT_STATUS) VALUES ('ENP' || LPAD(SEQ_PRODUCT_ID.NEXTVAL,4,'0'), ?, ?, ?, ?, ?, ?, ?)";
 
@@ -524,19 +524,20 @@ public class ProductJNDIDAO implements ProductDAO_Interface {
 	}
 	
 	@Override
-	public void testU(String productId, String productDescription, Integer productMSRP, Integer productPrice, Integer productStatus) {
+	public void testU(String productId,String productName, String productDescription, Integer productMSRP, Integer productPrice,Integer categoryId ,Integer productStatus) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(TESTU);
-			
-			pstmt.setString(1, productDescription);
-			pstmt.setInt(2, productMSRP);
-			pstmt.setInt(3, productPrice);
-			pstmt.setInt(4, productStatus);
-			pstmt.setString(5, productId);
+			pstmt.setString(1, productName);
+			pstmt.setString(2, productDescription);
+			pstmt.setInt(3, productMSRP);
+			pstmt.setInt(4, productPrice);
+			pstmt.setInt(5, categoryId);
+			pstmt.setInt(6, productStatus);
+			pstmt.setString(7, productId);
 			
 			pstmt.executeUpdate();
 			
