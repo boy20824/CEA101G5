@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.foodorderdetail.model.FoodOrderDetailVO;
 import com.orderdetail.model.*;
 import com.product.model.*;
 import com.productphoto.model.*;
@@ -210,7 +211,7 @@ public class ProductServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			System.out.println("ADD");
+			
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
@@ -250,6 +251,23 @@ public class ProductServlet extends HttpServlet {
 				Integer productQtySold = new Integer(req.getParameter("productQtySold"));
 				String productDescription = req.getParameter("productDescription");
 				
+				List<byte[]> productPhotoList = new ArrayList<byte[]>();
+				byte[] productPhoto = null;
+				List<Part> parts = (List<Part>) req.getParts();	//�������nput��镼�
+				for(Part part:parts) {							//for each 韏唬���arts
+					if (part.getContentType() != null) {		//input text���null
+						if (part.getContentType().contains("image")) {	//��蕪�隞��銝����
+							InputStream in = part.getInputStream();
+							byte[] buf = new byte[in.available()];
+							in.read(buf);
+							productPhoto = buf;
+							productPhotoList.add(productPhoto);						
+						}
+					}
+				}
+				
+				
+				
 				ProductVO pVO = new ProductVO();
 				pVO.setProductName(productName);
 				pVO.setProductMSRP(productMSRP);
@@ -271,23 +289,24 @@ public class ProductServlet extends HttpServlet {
 				
 				/***************************2.���憓���***************************************/
 				ProductService pSvc = new ProductService();
-				pVO = pSvc.add(productName, productDescription, productMSRP, productPrice, productQtySold, categoryId, productStatus);
+				pSvc.addWithPicture(pVO,productPhotoList);
+				
 //				System.out.println("PRODUCTID:" + pVO.getProductId());
-				String PID = "ENP";
-				if (pSvc.getPID().length() == 4) {
-					PID += pSvc.getPID();
-				}
-				else if (pSvc.getPID().length() == 3) {
-					PID += "0" + pSvc.getPID();
-				}
-				else if (pSvc.getPID().length() == 2) {
-					PID += "00" + pSvc.getPID();
-				}
-				else if (pSvc.getPID().length() == 1) {
-					PID += "000" + pSvc.getPID();
-				}
-				System.out.println(PID);
-				req.setAttribute("PID",PID);
+//				String PID = "ENP";
+//				if (pSvc.getPID().length() == 4) {
+//					PID += pSvc.getPID();
+//				}
+//				else if (pSvc.getPID().length() == 3) {
+//					PID += "0" + pSvc.getPID();
+//				}
+//				else if (pSvc.getPID().length() == 2) {
+//					PID += "00" + pSvc.getPID();
+//				}
+//				else if (pSvc.getPID().length() == 1) {
+//					PID += "000" + pSvc.getPID();
+//				}
+//				System.out.println(PID);
+//				req.setAttribute("PID",PID);
 
 				
 				//隞乩�憓撘萄���
@@ -313,27 +332,26 @@ public class ProductServlet extends HttpServlet {
 				
 				
 				//隞乩�憓�撐����
-				String productId = PID;
-				ProductPhotoVO ppVO = new ProductPhotoVO();
-				ProductPhotoService ppSvc = new ProductPhotoService();
 				
-				byte[] productPhoto = null;
-				List<Part> parts = (List<Part>) req.getParts();	//�������nput��镼�
-				for(Part part:parts) {							//for each 韏唬���arts
-					if (part.getContentType() != null) {		//input text���null
-						if (part.getContentType().contains("image")) {	//��蕪�隞��銝����
-							InputStream in = part.getInputStream();
-							byte[] buf = new byte[in.available()];
-							in.read(buf);
-							productPhoto = buf;
-							
-							ppVO.setProductId(productId);
-							ppVO.setProductPhoto(productPhoto);
-							
-							ppVO = ppSvc.addProductPhoto(productId, productPhoto);
-						}
-					}
-				}
+				;
+				
+//				byte[] productPhoto = null;
+//				List<Part> parts = (List<Part>) req.getParts();	//�������nput��镼�
+//				for(Part part:parts) {							//for each 韏唬���arts
+//					if (part.getContentType() != null) {		//input text���null
+//						if (part.getContentType().contains("image")) {	//��蕪�隞��銝����
+//							InputStream in = part.getInputStream();
+//							byte[] buf = new byte[in.available()];
+//							in.read(buf);
+//							productPhoto = buf;
+//							
+//							ppVO.setProductId(productId);
+//							ppVO.setProductPhoto(productPhoto);
+//							
+//							ppVO = ppSvc.addProductPhoto(productId, productPhoto);
+//						}
+//					}
+//				}
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/back-end/shopProductListAll.jsp";

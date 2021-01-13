@@ -1,5 +1,6 @@
 package com.product.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
@@ -88,6 +89,11 @@ public class ProductService {
 		dao.add(productVO);
 		
 		return productVO;
+	}
+	
+	public void addWithPicture(ProductVO productVO,List<byte[]> productPhotoList ) {
+		
+		dao.addWithPicture(productVO,productPhotoList);
 	}
 	
 	public String getPID() {

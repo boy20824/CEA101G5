@@ -80,7 +80,7 @@ public class ProductJDBCDAO implements ProductDAO_Interface {
 			}
 		}
 	}
-
+	public void addWithPicture(ProductVO productVO,List<byte[]> productPhotoList) {}
 	@Override
 	public void update(ProductVO productVO) {
 		Connection con = null;

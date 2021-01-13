@@ -13,6 +13,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.productphoto.model.ProductPhotoJNDIDAO;
+import com.productphoto.model.ProductPhotoVO;
+
 import util.Util;
 
 public class ProductJNDIDAO implements ProductDAO_Interface {
@@ -569,6 +572,7 @@ public class ProductJNDIDAO implements ProductDAO_Interface {
 		
 		try {
 			con = dataSource.getConnection();
+			
 			pstmt = con.prepareStatement(ADD);
 			
 			pstmt.setString(1, productVO.getProductName());
@@ -600,6 +604,78 @@ public class ProductJNDIDAO implements ProductDAO_Interface {
 			}
 		}
 	}
+	@Override
+	public void addWithPicture(ProductVO productVO,List<byte[]> productPhotoList) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = dataSource.getConnection();
+			con.setAutoCommit(false);
+			String cols[] = {"PRODUCT_ID"};
+			pstmt = con.prepareStatement(ADD,cols);
+			
+			pstmt.setString(1, productVO.getProductName());
+			pstmt.setString(2, productVO.getProductDescription());
+			pstmt.setInt(3, productVO.getProductMSRP());
+			pstmt.setInt(4, productVO.getProductPrice());
+			pstmt.setInt(5, productVO.getProductQtySold());
+			pstmt.setInt(6, productVO.getCategoryId());
+			pstmt.setInt(7, productVO.getProductStatus());
+			
+			pstmt.executeUpdate();
+			
+			ResultSet rs = pstmt.getGeneratedKeys();
+			rs.next();
+			StringBuilder productId =new StringBuilder(rs.getString(1));
+			rs.close();
+			
+			ProductPhotoJNDIDAO dao =new ProductPhotoJNDIDAO();
+			
+			for(byte[] pic:productPhotoList) {
+				ProductPhotoVO productPhotoVO = new ProductPhotoVO();
+				productPhotoVO.setProductId(productId.toString());
+				productPhotoVO.setProductPhoto(pic);
+				dao.insert2(productPhotoVO, con);
+				
+			}
+			con.commit();
+			con.setAutoCommit(true);
+			
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-dept");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
 	
 	@Override
 	public String getPID() {

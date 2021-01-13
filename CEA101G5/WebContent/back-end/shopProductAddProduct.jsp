@@ -176,7 +176,7 @@ ${message}
 <!-- 					<div id="display" style="width: 100px;"></div> -->
 <!-- 				</div> -->
 <!-- 			</div> -->
-	<input type="file" id="productPhoto" name="productPhoto" accept="image/*" size="45" multiple="multiple" /></td>
+	<input type="file" id="productPhoto" name="productPhoto"  accept="image/*" size="45" multiple="multiple" /></td>
 	</tr>
 	<tr>
 		<td>商品名稱 <input type="text" name="productName" value="${pVO.getProductName()}" /></td>
