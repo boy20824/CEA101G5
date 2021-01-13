@@ -167,8 +167,8 @@
 				</li>
 				<li>
 					<div class="memChoseList">
-						<a href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp"><i class="fas fa-vote-yea"></i></i></i></a> <a
-							href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp">
+						<a href="<%=request.getContextPath()%>/front-store-end/queue/queueNo/showCustomerPickupNo.jsp"><i class="fas fa-vote-yea"></i></i></i></a> <a
+							href="<%=request.getContextPath()%>/front-store-end/customerorder/showCustomerPickuoNo.jsp">
 							<p>取號資訊</p>
 						</a>
 					</div>
