@@ -480,6 +480,7 @@ public class QueNoServlet extends HttpServlet {
 				session.setAttribute("queNoVO2", queNoVO2);
 				session.setAttribute("quePeriodVO", quePeriodVO);
 				session.setAttribute("expectTime", expectTime);
+				session.setAttribute("storeid", storeid);
 				
 //				req.setAttribute("queNoVO", queNoVO);
 //				req.setAttribute("queNoVOList", list);

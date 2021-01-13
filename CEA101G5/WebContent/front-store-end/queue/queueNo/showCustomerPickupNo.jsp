@@ -10,20 +10,24 @@
 <%@ page import="com.queueperiod.model.*"%>
 
 <%
+
 	QueNoVO queNoVO = (QueNoVO) session.getAttribute("queNoVO");
 	QueNoVO queNoVO2 = (QueNoVO) session.getAttribute("queNoVO2");
 	List<QuePeriodVO> quePeriodVO = new ArrayList<QuePeriodVO>();
 	quePeriodVO = (List<QuePeriodVO>) session.getAttribute("quePeriodVO");
 	String memberName = (String) session.getAttribute("memberName");
+	String storeid = (String) session.getAttribute("storeid");
 	session.setAttribute("queNoVO", queNoVO);
 	session.setAttribute("queNoVO2", queNoVO);
 	session.setAttribute("quePeriodVO", quePeriodVO);
 	session.setAttribute("memberName", memberName);
+	session.setAttribute("storeid", storeid);
 // 	List<QueNoVO> list = new ArrayList<QueNoVO>();//取得by storeid and tableid 未決定時段
 // 	list = (List<QueNoVO>) session.getAttribute("list");
 // 	pageContext.setAttribute("list", list);
 %>
 <html>
+
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -205,18 +209,16 @@ div#helloName {
 				<div class="form-control"
 					aria-label="Amount (to the nearest dollar)">
 <!-- 					抓出queNo後序號碼排序 -->
-					<c:out value="${queNoVO.storeid }"></c:out>
 					<c:forEach var="queNoVOList" items="${queNoSvc.all}" begin="0"
 						end="4">
-						<c:choose>
-							<c:when
-								test="${queNoVO.storeid==queNoVOList.storeid && queNoVO.queuetableid==queNoVOList.queuetableid }">
-								<c:out value="${queNoVOList.queuenum }" />
-							</c:when>
-						</c:choose>
-					</c:forEach>
+<%-- 						<c:choose>  --%>
+<%--  							<c:when test="${storeid==queNoVOList.storeid && queNoVO.queuetableid==queNoVOList.queuetableid }">  --%>
+							<c:out value="${queNoVOList.queuenum }" />
+<%--  							</c:when>  --%>
+<%--  						</c:choose> --%>
+ 											</c:forEach>
 					<%-- 						<c:forEach var="queNoVOList" items="${list}" begin="1" end="4"> --%>
-					<%-- 							<div>${queNoVOList.queuelineno} 1</div> --%>
+					<%-- 							<div>${queNoVOList.queuelineno} </div> --%>
 					<%-- 						</c:forEach> --%>
 				</div>
 				<div class="input-group-append"></div>
