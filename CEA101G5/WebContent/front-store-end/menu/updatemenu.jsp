@@ -80,7 +80,7 @@ font {
 		<div class="container">
 			<div class="top1">
 				<div class="pic">
-					<div class="preview" style="display: flex; align-items: center">
+					<div class="preview" style="display: flex; align-items: center;margin-top:1%;">
 						<img class="begin" src="<%=request.getContextPath()%>/menu/MenuServlet.do?menuId=${menuVO.menuId}&action=getOnePicture">
 					</div>
 					<label for="myFile" style="margin-left: 2vw">請上傳圖片檔案</label> 

@@ -13,7 +13,11 @@
 </head>
 <body>
 <%@include file="../selectpage/selectstorepage.jsp" %>
-
+<style>
+.sidebar label{
+	line-height:80px;
+}
+</style>
 <%
 @SuppressWarnings("unchecked")
 Session session1 = HibernateUtil.getSessionFactory().openSession();

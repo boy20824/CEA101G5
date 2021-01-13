@@ -30,12 +30,13 @@
 
 .preview {
 	width: 20rem;
-	height: 20rem;
+	height: 20em;
 	border: 5px solid gray;
 	border-radius: 1vw;
 	padding: 0.2em;
 	margin-left: 2vw;
-	margin-bottom: 1vw;
+	margin-bottom: 2em;
+	margin-top:0px;
 }
 
 img {
@@ -51,23 +52,6 @@ font{
 position:absolute;
 top:1%;
 left:25%;
-}
-.sidebar {
-	height: 100%;
-    width: 100px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #404040;
-    transition: 0.5s;
-    padding-top: 10px;
-    transform: translateX(-100%);
-    transition: 0.5s;
-    box-sizing: content-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }
 </style>
 </head>
@@ -87,11 +71,13 @@ left:25%;
 			<div class="top1">
 				<div class="pic">
 					<div class="preview" style="display: flex; align-items: center"></div>
-						<label for="myFile" style="margin-left: 2vw">請上傳圖片檔案</label>
+						<div style="margin-left:2em">
+						<label for="myFile">請上傳圖片檔案</label>
 						<input type="file" id="myFile" style="margin: 2px" name="menuPic" /><br /> 
-						<label for="fileName" style="margin-left: 2vw; margin-right: 1vw;">檔案名稱</label>
+						<label for="fileName" style="margin-right: 1vw;">檔案名稱</label>
 						<input type="text" id="fileName" disabled="disabled" /> 
 						<input type="button" value="刪除" id="clear" style="margin: 5px 10px 10px 10px" />
+						</div>
 					</div>
 				<div class="add">
 					<label for="menuName">餐點名稱</label><input type="text" id="menuName" name="menuName" value="<%=(menuVO == null) ? "" : menuVO.getMenuName()%>" />

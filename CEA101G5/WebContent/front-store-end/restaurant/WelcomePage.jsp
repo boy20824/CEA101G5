@@ -3,8 +3,6 @@
 
 <%
 RestaurantService restSvc = new RestaurantService();
-String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
-pageContext.setAttribute("storeid", storeid);
 %>
     <html>
 
@@ -65,21 +63,14 @@ pageContext.setAttribute("storeid", storeid);
 				<li>定位選項設定</li>
 			</ul>
 		</span>
-            <span> <svg aria-hidden="true" focusable="false"
+            <span><a href="<%=request.getContextPath()%>/front-store-end/foodorder/orderlist.jsp"><svg aria-hidden="true" focusable="false"
 				data-prefix="fas" data-icon="concierge-bell"
 				class="svg-inline--fa fa-concierge-bell fa-w-16" role="img"
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path fill="#9C9C9C"
 					d="M288 130.54V112h16c8.84 0 16-7.16 16-16V80c0-8.84-7.16-16-16-16h-96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h16v18.54C115.49 146.11 32 239.18 32 352h448c0-112.82-83.49-205.89-192-221.46zM496 384H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
-         
-        </svg>
-        
+        </svg></a>
 			<p>外帶</p>
-			<ul>
-			<li>
-				<a href="<%=request.getContextPath()%>/front-store-end/foodorder/orderlist.jsp">外帶管理</a>
-			</li>
-			</ul>
 		</span>
             <span> <a href="<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do?action=storeGetQueNo&storeid=${storeid}"><svg aria-hidden="true" focusable="false" id="numPickup"
 				data-prefix="fas" data-icon="vote-yea"
@@ -92,28 +83,23 @@ pageContext.setAttribute("storeid", storeid);
 			<p>取號</p>
 			
 
-            <span> <svg aria-hidden="true" focusable="false"
+            <span> <a href="<%=request.getContextPath()%>/front-store-end/acceptreserve/listAllAcceptReserve.jsp"><svg aria-hidden="true" focusable="false"
 				data-prefix="far" data-icon="calendar-check"
 				class="svg-inline--fa fa-calendar-check fa-w-14" role="img"
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
             <path fill="#9C9C9C"
 					d="M400 64h-48V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v52H160V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v52H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V160h352v298a6 6 0 0 1-6 6zm-52.849-200.65L198.842 404.519c-4.705 4.667-12.303 4.637-16.971-.068l-75.091-75.699c-4.667-4.705-4.637-12.303.068-16.971l22.719-22.536c4.705-4.667 12.303-4.637 16.97.069l44.104 44.461 111.072-110.181c4.705-4.667 12.303-4.637 16.971.068l22.536 22.718c4.667 4.705 4.636 12.303-.069 16.97z"></path>
           
-        </svg>
-			<p>訂位</p></span> <span> <svg aria-hidden="true" focusable="false"
+        </svg></a>
+			<p>訂位</p></span> <span> <a href="<%=request.getContextPath()%>/front-store-end/cashflow/cashflow.jsp"><svg aria-hidden="true" focusable="false"
 				data-prefix="fas" data-icon="cash-register"
 				class="svg-inline--fa fa-cash-register fa-w-16" role="img"
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path fill="#9C9C9C"
 					d="M511.1 378.8l-26.7-160c-2.6-15.4-15.9-26.7-31.6-26.7H208v-64h96c8.8 0 16-7.2 16-16V16c0-8.8-7.2-16-16-16H48c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h96v64H59.1c-15.6 0-29 11.3-31.6 26.7L.8 378.7c-.6 3.5-.9 7-.9 10.5V480c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32v-90.7c.1-3.5-.2-7-.8-10.5zM280 248c0-8.8 7.2-16 16-16h16c8.8 0 16 7.2 16 16v16c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16v-16zm-32 64h16c8.8 0 16 7.2 16 16v16c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16v-16c0-8.8 7.2-16 16-16zm-32-80c8.8 0 16 7.2 16 16v16c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16v-16c0-8.8 7.2-16 16-16h16zM80 80V48h192v32H80zm40 200h-16c-8.8 0-16-7.2-16-16v-16c0-8.8 7.2-16 16-16h16c8.8 0 16 7.2 16 16v16c0 8.8-7.2 16-16 16zm16 64v-16c0-8.8 7.2-16 16-16h16c8.8 0 16 7.2 16 16v16c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16zm216 112c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h176c4.4 0 8 3.6 8 8v16zm24-112c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16v-16c0-8.8 7.2-16 16-16h16c8.8 0 16 7.2 16 16v16zm48-80c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16v-16c0-8.8 7.2-16 16-16h16c8.8 0 16 7.2 16 16v16z"></path>
        
-        </svg>
+        </svg></a>
 			<p>金流</p>
-			<ul>
-			<li>
-				<a href="<%=request.getContextPath()%>/front-store-end/cashflow/cashflow.jsp">營收查詢</a>
-			</li>
-			</ul>
 		</span> <label for="side-menu-switch"> <i class="fas fa-angle-right"></i>
 		</label>
         </div>
@@ -122,7 +108,7 @@ pageContext.setAttribute("storeid", storeid);
         </div>
         <div class="welcomePageBtn">
             <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/restaurant/addrestaurant.jsp'">餐廳資訊管理</button>
-            <button type="submit">外帶訂單管理</button>
+            <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/foodorder/orderlist.jsp'">外帶訂單管理</button>
             <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do?action=storeGetQueNo&storeid=${storeid }'">取號管理</button>
             <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/acceptreserve/listAllAcceptReserve.jsp'">訂位管理</button>
             <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/cashflow/cashflow.jsp'">查看營業金流</button>

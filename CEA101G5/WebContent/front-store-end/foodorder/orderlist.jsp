@@ -34,10 +34,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.0.0/animate.min.css">
     <style>
     body {
-  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
-  
-}
-.sidebar label{line-height: 80px;}
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; }
     </style>
 </head>
 
@@ -48,6 +45,11 @@
 
 
 <%@include file="../selectpage/selectstorepage.jsp" %>
+<style>
+.sidebar label{
+	line-height:80px;
+}
+</style>
     <div class="storeDetail">
         <h1>訂單清單</h1>
         <c:forEach var="foodOrderVO" items="${list}">
