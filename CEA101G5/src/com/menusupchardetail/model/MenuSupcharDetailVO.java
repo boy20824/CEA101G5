@@ -1,5 +1,7 @@
 package com.menusupchardetail.model;
 
-public class MenuSupcharDetailVO {
+import java.io.Serializable;
+
+public class MenuSupcharDetailVO implements Serializable{
 
 }
