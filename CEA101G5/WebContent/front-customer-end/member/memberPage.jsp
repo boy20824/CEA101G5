@@ -67,7 +67,20 @@
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-
+<style>
+.orderSet{
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #81726A;
+  cursor: pointer;
+  font-weight:bold;
+ font-size: 20px;
+  }
+</style>
 
 </head>
 
@@ -130,11 +143,9 @@
 				<li>
 					<div class="memChoseList">
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-customer-end/reserveorder/listAllReserveOrder.jsp" >
-						<a href="#"><i class="fas fa-concierge-bell"></i></i></i></a>
+						<a href="#"></a><i class="fas fa-concierge-bell"></i></i></i>
      						<input type="hidden" name="memId" value="${memLogin.memPhone}" />
-							<input type="submit" value="預約定位" class="orderSet" />
-							<p>訂位資訊</p>
-						</a>
+							<p><input type="submit" value="預約定位" class="orderSet" /></p>
 	 					</FORM>
 					</div>
 				</li>
@@ -156,6 +167,14 @@
 				</li>
 				<li>
 					<div class="memChoseList">
+						<a href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp"><i class="fas fa-vote-yea"></i></i></i></a> <a
+							href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp">
+							<p>取號資訊</p>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div class="memChoseList">
 						<a href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp"><i class="far fa-comments"></i></i></a> <a
 							href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp">
 							<p>歷史評論</p>
@@ -169,9 +188,10 @@
 							<p>檢舉資訊</p>
 						</a>
 					</div>
-		</div>
 		</li>
+		
 		</ul>
+		</div>
 	</div>
 	<FORM METHOD="get" ACTION="<%=request.getContextPath()%>/back-end/member/mem.do"
 			name="form1" ienctype="multipart/form-data">
