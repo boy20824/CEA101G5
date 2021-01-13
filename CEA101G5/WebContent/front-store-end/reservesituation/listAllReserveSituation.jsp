@@ -3,10 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.reservesituation.model.*"%>
-
+<%@ page import="com.restaurant.model.*"%>
 <%
     ReserveSituationService rsSvc = new ReserveSituationService();
-    List<ReserveSituationVO> list = rsSvc.fors(storeLogin.storeId);
+    List<ReserveSituationVO> list = rsSvc.fors(((RestaurantVO)(session.getAttribute("storeLogin"))).getStoreId());
     pageContext.setAttribute("list",list);
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
