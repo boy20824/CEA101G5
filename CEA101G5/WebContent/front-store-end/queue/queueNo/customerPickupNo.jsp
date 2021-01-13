@@ -127,33 +127,33 @@
 						<input id="memphone" name="memphone" type="tel"
 							class="form-control" placeholder="請輸入手機號碼：如 0987654321"
 							minlength="10" maxlength="10"
-							pattern="[0][9][0-9]{3}[0-9]{2}[0-9]{3}" required />
+							 required />
 					</div>
 				</div>
-				<div class="form-group row">
-					<div class="col-sm-2"></div>
-					<label for="inputPassword3" class="col-sm-2 col-form-label">密碼設定</label>
-					<div class="col-sm-3">
-						<input id="psw" type="password" class="form-control" value="enak"
-							readonly minlength="4" maxlength="8" />
-					</div>
-					<div class="col-sm-1">
-						<button id="reset" type="button" class="btn btn-outline-primary">reset</button>
-					</div>
-					<div class="col-sm-2">
-						<small id="passwordHelpInline" class="text-muted">
-							預設密碼為：enak </small>
-					</div>
-				</div>
-				<div class="form-group row" id="showPswCheck"
-					style="visibility: hidden">
-					<div class="col-sm-2"></div>
-					<label for="inputPassword3" class="col-sm-2 col-form-label">密碼確認</label>
-					<div class="col-sm-3">
-						<input type="password" id="pswCheck" class="form-control"
-							value="enak">
-					</div>
-				</div>
+<!-- 				<div class="form-group row"> -->
+<!-- 					<div class="col-sm-2"></div> -->
+<!-- 					<label for="inputPassword3" class="col-sm-2 col-form-label">密碼設定</label> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<input id="psw" type="password" class="form-control" value="enak" -->
+<!-- 							readonly minlength="4" maxlength="8" /> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-sm-1"> -->
+<!-- 						<button id="reset" type="button" class="btn btn-outline-primary">reset</button> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-sm-2"> -->
+<!-- 						<small id="passwordHelpInline" class="text-muted"> -->
+<!-- 							預設密碼為：enak </small> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group row" id="showPswCheck" -->
+<!-- 					style="visibility: hidden"> -->
+<!-- 					<div class="col-sm-2"></div> -->
+<!-- 					<label for="inputPassword3" class="col-sm-2 col-form-label">密碼確認</label> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<input type="password" id="pswCheck" class="form-control" -->
+<!-- 							value="enak"> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 
 
 				<div class="form-group row">
@@ -356,8 +356,21 @@
 		getNoCurrent();
 	}
 </script>
-<script>
 
+<script>
+//  電話驗證
+$("#memphone").blur(
+function() {
+	var MobileReg = /^[0]{1}[9]{1}[0-9]{8}$/;
+	console.log($(this).val());
+	console.log($(this).val().match(MobileReg));
+	
+	if($(this).val().match(MobileReg)){
+			$(this).addClass("is-valid").removeClass("is-invalid");
+	}else{
+			$(this).addClass("is-invalid").removeClass("is-valid");
+	}		
+});
 </script>
 
 </html>
