@@ -2,17 +2,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.reserveorder.model.*"%>
+<%@ page import="com.restaurant.model.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
   ReserveOrderVO reserveOrderVO = (ReserveOrderVO) request.getAttribute("reserveOrderVO");
 //   String ss = "S000003";
 //   request.setAttribute("ss",ss);
   String ss = request.getParameter("storeId");
-  System.out.println(ss);
+  System.out.println(ss + "add");
+  RestaurantService rSvc = new RestaurantService();
+  Integer sf = rSvc.getOneRestaurant(ss).getStoreFinalReservDate();
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
 <jsp:useBean id="rsSvc" scope="page" class="com.reservesituation.model.ReserveSituationService"/>
-<jsp:useBean id="rSvc" scope="page" class="com.restaurant.model.RestaurantService"/>
+<%-- <jsp:useBean id="rSvc" scope="page" class="com.restaurant.model.RestaurantService"/> --%>
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -185,14 +188,14 @@ tr .radio-item input:checked + label + span {
 
 <table class="pickPeopleAndNote">
 	<tr><!-- 餐廳號 -->
-		<td><input type="hidden" name="storeId" size="45" 
+		<td><input type="text" name="storeid" size="45" 
 			 value="<%=ss %>" /></td> <!-- value 若空值=吳永志 , 否則=empVO.getEname() -->
 	</tr>
 	<tr><!-- 會員電話 -->
-		<td><input type="hidden" name="memphone" size="45"
+		<td><input type="text" name="memphone" size="45"
 			 value="${memLogin.memPhone}" /></td>
 	</tr>
-		<td><input name="reservetime" id="zzz" type="hidden" class="bookingDate"></td>
+		<td><input name="reservetime" id="zzz" type="text" class="bookingDate"></td>
 	<tr>
 		<td>大人人數:
 			<td><select name="reserveadult" size="1" id="adult">
@@ -283,7 +286,8 @@ tr .radio-item input:checked + label + span {
 	        dateFormat: "yy-mm-dd",
 	        showButtonPanel: true,
 	        minDate: +1,
-	        maxDate: "+0M +${rSvc.getOneRestaurant(ss).storeFinalReservDate}D",
+	        maxDate: "+0M +<%=sf%>D",
+// 	        maxDate: "+0M +10D",
 	        onSelect: function(date) {
 	            $(".bookingDate").val(date);
 	     		hi();	//直接在這邊執行hi()就能觸發了*****感謝輯神
@@ -312,7 +316,7 @@ tr .radio-item input:checked + label + span {
  		let adnum = document.getElementById("adult").value;
  		let dd = document.getElementById("zzz").value;
 // 		console.log(dd);
-		let ss = "S000003";
+		let sss = "<%=ss%>";
  		if (adnum != null && dd != null){ //ById找不到回傳null sByClassName找不到回傳空陣列
  			$.ajax({
  				url: "<%=request.getContextPath()%>/reservesituation/reservesituation.do?action=searchacg",
@@ -321,7 +325,7 @@ tr .radio-item input:checked + label + span {
  					//這是用來給你getParameter ("date")   值是dd
  					date : dd,
  					picknum : adnum,
- 					storeid : ss,
+ 					storeid : sss,
  					},
  					success: function(msg){//傳回字串
 //  						console.log(msg)

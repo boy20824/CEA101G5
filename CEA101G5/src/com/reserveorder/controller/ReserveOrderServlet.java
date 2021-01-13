@@ -257,7 +257,7 @@ public class ReserveOrderServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String storeId = req.getParameter("storeid").trim();
 			    //Java版Reg ^起頭$結尾 中文範圍 英文範圍數字 長度2~10
@@ -353,12 +353,12 @@ public class ReserveOrderServlet extends HttpServlet {
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-customer-end/reserveorder/addReserveOrder.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage());
+//				RequestDispatcher failureView = req
+//						.getRequestDispatcher("/front-customer-end/reserveorder/addReserveOrder.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		
 		

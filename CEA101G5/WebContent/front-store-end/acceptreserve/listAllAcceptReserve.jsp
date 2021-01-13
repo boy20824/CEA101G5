@@ -99,9 +99,11 @@
 			${message}
 		</c:forEach>
 </c:if>
+<a href="<%=request.getContextPath() %>/front-customer-end/reserveorder/oldReserveOrder.jsp" class="button">查詢歷史訂位訊息</a>
 <br>
+<a href="<%=request.getContextPath() %>/front-customer-end/reserveorder/listAllReserveOrder.jsp" class="button">查詢預定中的訂位</a><br>
 <table class="info">
-	<caption>所有時段</caption>
+	<caption>管理時段</caption>
 	<tr>
 		<th>時段編號</th>
 		<th>開始時間</th>

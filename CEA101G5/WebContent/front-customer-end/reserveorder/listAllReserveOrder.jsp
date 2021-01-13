@@ -9,6 +9,9 @@
 	String memPhone = request.getParameter("memId");
 	if (memPhone == null){
 		memPhone = (String)session.getAttribute("memPhone");
+		if (memPhone == null){
+			memPhone = request.getParameter("memphone");
+		}
 	}
     ReserveOrderService reserveOrderSvc = new ReserveOrderService();
     List<ReserveOrderVO> list = reserveOrderSvc.getForc(memPhone,0);

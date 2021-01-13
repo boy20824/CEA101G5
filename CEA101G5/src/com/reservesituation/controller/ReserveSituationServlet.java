@@ -364,10 +364,11 @@ public class ReserveSituationServlet extends HttpServlet {
 			List<ReserveSituationVO> list = rsSvc.getSearch(dd,ss);//該日期該店家 有哪些時段有位子
 //			JSONArray array = new JSONArray();
 			JSONObject obj = new JSONObject();
+			System.out.println(dd + "  " + pickNum + "  " + ss +"   ");
 			for (int i = 0; i < list.size(); i++) {//依有位子的時段數量跑迴圈
 				
 				int acg = list.get(i).acceptGroups;//acg=該時段的剩餘位子
-				if (pickNum < acg * 2) {
+				if (pickNum <= acg * 2) {
 					//periodId當KEY(反正同家店的ID不會重複) 記得要改店號
 					DateFormat df = new SimpleDateFormat("HH:mm");
 					try {
