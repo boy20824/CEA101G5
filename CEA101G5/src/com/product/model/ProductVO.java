@@ -14,6 +14,7 @@ public class ProductVO implements Serializable {
 	
 	private Integer productQty;
 	private Integer orderId;
+	private Integer productPromoPrice;
 	
 	public ProductVO() {
 		super();
@@ -97,6 +98,14 @@ public class ProductVO implements Serializable {
 	
 	public Integer getOrderId() {
 		return orderId;
+	}
+	
+	public void setProductPromoPrice(Integer productPromoPrice) {
+		this.productPromoPrice = productPromoPrice;
+	}
+	
+	public Integer getProductPromoPrice() {
+		return productPromoPrice;
 	}
 	
 }
