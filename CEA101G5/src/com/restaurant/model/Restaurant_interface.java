@@ -13,5 +13,8 @@ public interface Restaurant_interface {
 	public void delete(String storeId);
 	public RestaurantVO findByPrimaryKey(String storeId);
 	public List<RestaurantVO> getAll();
-	public List<RestaurantVO> getAll(Map<String, String[]> map); 
+	public List<RestaurantVO> getAll(Map<String, String[]> map);
+	public void easyupdate(RestaurantVO restaurantVO);
+	public List<RestaurantVO> getAllByChar(String storeChar);
+	public void updategroup(RestaurantVO restaurantVO); 
 }

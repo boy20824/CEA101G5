@@ -655,7 +655,6 @@ function() {
 </script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<c:out value="${check }"></c:out>
 <c:if test="${check=='addNo' }">
 	<script>
 swal("新增成功", "ok", "success");

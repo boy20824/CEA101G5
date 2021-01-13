@@ -10,23 +10,24 @@
 <%@ page import="com.queueperiod.model.*"%>
 
 <%
+
 	QueNoVO queNoVO = (QueNoVO) session.getAttribute("queNoVO");
 	QueNoVO queNoVO2 = (QueNoVO) session.getAttribute("queNoVO2");
 	List<QuePeriodVO> quePeriodVO = new ArrayList<QuePeriodVO>();
 	quePeriodVO = (List<QuePeriodVO>) session.getAttribute("quePeriodVO");
 	String memberName = (String) session.getAttribute("memberName");
-// 	List<QueNoVO> list = new ArrayList<QueNoVO>();//取得by storeid and tableid 未決定時段
-// 	list = (List<QueNoVO>) session.getAttribute("list");
-// 	pageContext.setAttribute("list", list);
+	String storeid = (String) session.getAttribute("storeid");
 	session.setAttribute("queNoVO", queNoVO);
 	session.setAttribute("queNoVO2", queNoVO);
 	session.setAttribute("quePeriodVO", quePeriodVO);
 	session.setAttribute("memberName", memberName);
+	session.setAttribute("storeid", storeid);
+// 	List<QueNoVO> list = new ArrayList<QueNoVO>();//取得by storeid and tableid 未決定時段
+// 	list = (List<QueNoVO>) session.getAttribute("list");
+// 	pageContext.setAttribute("list", list);
 %>
-<%=queNoVO %>
-<%=queNoVO2 %>
-<%=quePeriodVO %>
 <html>
+
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,6 +56,24 @@ img {
 	z-index: 4;
 	margin-top: 10;
 }
+@keyframes blink-smooth {
+  to {
+    color: transparent;
+  }
+}
+
+@keyframes blink {
+  50% {
+    color: transparent;
+  }
+}
+
+
+div#helloName {
+ color:  #FA7E23;
+  font-size: 48px;
+  animation: 1s blink 10 steps(1);
+}
 </style>
 </head>
 <div class="header">
@@ -73,11 +92,11 @@ img {
 	<div class="container">
 		<div class="row reserve"></div>
 		<div class="row reserve"></div>
-		<div class="row">
+		<div class="row" id="helloName">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-4">
 				<h1>
-					<span class="badge badge-secondary">您好！！</span>
+					您好！！
 				</h1>
 			</div>
 			<div class="col-sm-4">
@@ -190,18 +209,16 @@ img {
 				<div class="form-control"
 					aria-label="Amount (to the nearest dollar)">
 <!-- 					抓出queNo後序號碼排序 -->
-					<c:out value="${queNoVO.storeid }"></c:out>
 					<c:forEach var="queNoVOList" items="${queNoSvc.all}" begin="0"
 						end="4">
-						<c:choose>
-							<c:when
-								test="${queNoVO.storeid==queNoVOList.storeid && queNoVO.queuetableid==queNoVOList.queuetableid }">
-								<c:out value="${queNoVOList.queuenum }" />
-							</c:when>
-						</c:choose>
-					</c:forEach>
+<%-- 						<c:choose>  --%>
+<%--  							<c:when test="${storeid==queNoVOList.storeid && queNoVO.queuetableid==queNoVOList.queuetableid }">  --%>
+							<c:out value="${queNoVOList.queuenum }" />
+<%--  							</c:when>  --%>
+<%--  						</c:choose> --%>
+ 											</c:forEach>
 					<%-- 						<c:forEach var="queNoVOList" items="${list}" begin="1" end="4"> --%>
-					<%-- 							<div>${queNoVOList.queuelineno} 1</div> --%>
+					<%-- 							<div>${queNoVOList.queuelineno} </div> --%>
 					<%-- 						</c:forEach> --%>
 				</div>
 				<div class="input-group-append"></div>
@@ -209,11 +226,8 @@ img {
 		</div>
 	</div>
 	<div class="row reserve1"></div>
-	<div class="row">
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-			Suscipit fuga ut odit, modi totam doloribus, eius facilis explicabo
-			facere ducimus error delectus sit reprehenderit ipsam architecto
-			possimus! Nesciunt, mollitia rerum!</p>
+	<div class="row" style="align-items: center;"><div class="col-2"></div>
+		<p  style="text-align: center; color: #FA7E23; font-size: 30px;">感謝您使用    Enak 取號系統！<br>THANK YOU FOR USING   Enak   CALL NUMBER SYSTEM!</p>
 
 	</div>
 	</div>

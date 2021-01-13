@@ -26,15 +26,46 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/customerPickupNo.css" />
 <style>
+.header {
+	position: fixed;
+	background-color: #FA7E23;
+	height: 120px;
+	width: 100%;
+	z-index: 2;
+	opacity: 85%;
+	margin-top: -30;
+}
+
+img {
+	position: fixed;
+	z-index: 4;
+	margin-top: 10;
+}
 .pickup{
 	background-color: #FA7E23; 
 	border-color: #FA7E23;
 }
 </style>
+<div class="header">
+		<!-- Just an image -->
+		<nav class="navbar navbar-light bg-light">
+			<a class="navbar-brand"
+				href="<%=request.getContextPath() %>/front-customer-end/front/front.jsp">
+				<img src="../img/LOGO/Logo3(2).png" width="180" height="100" alt=""
+				loading="lazy">
+			</a>
+		</nav>
+		<a class="icon"
+			href="<%=request.getContextPath() %>/front-customer-end/front/front.jsp"></a>
+	</div>
 </head>
+
 <body>
 	<div class="container">
-		<div class="row reserve">
+	
+		<div class="row reserve"></div>
+		<div class="row reserve"></div>
+		<div class="row reserve"><div class="col-sm-4"></div>
 			<div id="display">
 				<div id="nowTime"></div>
 			</div>

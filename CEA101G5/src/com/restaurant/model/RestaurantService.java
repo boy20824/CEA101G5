@@ -102,19 +102,58 @@ public class RestaurantService {
 
 		return restaurantVO;
 	}
+	
+	public RestaurantVO easyupdateRestaurant(String storeId,String storeChar, String storeInfo,
+			String storeName, String storePhone, String storeAddress, Integer storeStatus,Timestamp storeOpenTime, Timestamp storeCloseTime) {
+		
+		RestaurantVO restaurantVO = new RestaurantVO();
+		
+		restaurantVO.setStoreId(storeId);
+		restaurantVO.setStoreChar(storeChar);
+		restaurantVO.setStoreInfo(storeInfo);
+		restaurantVO.setStoreName(storeName);
+		restaurantVO.setStorePhone(storePhone);
+		restaurantVO.setStoreAddress(storeAddress);
+		restaurantVO.setStoreStatus(storeStatus);
+		restaurantVO.setStoreOpenTime(storeOpenTime);
+		restaurantVO.setStoreCloseTime(storeCloseTime);
+		dao.easyupdate(restaurantVO);
+		
+		return restaurantVO;
+	}
+	
+	public RestaurantVO easyupdateRestaurantGroup(Integer storeFinalReservDate,Integer acceptGroups,String storeId) {
+		
+		RestaurantVO restaurantVO = new RestaurantVO();
+		
+		restaurantVO.setStoreFinalReservDate(storeFinalReservDate);
+		restaurantVO.setAcceptGroups(acceptGroups);
+		restaurantVO.setStoreId(storeId);
+		dao.updategroup(restaurantVO);
+		
+		return restaurantVO;
+	}
+	
 	public RestaurantVO getOneRestaurant(String storeId) {
 		return dao.findByPrimaryKey(storeId);
 	}
+	
 	public List<RestaurantVO> getAll() {
 		return dao.getAll();
 	}
+	
 	public List<RestaurantVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
+	}
+	
+	public List<RestaurantVO> getAllByChar(String storeChar) {
+		return dao.getAllByChar(storeChar);
 	}
 	
 	public void deleteRestaurant(String storeId) {
 		dao.delete(storeId);
 	}
+	
 	public void easyAddRestaurantWithPic(RestaurantVO restaurantVO,RestaurantPictureVO restaurantPictureVO) {
 		dao.easyInsertWithPics(restaurantVO,restaurantPictureVO);
 	}

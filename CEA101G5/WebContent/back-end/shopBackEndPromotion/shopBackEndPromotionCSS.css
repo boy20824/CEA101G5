@@ -179,11 +179,46 @@ input[type=number] {
 	padding-left: 18px;
 }
 
+.scroll-menu {
+   min-width: 220px;
+   max-height: 300px;
+   overflow: auto;
+ }
+ 
+/* Product To Promo Animation */
+.addToCartPopContainer {
+	background-color: rgba(40, 40, 40, 0.8);
+	text-align: center;
+	width: 335px;
+	height: 180px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
+	display: none;
+}
+
+.addToCartImgContainer {
+	text-align: center;
+	padding: 42px 0px 15px 0px;
+}
+
+.addToCartPopContainer img {
+	width: 60px;
+}
+
+.addToCartPopContainer p {
+	color: rgb(245, 245, 245);
+	font-size: 17px;
+	
+} 
+ 
+
 /* Table */
 .container table {
 	margin: 30px auto;
 	width: 100%;	
-	text-align: center;
 	background-color: white;
 }
 
@@ -191,10 +226,15 @@ input[type=number] {
 	padding: 10px;
 }
 
+.tdAlignMiddle {
+	text-align: center;
+}
+
 .container table img {
 	width: 125px;
 	height: 125px;
 }
+
 
 
 
