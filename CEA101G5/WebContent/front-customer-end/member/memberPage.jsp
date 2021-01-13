@@ -129,10 +129,13 @@
 				</li>
 				<li>
 					<div class="memChoseList">
-						<a href="#"><i class="fas fa-concierge-bell"></i></i></i></a> <a
-							href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-customer-end/reserveorder/listAllReserveOrder.jsp" >
+						<a href="#"><i class="fas fa-concierge-bell"></i></i></i></a>
+     						<input type="hidden" name="memId" value="${memLogin.memPhone}" />
+							<input type="submit" value="預約定位" class="orderSet" />
 							<p>訂位資訊</p>
 						</a>
+	 					</FORM>
 					</div>
 				</li>
 				<li>

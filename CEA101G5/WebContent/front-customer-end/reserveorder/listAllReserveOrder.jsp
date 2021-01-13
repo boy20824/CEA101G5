@@ -4,10 +4,13 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.reserveorder.model.*"%>
 
-<%
+<%	
+	String memPhone = request.getParameter("memId");
+	System.out.println(memPhone + "a");
     ReserveOrderService reserveOrderSvc = new ReserveOrderService();
-    List<ReserveOrderVO> list = reserveOrderSvc.getForc(memLogin.getMemPhone(),0);
+    List<ReserveOrderVO> list = reserveOrderSvc.getForc(memPhone,0);
     pageContext.setAttribute("list",list);
+    request.setAttribute("memPhone",memPhone);
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
 

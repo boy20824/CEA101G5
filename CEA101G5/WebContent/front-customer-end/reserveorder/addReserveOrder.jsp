@@ -185,9 +185,7 @@ tr .radio-item input:checked + label + span {
 
 <table class="pickPeopleAndNote">
 	<tr><!-- 餐廳號 -->
-		<td><input type="hidden" name="storeid" size="45" 
-			 value="${storeid}" /></td> <!-- value 若空值=吳永志 , 否則=empVO.getEname() -->
-		<td><input type="text" name="storeId" size="45" 
+		<td><input type="hidden" name="storeId" size="45" 
 			 value="<%=ss %>" /></td> <!-- value 若空值=吳永志 , 否則=empVO.getEname() -->
 	</tr>
 	<tr><!-- 會員電話 -->
