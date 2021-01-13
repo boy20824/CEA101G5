@@ -27,8 +27,6 @@
 
 	Integer pickupNo = (Integer) session.getAttribute("pickupNo");
 	String storeid = (String) session.getAttribute("storeid");
-	
-	
 %>
 <c:if test="${not empty errorMsgs}">
 	<font style="color: red">請修正以下錯誤:</font>
@@ -47,13 +45,13 @@
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/bootstrap-grid.min.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/bootstrap.min.css" />
-<link rel="stylesheet"	
+<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/bootstrap-reboot.min.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/storePickupNoAndNoCall.css" />
 <%-- 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/restaurant/css/css.css" /> --%>
 <style>
-.header{
+.header {
 	position: fixed;
 	background-color: #FA7E23;
 	height: 120px;
@@ -61,32 +59,35 @@
 	z-index: 2;
 	opacity: 85%;
 	margin-top: -30;
-
 }
-img{
-position: fixed;
-z-index: 4;
-margin-top: 10;
+
+img {
+	position: fixed;
+	z-index: 4;
+	margin-top: 10;
 }
 </style>
 </head>
 <body>
-<div class="header">
-<!-- Just an image -->
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp">
-    <img src="../img/LOGO/Logo3(2).png" width="180" height="100" alt="" loading="lazy">
-  </a>
-</nav>
-<a class="icon" href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp"></a>
-</div>
+	<div class="header">
+		<!-- Just an image -->
+		<nav class="navbar navbar-light bg-light">
+			<a class="navbar-brand"
+				href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp">
+				<img src="../img/LOGO/Logo3(2).png" width="180" height="100" alt=""
+				loading="lazy">
+			</a>
+		</nav>
+		<a class="icon"
+			href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp"></a>
+	</div>
 	<div class="container">
 		<div class="row reserve2"></div>
 		<div class="row">
 			<div class="col-4 left">
 				<div class="row left-top">
 					<div class="row" id="display">
-						<div style="font-size:60px; text-align:center; "id="nowTime"></div>
+						<div style="font-size: 60px; text-align: center;" id="nowTime"></div>
 					</div>
 				</div>
 				<form id="info">
@@ -97,7 +98,7 @@ margin-top: 10;
 							</div>
 							<div class="col-sm-1"></div>
 							<div class="col-sm-9">
-								<input name="memName" class="form-control" id="name">
+								<input name="memName" class="form-control" id="name" required>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -106,7 +107,7 @@ margin-top: 10;
 							</div>
 							<div class="col-sm-1"></div>
 							<div class="col-sm-9">
-								<input name="memphone" type="tel" class="form-control"
+								<input name="memphone" type="tel" class="form-control" required
 									id="memphone" minlength="10" maxlength="10">
 							</div>
 						</div>
@@ -155,12 +156,15 @@ margin-top: 10;
 							<h3>預計取號</h3>
 
 						</div>
-		<input name="storeid" id="storeid" value="${storeid }" hidden="hidden" />
-						<input style="text-align:center;" name="queuenum" type="text" class="form-control" value="<%=pickupNo%>" aria-label="Amount (to the nearest dollar)" readonly> 
-						<input type="hidden" id="queuenotime" name="queuenotime" class="quenotime"> 
-						<input type="hidden" id="queuetableid" name="queuetableid" value="1">
+						<input name="storeid" id="storeid" value="${storeid }"
+							hidden="hidden" /> <input style="text-align: center;"
+							name="queuenum" type="text" class="form-control"
+							value="<%=pickupNo%>" aria-label="Amount (to the nearest dollar)"
+							readonly> <input type="hidden" id="queuenotime"
+							name="queuenotime" class="quenotime"> <input
+							type="hidden" id="queuetableid" name="queuetableid" value="1">
 						<input type="hidden" id="queuelineno" name="queuelineno" value="1">
-						<input type="hidden" name="action" value="storeInsert">						
+						<input type="hidden" name="action" value="storeInsert">
 						<button id="submit" type="submit" class="btn btn-primary"
 							value="送出新增">新增取號</button>
 					</div>
@@ -177,19 +181,23 @@ margin-top: 10;
 							<c:choose>
 								<c:when test="${queTableVO.queuetableid ==1}">
 									<div class="table_type">2人桌</div>
-									<input class="queuetableid" value="${queTableVO.queuetableid}" type="hidden">
+									<input class="queuetableid" value="${queTableVO.queuetableid}"
+										type="hidden">
 								</c:when>
 								<c:when test="${queTableVO.queuetableid ==2}">
 									<div class="table_type">4人桌</div>
-									<input class="queuetableid" value="${queTableVO.queuetableid}" type="hidden">
+									<input class="queuetableid" value="${queTableVO.queuetableid}"
+										type="hidden">
 								</c:when>
 								<c:when test="${queTableVO.queuetableid ==3}">
 									<div class="table_type">8人桌</div>
-									<input class="queuetableid" value="${queTableVO.queuetableid}" type="hidden">
+									<input class="queuetableid" value="${queTableVO.queuetableid}"
+										type="hidden">
 								</c:when>
 								<c:when test="${queTableVO.queuetableid ==4}">
 									<div class="table_type">10人桌</div>
-									<input class="queuetableid" value="${queTableVO.queuetableid}" type="hidden">
+									<input class="queuetableid" value="${queTableVO.queuetableid}"
+										type="hidden">
 								</c:when>
 							</c:choose>
 						</div>
@@ -197,11 +205,12 @@ margin-top: 10;
 						<div class="col-2">
 							<div class="tableavail">空桌數</div>
 							<div class="queuetableusable">${queTableVO.queuetableusable}</div>
-							<input class="queuetableocc" value="${queTableVO.queuetableocc }" type="hidden">
-							<input class="quetableusable" value="${queTableVO.queuetableusable}" type="hidden">
+							<input class="queuetableocc" value="${queTableVO.queuetableocc }"
+								type="hidden"> <input class="quetableusable"
+								value="${queTableVO.queuetableusable}" type="hidden">
 						</div>
 
-						
+
 
 						<div class="col-2">
 							<div class="queuenums">預備叫號</div>
@@ -254,7 +263,7 @@ margin-top: 10;
 								</c:choose>
 							</div>
 						</div>
-						
+
 						<div class="col-2">
 							<div class="nocall">目前叫號</div>
 							<c:choose>
@@ -263,7 +272,8 @@ margin-top: 10;
 										<c:choose>
 											<c:when test="${queLineVO.queuelineno==1}">
 												<div id="queuenum" class="no_call">${queLineVO.queuenocall}</div>
-												<input class="queuenum" value="${queLineVO.queuenocall}" type="hidden">
+												<input class="queuenum" value="${queLineVO.queuenocall}"
+													type="hidden">
 											</c:when>
 										</c:choose>
 									</c:forEach>
@@ -273,7 +283,8 @@ margin-top: 10;
 										<c:choose>
 											<c:when test="${queLineVO.queuelineno==2}">
 												<div id="queuenum" class="no_call">${queLineVO.queuenocall}</div>
-												<input class="queuenum" value="${queLineVO.queuenocall}" type="hidden">
+												<input class="queuenum" value="${queLineVO.queuenocall}"
+													type="hidden">
 											</c:when>
 										</c:choose>
 									</c:forEach>
@@ -283,7 +294,8 @@ margin-top: 10;
 										<c:choose>
 											<c:when test="${queLineVO.queuelineno==3}">
 												<div id="queuenum" class="no_call">${queLineVO.queuenocall}</div>
-												<input class="queuenum" value="${queLineVO.queuenocall}" type="hidden">
+												<input class="queuenum" value="${queLineVO.queuenocall}"
+													type="hidden">
 											</c:when>
 										</c:choose>
 									</c:forEach>
@@ -293,7 +305,8 @@ margin-top: 10;
 										<c:choose>
 											<c:when test="${queLineVO.queuelineno==4}">
 												<div id="queuenum" class="no_call">${queLineVO.queuenocall}</div>
-												<input class="queuenum" value="${queLineVO.queuenocall}" type="hidden">
+												<input class="queuenum" value="${queLineVO.queuenocall}"
+													type="hidden">
 											</c:when>
 										</c:choose>
 									</c:forEach>
@@ -309,85 +322,85 @@ margin-top: 10;
 					</div>
 				</c:forEach>
 
-<!-- -------------------------------------------------------------------------------------------------------- -->
+				<!-- -------------------------------------------------------------------------------------------------------- -->
 
-<%-- 				<jsp:useBean id="queTableSvc" scope="page" --%>
-<%-- 					class="com.queuetable.model.QueTableService" /> --%>
-<!-- 				<div class="row right-li"> -->
-<%-- 					<c:forEach var="queTableVO" items="${queTableSvc.all}"> --%>
-<%-- 						<c:choose> --%>
-<%-- 							<c:when --%>
-<%-- 								test="${queTableVO.storeid=='S000001' && queTableVO.queuetableid ==1}"> --%>
-<!-- 								<div class="col-2"> -->
-<!-- 									<div class="tabletype">桌位</div> -->
-<!-- 									<div class="table_type">2人桌</div> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-2"> -->
-<!-- 									<div class="tableavail">空桌數</div> -->
-<%-- 									<div class="table_avail">${queTableVO.queuetablettl-queTableVO.queuetableocc }</div> --%>
-<!-- 								</div> -->
-<%-- 							</c:when> --%>
-<%-- 						</c:choose> --%>
-<%-- 					</c:forEach> --%>
+				<%-- 				<jsp:useBean id="queTableSvc" scope="page" --%>
+				<%-- 					class="com.queuetable.model.QueTableService" /> --%>
+				<!-- 				<div class="row right-li"> -->
+				<%-- 					<c:forEach var="queTableVO" items="${queTableSvc.all}"> --%>
+				<%-- 						<c:choose> --%>
+				<%-- 							<c:when --%>
+				<%-- 								test="${queTableVO.storeid=='S000001' && queTableVO.queuetableid ==1}"> --%>
+				<!-- 								<div class="col-2"> -->
+				<!-- 									<div class="tabletype">桌位</div> -->
+				<!-- 									<div class="table_type">2人桌</div> -->
+				<!-- 								</div> -->
+				<!-- 								<div class="col-2"> -->
+				<!-- 									<div class="tableavail">空桌數</div> -->
+				<%-- 									<div class="table_avail">${queTableVO.queuetablettl-queTableVO.queuetableocc }</div> --%>
+				<!-- 								</div> -->
+				<%-- 							</c:when> --%>
+				<%-- 						</c:choose> --%>
+				<%-- 					</c:forEach> --%>
 
-<%-- 					<c:forEach var="quePeriodVO" items="${quePeriodSvc.all}"> --%>
-<%-- 						<c:choose> --%>
-<%-- 							<c:when test="${quePeriodVO.storeid== 'S000001'}"> --%>
-<%-- 								<c:choose> --%>
-<%-- 									<c:when test="${quePeriodVO.queueperiodid ==1}"> --%>
-<!-- 										<div class="col-2"> -->
-<!-- 											<div class="nocurrent">目前取號</div> -->
-<%-- 											<div class="no_current">${quePeriodVO.queuenocurrent }</div> --%>
-<!-- 										</div> -->
-<%-- 									</c:when> --%>
-<%-- 								</c:choose> --%>
-<%-- 							</c:when> --%>
-<%-- 						</c:choose> --%>
-<%-- 					</c:forEach> --%>
+				<%-- 					<c:forEach var="quePeriodVO" items="${quePeriodSvc.all}"> --%>
+				<%-- 						<c:choose> --%>
+				<%-- 							<c:when test="${quePeriodVO.storeid== 'S000001'}"> --%>
+				<%-- 								<c:choose> --%>
+				<%-- 									<c:when test="${quePeriodVO.queueperiodid ==1}"> --%>
+				<!-- 										<div class="col-2"> -->
+				<!-- 											<div class="nocurrent">目前取號</div> -->
+				<%-- 											<div class="no_current">${quePeriodVO.queuenocurrent }</div> --%>
+				<!-- 										</div> -->
+				<%-- 									</c:when> --%>
+				<%-- 								</c:choose> --%>
+				<%-- 							</c:when> --%>
+				<%-- 						</c:choose> --%>
+				<%-- 					</c:forEach> --%>
 
-<%-- 					<jsp:useBean id="queLineSvc" scope="page" --%>
-<%-- 						class="com.queueline.model.QueLineService" /> --%>
+				<%-- 					<jsp:useBean id="queLineSvc" scope="page" --%>
+				<%-- 						class="com.queueline.model.QueLineService" /> --%>
 
-<%-- 					<c:forEach var="queLineVO" items="${queLineSvc.all }"> --%>
-<%-- 						<c:choose> --%>
-<%-- 							<c:when --%>
-<%-- 								test="${queLineVO.storeid=='S000001' && queLineVO.queuetableid==1}"> --%>
-<!-- 								<div class="col-2"> -->
-<!-- 									<div class="nocall">目前叫號</div> -->
-<%-- 									<div id="queuenum1" class="no_call">${queLineVO.queuenocall}</div> --%>
-<!-- 								</div> -->
-<%-- 							</c:when> --%>
-<%-- 						</c:choose> --%>
-<%-- 					</c:forEach> --%>
+				<%-- 					<c:forEach var="queLineVO" items="${queLineSvc.all }"> --%>
+				<%-- 						<c:choose> --%>
+				<%-- 							<c:when --%>
+				<%-- 								test="${queLineVO.storeid=='S000001' && queLineVO.queuetableid==1}"> --%>
+				<!-- 								<div class="col-2"> -->
+				<!-- 									<div class="nocall">目前叫號</div> -->
+				<%-- 									<div id="queuenum1" class="no_call">${queLineVO.queuenocall}</div> --%>
+				<!-- 								</div> -->
+				<%-- 							</c:when> --%>
+				<%-- 						</c:choose> --%>
+				<%-- 					</c:forEach> --%>
 
-<%-- 					<jsp:useBean id="queNoSvc" scope="page" --%>
-<%-- 						class="com.queueno.model.QueNoService" /> --%>
+				<%-- 					<jsp:useBean id="queNoSvc" scope="page" --%>
+				<%-- 						class="com.queueno.model.QueNoService" /> --%>
 
-<!-- 					<div class="col-2"> -->
-<!-- 						<div class="queuenums">預備叫號</div> -->
-<!-- 						<div class="queue_nums"> -->
-<%-- 							<c:forEach var="queNoVO" items="${queNoSvc.all}" begin="0" --%>
-<%-- 								end="3"> --%>
-<%-- 								<c:choose> --%>
-<%-- 									<c:when --%>
-<%-- 										test="${queNoVO.storeid=='S000001' && queNoVO.queuetableid==1 }"> --%>
-<!-- 										<div> -->
-<%-- 											<c:out value="${queNoVO.queuenum } " /> --%>
-<!-- 										</div> -->
-<%-- 									</c:when> --%>
-<%-- 								</c:choose> --%>
-<%-- 							</c:forEach> --%>
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-2"> -->
-<!-- 						<input id="queuetableid1" name="queuetableid1" value="1" -->
-<!-- 							hidden="hidden"> <input onclick="" -->
-<!-- 							type="button" class="btn btn-danger" value="叫號" /> <input -->
-<!-- 							onclick="" type="button" class="btn btn-success" value="收桌"> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-				
-				
+				<!-- 					<div class="col-2"> -->
+				<!-- 						<div class="queuenums">預備叫號</div> -->
+				<!-- 						<div class="queue_nums"> -->
+				<%-- 							<c:forEach var="queNoVO" items="${queNoSvc.all}" begin="0" --%>
+				<%-- 								end="3"> --%>
+				<%-- 								<c:choose> --%>
+				<%-- 									<c:when --%>
+				<%-- 										test="${queNoVO.storeid=='S000001' && queNoVO.queuetableid==1 }"> --%>
+				<!-- 										<div> -->
+				<%-- 											<c:out value="${queNoVO.queuenum } " /> --%>
+				<!-- 										</div> -->
+				<%-- 									</c:when> --%>
+				<%-- 								</c:choose> --%>
+				<%-- 							</c:forEach> --%>
+				<!-- 						</div> -->
+				<!-- 					</div> -->
+				<!-- 					<div class="col-2"> -->
+				<!-- 						<input id="queuetableid1" name="queuetableid1" value="1" -->
+				<!-- 							hidden="hidden"> <input onclick="" -->
+				<!-- 							type="button" class="btn btn-danger" value="叫號" /> <input -->
+				<!-- 							onclick="" type="button" class="btn btn-success" value="收桌"> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+
+
 			</div>
 
 
@@ -395,13 +408,14 @@ margin-top: 10;
 
 	</div>
 </body>
-<script src="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/js/jquery-3.4.1.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/js/jquery-3.4.1.min.js"></script>
 <script
 	src="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
 <script
 	src="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/js/popper.min.js"></script>
-<script
-	src="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/js/customerPickupNo.js"></script>
+<!-- <script -->
+<%-- 	src="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/js/customerPickupNo.js"></script> --%>
 
 <!-- 		顯示動態時間 -->
 <script type="text/javascript">
@@ -459,10 +473,10 @@ margin-top: 10;
 </script>
 
 <script>
-	//開始先關送出
-	$(document).ready(function() {
-		$("#submit").prop("disabled", true);
-	});
+// 	//先關送出
+// 	$(document).ready(function() {
+// 		$("#submit").prop("disabled", true);
+// 	});
 </script>
 
 <!-- 	插入動態最新叫號 -->
@@ -617,15 +631,32 @@ margin-top: 10;
 	
 	
 </script>
+
+<script>
+//  電話驗證
+$("#memphone").blur(
+function() {
+	var MobileReg = /^[0]{1}[9]{1}[0-9]{8}$/;
+	console.log($(this).val());
+	console.log($(this).val().match(MobileReg));
+	
+	if($(this).val().match(MobileReg)){
+			$(this).addClass("is-valid").removeClass("is-invalid");
+	}else{
+			$(this).addClass("is-invalid").removeClass("is-valid");
+	}		
+});
+</script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <c:out value="${check }"></c:out>
 <c:if test="${check=='addNo' }">
-<script>
+	<script>
 swal("新增成功", "ok", "success");
 </script>
 </c:if>
 <c:if test="${check=='repeat' }">
-<script>
+	<script>
 swal("已取過號，請確認", "fail", "error");
 </script>
 </c:if>

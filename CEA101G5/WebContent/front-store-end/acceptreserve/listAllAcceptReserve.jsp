@@ -3,11 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.acceptreserve.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+<%@ page import="com.restaurant.model.*"%>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
 	AcceptReserveService arSvc = new AcceptReserveService();
-    List<AcceptReserveVO> list = arSvc.getSearch(storeLogin.getStoreId());
+    List<AcceptReserveVO> list = arSvc.getSearch(((RestaurantVO)(session.getAttribute("storeLogin"))).getStoreId());
     pageContext.setAttribute("list",list);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String today = sdf.format(new Date());
@@ -101,6 +101,7 @@
 </c:if>
 <br>
 <table class="info">
+	<caption>所有時段</caption>
 	<tr>
 		<th>時段編號</th>
 		<th>開始時間</th>

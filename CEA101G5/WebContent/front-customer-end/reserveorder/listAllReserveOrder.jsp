@@ -4,15 +4,19 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.reserveorder.model.*"%>
 
+<jsp:useBean id="memSvc" scope="session" class="com.member.model.MemService"/>
 <%	
 	String memPhone = request.getParameter("memId");
-	System.out.println(memPhone + "a");
+	if (memPhone == null){
+		memPhone = (String)session.getAttribute("memPhone");
+	}
     ReserveOrderService reserveOrderSvc = new ReserveOrderService();
     List<ReserveOrderVO> list = reserveOrderSvc.getForc(memPhone,0);
     pageContext.setAttribute("list",list);
-    request.setAttribute("memPhone",memPhone);
+    session.setAttribute("memPhone",memPhone);
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
+<%-- <jsp:useBean id="roSvc" scope="page" class="com.reserveorder.model.ReserveOrderService"/> --%>
 
 <html>
 <head>
