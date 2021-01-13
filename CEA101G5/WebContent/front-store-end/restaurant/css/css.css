@@ -283,3 +283,6 @@ font {
     font-size: 1.1vw;
     font-weight: bold;
 }
+.welcomePageBtn button:hover{
+	cursor: pointer;
+}

@@ -125,7 +125,7 @@ pageContext.setAttribute("storeid", storeid);
             <button type="submit">外帶訂單管理</button>
             <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do?action=storeGetQueNo&storeid=${storeid }'">取號管理</button>
             <button type="submit">訂位管理</button>
-            <button type="submit">查看營業金流</button>
+            <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/cashflow/cashflow.jsp'">查看營業金流</button>
         </div>
     </body>
     </html>
