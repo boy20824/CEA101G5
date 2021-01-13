@@ -160,6 +160,7 @@ $('document').ready(function(){
 			type : "GET",
 			dataType : "json",
 			success : function(data) { 
+				
 			}
 		})     		
     	 // 點擊購物車移除觸發刪除事件

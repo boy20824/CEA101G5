@@ -5,9 +5,16 @@
 <%@ page import="com.restaurant.model.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.member.model.*"%>
+<%@ page import="com.restaurantpicture.model.*"%>
+
 
 <%
 	RestaurantService restaurantSvc = new RestaurantService(); //創建 實體
+	
+	 RestaurantPictureService resPicSvc = new RestaurantPictureService();
+	 List<RestaurantPictureVO> list = resPicSvc.getAll();
+	 pageContext.setAttribute("list",list);
+	
 	if(request.getParameter("storeId")==null){
 		RestaurantVO restaurantVO = restaurantSvc.getOneRestaurant(((RestaurantVO)session.getAttribute("restaurantVO")).getStoreId());
 	}else{
@@ -143,10 +150,9 @@ response.setDateHeader("Expires", 0);
 
 				<div class="text">
 					<ul class="cb-slideshow">
-						<img src="img/圖片/餐廳.jpg" alt="" />
-						<img src="img/圖片/餐廳.jpg" alt="" />
-						<img src="img/圖片/餐廳.jpg" alt="" />
-						<img src="img/圖片/餐廳.jpg" alt="" />
+						<c:forEach var="restaurantPictureVO" items="${list}">
+						<img src="<%=request.getContextPath() %>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantVO.storeId}&action=getOne_For_Display" alt="" />
+						</c:forEach>
 					</ul>
 				</div>
 
