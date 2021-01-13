@@ -6,7 +6,7 @@
 
 <%
     ReserveOrderService reserveOrderSvc = new ReserveOrderService();
-    List<ReserveOrderVO> list = reserveOrderSvc.getForc("0921842855",0);
+    List<ReserveOrderVO> list = reserveOrderSvc.getForc(memLogin.getMemPhone(),0);
     pageContext.setAttribute("list",list);
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>

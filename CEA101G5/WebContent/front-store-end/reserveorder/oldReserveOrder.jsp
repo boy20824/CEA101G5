@@ -6,7 +6,7 @@
 
 <%  
     ReserveOrderService reserveOrderSvc = new ReserveOrderService();
-    List<ReserveOrderVO> list = reserveOrderSvc.getForsold("S000003",0);
+    List<ReserveOrderVO> list = reserveOrderSvc.getForsold(storeLogin.storeId,0);
     pageContext.setAttribute("list",list);
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>

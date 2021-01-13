@@ -7,7 +7,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
 	AcceptReserveService arSvc = new AcceptReserveService();
-    List<AcceptReserveVO> list = arSvc.getSearch("S000003");
+    List<AcceptReserveVO> list = arSvc.getSearch(storeLogin.getStoreId());
     pageContext.setAttribute("list",list);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String today = sdf.format(new Date());
@@ -132,8 +132,8 @@
 					<input type="hidden" name="periodstatus"  value=1>
 					<input type="hidden" name="delperiod" value="open">
 					<input type="hidden" name="reservesituationdate" value="<%=tomorrow %>">
-					<input type="hidden" name="acceptdays" value=7><!-- 這個允許訂位天數的名稱我亂取的  還要跟餐廳拿 -->
-					<input type="hidden" name="acceptgroups" value=6><!-- 這個也要跟餐廳拿 -->
+					<input type="hidden" name="acceptdays" value="${storeLogin.storeFinalReservDate}"><!-- 這個允許訂位天數的名稱我亂取的  還要跟餐廳拿 -->
+					<input type="hidden" name="acceptgroups" value="${storeLogin.acceptGroups}"><!-- 這個也要跟餐廳拿 -->
 					<input type="hidden" name="reservedgroups" value=0>
 				</c:if>
 				<c:if test="${arVO.periodStatus==1}">
@@ -166,33 +166,33 @@
 		<th>結束時間</th>
 	</tr>
 		<jsp:useBean id="arSvc2" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
-		<c:if test="${arSvc2.getSearch(ss).size() == 0}">
+		<c:if test="${arSvc2.getSearch(storeLogin.storeId).size() == 0}">
 			<input type="hidden" name="periodid" value=1>
 		</c:if>
-		<c:if test="${arSvc2.getSearch(ss).size() > 0}">
-			<input type="hidden" name="periodid" value="${arSvc2.getSearch(ss).size()+1}">
+		<c:if test="${arSvc2.getSearch(storeLogin.storeId).size() > 0}">
+			<input type="hidden" name="periodid" value="${arSvc2.getSearch(storeLogin.storeId).size()+1}">
 		</c:if>
 	
 	<tr>
-		<input type="hidden" name="storeid" value="S000003"> <!-- 引入餐廳ID -->
+		<input type="hidden" name="storeid" value="${storeLogin.storeId}"> <!-- 引入餐廳ID -->
 		<td><input name="starttime" id="f_date1" type="text"></td>
 		<td><input name="endtime" id="f_date2" type="text"></td>
 		<input type="hidden" name="periodstatus" value=1>
 	</tr>
 
 	</table>
-	<c:forEach var="arVO" items="${arSvc2.getSearch(ss)}">
+	<c:forEach var="arVO" items="${arSvc2.getSearch(storeLogin.storeId)}">
 		<input type="hidden" name="${arVO.periodId}" value="${arVO.startTime}">
 		<input type="hidden" name="${arVO.periodId*10}" value="${arVO.endTime}">
 	</c:forEach>
-	<input type="hidden" name="fori" value="${arSvc2.getSearch(ss).size()}">	
+	<input type="hidden" name="fori" value="${arSvc2.getSearch(storeLogin.storeId).size()}">	
 <input type="hidden" name="action" value="insert">
 
 
 
 <input type="hidden" name="reservesituationdate" value="<%=tomorrow %>">
-<input type="hidden" name="acceptdays" value=7><!-- 這個允許訂位天數的名稱我亂取的  還要跟餐廳拿 -->
-<input type="hidden" name="acceptgroups" value=6><!-- 這個也要跟餐廳拿 -->
+<input type="hidden" name="acceptdays" value="${storeLogin.storeFinalReservDate}"><!-- 這個允許訂位天數的名稱我亂取的  還要跟餐廳拿 -->
+<input type="hidden" name="acceptgroups" value="${storeLogin.acceptGroups}"><!-- 這個也要跟餐廳拿 -->
 <input type="hidden" name="reservedgroups" value=0>
 <input type="submit" value="新增時段" class="button"></FORM>
 <% 
@@ -232,7 +232,7 @@ $('#f_date1').datetimepicker({
    format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
    value: '<%=starttime%>', // value:   new Date(),
    //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-   //startDate:	            '2017/07/10',  // 起始日
+   startDate:	            '2000/01/01',  // 起始日
    //minDate:               '-1970-01-01', // 去除今日(不含)之前
    //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 });   
@@ -245,7 +245,7 @@ $('#f_date2').datetimepicker({
    format:'Y-m-d H:i:s',         //format:'Y-m-d H:i:s',
    value: '<%=endtime%>', // value:   new Date(),
    //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-   //startDate:	            '2017/07/10',  // 起始日
+   startDate:	            '2000/01/01',  // 起始日
    //minDate:               '-1970-01-01', // 去除今日(不含)之前
    //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 });

@@ -18,7 +18,7 @@ public class ReserveOrderDAO implements ReserveOrderDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/MING"); //記得要去Server的context.xml註冊DB
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G5"); //記得要去Server的context.xml註冊DB
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

@@ -12,12 +12,12 @@ import jdk.nashorn.internal.runtime.regexp.joni.SearchAlgorithm;
 
 public class AcceptReserveDAO implements AcceptReserveDAO_interface {
 
-	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
+	// 銝���蝔�葉,�������澈 ,��銝��ataSource��
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/MING");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G5");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +52,7 @@ public class AcceptReserveDAO implements AcceptReserveDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// arVO 也稱為 Domain objects
+				// arVO 銋迂� Domain objects
 				arVO = new AcceptReserveVO();
 				arVO.setStoreId(rs.getString("STORE_ID"));
 				arVO.setPeriodId(rs.getInt("PERIOD_ID"));
@@ -109,7 +109,7 @@ public class AcceptReserveDAO implements AcceptReserveDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// arVO 也稱為 Domain objects
+				// arVO 銋迂� Domain objects
 				arVO = new AcceptReserveVO();
 				arVO.setStoreId(rs.getString("STORE_ID"));
 				arVO.setPeriodId(rs.getInt("PERIOD_ID"));
@@ -161,7 +161,7 @@ public class AcceptReserveDAO implements AcceptReserveDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			//注意JDBC的prepareStatement是從1開始
+			//瘜冽�DBC��repareStatement�敺�1����
 			pstmt.setInt(1, arVO.getPeriodId());
 			pstmt.setString(2, arVO.getStoreId());
 			pstmt.setTimestamp(3, arVO.getStartTime());
@@ -258,7 +258,7 @@ public class AcceptReserveDAO implements AcceptReserveDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo 也稱為 Domain objects
+				// empVo 銋迂� Domain objects
 				arVO = new AcceptReserveVO();
 				arVO.setStoreId(rs.getString("STORE_ID"));
 				arVO.setPeriodId(rs.getInt("PERIOD_ID"));
@@ -297,7 +297,7 @@ public class AcceptReserveDAO implements AcceptReserveDAO_interface {
 		}
 		return arVO;
 	}
-	//他這邊getAll 就是把 Select * 用List接(一筆一行, 可單獨取出?)
+	//隞��etAll 撠望��� Select * �List�(銝�蝑�銵�, �����?)
 	@Override
 	public List<AcceptReserveVO> getAll() {
 		List<AcceptReserveVO> list = new ArrayList<AcceptReserveVO>();
@@ -314,7 +314,7 @@ public class AcceptReserveDAO implements AcceptReserveDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// arVO 也稱為 Domain objects
+				// arVO 銋迂� Domain objects
 				arVO = new AcceptReserveVO();
 				arVO.setStoreId(rs.getString("STORE_ID"));
 				arVO.setPeriodId(rs.getInt("PERIOD_ID"));

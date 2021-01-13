@@ -6,7 +6,7 @@
 
 <%
     ReserveSituationService rsSvc = new ReserveSituationService();
-    List<ReserveSituationVO> list = rsSvc.fors("S000003");
+    List<ReserveSituationVO> list = rsSvc.fors(storeLogin.storeId);
     pageContext.setAttribute("list",list);
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>

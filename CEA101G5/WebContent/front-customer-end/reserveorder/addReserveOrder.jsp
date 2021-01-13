@@ -11,12 +11,12 @@
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
 <jsp:useBean id="rsSvc" scope="page" class="com.reservesituation.model.ReserveSituationService"/>
+<jsp:useBean id="rSvc" scope="page" class="com.restaurant.model.RestaurantService"/>
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-<title>測試</title>
-
+<title>訂位</title>
 <style>
   table#table-1 {
 	background-color: #f3853d;
@@ -185,11 +185,11 @@ tr .radio-item input:checked + label + span {
 <table class="pickPeopleAndNote">
 	<tr><!-- 餐廳號 -->
 		<td><input type="hidden" name="storeid" size="45" 
-			 value="<%= (reserveOrderVO==null)? "S000003" : reserveOrderVO.getStoreId()%>" /></td> <!-- value 若空值=吳永志 , 否則=empVO.getEname() -->
+			 value="從瀏覽餐廳得到" /></td> <!-- value 若空值=吳永志 , 否則=empVO.getEname() -->
 	</tr>
 	<tr><!-- 會員電話 -->
 		<td><input type="hidden" name="memphone" size="45"
-			 value="<%= (reserveOrderVO==null)? "0921842855" : reserveOrderVO.getMemPhone()%>" /></td>
+			 value="${memLogin.memPhone}" /></td>
 	</tr>
 		<td><input name="reservetime" id="zzz" type="hidden" class="bookingDate"></td>
 	<tr>
@@ -282,7 +282,7 @@ tr .radio-item input:checked + label + span {
 	        dateFormat: "yy-mm-dd",
 	        showButtonPanel: true,
 	        minDate: +1,
-	        maxDate: "+0M +10D",
+	        maxDate: "+0M +${rSvc.getOneRestaurant("S000003").storeFinalReservDate}D",
 	        onSelect: function(date) {
 	            $(".bookingDate").val(date);
 	     		hi();	//直接在這邊執行hi()就能觸發了*****感謝輯神
@@ -320,6 +320,7 @@ tr .radio-item input:checked + label + span {
  					//這是用來給你getParameter ("date")   值是dd
  					date : dd,
  					picknum : adnum,
+ 					storeid : ss,
  					},
  					success: function(msg){//傳回字串
 //  						console.log(msg)

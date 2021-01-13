@@ -12,6 +12,7 @@ import javax.servlet.http.*;
 
 import org.apache.naming.java.javaURLContextFactory;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.acceptreserve.model.*;
@@ -359,17 +360,22 @@ public class ReserveSituationServlet extends HttpServlet {
 			Integer pickNum = Integer.parseInt( (req.getParameter("picknum")));
 			ReserveSituationService rsSvc = new ReserveSituationService();
 			AcceptReserveService arSvc = new AcceptReserveService();
-//			String ss = req.getParameter("storeid");
-			List<ReserveSituationVO> list = rsSvc.getSearch(dd,"S000003");
+			String ss = req.getParameter("storeid");
+			List<ReserveSituationVO> list = rsSvc.getSearch(dd,ss);//該日期該店家 有哪些時段有位子
 //			JSONArray array = new JSONArray();
 			JSONObject obj = new JSONObject();
-			for (int i = 0; i < list.size(); i++) {
+			for (int i = 0; i < list.size(); i++) {//依有位子的時段數量跑迴圈
 				
 				int acg = list.get(i).acceptGroups;//acg=該時段的剩餘位子
 				if (pickNum < acg * 2) {
 					//periodId當KEY(反正同家店的ID不會重複) 記得要改店號
 					DateFormat df = new SimpleDateFormat("HH:mm");
-					obj.put("" + list.get(i).periodId, df.format(arSvc.getOneAcceptReserve("S000003",list.get(i).periodId).startTime));
+					try {
+						obj.put("" + list.get(i).periodId, df.format(arSvc.getOneAcceptReserve(ss,list.get(i).periodId).startTime));
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				//先丟到list再包成JSONarray 再out.print拋給JSP 參考ClassDemo2 AjaxResponse.java
 				//我沒有包成JSONArray直接JSON物件回去了

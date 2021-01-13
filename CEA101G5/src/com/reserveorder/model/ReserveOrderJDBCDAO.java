@@ -27,7 +27,7 @@ public class ReserveOrderJDBCDAO implements ReserveOrderDAO_interface {
 
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "MING";
+	String userid = "CEA101G5";
 	String passwd = "123456";
 
 	@Override
