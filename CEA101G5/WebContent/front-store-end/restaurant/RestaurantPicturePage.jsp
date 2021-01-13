@@ -127,9 +127,9 @@ margin-left:200px
 	<c:forEach var="restPiclist" items="${restPicSvc.getStorePicByStoreId(storeLogin.storeId)}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td><input type="checkbox">${restaurantPictureVO.storePictureId}</td>
+			<td><input type="checkbox">${restPiclist.storePictureId}</td>
 			<td>${storeLogin.storeId}</td>
-			<td><img style="width:100px;" src="<%=request.getContextPath() %>/back-end/restaurantpicture/restaurantPicture.do?storeId=${storeLogin.storeId}&action=getOne_For_Display"></td>
+			<td><img style="width:100px;" src="<%=request.getContextPath() %>/back-end/restaurantpicture/restaurantPicture.do?storePictureId=${restPiclist.storePictureId}&action=getOne_For_Display"></td>
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do" style="margin-bottom: 0px;">

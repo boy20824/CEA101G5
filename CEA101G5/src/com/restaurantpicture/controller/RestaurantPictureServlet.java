@@ -53,9 +53,9 @@ public class RestaurantPictureServlet extends HttpServlet {
 			res.setContentType("image/gif");
 			ServletOutputStream out = res.getOutputStream();
 			try {
-				String storeId = req.getParameter("storeId");
+				String storePictureId = req.getParameter("storePictureId");
 				RestaurantPictureService restPicSvc = new RestaurantPictureService();
-				byte[] baos = restPicSvc.getOneStorePicByStoreId(storeId).getStorePicture();
+				byte[] baos = restPicSvc.getOneRestaurantPicture(storePictureId).getStorePicture();
 				out.write(baos);
 				
 			} catch (Exception e) {
