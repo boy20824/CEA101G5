@@ -42,6 +42,9 @@ public class RestaurantDAO implements Restaurant_interface {
 			+ "STORE_FINAL_RESERVDATE=?, STORE_ORDER_CONDITION=?, STORE_RESERV_CONDITION=?, STORE_QUEUE_CONDITION=?, STORE_ORDER_WAITTIME=?, "
 			+ "STORE_OPENTIME=?, STORE_CLOSETIME=?, STORE_START_ORDERDATE=?, STORE_END_ORDERDATE=?, ACCEPT_GROUPS=?, NUM_OF_GROUPS=?, "
 			+ "STORE_PEOPLE_TOTAL=?, STORE_RATING_TOTAL=? WHERE STORE_ID=? ";
+	
+	private static final String EASY_UPDATE = "UPDATE RESTAURANT SET STORE_CHAR=?, STORE_INFO=?, STORE_NAME=?, STORE_PHONE=?,"
+			+ "STORE_ADDRESS=?, STORE_STATUS=?, STORE_OPENTIME=?, STORE_CLOSETIME=? WHERE STORE_ID=?";
 
 	private static final String GET_ONE_STMT = "SELECT STORE_ID, MEM_PHONE, STORE_CHAR, STORE_INFO, STORE_NAME, STORE_PHONE,"
 			+ "STORE_ADDRESS, STORE_STATUS, STORE_FINAL_RESERVDATE, STORE_ORDER_CONDITION, STORE_RESERV_CONDITION,STORE_QUEUE_CONDITION,"
@@ -49,6 +52,10 @@ public class RestaurantDAO implements Restaurant_interface {
 			+ "STORE_PEOPLE_TOTAL, STORE_RATING_TOTAL FROM RESTAURANT WHERE STORE_ID=?";
 
 	private static final String GET_ALl_STMT = "SELECT * FROM RESTAURANT";
+	
+	private static final String GET_ALl_BY_CHAR_STMT = "SELECT * FROM WHERE STORE_CHAR = ?";
+	
+	private static final String UPDATE_GROUPS = "UPDATE RESTAURANT SET ACCEPT_GROUPS=?, STORE_FINAL_RESERVDATE=? WHERE STORE_ID=?";
 
 	private static final String DELETE_RESTAURANT = "DELETE FROM RESTAURANT WHERE STORE_ID = ?";
 
@@ -166,6 +173,88 @@ public class RestaurantDAO implements Restaurant_interface {
 		}
 
 	}
+	
+	public void easyupdate(RestaurantVO restaurantVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(EASY_UPDATE);
+			
+			pstmt.setString(1, restaurantVO.getStoreChar());
+			pstmt.setString(2, restaurantVO.getStoreInfo());
+			pstmt.setString(3, restaurantVO.getStoreName());
+			pstmt.setString(4, restaurantVO.getStorePhone());
+			pstmt.setString(5, restaurantVO.getStoreAddress());
+			pstmt.setInt(6, restaurantVO.getStoreStatus());
+			pstmt.setTimestamp(7, restaurantVO.getStoreOpenTime());
+			pstmt.setTimestamp(8, restaurantVO.getStoreCloseTime());
+			pstmt.setString(9, restaurantVO.getStoreId());
+			
+			pstmt.executeUpdate();
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
+	public void updategroup(RestaurantVO restaurantVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_GROUPS);
+			
+			pstmt.setInt(1, restaurantVO.getAcceptGroups());
+			pstmt.setInt(2, restaurantVO.getStoreFinalReservDate());
+			pstmt.setString(3, restaurantVO.getStoreId());
+			
+			pstmt.executeUpdate();
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 
 	// 主鍵查詢
 	@Override
@@ -278,6 +367,74 @@ public class RestaurantDAO implements Restaurant_interface {
 				list.add(restaurantVO);
 			}
 
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	public List<RestaurantVO> getAllByChar(String storeChar) {
+		List<RestaurantVO> list = new ArrayList<RestaurantVO>();
+		RestaurantVO restaurantVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALl_BY_CHAR_STMT);
+			pstmt.setString(1, storeChar);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				restaurantVO = new RestaurantVO();
+				restaurantVO.setStoreId(rs.getString("STORE_ID"));
+				restaurantVO.setMemPhone(rs.getString("MEM_PHONE"));
+				restaurantVO.setStoreChar(rs.getString("STORE_CHAR"));
+				restaurantVO.setStoreInfo(rs.getString("STORE_INFO"));
+				restaurantVO.setStoreId(rs.getString("STORE_ID"));
+				restaurantVO.setStoreName(rs.getString("STORE_NAME"));
+				restaurantVO.setStorePhone(rs.getString("STORE_PHONE"));
+				restaurantVO.setStoreAddress(rs.getString("STORE_ADDRESS"));
+				restaurantVO.setStoreStatus(rs.getInt("STORE_STATUS"));
+				restaurantVO.setStoreFinalReservDate(rs.getInt("STORE_FINAL_RESERVDATE"));
+				restaurantVO.setStoreQueueCondition(rs.getInt("STORE_QUEUE_CONDITION"));
+				restaurantVO.setStoreOrderCondition(rs.getInt("STORE_ORDER_CONDITION"));
+				restaurantVO.setStoreOrderWaitTime(rs.getInt("STORE_ORDER_WAITTIME"));
+				restaurantVO.setStoreOpenTime(rs.getTimestamp("STORE_OPENTIME"));
+				restaurantVO.setStoreCloseTime(rs.getTimestamp("STORE_CLOSETIME"));
+				restaurantVO.setStoreStartOrderDate(rs.getTimestamp("STORE_START_ORDERDATE"));
+				restaurantVO.setStoreEndOrderDate(rs.getTimestamp("STORE_END_ORDERDATE"));
+				restaurantVO.setAcceptGroups(rs.getInt("ACCEPT_GROUPS"));
+				restaurantVO.setNumOfGroups(rs.getInt("NUM_OF_GROUPS"));
+				restaurantVO.setStorePeopleTotal(rs.getInt("STORE_PEOPLE_TOTAL"));
+				restaurantVO.setStoreRatingTotal(rs.getInt("STORE_RATING_TOTAL"));
+				list.add(restaurantVO);
+			}
+			
 			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
