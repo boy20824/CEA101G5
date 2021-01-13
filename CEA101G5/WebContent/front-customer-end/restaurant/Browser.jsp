@@ -221,7 +221,7 @@
 			<div class="store-container">
 				<div class="store-img">
 					<img style="width: 250px; height: 280px;"
-						src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantVO.storeId}&action=getOne_For_Display">
+						src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantVO.storeId}&action=getFirst_For_Display">
 				</div>
 				<div class="store-text">
 					<ul>

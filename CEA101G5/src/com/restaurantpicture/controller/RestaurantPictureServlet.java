@@ -33,6 +33,22 @@ public class RestaurantPictureServlet extends HttpServlet {
 
 		System.out.println("action: "+action);
 
+		if ("getFirst_For_Display".equals(action)) {
+			res.setContentType("image/gif");
+			ServletOutputStream out = res.getOutputStream();
+			try {
+				String storeId = req.getParameter("storeId");
+				RestaurantPictureService restPicSvc = new RestaurantPictureService();
+				byte[] baos = restPicSvc.getFirstStorePicByStoreId(storeId).getStorePicture();
+				out.write(baos);
+				
+			} catch (Exception e) {
+				System.out.println("沒有圖片!!!");
+			}finally {
+				out.close();
+			}
+		}
+		
 		if ("getOne_For_Display".equals(action)) {
 			res.setContentType("image/gif");
 			ServletOutputStream out = res.getOutputStream();

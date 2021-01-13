@@ -53,10 +53,13 @@ public class RestaurantPictureService {
 		return dao.findByStoreId(storeId);
 	}
 	
-	public RestaurantPictureVO getOneStorePicByStoreId(String storeId) {
+	public RestaurantPictureVO getFirstStorePicByStoreId(String storeId) {
 		return dao.findOneByStoreId(storeId);
 	}
 	
+	public RestaurantPictureVO getOneStorePicByStoreId(String storeId) {
+		return dao.findPicByStoreId(storeId);
+	}
 
 	public List<RestaurantPictureVO> getAll() {
 		return dao.getAll();

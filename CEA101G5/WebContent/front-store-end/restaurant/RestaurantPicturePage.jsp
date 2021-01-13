@@ -122,8 +122,9 @@ margin-left:200px
 		<th>storeid</th>
 		<th>storepic</th>
 	</tr>
+	<jsp:useBean id="restPicSvc" scope="page" class="com.restaurantpicture.model.RestaurantPictureService" />
 	<%@ include file="page1.file" %> 
-	<c:forEach var="restaurantPictureVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="restPiclist" items="${restPicSvc.getStorePicByStoreId(storeLogin.storeId)}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
 			<td><input type="checkbox">${restaurantPictureVO.storePictureId}</td>

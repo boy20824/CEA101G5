@@ -112,7 +112,7 @@
 			<div class="row">
 				<div class="col-2">
 					<div class="preview"><img style="width: 160px; height: 150px;"
-						src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${storeLogin.storeId}&action=getOne_For_Display"></div>
+						src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${storeLogin.storeId}&action=getFirst_For_Display"></div>
 				</div>
 				<div class="col" id="addTextBlock">
 					<div class="col-10">
