@@ -9,7 +9,6 @@
 //   String ss = "S000003";
 //   request.setAttribute("ss",ss);
   String ss = request.getParameter("storeId");
-  System.out.println(ss + "add");
   RestaurantService rSvc = new RestaurantService();
   Integer sf = rSvc.getOneRestaurant(ss).getStoreFinalReservDate();
 %>
@@ -188,14 +187,14 @@ tr .radio-item input:checked + label + span {
 
 <table class="pickPeopleAndNote">
 	<tr><!-- 餐廳號 -->
-		<td><input type="text" name="storeid" size="45" 
+		<td><input type="hidden" name="storeid" size="45" 
 			 value="<%=ss %>" /></td> <!-- value 若空值=吳永志 , 否則=empVO.getEname() -->
 	</tr>
 	<tr><!-- 會員電話 -->
-		<td><input type="text" name="memphone" size="45"
+		<td><input type="hidden" name="memphone" size="45"
 			 value="${memLogin.memPhone}" /></td>
 	</tr>
-		<td><input name="reservetime" id="zzz" type="text" class="bookingDate"></td>
+		<td><input name="reservetime" id="zzz" type="hidden" class="bookingDate"></td>
 	<tr>
 		<td>大人人數:
 			<td><select name="reserveadult" size="1" id="adult">
