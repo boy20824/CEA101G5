@@ -23,7 +23,13 @@ RestaurantPictureVO restPicVO = (RestaurantPictureVO) request.getAttribute("rest
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/front-store-end/restaurant/js/js.js"></script>
+<style>
+.addPicBlock{
+margin-left:200px;
 
+}
+
+</style>
 </head>
 
 <body>
@@ -106,7 +112,7 @@ RestaurantPictureVO restPicVO = (RestaurantPictureVO) request.getAttribute("rest
 	</div>
 
 
-
+<div class="addPicBlock">
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do" name="form1" enctype="multipart/form-data">
 <table>
 <%-- 錯誤表列 --%>
@@ -119,26 +125,22 @@ RestaurantPictureVO restPicVO = (RestaurantPictureVO) request.getAttribute("rest
 	</ul>
 </c:if>
 	<tr>
-		<td>storeid:</td>
-		<td><input type="TEXT" name="storeId" size="45"
-			 value="<%= (restPicVO==null)? "S000001" : restPicVO.getStoreId()%>" /></td>
+		<td>餐廳名稱:</td>
+		<td>${storeLogin.storeName}</td>
 	</tr>
 	<tr>
-		<td>storepic:</td>
+		<td>新增照片:</td>
 		<td><input type="file" id="storePicture" name="storePicture" size="45" multiple="multiple" /></td>
 	</tr>
 
 </table>
 <br>
+<input type="hidden" name="storeId" value="${storeLogin.storeId}">
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
 
-
+</div>
 <div>
-		<div>
-			<h1>圖片預覽</h1>
-
-		</div>
 		<div id="photoArea">
 			<div id="display" style="width: 800px;"></div>
 		</div>

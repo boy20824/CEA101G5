@@ -27,6 +27,11 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/front-store-end/restaurant/js/js.js"></script>
 
+<style>
+.restauranPicBlock{
+margin-left:200px
+}
+</style>
 </head>
 
 <body>
@@ -110,6 +115,7 @@
 
 
 <div>
+<div class="restauranPicBlock">
 <table>
 	<tr>
 		<th>storepicid</th>
@@ -121,17 +127,11 @@
 		
 		<tr>
 			<td><input type="checkbox">${restaurantPictureVO.storePictureId}</td>
-			<td>${restaurantPictureVO.storeId}</td>
-			<td><img style="width:100px;" src="<%=request.getContextPath() %>/restaurantPicture/restaurantPicture.do?storePicId=${restaurantPictureVO.storePictureId}&action=getOne_For_Display"></td>
+			<td>${storeLogin.storeId}</td>
+			<td><img style="width:100px;" src="<%=request.getContextPath() %>/back-end/restaurantpicture/restaurantPicture.do?storeId=${storeLogin.storeId}&action=getOne_For_Display"></td>
 			
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/restaurantPicture/restaurantPicture.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="­×§ï">
-			     <input type="hidden" name="storePictureId"  value="${restaurantPictureVO.storePictureId}">
-			     <input type="hidden" name="action" value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/restaurantPicture/restaurantPicture.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="§R°£">
 			     <input type="hidden" name="storePictureId"  value="${restaurantPictureVO.storePictureId}">
 			     <input type="hidden" name="action" value="delete"></FORM>
@@ -140,6 +140,7 @@
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
+</div>
 </div>
 </body>
  

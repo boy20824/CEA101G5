@@ -48,6 +48,7 @@ public class RestaurantPictureServlet extends HttpServlet {
 				out.close();
 			}
 		}
+		
 
 		if ("insert".equals(action)) {
 			//從req取得part物件
@@ -66,7 +67,7 @@ public class RestaurantPictureServlet extends HttpServlet {
 					req.setAttribute("restPicVO", restPicVO);
 				}
 			}
-			String url = "/front-end/restaurantPicture/restaurantPictureEdit/listAllResPic.jsp";
+			String url = "/front-store-end/restaurant/RestaurantPicturePage.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
 			successView.forward(req, res);
 		}
@@ -75,7 +76,7 @@ public class RestaurantPictureServlet extends HttpServlet {
 			String storePicId = req.getParameter("storePictureId");
 			RestaurantPictureService restPicSvc = new RestaurantPictureService();
 			restPicSvc.deleteRestaurantPicture(storePicId);
-			String url = "/front-end/restaurantPicture/restaurantPictureEdit/listAllResPic.jsp";
+			String url = "/front-store-end/restaurant/RestaurantPicturePage.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
 			successView.forward(req, res);
 			
@@ -112,7 +113,7 @@ public class RestaurantPictureServlet extends HttpServlet {
 					System.out.println("updated");
 				}
 			}
-			String url = "/front-end/restaurantPicture/restaurantPictureEdit/listAllResPic.jsp";
+			String url = "/front-store-end/restaurant/RestaurantPicturePage.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
 			successView.forward(req, res);
 		}
