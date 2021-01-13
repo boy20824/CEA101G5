@@ -101,7 +101,7 @@
 <body>
 	<div class="wrap">
 		<!--  側拉選單  -->
-		<div class="side-menu-all">
+	<div class="side-menu-all">
 			<div class="side-menu">
 				<nav>
 					<c:if test="${empty sessionScope.memLogin}">
@@ -115,7 +115,9 @@
 
 					<a href=""> <i class="fas fa-bullhorn"></i>尋找美食
 					</a> <a href=""> <i class="fas fa-bullhorn"></i>購物商城
-					</a> <a href=""> <i class="fas fa-bullhorn"></i>商家入口
+					</a> <a
+						href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp">
+						<i class="fas fa-bullhorn"></i>商家入口
 					</a>
 				</nav>
 			</div>
