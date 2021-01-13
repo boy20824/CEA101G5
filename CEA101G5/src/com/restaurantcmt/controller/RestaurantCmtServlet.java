@@ -57,7 +57,9 @@ public class RestaurantCmtServlet extends HttpServlet {
 				}
 			}
 			if(storeCmtContent==null) {
-				storeCmtContent="";
+				storeCmtContent=" ";
+			}else {
+				storeCmtContent=" ";
 			}
 				/*************************** 2.開始查詢資料 *****************************************/
 				RestaurantCmtService cmtSvc = new RestaurantCmtService();
