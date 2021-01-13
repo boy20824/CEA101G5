@@ -101,6 +101,7 @@
 </c:if>
 <br>
 <table class="info">
+	<caption>所有時段</caption>
 	<tr>
 		<th>時段編號</th>
 		<th>開始時間</th>
