@@ -160,6 +160,9 @@ table {
   border-radius: 1vw;
   border: none;
   padding: 1vw;
+  background-color: black;
+  color: white;
+  margin-bottom: 1em;
 }
 .side-menu input:hover {
   cursor: pointer;

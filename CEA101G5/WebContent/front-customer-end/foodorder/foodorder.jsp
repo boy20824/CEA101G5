@@ -49,9 +49,9 @@ response.setDateHeader("Expires", 0);
 						<input type="button" value="登出" onclick="location.href='<%=request.getContextPath()%>/back-end/member/mem.do?action=logout';" />
 					</c:if>
 
-					<a href=""> <i class="fas fa-bullhorn"></i>尋找美食</a>
+					<a href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp"> <i class="fas fa-bullhorn"></i>尋找美食</a>
 					<a href=""> <i class="fas fa-bullhorn"></i>購物商城</a>
-					<a href=""> <i class="fas fa-bullhorn"></i>商家入口</a>
+					<a href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp"> <i class="fas fa-bullhorn"></i>商家入口</a>
 				</nav>
 			</div>
 			<div class="side-menu-black"></div>
