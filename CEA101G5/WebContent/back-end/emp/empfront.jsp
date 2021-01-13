@@ -29,8 +29,10 @@
 <body>
 	<div id="mySidebar" class="sidebar">
 		<div>
+		<a href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">
 			<img id="logo" src="<%=request.getContextPath()%>/front-end/shared/logoMain2.png" class="img-circle"
 				alt="User Image">
+				</a>
 		</div>
 		<br><br><br><br><br>
 		<span id="empFront">首頁<br>
