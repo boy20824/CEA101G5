@@ -67,7 +67,10 @@ public class QueNoServlet extends HttpServlet {
 					QuePeriodService quePeriodSvc = new QuePeriodService();
 					List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
 					periodCheck(quePeriodVO);//超過最後取號時間不得選取
-					System.out.println(quePeriodVO);
+					if(quePeriodVO.isEmpty()) {
+						req.setAttribute("check", "alert");
+					}
+					
 					if (!errorMsgs.isEmpty()) {
 						RequestDispatcher failureView = req
 								.getRequestDispatcher("/front-store-end/queue/queueNo/customerPickupNo.jsp");
@@ -286,7 +289,9 @@ public class QueNoServlet extends HttpServlet {
 				Integer party = new Integer(req.getParameter("party").trim());
 				Timestamp queuenotime = strToTsp(req.getParameter("queuenotime"));
 				String storeid = req.getParameter("storeid").trim();
+				
 				Integer queueperiodid = new Integer(req.getParameter("queueperiodid").trim());
+				
 				Integer queuelineno = new Integer(req.getParameter("queuelineno").trim());
 				Integer queuetableid = new Integer(req.getParameter("queuetableid").trim());
 				String psw = "Enak1234";
@@ -325,8 +330,9 @@ public class QueNoServlet extends HttpServlet {
 				
 				MemService memSvc = new MemService();
 				List<MemVO> memVO = memSvc.getAll();
-				// 用來檢查是否有註冊電話
+				// 用來檢查是否有註冊電話 sweetalert
 				List<String> memList = new ArrayList<String>();
+				if(queueperiodid!=999) {
 				for(int i = 0 ; i<memVO.size();i++) {
 					memList.add(memVO.get(i).getMemPhone());
 				}
@@ -392,6 +398,19 @@ public class QueNoServlet extends HttpServlet {
 //						.getRequestDispatcher("/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
 //				failureView.forward(req, res);
 //			}
+				}else { // 沒新增
+						req.setAttribute("check", "stop");
+					HttpSession session = req.getSession();
+					session.setAttribute("quePeriodVO", quePeriodVO);
+					session.setAttribute("queTableVO", queTableVO);
+					session.setAttribute("queLineVO", queLineVO);
+					session.setAttribute("queNoVO", queNoVO);
+					session.setAttribute("storeid", storeid);
+					session.setAttribute("pickupNo", count);
+					String url = "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
+				}
 		}
 
 		if ("insert".equals(action)) {
@@ -514,13 +533,17 @@ public class QueNoServlet extends HttpServlet {
 			Integer checkhr = quePeriodVO.get(i).getQueueendtime().getHours();
 			Integer checkmin = quePeriodVO.get(i).getQueueendtime().getMinutes();
 			if(quePeriodVO.get(i).getQueuest()==1) {
-			if(hr>checkhr) {
+				if(hr>checkhr) {
+					quePeriodVO.remove(i);
+					i--;
+				}else if(hr==checkhr&&min>checkmin) {
+					quePeriodVO.remove(i);
+					i--;
+				}
+			}else {
 				quePeriodVO.remove(i);
 				i--;
-			}else if(hr==checkhr&&min>checkmin) {
-				quePeriodVO.remove(i);
-				i--;
-			}}
+			}
 		}
 		
 	}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.queueno.model.*"%>
 <%@ page import="com.queueperiod.model.*"%>
@@ -36,6 +37,8 @@
 		</c:forEach>
 	</ul>
 </c:if>
+<%-- <%=quePeriodVO.isEmpty() %> --%>
+<%-- ${empty quePeriodVO } --%>
 <html>
 <head>
 <title>storePickupAndNoCall</title>
@@ -130,16 +133,18 @@ img {
 							</div>
 						</div>
 
-						<jsp:useBean id="quePeriodSvc" scope="page"
-							class="com.queueperiod.model.QuePeriodService" />
+<%-- 						<jsp:useBean id="quePeriodSvc" scope="page" --%>
+<%-- 							class="com.queueperiod.model.QuePeriodService" /> --%>
 						<div class="form-group row">
 							<div class="col-sm-2">
 								<label for="queueperiodid" class="col-sm-2 col-form-label">Period:</label>
 							</div>
 							<div class="col-sm-1"></div>
 							<div class="col-sm-8">
+											<c:if test="${!empty quePeriodVO }">
+											
 								<select class="form-control" name="queueperiodid"
-									id="queueperiodid" style="width: 275px">
+									id="queueperiodid" style="width: 275px" required>
 									<c:forEach var="quePeriodVO" items="${quePeriodVO}">
 										<c:choose>
 											<c:when test="${quePeriodVO.queuest==1 }">
@@ -152,6 +157,12 @@ img {
 										</c:choose>
 									</c:forEach>
 								</select>
+								</c:if>
+								<c:if test="${empty quePeriodVO }">
+								<select class="form-control" name="queueperiodid"
+									id="queueperiodid" style="width: 275px" required>
+								<option value="999"><c:out value="取號時段已結束"></c:out></option></select>
+								</c:if>
 							</div>
 						</div>
 					</div>
@@ -483,6 +494,7 @@ img {
 // 	});
 </script>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- 	插入動態最新叫號 -->
 <script>
 	var xhr = null;
@@ -652,9 +664,9 @@ function() {
 			$("#submit").prop("disabled", true);
 	}		
 });
+
 </script>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <c:if test="${check=='addNo' }">
 	<script>
 swal("新增成功", "ok", "success");
@@ -663,6 +675,11 @@ swal("新增成功", "ok", "success");
 <c:if test="${check=='repeat' }">
 	<script>
 swal("已取過號，請確認", "fail", "error");
+</script>
+</c:if>
+<c:if test="${check=='stop' }">
+	<script>
+swal("別按了，已過取號時段", "fail", "error");
 </script>
 </c:if>
 

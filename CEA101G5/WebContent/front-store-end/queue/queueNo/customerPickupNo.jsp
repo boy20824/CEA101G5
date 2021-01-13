@@ -46,6 +46,7 @@ img {
 	border-color: #FA7E23;
 }
 </style>
+</head>
 <div class="header">
 		<!-- Just an image -->
 		<nav class="navbar navbar-light bg-light">
@@ -58,7 +59,6 @@ img {
 		<a class="icon"
 			href="<%=request.getContextPath() %>/front-customer-end/front/front.jsp"></a>
 	</div>
-</head>
 
 <body>
 	<div class="container">
@@ -76,6 +76,7 @@ img {
 					<div class="col-sm-2"></div>
 					<label for="queueperiodid" class="col-sm-2 col-form-label">時段選擇</label>
 					<div class="col-sm-6">
+					<c:if test="${!empty quePeriodVO }">
 						<select class="form-control" name="queueperiodid"
 							id="queueperiodid" onclick="getNoCurrent();">
 							<c:forEach var="quePeriodVO" items="${list}">
@@ -86,6 +87,12 @@ img {
 							</c:choose>
 							</c:forEach>
 						</select>
+						</c:if>
+								<c:if test="${empty quePeriodVO }">
+								<select class="form-control" name="queueperiodid"
+									id="queueperiodid" style="width: 275px" required >
+								<option value="999"><c:out value="取號時段已結束"></c:out></option></select>
+								</c:if>
 					</div>
 				</div>
 				<div class="row reserve1"></div>
@@ -409,7 +416,6 @@ function() {
 });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<c:out value="${check }"></c:out>
 <c:if test="${check=='addNo' }">
 	<script>
 swal("新增成功", "ok", "success");
@@ -418,6 +424,13 @@ swal("新增成功", "ok", "success");
 <c:if test="${check=='repeat' }">
 	<script>
 swal("已取過號，請確認", "fail", "error");
+</script>
+</c:if>
+<c:if test="${check=='alert' }">
+	<script>
+swal("取號時段已結束", "回首頁", "error").then(function(){
+	window.location.href = "<%=request.getContextPath()%>/front-customer-end/front/front.jsp"
+})
 </script>
 </c:if>
 </html>
