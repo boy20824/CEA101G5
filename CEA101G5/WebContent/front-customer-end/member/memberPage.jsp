@@ -183,9 +183,9 @@
 				</li>
 				<li>
 					<div class="memChoseList">
-						<a href="#"><i class="fas fa-exclamation-circle"></i></a> <a
+						<a href="#"><i class="fas fa-shopping-bag"></i></a> <a
 							href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">
-							<p>檢舉資訊</p>
+							<p>購物訂單</p>
 						</a>
 					</div>
 		</li>
