@@ -101,7 +101,6 @@ public class QueNoServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-
 				String storeid = req.getParameter("storeid");
 				
 				QuePeriodService quePeriodSvc = new QuePeriodService();

@@ -3,6 +3,8 @@
 
 <%
 RestaurantService restSvc = new RestaurantService();
+String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
+pageContext.setAttribute("storeid", storeid);
 %>
     <html>
 
@@ -79,7 +81,7 @@ RestaurantService restSvc = new RestaurantService();
 			</li>
 			</ul>
 		</span>
-            <span> <a href="<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do?action=storeGetQueNo&storeid=${storeid }"><svg aria-hidden="true" focusable="false" id="numPickup"
+            <span> <a href="<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do?action=storeGetQueNo&storeid=${storeid}"><svg aria-hidden="true" focusable="false" id="numPickup"
 				data-prefix="fas" data-icon="vote-yea"
 				class="svg-inline--fa fa-vote-yea fa-w-20" role="img"
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
