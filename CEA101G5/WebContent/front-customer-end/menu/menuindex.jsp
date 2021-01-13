@@ -185,12 +185,15 @@ response.setDateHeader("Expires", 0);
 				<div class="functionPick">
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do" >
 				
-       <input type="hidden" name="storeid" value="${storeid}">
+       <input type="hidden" name="storeid" value="${restaurantVO.storeId}">
        <input type="hidden" name="action" value="getQueNo">       
        
 					<input type="submit" value="線上取號" class="orderNum" />
      </FORM>
-					<input type="button" value="預約定位" class="orderSet" />
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-customer-end/reserveorder/addReserveOrder.jsp" >
+     <input type="hidden" name="storeId" value="${restaurantVO.storeId}" />
+					<input type="submit" value="預約定位" class="orderSet" />
+	 </FORM>
 				</div>
 			</div>
 			       <div class="data-slick">

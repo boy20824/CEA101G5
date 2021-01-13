@@ -5,9 +5,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
   ReserveOrderVO reserveOrderVO = (ReserveOrderVO) request.getAttribute("reserveOrderVO");
-  String ss = "S000003";
-  request.setAttribute("ss",ss);
-  
+//   String ss = "S000003";
+//   request.setAttribute("ss",ss);
+  String ss = request.getParameter("storeId");
+  System.out.println(ss);
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
 <jsp:useBean id="rsSvc" scope="page" class="com.reservesituation.model.ReserveSituationService"/>
@@ -185,7 +186,9 @@ tr .radio-item input:checked + label + span {
 <table class="pickPeopleAndNote">
 	<tr><!-- 餐廳號 -->
 		<td><input type="hidden" name="storeid" size="45" 
-			 value="從瀏覽餐廳得到" /></td> <!-- value 若空值=吳永志 , 否則=empVO.getEname() -->
+			 value="${storeid}" /></td> <!-- value 若空值=吳永志 , 否則=empVO.getEname() -->
+		<td><input type="text" name="storeId" size="45" 
+			 value="<%=ss %>" /></td> <!-- value 若空值=吳永志 , 否則=empVO.getEname() -->
 	</tr>
 	<tr><!-- 會員電話 -->
 		<td><input type="hidden" name="memphone" size="45"
@@ -282,7 +285,7 @@ tr .radio-item input:checked + label + span {
 	        dateFormat: "yy-mm-dd",
 	        showButtonPanel: true,
 	        minDate: +1,
-	        maxDate: "+0M +${rSvc.getOneRestaurant("S000003").storeFinalReservDate}D",
+	        maxDate: "+0M +${rSvc.getOneRestaurant(ss).storeFinalReservDate}D",
 	        onSelect: function(date) {
 	            $(".bookingDate").val(date);
 	     		hi();	//直接在這邊執行hi()就能觸發了*****感謝輯神
