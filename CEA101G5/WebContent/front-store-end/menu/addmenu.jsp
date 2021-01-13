@@ -92,8 +92,7 @@ left:25%;
 					<input type="text" id="menuPrice" name="menuPrice" value="<%=(menuVO == null) ? "" : menuVO.getMenuPrice()%>"/>
 					<div class="detail">
 						<h2>詳細資訊</h2>
-						<textarea style="width: 25em; height: 8.7em" name="menuDetail"><%=(menuVO == null) ? "" : menuVO.getMenuDetail()%>
-						</textarea>
+						<textarea style="width: 25em; height: 8.7em" name="menuDetail"><%=(menuVO == null) ? "" : menuVO.getMenuDetail()%></textarea>
 					</div>
 				</div>
 

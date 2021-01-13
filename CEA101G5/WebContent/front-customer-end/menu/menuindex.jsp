@@ -10,17 +10,19 @@
 
 <%
 	RestaurantService restaurantSvc = new RestaurantService(); //創建 實體
-	
-	 RestaurantPictureService resPicSvc = new RestaurantPictureService();
-	 List<RestaurantPictureVO> list = resPicSvc.getAll();
-	 pageContext.setAttribute("list",list);
+	RestaurantPictureService resPicSvc = new RestaurantPictureService();
+	List<RestaurantPictureVO> list=null;
 	
 	if(request.getParameter("storeId")==null){
 		RestaurantVO restaurantVO = restaurantSvc.getOneRestaurant(((RestaurantVO)session.getAttribute("restaurantVO")).getStoreId());
+		list = resPicSvc.getStorePicByStoreId(restaurantVO.getStoreId());
 	}else{
 		RestaurantVO restaurantVO = restaurantSvc.getOneRestaurant(request.getParameter("storeId")); //呼叫DAO並執行getAll()取得VO為每一列資訊的所有欄位並裝入List集合<泛型只能裝取該VO型別>;
+		list = resPicSvc.getStorePicByStoreId(restaurantVO.getStoreId());
 		session.setAttribute("restaurantVO", restaurantVO);
 	}
+	
+	 pageContext.setAttribute("list",list);
 
 %>
 <%
@@ -151,7 +153,7 @@ response.setDateHeader("Expires", 0);
 				<div class="text">
 					<ul class="cb-slideshow">
 						<c:forEach var="restaurantPictureVO" items="${list}">
-						<img src="<%=request.getContextPath() %>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantVO.storeId}&action=getOne_For_Display" alt="" />
+						<img src="<%=request.getContextPath() %>/back-end/restaurantpicture/restaurantPicture.do?storePictureId=${restaurantPictureVO.storePictureId}&action=getOne_For_Display" alt="" />
 						</c:forEach>
 					</ul>
 				</div>
