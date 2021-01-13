@@ -3,9 +3,6 @@
 
 <%
 RestaurantService restSvc = new RestaurantService();
-
-String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
-pageContext.setAttribute("storeid", storeid);
 %>
     <html>
 
