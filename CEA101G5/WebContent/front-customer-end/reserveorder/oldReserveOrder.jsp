@@ -5,12 +5,11 @@
 <%@ page import="com.reserveorder.model.*"%>
 
 <%
-	String memPhone = (String)request.getAttribute("memPhone");
-	System.out.println(memPhone + "   o");
+	String memPhone = (String)session.getAttribute("memPhone");
     ReserveOrderService reserveOrderSvc = new ReserveOrderService();
     List<ReserveOrderVO> list = reserveOrderSvc.getForcold(memPhone,0);
     pageContext.setAttribute("list",list);
-    
+    session.setAttribute("memPhone",memPhone);
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
 
