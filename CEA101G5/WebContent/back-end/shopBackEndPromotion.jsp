@@ -151,12 +151,6 @@
 
 	<!-- Promotion -->
 	<div class="container searchCriteriaBtnContainer">
-<!-- 		<div class="btn-group">
-  			<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">商品分類</button>
-  			<ul class="dropdown-menu">
-    			<li><a class="dropdown-item" href="#"></a></li>
-  			</ul>
-		</div> -->
 		<div class="btn-group">
   			<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">商品編號</button>
   			<ul class="dropdown-menu scroll-menu">
@@ -210,7 +204,7 @@
 			<div class="col-md-3 divForPromoPrice">
 				<label for="" class="form-label" style="color: red;">請輸入產品促銷售價</label>
 				<span>$</span>
-				<input id="promoPrice" type="number" class="form-control" value="" disabled>
+				<input id="formPromoPrice" type="number" class="form-control" value="" disabled>
 			</div>
 		</form>
 	</div>
@@ -222,7 +216,7 @@
 				<tr class="table-success">
 					<td class="col-1">商品圖片</td>
 					<td class="col-1">商品編號</td>
-					<td class="col-3">商品介紹</td>
+					<td class="col-3">商品名稱</td>
 					<td class="col-1 tdAlignMiddle">商品原價</td>
 					<td class="col-1 tdAlignMiddle">商品售價</td>
 					<td class="col-1 tdAlignMiddle">商品促銷售價</td>
@@ -230,8 +224,8 @@
 				<c:forEach var="promotionDetailVO" items="${promotionDetailVOList}">
 					<tr>
 						<td class="col-1"><img class="rounded" src="<%=request.getContextPath()%>/shop/productphotoreader.do?productId=${promotionDetailVO.getProductId()}"></td>
-						<td class="col-1 productVOInList">${promotionDetailVO.getProductId()}</td>
-						<td class="col-3">${productServiceForTable.getProductById(promotionDetailVO.getProductId()).getProductDescription()}</td>
+						<td class="col-1 productVOInTable">${promotionDetailVO.getProductId()}</td>
+						<td class="col-3">${productServiceForTable.getProductById(promotionDetailVO.getProductId()).getProductName()}</td>
 						<td class="col-1 tdAlignMiddle">$${productServiceForTable.getProductById(promotionDetailVO.getProductId()).getProductMSRP()}</td>
 						<td class="col-1 tdAlignMiddle">$${productServiceForTable.getProductById(promotionDetailVO.getProductId()).getProductPrice()}</td>
 						<td class="col-1 tdAlignMiddle">$${promotionDetailVO.getProductPrice()}</td>

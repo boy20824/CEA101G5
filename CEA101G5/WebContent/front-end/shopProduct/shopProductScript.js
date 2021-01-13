@@ -164,14 +164,6 @@ reviewButton.addEventListener("click", function() {
 	productQAContainer.classList.add("qaAndReviewDisplayController");
 })
 
-// Product QA TextArea
-let productQuesResetBtn = document.getElementById("productQuesResetBtn");
-let qaSubmissionTextArea = document.getElementById("qaSubmissionTextArea");
-
-productQuesResetBtn.addEventListener("click", function() {
-	qaSubmissionTextArea.value = "";
-});
-
 // Product To Cart
 $("#addToCart").click(function() {
 	//Add To Cart Animation
@@ -200,6 +192,14 @@ $("#addToCart").click(function() {
 	}
 	ajaxRequest.send("action=addToCart&productId=" + productId + "&productQty=" + productQty);
 	refreshCheckOutBtn();	
+});
+
+// Product QA TextArea
+let productQuesResetBtn = document.getElementById("productQuesResetBtn");
+let qaSubmissionTextArea = document.getElementById("qaSubmissionTextArea");
+
+productQuesResetBtn.addEventListener("click", function() {
+	qaSubmissionTextArea.value = "";
 });
 
 function renderProductToCart(data) {

@@ -84,8 +84,6 @@ $(window).keydown(function (e) {
 // Promotion
 // Generate Form By Product Id
 let toPromoProductIdArr = document.querySelectorAll(".toPromoProductId");
-let promoPrice = document.getElementById("promoPrice");
-let formProductPrice = document.getElementById("formProductPrice");
 
 for (let i = 0; i < toPromoProductIdArr.length; i++) {
 	toPromoProductIdArr[i].addEventListener("click", function(e) {
@@ -106,28 +104,31 @@ for (let i = 0; i < toPromoProductNameArr.length; i++) {
 let addToPromoBtn = document.getElementById("addToPromoBtn");
 
 addToPromoBtn.addEventListener("click", function() {
-	let productId = document.getElementById("formProductId").value; 
-	let productPromoPrice = document.getElementById("promoPrice").value;
-	let productVOInListArr = document.querySelectorAll(".productVOInList");
-	let promoProductRepeat = false;
-
-	for(let i = 0; i < productVOInListArr.length; i++) {
-		if (productId == productVOInListArr[i].innerText) {
-			promoProductRepeat = true;
+	let formProductId = document.getElementById("formProductId").value; 
+	let formPromoPrice = document.getElementById("formPromoPrice").value; 
+	let productVOInTableArr = document.querySelectorAll(".productVOInTable");
+	let formProductPrice = document.getElementById("formProductPrice");
+	let existingProduct = false;
+		
+	for(let i = 0; i < productVOInTableArr.length; i++) {
+		if (formProductId === productVOInTableArr[i].innerText) {
+			existingProduct = true;
 		}
 	}
 	
-	if (promoProductRepeat) {
+	if (existingProduct) {
 		alert("商品目前促銷中，請勿重複加入商品！");
-	} else if (productPromoPrice < 1) {
+	} else if (formPromoPrice < 1) {
 		alert("商品促銷售價不得小於１元");
-	} else if (productPromoPrice >= ((formProductPrice.value).substring(1))) {
+	} else if (formPromoPrice >= (formProductPrice.value.substring(1))) {
+		console.log(formPromoPrice);
+		console.log(formProductPrice.value.substring(1));
 		alert("商品促銷售價不得等於或大於商品售價");
 	} else {
-		ajaxAddProductToPromo(productId, productPromoPrice);
+		ajaxAddProductToPromo(formProductId, formPromoPrice);
 	}
 	
-	document.getElementById("promoPrice").value = null;
+	document.getElementById("formPromoPrice").value = null;
 });
 
 // Functions
@@ -137,6 +138,8 @@ function ajaxFormProcessorByProductId(productId) {
 	let formProductStatus = document.getElementById("formProductStatus");
 	let formCategoryId = document.getElementById("formCategoryId");
 	let formProductMSRP = document.getElementById("formProductMSRP");
+	let formProductPrice = document.getElementById("formProductPrice");
+	let formPromoPrice = document.getElementById("formPromoPrice"); 
 	
 	let ajaxRequest = new XMLHttpRequest();
 	
@@ -147,18 +150,17 @@ function ajaxFormProcessorByProductId(productId) {
 		if (ajaxRequest.status >= 200 && ajaxRequest.status < 400) {
 			ajaxData = JSON.parse(ajaxRequest.responseText);
 			
-			promoPrice.disabled = false;
+			formPromoPrice.disabled = false;
 			formProductId.value = ajaxData["productId"];
 			formProductName.value = ajaxData["productName"];
 			if (ajaxData["productStatus"] === 0) {
 				formProductStatus.value = "停用";
-				promoPrice.disabled = true;
+				formPromoPrice.disabled = true;
 				alert("停用商品不得加入促銷活動！")
 			}
 			if (ajaxData["productStatus"] === 1) {
 				formProductStatus.value = "上架中";
 			}
-			
 			formCategoryId.value = ajaxData["categoryId"];
 			formProductMSRP.value = "$" + ajaxData["productMSRP"];
 			formProductPrice.value = "$" + ajaxData["productPrice"];
