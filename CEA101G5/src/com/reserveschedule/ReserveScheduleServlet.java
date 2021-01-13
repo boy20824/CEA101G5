@@ -1,5 +1,4 @@
-package com.reserveschedule;
-//package Test;
+//package com.reserveschedule;
 //import java.io.*;
 //import javax.servlet.*;
 //import javax.servlet.http.*;
@@ -7,7 +6,7 @@ package com.reserveschedule;
 //import com.reservesituation.model.*;
 //import java.util.*;
 ////每日刪除過去位子  要用的時候設定啟動時間
-//public class ScheduleServlet extends HttpServlet {
+//public class ReserveScheduleServlet extends HttpServlet {
 //   
 //    Timer timer;
 //    int i=0;      

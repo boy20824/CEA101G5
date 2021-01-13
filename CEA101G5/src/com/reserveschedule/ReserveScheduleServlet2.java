@@ -1,5 +1,4 @@
-package com.reserveschedule;
-//package Test;
+//package com.reserveschedule;
 //import java.io.*;
 //import javax.servlet.*;
 //import javax.servlet.http.*;
@@ -8,7 +7,7 @@ package com.reserveschedule;
 //import com.acceptreserve.model.*;
 //import com.reservesituation.model.*;
 //import java.util.*;
-//public class ScheduleServlet2 extends HttpServlet {
+//public class ReserveScheduleServlet2 extends HttpServlet {
 //   
 //    Timer timer;
 //    int i=0;      

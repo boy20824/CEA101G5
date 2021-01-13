@@ -1,5 +1,4 @@
-package com.reserveschedule;
-//package Test;
+//package com.reserveschedule;
 //import java.io.*;
 //import javax.servlet.*;
 //import javax.servlet.http.*;
@@ -7,7 +6,7 @@ package com.reserveschedule;
 //import com.reserveorder.model.*;
 //import java.util.*;
 ////每日將訂單狀態0的改成1
-//public class ScheduleServlet3 extends HttpServlet {
+//public class ReserveScheduleServlet3 extends HttpServlet {
 //   
 //    Timer timer;
 //    int i=0;      
@@ -23,8 +22,8 @@ package com.reserveschedule;
 //      };
 //      timer = new Timer(); 
 //      
-//      //2020, Calendar.DECEMBER, 26, 22, 12, 0
-//      Calendar cal = new GregorianCalendar(2021, Calendar.JANUARY, 6, 23, 58, 0);//改成空建構子也就是當下時間
+//      //2021, Calendar.JANUARY, 6, 23, 58, 0
+//      Calendar cal = new GregorianCalendar();//改成空建構子也就是當下時間
 //      timer.scheduleAtFixedRate(task, cal.getTime(), 24*60*60*1000L);//1*60*60*1000
 //      System.out.println("已建立排程更新訂單狀態!");       
 //    }
