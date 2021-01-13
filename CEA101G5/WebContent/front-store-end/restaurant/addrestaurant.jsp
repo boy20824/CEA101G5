@@ -41,7 +41,12 @@
 			<ul>
 				<li>餐廳設定
 					<ul>
+					<c:if test="${empty sessionScope.storeLogin}">
 						<li><a href="<%=request.getContextPath()%>/front-store-end/restaurant/addrestaurant.jsp">餐廳資訊設定</a></li>
+					</c:if>	
+					<c:if test="${not empty sessionScope.storeLogin}">
+						<li><a href="<%=request.getContextPath()%>/front-store-end/restaurant/restaurantPage.jsp">餐廳資訊設定</a></li>
+					</c:if>	
 						<li><a href="<%=request.getContextPath()%>/front-store-end/restaurant/addrestaurant.jsp">餐廳照片管理</a></li>
 						<li>功能開關選項</li>
 					</ul>
