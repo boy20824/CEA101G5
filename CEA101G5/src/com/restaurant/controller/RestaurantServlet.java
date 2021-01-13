@@ -127,6 +127,55 @@ public class RestaurantServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		if ("updateGroup".equals(action)) { // 來自update_member_input.jsp的請求
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+				System.out.println(req.getParameter("storeId"));
+				System.out.println(req.getParameter("storeFinalReservDate"));
+				System.out.println(req.getParameter("acceptGroups"));
+				String storeId = req.getParameter("storeId");
+				Integer storeFinalReservDate = new Integer(req.getParameter("storeFinalReservDate"));
+				Integer acceptGroups = new Integer(req.getParameter("acceptGroups"));
+				
+				RestaurantVO restVO = new RestaurantVO();
+				
+				restVO.setStoreId(storeId);
+				restVO.setStoreFinalReservDate(storeFinalReservDate);
+				restVO.setAcceptGroups(acceptGroups);
+				
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("restVO", restVO);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-store-end/restaurant/updaterestaurantGroup.jsp");
+					failureView.forward(req, res);
+					return; // 程式中斷
+				}
+				
+				/*************************** 2.開始修改資料 *****************************************/
+				RestaurantService restSvc = new RestaurantService();
+				restVO = restSvc.easyupdateRestaurantGroup(storeFinalReservDate, acceptGroups,storeId);
+				
+				/*************************** 3.修改完成轉交成功畫面(Send the Success view) *************/
+				req.setAttribute("restVO", restVO);
+				String url = "/front-store-end/restaurant/updaterestaurantGroup.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+				/*************************** 其他錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("其他錯誤訊息:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-store-end/restaurant/updaterestaurantGroup.jsp");
+				failureView.forward(req, res);
+			}
+		}
 
 		if ("insert".equals(action)) { 
 
