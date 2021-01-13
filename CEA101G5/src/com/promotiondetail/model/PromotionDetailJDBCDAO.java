@@ -279,12 +279,13 @@ public class PromotionDetailJDBCDAO implements PromotionDetailDAO_Interface{
 		 PromotionDetailJDBCDAO dao = new PromotionDetailJDBCDAO();
 
 //		 insert
-//		 PromotionDetailVO promotionDetailVO = new PromotionDetailVO();
-//		 promotionDetailVO.setPromoId(1);
-//		 promotionDetailVO.setProductId("ENP0010");
-//		 promotionDetailVO.setProductPrice(2500);
-//		 promotionDetailVO.setProductPromoQty(100);
-//		 dao.insert(promotionDetailVO);
+		 PromotionDetailVO promotionDetailVO = new PromotionDetailVO();
+		 promotionDetailVO.setPromoId(1);
+		 promotionDetailVO.setProductId("ENP0009");
+		 promotionDetailVO.setProductPrice(1199);
+		 promotionDetailVO.setProductPromoQty(100);
+		 dao.insert(promotionDetailVO);
+		 System.out.println("Statement Processed....");
 
 //		update
 //		PromotionDetailVO promotionDetailVO = new PromotionDetailVO();
@@ -299,13 +300,13 @@ public class PromotionDetailJDBCDAO implements PromotionDetailDAO_Interface{
 
 
 //		getOne
-		PromotionDetailVO promotionDetailVO = new PromotionDetailVO();
-		promotionDetailVO  = dao.getOne("ENP0001");
-		System.out.println(promotionDetailVO.getPromoId());
-		System.out.println(promotionDetailVO.getProductId());
-		System.out.println(promotionDetailVO.getProductPrice());
-		System.out.println(promotionDetailVO.getProductPromoQty());
-		System.out.println("---------------------");
+//		PromotionDetailVO promotionDetailVO = new PromotionDetailVO();
+//		promotionDetailVO  = dao.getOne("ENP0001");
+//		System.out.println(promotionDetailVO.getPromoId());
+//		System.out.println(promotionDetailVO.getProductId());
+//		System.out.println(promotionDetailVO.getProductPrice());
+//		System.out.println(promotionDetailVO.getProductPromoQty());
+//		System.out.println("---------------------");
 
 //		getAll
 //		List<PromotionDetailVO> list = dao.getAll(1);

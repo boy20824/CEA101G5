@@ -1,11 +1,26 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.product.model.*"%>
+<%@ page import="com.promotiondetail.model.*"%>
+
+<%
+	ProductService productService = new ProductService();
+	List<ProductVO> productVOList = productService.getAllProducts();
+	pageContext.setAttribute("productVOList", productVOList);
+	
+	PromotionDetailService promotionDetailService = new PromotionDetailService();
+	List<PromotionDetailVO> promotionDetailVOList = promotionDetailService.getAllPromotionDetail(1);
+	pageContext.setAttribute("promotionDetailVOList", promotionDetailVOList);
+%>
+
+<jsp:useBean id="productServiceForTable" scope="page" class="com.product.model.ProductService" />
 
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EatNAK | 管理後台</title>
+<title>EatNAK | 商品促銷管理</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -135,38 +150,34 @@
     </div>
 
 	<!-- Promotion -->
-	
-	
 	<div class="container searchCriteriaBtnContainer">
 <!-- 		<div class="btn-group">
   			<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">商品分類</button>
   			<ul class="dropdown-menu">
-    			<li><a class="dropdown-item" href="#">環保餐具</a></li>
-    			<li><a class="dropdown-item" href="#">美食餐卷</a></li>
-			    <li><a class="dropdown-item" href="#">跑腿服務</a></li>
+    			<li><a class="dropdown-item" href="#"></a></li>
   			</ul>
 		</div> -->
 		<div class="btn-group">
   			<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">商品編號</button>
-  			<ul class="dropdown-menu">
-    			<li><a class="dropdown-item" href="#">ENP0001</a></li>
-    			<li><a class="dropdown-item" href="#">ENP0002</a></li>
-			    <li><a class="dropdown-item" href="#">ENP0003</a></li>
+  			<ul class="dropdown-menu scroll-menu">
+	  			<c:forEach var="productVO" items="${productVOList}">
+	    			<li><a class="dropdown-item toPromoProductId" data-productId="${productVO.getProductId()}" href="#">${productVO.getProductId()}</a></li>
+	    		</c:forEach>
   			</ul>
 		</div>
 		<div class="btn-group">
   			<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">商品名稱</button>
-  			<ul class="dropdown-menu">
-    			<li><a class="dropdown-item" href="#">GreeGreen不鏽鋼餐具套裝8件入</a></li>
-    			<li><a class="dropdown-item" href="#">GreeGreen不鏽鋼泡麵碗 附保鮮蓋 1300ML 可直接爐上加熱</a></li>
-			    <li><a class="dropdown-item" href="#">GreeGreen分離式玻璃泡茶杯 400ML</a></li>
+  			<ul class="dropdown-menu scroll-menu">
+	  			<c:forEach var="productVO" items="${productVOList}">
+	    			<li><a class="dropdown-item toPromoProductName" data-productId="${productVO.getProductId()}" href="#">${productVO.getProductName()}</a></li>
+	    		</c:forEach>
   			</ul>
 		</div>
 		<div class="btn-group">
-			<button type="button" class="btn btn-danger">加入商品</button>
+			<button id="addToPromoBtn" type="button" class="btn btn-danger">加入商品</button>
 		</div>
 		<div class="btn-group">
-			<button type="button" class="btn btn-warning">移除商品</button>
+			<button id="removeFromPromoBtn" type="button" class="btn btn-warning">移除商品</button>
 		</div>
 	</div>
 	
@@ -174,81 +185,69 @@
 		<form class="row g-3">
 			<div class="col-md-2">
 				<label for="" class="form-label">產品編號</label>
-				<input type="text" readonly class="form-control" value="ENP0001">
+				<input id="formProductId" type="text" readonly class="form-control" value="">
 			</div>
 			<div class="col-md-8">
 				<label for="" class="form-label">產品名稱</label>
-				<input type="text" readonly class="form-control" value="GreeGreen不鏽鋼餐具套裝8件入">
+				<input id="formProductName" type="text" readonly class="form-control" value="">
 			</div>
 			<div class="col-md-2">
 				<label for="" class="form-label">產品狀態</label>
-				<input type="text" readonly class="form-control" value="開啟">
+				<input id="formProductStatus"type="text" readonly class="form-control" value="">
 			</div>
 			<div class="col-md-3">
 				<label for="" class="form-label">產品分類</label>
-				<input type="text" readonly class="form-control" value="環保餐具">
+				<input id="formCategoryId" type="text" readonly class="form-control" value="">
 			</div>
 			<div class="col-md-3">
 				<label for="" class="form-label">產品原價</label>
-				<input type="text" readonly class="form-control" value="$399">
+				<input id="formProductMSRP" type="text" readonly class="form-control" value="">
 			</div>
 			<div class="col-md-3">
 				<label for="" class="form-label">產品售價</label>
-				<input type="text" readonly class="form-control" value="$199">
+				<input id="formProductPrice" type="text" readonly class="form-control" value="">
 			</div>
 			<div class="col-md-3 divForPromoPrice">
 				<label for="" class="form-label" style="color: red;">請輸入產品促銷售價</label>
 				<span>$</span>
-				<input id="promoPrice" type="number" class="form-control" value="">
+				<input id="promoPrice" type="number" class="form-control" value="" disabled>
 			</div>
 		</form>
 	</div>
 	
 	<div class="container tableContainer">
 		<div>
-			<table class="table table-hover caption-top">
+			<table id="promoListTable" class="table table-hover caption-top">
 				<caption>促銷產品管理</caption>
 				<tr class="table-success">
-					<td>商品圖片</td>
-					<td>商品編號</td>
-					<td>商品介紹</td>
-					<td>商品原價</td>
-					<td>商品售價</td>
-					<td>商品促銷售價</td>
+					<td class="col-1">商品圖片</td>
+					<td class="col-1">商品編號</td>
+					<td class="col-3">商品介紹</td>
+					<td class="col-1 tdAlignMiddle">商品原價</td>
+					<td class="col-1 tdAlignMiddle">商品售價</td>
+					<td class="col-1 tdAlignMiddle">商品促銷售價</td>
 				</tr>
-				<tr class="rounded">
-					<td><img class="" src="https://img.feebee.com.tw/ip/372/Q2qsyAwOQQW3C5laqZoDA8M8WjJmdmrJazroMKDmJDg=/https://s.yimg.com/zp/MerchandiseImages/9887EBF613-SP-6973593.jpg"></td>
-					<td>ENP0001</td>
-					<td>GreeGreen不鏽鋼餐具套裝8件入</td>
-					<td>$399</td>
-					<td>$199</td>
-					<td>$149</td>
-				</tr>
-				<tr class="rounded">
-					<td><img class=""  src="https://img.feebee.com.tw/ip/372/Q2qsyAwOQQW3C5laqZoDA8M8WjJmdmrJazroMKDmJDg=/https://s.yimg.com/zp/MerchandiseImages/9887EBF613-SP-6973593.jpg"></td>
-					<td>ENP0001</td>
-					<td>GreeGreen不鏽鋼餐具套裝8件入</td>
-					<td>$399</td>
-					<td>$199</td>
-					<td>$149</td>
-				</tr>
-				<tr class="rounded">
-					<td><img class=""  src="https://img.feebee.com.tw/ip/372/Q2qsyAwOQQW3C5laqZoDA8M8WjJmdmrJazroMKDmJDg=/https://s.yimg.com/zp/MerchandiseImages/9887EBF613-SP-6973593.jpg"></td>
-					<td>ENP0001</td>
-					<td>GreeGreen不鏽鋼餐具套裝8件入</td>
-					<td>$399</td>
-					<td>$199</td>
-					<td>$149</td>
-				</tr>
-				<tr class="table-default">
-					<td><img class="rounded"  src="https://img.feebee.com.tw/ip/372/Q2qsyAwOQQW3C5laqZoDA8M8WjJmdmrJazroMKDmJDg=/https://s.yimg.com/zp/MerchandiseImages/9887EBF613-SP-6973593.jpg"></td>
-					<td>ENP0001</td>
-					<td>GreeGreen不鏽鋼餐具套裝8件入</td>
-					<td>$399</td>
-					<td>$199</td>
-					<td>$149</td>
-				</tr>
+				<c:forEach var="promotionDetailVO" items="${promotionDetailVOList}">
+					<tr>
+						<td class="col-1"><img class="rounded" src="<%=request.getContextPath()%>/shop/productphotoreader.do?productId=${promotionDetailVO.getProductId()}"></td>
+						<td class="col-1 productVOInList">${promotionDetailVO.getProductId()}</td>
+						<td class="col-3">${productServiceForTable.getProductById(promotionDetailVO.getProductId()).getProductDescription()}</td>
+						<td class="col-1 tdAlignMiddle">$${productServiceForTable.getProductById(promotionDetailVO.getProductId()).getProductMSRP()}</td>
+						<td class="col-1 tdAlignMiddle">$${productServiceForTable.getProductById(promotionDetailVO.getProductId()).getProductPrice()}</td>
+						<td class="col-1 tdAlignMiddle">$${promotionDetailVO.getProductPrice()}</td>
+					</tr>
+				</c:forEach>
 			</table>
+		</div>
+	</div>
+	
+	<!-- Product To Promotion -->
+	<div class="container addToCartPopContainer">
+		<div class="addToCartImgContainer">
+			<img src="<%=request.getContextPath()%>/back-end/shopBackEndPromotion/images/check.svg">
+		</div>
+		<div>
+			<p>商品已加入促銷活動</p>
 		</div>
 	</div>
 	

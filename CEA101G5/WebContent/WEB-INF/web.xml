@@ -216,6 +216,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>PromotionServlet</servlet-name>
+		<servlet-class>com.promotion.controller.PromotionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PromotionServlet</servlet-name>
+		<url-pattern>/shop/promotion.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>QueTableServlet</servlet-name>
 		<servlet-class>com.queuetable.controller.QueTableServlet</servlet-class>
 	</servlet>

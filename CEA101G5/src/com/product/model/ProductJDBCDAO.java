@@ -709,18 +709,18 @@ public class ProductJDBCDAO implements ProductDAO_Interface {
 //		System.out.println("PRODUCT STATUS: " + productVO.getProductStatus());
 		
 //		testing : getAll()
-//		List<ProductVO> list = dao.getAll();
-//		for (ProductVO productVO : list) {
-//			System.out.println("PRODUCT ID: " + productVO.getProductId());
-//			System.out.println("PRODUCT NAME: " + productVO.getProductName());
-//			System.out.println("PRODUCT DESCRIPTION: " + productVO.getProductDescription());
-//			System.out.println("PRODUCT MSRP: " + productVO.getProductMSRP());
-//			System.out.println("PRODUCT PRICE: " + productVO.getProductPrice());
-//			System.out.println("PRODUCT SOLD: " + productVO.getProductQtySold());
-//			System.out.println("PRODUCT CATEGORY: " + productVO.getCategoryId());
-//			System.out.println("PRODUCT STATUS: " + productVO.getProductStatus());
-//			System.out.println("-----------------------------------");
-//		}
+		List<ProductVO> list = dao.getAll();
+		for (ProductVO productVO : list) {
+			System.out.println("PRODUCT ID: " + productVO.getProductId());
+			System.out.println("PRODUCT NAME: " + productVO.getProductName());
+			System.out.println("PRODUCT DESCRIPTION: " + productVO.getProductDescription());
+			System.out.println("PRODUCT MSRP: " + productVO.getProductMSRP());
+			System.out.println("PRODUCT PRICE: " + productVO.getProductPrice());
+			System.out.println("PRODUCT SOLD: " + productVO.getProductQtySold());
+			System.out.println("PRODUCT CATEGORY: " + productVO.getCategoryId());
+			System.out.println("PRODUCT STATUS: " + productVO.getProductStatus());
+			System.out.println("-----------------------------------");
+		}
 		
 //		testing : getAllByCategoryId()
 //		List<ProductVO> list = dao.getAllByCategoryId(1);
@@ -779,18 +779,18 @@ public class ProductJDBCDAO implements ProductDAO_Interface {
 //		}
 		
 //		testing : getAllByPriceHTML()
-		List<ProductVO> list = dao.getAllByPriceHTL();
-		for (ProductVO productVO : list) {
-			System.out.println("PRODUCT ID: " + productVO.getProductId());
-			System.out.println("PRODUCT NAME: " + productVO.getProductName());
-			System.out.println("PRODUCT DESCRIPTION: " + productVO.getProductDescription());
-			System.out.println("PRODUCT MSRP: " + productVO.getProductMSRP());
-			System.out.println("PRODUCT PRICE: " + productVO.getProductPrice());
-			System.out.println("PRODUCT SOLD: " + productVO.getProductQtySold());
-			System.out.println("PRODUCT CATEGORY: " + productVO.getCategoryId());
-			System.out.println("PRODUCT STATUS: " + productVO.getProductStatus());
-			System.out.println("-----------------------------------");
-		}
+//		List<ProductVO> list = dao.getAllByPriceHTL();
+//		for (ProductVO productVO : list) {
+//			System.out.println("PRODUCT ID: " + productVO.getProductId());
+//			System.out.println("PRODUCT NAME: " + productVO.getProductName());
+//			System.out.println("PRODUCT DESCRIPTION: " + productVO.getProductDescription());
+//			System.out.println("PRODUCT MSRP: " + productVO.getProductMSRP());
+//			System.out.println("PRODUCT PRICE: " + productVO.getProductPrice());
+//			System.out.println("PRODUCT SOLD: " + productVO.getProductQtySold());
+//			System.out.println("PRODUCT CATEGORY: " + productVO.getCategoryId());
+//			System.out.println("PRODUCT STATUS: " + productVO.getProductStatus());
+//			System.out.println("-----------------------------------");
+//		}
 		
 	}
 }
