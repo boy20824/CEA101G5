@@ -169,7 +169,7 @@
 					<div class="memChoseList">
 						<a href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp"><i class="fas fa-vote-yea"></i></i></i></a> <a
 							href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp">
-							<p>取號資</p>
+							<p>取號資訊</p>
 						</a>
 					</div>
 				</li>
