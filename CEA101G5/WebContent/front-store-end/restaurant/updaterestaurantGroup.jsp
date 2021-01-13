@@ -124,6 +124,7 @@ width:500px;
 									${(storeLogin.storeFinalReservDate==restaurantVO.storeFinalReservDate)? 'selected':'' }>${storeFinalReservDatelist}
 							</c:forEach>
 						</select>
+						<p>目前最終訂位日期 : ${storeLogin.storeFinalReservDate} 天後</p>
 					</div>
 
 
@@ -135,6 +136,7 @@ width:500px;
 									${(storeLogin.acceptGroups==restaurantVO.acceptGroups)? 'selected':'' }>${acceptGroupslist}
 							</c:forEach>
 						</select>
+						<p>可接受訂位組數 : ${storeLogin.acceptGroups} 組</p>
 					</div>
 
 				</div>

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.member.model.MemVO;
 import com.restaurant.model.RestaurantService;
 import com.restaurant.model.RestaurantVO;
 import com.restaurantpicture.model.RestaurantPictureService;
@@ -167,6 +168,8 @@ public class RestaurantServlet extends HttpServlet {
 				req.setAttribute("restVO", restVO);
 				String url = "/front-store-end/restaurant/updaterestaurantGroup.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
+				RestaurantVO storeLogin = restSvc.getOneRestaurant(storeId);
+				session.setAttribute("storeLogin", storeLogin);
 				successView.forward(req, res);
 				
 				/*************************** 其他錯誤處理 *************************************/
