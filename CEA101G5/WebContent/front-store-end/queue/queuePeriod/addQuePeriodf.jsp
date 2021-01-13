@@ -26,10 +26,23 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/restaurant/css/css.css" />
 <title>addQueperiod.jsp</title>
-
+<style>
+.btn{
+	background-color: #FA7E23; 
+	border-color: #FA7E23;
+}
+div.label{
+	text-align: center;
+}
+input.inputH{
+	height: 40px;
+	width: 100px;
+}
+</style>
 
 </head>
 <body bgcolor='white'>
+	<div class="row reserve1"></div>
 <div class="container">
 
 	<jsp:useBean id="quePeriodSvc" scope="session"
@@ -45,7 +58,7 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
 <!-- 						<label for="exampleFormControlSelect1"><b>時段：</b></label> -->
 <!-- 					</div> -->
 <!-- 					<div class="c○l-6"> -->
-<!-- 						<select class="form-control" id="queueperiodid" name="queueperiodid" -->
+<!-- 						<select class="form-control inputH" id="queueperiodid" name="queueperiodid" -->
 <!-- 							style="width: 280px"> -->
 <!-- 							<option value="1">白天</option> -->
 <!-- 							<option value="2">晚上</option> -->
@@ -67,7 +80,7 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
   <label for="open">Open</label>
   <input type="radio" id="close" name="queuest" value="0">
   <label for="close">Close</label>
-<!-- 						<select class="form-control" id="queuest" name="queuest" -->
+<!-- 						<select class="form-control inputH" id="queuest" name="queuest" -->
 <!-- 							style="width: 280px"> -->
 <!-- 							<option value="1">開放</option> -->
 <!-- 							<option value="0">關閉</option> -->
@@ -83,7 +96,7 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
 					</div>
 					<div class="c○l-6">
 						<div class="form-group">
-						<select  class="form-control" name="queuestarttime">
+						<select  class="form-control inputH" style="height:30px;" name="queuestarttime">
 <!-- 設定時間區段供servlet調整時間 -->
 						<% int hr = 0; String minEven = ":00"; String minOdd = ":30";%>
 						<c:forEach var="i" begin="0" end="47">
@@ -98,10 +111,10 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
 						</c:choose>
 						</c:forEach>
 						</select>
-<!-- 							<input class="form-control" name="queueperiodttl" id="queueperiodttl" value="15" -->
+<!-- 							<input class="form-control inputH" name="queueperiodttl" id="queueperiodttl" value="15" -->
 <!-- 								readonly> <input value="10" onMousemove="showTtlValue()" -->
 <!-- 								onMouseup="showUsableValue()" type="range" -->
-<!-- 								class="form-control-range" id="formControlTtl" min="1" max="30" -->
+<!-- 								class="form-control inputH-range" id="formControlTtl" min="1" max="30" -->
 <!-- 								step="1"> -->
 						</div>
 					</div>
@@ -115,7 +128,7 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
 					</div>
 					<div class="c○l-6">
 						<div class="form-group">
-						<select  class="form-control" name="queueendtime">
+						<select  class="form-control inputH" style="height:30px;" name="queueendtime">
 						<% int hr2 = 0; String minEven2 = ":00"; String minOdd2 = ":30";%>
 						<c:forEach var="i" begin="0" end="47">
 						<c:choose>
@@ -129,10 +142,10 @@ pageContext.setAttribute("queueperiodid", queueperiodid);
 						</c:choose>
 						</c:forEach>
 						</select>
-<!-- 							<input class="form-control" name="queueperiodttl" id="queueperiodttl" value="15" -->
+<!-- 							<input class="form-control inputH" name="queueperiodttl" id="queueperiodttl" value="15" -->
 <!-- 								readonly> <input value="10" onMousemove="showTtlValue()" -->
 <!-- 								onMouseup="showUsableValue()" type="range" -->
-<!-- 								class="form-control-range" id="formControlTtl" min="1" max="30" -->
+<!-- 								class="form-control inputH-range" id="formControlTtl" min="1" max="30" -->
 <!-- 								step="1"> -->
 						</div>
 					</div>

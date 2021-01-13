@@ -35,7 +35,15 @@ String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId()
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/restaurant/css/css.css" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>editQuePeriod.jsp</title>
-
+<style>
+.btn{
+	background-color: #FA7E23; 
+	border-color: #FA7E23;
+}
+div.label{
+	text-align: center;
+}
+</style>
 </head>
 <body bgcolor='white'>
 
@@ -48,6 +56,7 @@ String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId()
 			</c:forEach>
 		</ul>
 	</c:if>
+		<div class="row reserve1"></div>
 	<div class="container">
 		<table class="table">
 			<thead>
@@ -113,7 +122,7 @@ String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId()
 			</tbody>
 		</table>
 		<div class="row">
-			<div class="col-3"></div>
+			<div class="col-4"></div>
 			<input id="storeid4Ajax" value="${storeid }" type="hidden">
 			<input id="add" onClick="showAddPage()" name="add" value="新增時段"
 				type="button" class="btn btn-primary">

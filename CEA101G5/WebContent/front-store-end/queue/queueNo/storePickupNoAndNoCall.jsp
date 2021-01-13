@@ -60,7 +60,7 @@
 	width: 100%;
 	z-index: 2;
 	opacity: 85%;
-	margin-top: -20;
+	margin-top: -30;
 
 }
 img{
@@ -75,7 +75,7 @@ margin-top: 10;
 <!-- Just an image -->
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp">
-    <img src="../img/LOGO/Logo3(2).png" width="150" height="100" alt="" loading="lazy">
+    <img src="../img/LOGO/Logo3(2).png" width="180" height="100" alt="" loading="lazy">
   </a>
 </nav>
 <a class="icon" href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp"></a>
@@ -86,7 +86,7 @@ margin-top: 10;
 			<div class="col-4 left">
 				<div class="row left-top">
 					<div class="row" id="display">
-						<div id="nowTime"></div>
+						<div style="font-size:60px; text-align:center; "id="nowTime"></div>
 					</div>
 				</div>
 				<form id="info">
@@ -156,7 +156,7 @@ margin-top: 10;
 
 						</div>
 		<input name="storeid" id="storeid" value="${storeid }" hidden="hidden" />
-						<input name="queuenum" type="text" class="form-control" value="<%=pickupNo%>" aria-label="Amount (to the nearest dollar)" readonly> 
+						<input style="text-align:center;" name="queuenum" type="text" class="form-control" value="<%=pickupNo%>" aria-label="Amount (to the nearest dollar)" readonly> 
 						<input type="hidden" id="queuenotime" name="queuenotime" class="quenotime"> 
 						<input type="hidden" id="queuetableid" name="queuetableid" value="1">
 						<input type="hidden" id="queuelineno" name="queuelineno" value="1">

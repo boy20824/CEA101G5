@@ -14,3 +14,7 @@ span.table{
    color: white;
     background-color: #ff615f;
 }
+input.inputH{
+	height: 20px;
+}
+

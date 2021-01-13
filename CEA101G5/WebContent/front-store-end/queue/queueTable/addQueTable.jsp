@@ -27,8 +27,19 @@ pageContext.setAttribute("list", list);
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 <title>addQueTable.jsp</title>
-
-
+<style>
+.btn{
+	background-color: #FA7E23; 
+	border-color: #FA7E23;
+}
+div.label{
+	text-align: center;
+}
+input.inputH{
+	height: 40px;
+	width: 100px;
+}
+</style>
 </head>
 <body bgcolor='white'>
 <div class="container">
@@ -40,17 +51,17 @@ pageContext.setAttribute("list", list);
 	<input class="testValue" value="${queTableVO.queuetableid }" type="hidden">
 </c:forEach>
 	
-		<div class="row reserve"></div>
+		<div class="row reserve1"></div>
 		<form METHOD="post" ACTION="queueTable.do" name="form1">
 			<div class="form-group">
 				<div class="row">
-					<div class="col-3"></div>
-					<div class="col-3">
+					<div class="col-2"></div>
+					<div class="col-3 label">
 						<label for="exampleFormControlSelect1"><b>請選擇餐桌類型：</b></label>
 					</div>
 					<div class="c○l-6">
 						<select class="form-control" id="queuetableid" name="queuetableid"
-							style="width: 280px">
+							style="width: 150px; height: 40px;">
 							<option value="1">二人桌</option>
 							<option value="2">四人桌</option>
 							<option value="3">八人桌</option>
@@ -61,14 +72,14 @@ pageContext.setAttribute("list", list);
 			</div>
 			<div class="form-group">
 				<div class="row">
-					<div class="col-3"></div>
-					<div class="col-3">
+					<div class="col-2"></div>
+					<div class="col-3 label">
 						<label for="exampleInputPassword1"><b>請設定桌數：</b></label>
 					</div>
-					<div class="c○l-6">
+					<div class="c○l-3">
 						<div class="form-group">
-							<input class="form-control" name="queuetablettl" id="queuetablettl" value="15"
-								readonly> <input value="10" onMousemove="showTtlValue()"
+							<input class="form-control inputH" name="queuetablettl" id="queuetablettl" value="15"
+								readonly> <input value="10" onMousemove="showTtlValue()" style="backgourn-color:#FA7123;"
 								onMouseup="showUsableValue()" type="range"
 								class="form-control-range" id="formControlTtl" min="1" max="30"
 								step="1">
@@ -78,12 +89,12 @@ pageContext.setAttribute("list", list);
 			</div>
 			<div class="form-group">
 				<div class="row">
-					<div class="col-3"></div>
-					<div class="col-3">
+					<div class="col-2"></div>
+					<div class="col-3 label">
 						<label for="exampleInputPassword1"><b>請設定開放桌數：</b></label>
 					</div>
 					<div class="c○l-6">
-						<input class="form-control" name="queuetableusable" id="queuetableusable" value="1"
+						<input class="form-control inputH" name="queuetableusable" id="queuetableusable" value="1"
 							readonly> <input onMousemove="showUsableValue()"
 							type="range" class="form-control-range" id="formControlUsable"
 							min="1" max="1" step="1">

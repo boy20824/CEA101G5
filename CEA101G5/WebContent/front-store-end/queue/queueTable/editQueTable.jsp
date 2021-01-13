@@ -33,6 +33,12 @@ String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId()
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/restaurant/css/css.css" />
 
 <title>editQueTable.jsp</title>
+<style>
+.btn{
+	background-color: #FA7E23; 
+	border-color: #FA7E23;
+}
+</style>
 
 </head>
 <body bgcolor='white'>
