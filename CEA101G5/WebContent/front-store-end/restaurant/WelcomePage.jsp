@@ -60,7 +60,7 @@ RestaurantService restSvc = new RestaurantService();
 						<a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/editQueTable.jsp">餐桌管理</a>
 						</li>
 					</ul></li>
-				<li>定位選項設定</li>
+				<li>訂位選項設定</li>
 			</ul>
 		</span>
             <span><a href="<%=request.getContextPath()%>/front-store-end/foodorder/orderlist.jsp"><svg aria-hidden="true" focusable="false"
