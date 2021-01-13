@@ -114,7 +114,9 @@ pageContext.setAttribute("list", list);
 									id="agreeApply" type="button"> <input type="hidden"
 									name="memPhone" value="${memVO.memPhone}"> <input
 									type="hidden" name="memLice" value="${memVO.memLice}" />
-								<input type="hidden" name="memCondition" value="4"> <input
+								<input type="hidden" name="memCondition" value="4"> 
+								<input type="hidden" name="comeFrom" value="fromBackEnd"> 
+								<input
 									type="hidden" name="action" value="updateMemLice">
 							</FORM>
 						</td>
@@ -125,8 +127,8 @@ pageContext.setAttribute("list", list);
 									id="refuseApply" type="button"> <input type="hidden"
 									name="memPhone" value="${memVO.memPhone}"> <input
 									type="hidden" name="memLice" value="${memVO.memLice}" />
-								<input type="hidden" name="memCondition" value="2"> <input
-									type="hidden" name="action" value="updateMemLice">
+								<input type="hidden" name="memCondition" value="2"> 
+								<input type="hidden" name="action" value="updateMemLice">
 							</FORM>
 						</td>
 					</tr>

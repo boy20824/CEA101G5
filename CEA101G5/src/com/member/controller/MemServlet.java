@@ -305,7 +305,6 @@ public class MemServlet extends HttpServlet {
 		}
 
 		if ("updateMemLice".equals(action)) {
-
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -313,6 +312,7 @@ public class MemServlet extends HttpServlet {
 
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+				String comeFrom = req.getParameter("comeFrom");
 				String memPhone = req.getParameter("memPhone");
 				Integer memLice = new Integer(req.getParameter("memLice").trim());
 				Integer memCondition = new Integer(req.getParameter("memCondition").trim());
@@ -337,9 +337,19 @@ public class MemServlet extends HttpServlet {
 
 				/*************************** 3.修改完成轉交成功畫面(Send the Success view) *************/
 				req.setAttribute("memVO", memVO);
-				String url = "/front-customer-end/restaurant/alreadyApply.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
+
+				if ("fromBackEnd".equals(comeFrom)) {
+					String url = "/back-end/restaurant/storeapply.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
+
+				} else {
+					MemVO memLogin = memSvc.getOneMem(memPhone);
+					session.setAttribute("memLogin", memLogin);
+					String url = "/front-customer-end/restaurant/alreadyApply.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
+				}
 
 				/*************************** 其他錯誤處理 *************************************/
 			} catch (Exception e) {
@@ -511,10 +521,10 @@ public class MemServlet extends HttpServlet {
 //				
 //				String url = "/front-customer-end/member/SMSAuth.jsp";
 				String url = "/front-customer-end/member/JoinSuccess.jsp";
-				req.setAttribute("memVO", memVO); 
+				req.setAttribute("memVO", memVO);
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-				
+
 				/*************************** 其他錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
@@ -538,7 +548,6 @@ public class MemServlet extends HttpServlet {
 
 				Jedis jedis = new Jedis("localhost", 6379);
 				jedis.auth("123456");
-				
 
 				String testAuth = jedis.get(memPhone);
 				if (!memAuthCode.trim().equals(testAuth)) {
@@ -552,7 +561,7 @@ public class MemServlet extends HttpServlet {
 				memVO.setMemCondition(memCondition);
 
 				jedis.close();
-				
+
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO);
@@ -709,14 +718,14 @@ public class MemServlet extends HttpServlet {
 				e.printStackTrace(System.err);
 			}
 		}
-		
+
 //		Logging In & Out For Shop
 		if ("shopLogin".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			System.out.println(req.getParameter("memPhone"));
-			
+
 			String refererUrlRaw = req.getHeader("referer");
 			String refererUrl = refererUrlRaw.substring(refererUrlRaw.indexOf("CEA101G5") + 8);
 
@@ -785,18 +794,18 @@ public class MemServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
+
 		if ("shopLogout".equals(action)) {
-			
+
 			try {
 				session.invalidate();
 				res.sendRedirect(req.getContextPath() + "/front-end/shopMain.jsp");
-				
+
 			} catch (Exception e) {
 				e.printStackTrace(System.err);
 			}
 		}
 //		Logging In & Out For Shop
-		
+
 	}
 }
