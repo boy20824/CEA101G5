@@ -66,6 +66,10 @@ img {
 	z-index: 4;
 	margin-top: 10;
 }
+.pickup{
+	background-color: #FA7E23; 
+	border-color: #FA7E23;
+}
 </style>
 </head>
 <body>
@@ -165,7 +169,7 @@ img {
 							type="hidden" id="queuetableid" name="queuetableid" value="1">
 						<input type="hidden" id="queuelineno" name="queuelineno" value="1">
 						<input type="hidden" name="action" value="storeInsert">
-						<button id="submit" type="submit" class="btn btn-primary"
+						<button id="submit" type="submit" class="pickup btn btn-primary"
 							value="送出新增">新增取號</button>
 					</div>
 				</form>
@@ -642,8 +646,10 @@ function() {
 	
 	if($(this).val().match(MobileReg)){
 			$(this).addClass("is-valid").removeClass("is-invalid");
+			$("#submit").prop("disabled", false);
 	}else{
 			$(this).addClass("is-invalid").removeClass("is-valid");
+			$("#submit").prop("disabled", true);
 	}		
 });
 </script>

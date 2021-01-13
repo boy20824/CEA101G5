@@ -12,8 +12,6 @@
 	Integer pickupNo = (Integer) session.getAttribute("pickupNo");
 	String storeid = (String) session.getAttribute("storeid");
 %>
-<%=list == null%>
-<%=pickupNo == null%>
 <html>
 <head>
 <title>customerpickup</title>
@@ -27,7 +25,12 @@
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/bootstrap-reboot.min.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/customerPickupNo.css" />
-
+<style>
+.pickup{
+	background-color: #FA7E23; 
+	border-color: #FA7E23;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -161,7 +164,7 @@
 					<div class="col-sm-3"></div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-2">
-						<button type="submit" class="btn btn-primary">放棄取號</button>
+						<a class="btn btn-light" href="<%=request.getContextPath() %>/front-customer-end/front/front.jsp" role="button">放棄取號</a>
 					</div>
 					<div class="col-sm-2">
 						<input type="hidden" id="queuetableid" name="queuetableid"
@@ -170,7 +173,7 @@
 							id="queuenotime" name="queuenotime" class="quenotime"> <input
 							type="hidden" id="storeid" name="storeid" value="${storeid }">
 						<input type="hidden" name="action" value="insert">
-						<button id="submit" type="submit" class="btn btn-primary"
+						<button id="submit" type="submit" class="pickup btn btn-primary"
 							value="送出新增">確認取號</button>
 					</div>
 				</div>
@@ -367,10 +370,23 @@ function() {
 	
 	if($(this).val().match(MobileReg)){
 			$(this).addClass("is-valid").removeClass("is-invalid");
+			$("#submit").prop("disabled", false);
 	}else{
 			$(this).addClass("is-invalid").removeClass("is-valid");
+			$("#submit").prop("disabled", true);
 	}		
 });
 </script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<c:out value="${check }"></c:out>
+<c:if test="${check=='addNo' }">
+	<script>
+swal("新增成功", "ok", "success");
+</script>
+</c:if>
+<c:if test="${check=='repeat' }">
+	<script>
+swal("已取過號，請確認", "fail", "error");
+</script>
+</c:if>
 </html>

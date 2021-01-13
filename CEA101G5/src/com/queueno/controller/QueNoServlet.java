@@ -52,7 +52,6 @@ public class QueNoServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
 		System.out.println(action);
 
 		// ??��?��?��??
@@ -81,7 +80,7 @@ public class QueNoServlet extends HttpServlet {
 					// SET �???�store??�list
 					session.setAttribute("quePeriodVO", quePeriodVO);
 					session.setAttribute("storeid", storeid);
-					count++;// 計數+1
+//					count++;// 計數+1
 //				req.setAttribute("pickupNo", count);
 //				req.setAttribute("quePeriodVO", quePeriodVO);
 //					res.sendRedirect((req.getContextPath() + "/front-store-end/queue/queueNo/customerPickupNo.jsp"));
@@ -130,7 +129,7 @@ public class QueNoServlet extends HttpServlet {
 					session.setAttribute("queLineVO", queLineVO);
 					session.setAttribute("queNoVO", queNoVO);
 					session.setAttribute("storeid", storeid);
-					count++;// 計數+1
+//					count++;// 計數+1
 //				req.setAttribute("pickupNo", count);
 //				req.setAttribute("quePeriodVO", quePeriodVO);
 //				count++;
@@ -398,39 +397,19 @@ public class QueNoServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 
 			System.out.println("startinsert");
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
 				/*********************** 1.?��?��請�?��?�數 - 輸入?��式�?�錯誤�?��?? *************************/
 				Integer queuenum = new Integer(req.getParameter("queuenum"));
 				String memphone = req.getParameter("memphone").trim();
 				String memberName = req.getParameter("memberName").trim();
-				if (memphone == null || memphone.trim().length() == 0) {
-					errorMsgs.add("請勿空白");
-				} else if (!memphone.trim().matches(memphone)) { // 以�?�練習正???(�?)表示�?(regular-expression)
-					errorMsgs.add("?��?��?��??��?��?�碼");
-				}
-				Integer party = null;
-				try {
-					party = new Integer(req.getParameter("party"));
-				} catch (NumberFormatException e) {
-					errorMsgs.add("??��?�到party");
-				}
-
-				Timestamp queuenotime = null;
-				try {
-					queuenotime = strToTsp(req.getParameter("queuenotime"));
-				} catch (IllegalArgumentException e) {
-					errorMsgs.add("?��??�到?��???!");
-				}
+				Integer party = new Integer(req.getParameter("party"));
+				Timestamp queuenotime = strToTsp(req.getParameter("queuenotime"));
 				String storeid = req.getParameter("storeid").trim();
 				Integer queueperiodid = new Integer(req.getParameter("queueperiodid").trim());
 				Integer queuelineno = new Integer(req.getParameter("queuelineno").trim());
 				Integer queuetableid = new Integer(req.getParameter("queuetableid").trim());
-				System.out.println(req.getParameter("queuetableid"));
+				String psw = "Enak1234";
+				
 				
 				QueNoVO queNoVO = new QueNoVO();
 				queNoVO.setQueuenum(queuenum);
@@ -441,21 +420,10 @@ public class QueNoServlet extends HttpServlet {
 				queNoVO.setQueuelineno(queuelineno);
 				queNoVO.setQueuetableid(queuetableid);
 				queNoVO.setStoreid(storeid);
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("queNoVO", queNoVO);
-
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-store-end/queue/queueNo/customerPickupNo.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-//				System.out.print("??��?��?��??");
 
 				/*************************** 2.??��?�新增�?��?? ***************************************/
 				// ?��增至資�?�庫
 				QueNoService queNoSvc = new QueNoService();
-				queNoVO = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
-						queuetableid);
 				
 				// 顯示桌種??��?��?�碼?��
 //				List<QueNoVO> list = queNoSvc2.getQueNoByStoreIdAndTableId(storeid, queuetableid);
@@ -464,14 +432,54 @@ public class QueNoServlet extends HttpServlet {
 				
 				QuePeriodService quePeriodSvc = new QuePeriodService();
 				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
-//				custInsert = count;
-				/*************************** 3.?��增�?��??,準�?��?�交(Send the Success view) ***********/
+//				
+				// 用來檢查是否有取過號
+				List<QueNoVO> queNoVO3 = queNoSvc.getQueNoByStoreId(storeid);
+				List<String> noList = new ArrayList<String>();
+				for(int i = 0; i<queNoVO3.size();i++) {
+					noList.add(queNoVO3.get(i).getMemphone());
+				}
 				
-//				HttpSession session = req.getSession();
-//				session.setAttribute("memberName", memberName);
-//				session.setAttribute("queNoVO", queNoVO);
-//				session.setAttribute("queNoVO2", queNoVO2);
-//				session.setAttribute("quePeriodVO", quePeriodVO);
+				MemService memSvc = new MemService();
+				List<MemVO> memVO = memSvc.getAll();
+				// 用來檢查是否有註冊電話
+				List<String> memList = new ArrayList<String>();
+				for(int i = 0 ; i<memVO.size();i++) {
+					memList.add(memVO.get(i).getMemPhone());
+				}
+				if(noList.contains(memphone)){
+					// 已取過號
+					req.setAttribute("check", "repeat");
+				}else {
+					if(memList.contains(memphone)) {
+						// 已有會員該店尚未取過號-->>新增取號
+						req.setAttribute("check", "addNo");
+						queNoVO = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
+								queuetableid);
+						count++;
+					}else {
+						// 新增會員-->>新增取號
+						memSvc.easyAddMem(memphone, psw, memberName);
+						queNoVO = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
+								queuetableid);
+						req.setAttribute("check", "addNo");
+						count++;
+					}
+				}
+				/*************************** 3.?��增�?��??,準�?��?�交(Send the Success view) ***********/
+				// 預期時間+組數
+				List<QueNoVO> queNoVO4 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
+				Date udate =new Date( req.getParameter("queuenotime"));
+				Long long2 = udate.getTime()+ queNoVO4.size()*5*60*1000;
+				Timestamp expectTime = new Timestamp(long2);
+				
+				
+				HttpSession session = req.getSession();
+				session.setAttribute("memberName", memberName);
+				session.setAttribute("queNoVO", queNoVO);
+				session.setAttribute("queNoVO2", queNoVO2);
+				session.setAttribute("quePeriodVO", quePeriodVO);
+				session.setAttribute("expectTime", expectTime);
 				
 //				req.setAttribute("queNoVO", queNoVO);
 //				req.setAttribute("queNoVOList", list);
@@ -482,95 +490,8 @@ public class QueNoServlet extends HttpServlet {
 //				successView.forward(req, res);
 
 				/*************************** ?��他可?��??�錯誤�?��?? **********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-store-end/queue/queueNo/customerPickupNo.jsp");
-				failureView.forward(req, res);
-			}
 		}
 
-//		if ("insert".equals(action)) {
-//
-//			System.out.println("startinsert");
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			try {
-//				/*********************** 1.?��?��請�?��?�數 - 輸入?��式�?�錯誤�?��?? *************************/
-//				count++;
-//				Integer queuenum = new Integer(req.getParameter("queuenum"));
-//				String memphone = req.getParameter("memphone").trim();
-//				if (memphone == null || memphone.trim().length() == 0) {
-//					errorMsgs.add("請勿空白");
-//				} else if (!memphone.trim().matches(memphone)) { // 以�?�練習正???(�?)表示�?(regular-expression)
-//					errorMsgs.add("?��?��?��??��?��?�碼");
-//				}
-//				Integer party = null;
-//				try {
-//					party = new Integer(req.getParameter("party"));
-//				} catch (NumberFormatException e) {
-//					errorMsgs.add("??��?�到party");
-//				}
-//
-//				Timestamp queuenotime = null;
-//				try {
-//					queuenotime = strToTsp(req.getParameter("queuenotime"));
-//				} catch (IllegalArgumentException e) {
-//					errorMsgs.add("?��??�到?��???!");
-//				}
-//				String storeid = req.getParameter("storeid").trim();
-//				Integer queueperiodid = new Integer(req.getParameter("queueperiodid").trim());
-//				Integer queuelineno = new Integer(req.getParameter("queuelineno").trim());
-//				Integer queuetableid = new Integer(req.getParameter("queuetableid").trim());
-//				QueNoVO queNoVO = new QueNoVO();
-//				queNoVO.setQueuenum(queuenum);
-//				queNoVO.setMemphone(memphone);
-//				queNoVO.setParty(party);
-//				queNoVO.setQueuenotime(queuenotime);
-//				queNoVO.setQueueperiodid(queueperiodid);
-//				;
-//				queNoVO.setQueuelineno(queuelineno);
-//				;
-//				queNoVO.setQueuetableid(queuetableid);
-//				;
-//				queNoVO.setStoreid(storeid);
-//				if (!errorMsgs.isEmpty()) {
-//					req.setAttribute("queNoVO", queNoVO);
-//
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/front-store-end/queue/queueNo/customerPickupNo.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-////				System.out.print("??��?��?��??");
-//
-//				/*************************** 2.??��?�新增�?��?? ***************************************/
-//				// ?��增至資�?�庫
-//				QueNoService queNoSvc = new QueNoService();
-//				queNoVO = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
-//						queuetableid);
-//				// 顯示桌種??��?��?�碼?��
-//				QueNoService queNoSvc2 = new QueNoService();
-//				List<QueNoVO> list = queNoSvc2.getQueNoByStoreIdAndTableId(storeid, queuetableid);
-//				/*************************** 3.?��增�?��??,準�?��?�交(Send the Success view) ***********/
-//				req.setAttribute("queNoVO", queNoVO);
-//				req.setAttribute("queNoVOList", list);
-//
-//				String url = "/front-store-end/queue/queueNo/showCustomerPickupNo.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url);
-//				successView.forward(req, res);
-//
-//				/*************************** ?��他可?��??�錯誤�?��?? **********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/front-store-end/queue/queueNo/customerPickupNo.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
 
 		if ("delete".equals(action)) {
 			String memphone = req.getParameter("memphone");
@@ -603,10 +524,11 @@ public class QueNoServlet extends HttpServlet {
 		
 	}
 	
-	public Timestamp addToTime(Integer num) {	
-		Timestamp time2 = new Timestamp(num-8*60*60*1000);
-		return time2;
-	}
+	// 預期時間+組數
+//	public Timestamp addToTime(Long num) {
+//		Timestamp time2 = new Timestamp(num+10*60*1000);
+//		return time2;
+//	}
 	
 	public Timestamp strToTsp(String str) {
 		System.out.println("transforming");

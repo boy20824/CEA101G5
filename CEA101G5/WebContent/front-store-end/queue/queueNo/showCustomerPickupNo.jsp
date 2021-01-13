@@ -23,8 +23,9 @@
 	session.setAttribute("quePeriodVO", quePeriodVO);
 	session.setAttribute("memberName", memberName);
 %>
-<%-- <%=list == null%> --%>
-
+<%=queNoVO %>
+<%=queNoVO2 %>
+<%=quePeriodVO %>
 <html>
 <head>
 <meta charset="UTF-8" />
@@ -38,7 +39,36 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/customerPickupNo.css" />
 <title>customerpickup</title>
+<style>
+.header {
+	position: fixed;
+	background-color: #FA7E23;
+	height: 120px;
+	width: 100%;
+	z-index: 2;
+	opacity: 85%;
+	margin-top: -30;
+}
+
+img {
+	position: fixed;
+	z-index: 4;
+	margin-top: 10;
+}
+</style>
 </head>
+<div class="header">
+		<!-- Just an image -->
+		<nav class="navbar navbar-light bg-light">
+			<a class="navbar-brand"
+				href="<%=request.getContextPath() %>/front-customer-end/front/front.jsp">
+				<img src="../img/LOGO/Logo3(2).png" width="180" height="100" alt=""
+				loading="lazy">
+			</a>
+		</nav>
+		<a class="icon"
+			href="<%=request.getContextPath() %>/front-customer-end/front/front.jsp"></a>
+	</div>
 <body>
 	<div class="container">
 		<div class="row reserve"></div>
@@ -97,7 +127,7 @@
 					<div class="col-sm-6">
 
 						<div class="form-control" id="queuenotime">
-							<fmt:formatDate value="${queNoVO.queuenotime}"
+							<fmt:formatDate value="${expectTime}"
 								pattern="yyyy-MM-dd HH:mm" />
 						</div>
 
@@ -160,6 +190,7 @@
 				<div class="form-control"
 					aria-label="Amount (to the nearest dollar)">
 <!-- 					抓出queNo後序號碼排序 -->
+					<c:out value="${queNoVO.storeid }"></c:out>
 					<c:forEach var="queNoVOList" items="${queNoSvc.all}" begin="0"
 						end="4">
 						<c:choose>
