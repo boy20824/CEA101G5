@@ -222,7 +222,7 @@
 					<td class="col-1 tdAlignMiddle">商品促銷售價</td>
 				</tr>
 				<c:forEach var="promotionDetailVO" items="${promotionDetailVOList}">
-					<tr>
+					<tr id="tr${promotionDetailVO.getProductId()}">
 						<td class="col-1"><img class="rounded" src="<%=request.getContextPath()%>/shop/productphotoreader.do?productId=${promotionDetailVO.getProductId()}"></td>
 						<td class="col-1 productVOInTable">${promotionDetailVO.getProductId()}</td>
 						<td class="col-3">${productServiceForTable.getProductById(promotionDetailVO.getProductId()).getProductName()}</td>
@@ -241,7 +241,7 @@
 			<img src="<%=request.getContextPath()%>/back-end/shopBackEndPromotion/images/check.svg">
 		</div>
 		<div>
-			<p>商品已加入促銷活動</p>
+			<p id="animationInnerText">商品已加入促銷活動</p>
 		</div>
 	</div>
 	

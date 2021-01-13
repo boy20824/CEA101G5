@@ -61,6 +61,13 @@ public class PromotionServlet extends HttpServlet {
 			out.write(productVOToJson);
 		}
 		
+		if ("removeFromPromo".equals(action)) {
+			String productId = req.getParameter("productId");
+			
+			PromotionDetailService promotionDetailService = new PromotionDetailService();
+			promotionDetailService.deletePromotionDetail(1, productId);
+		}
+		
 	}
 
 }

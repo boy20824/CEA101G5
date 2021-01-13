@@ -102,6 +102,7 @@ for (let i = 0; i < toPromoProductNameArr.length; i++) {
 
 // Submitting Promo
 let addToPromoBtn = document.getElementById("addToPromoBtn");
+let removeFromPromoBtn = document.getElementById("removeFromPromoBtn");
 
 addToPromoBtn.addEventListener("click", function() {
 	let formProductId = document.getElementById("formProductId").value; 
@@ -129,6 +130,13 @@ addToPromoBtn.addEventListener("click", function() {
 	}
 	
 	document.getElementById("formPromoPrice").value = null;
+	addToPromoAnimation();
+});
+
+removeFromPromoBtn.addEventListener("click", function() {
+	let formProductId = document.getElementById("formProductId");
+	ajaxRemoveProductFromPromo(formProductId.value);
+	removeFromPromoAnimation()
 });
 
 // Functions
@@ -195,6 +203,43 @@ function ajaxAddProductToPromo(productId, productPromoPrice) {
 	ajaxRequest.send("action=addToPromo&productId=" + productId + "&productPromoPrice=" + productPromoPrice);
 }
 
+function ajaxRemoveProductFromPromo(productId) {
+	let ajaxRequest = new XMLHttpRequest();
+	let url = window.location.origin + "/CEA101G5/shop/promotion.do";
+	
+	ajaxRequest.open("POST", url, true);
+	ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	ajaxRequest.onload = function () {
+		if (ajaxRequest.status >= 200 && ajaxRequest.status < 400) {
+			let trToRemove = document.getElementById("tr" + productId);
+			trToRemove.remove();
+		} else {
+			console.log("An error has occured...");
+		}
+	}
+	
+	ajaxRequest.send("action=removeFromPromo&productId=" + productId);
+}
+
+function addToPromoAnimation() {
+	let animationInnerText = document.getElementById("animationInnerText");
+	animationInnerText.innerText = "商品已加入促銷活動";
+	
+	$(".addToCartPopContainer").fadeIn(100);
+	setTimeout(function() {
+		$(".addToCartPopContainer").fadeOut(100);	
+	}, 2500);
+}
+
+function removeFromPromoAnimation() {
+	let animationInnerText = document.getElementById("animationInnerText");
+	animationInnerText.innerText = "商品已從促銷活動移除";
+	
+	$(".addToCartPopContainer").fadeIn(100);
+	setTimeout(function() {
+		$(".addToCartPopContainer").fadeOut(100);	
+	}, 2500);
+}
 
 
 

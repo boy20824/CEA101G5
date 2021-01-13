@@ -279,13 +279,13 @@ public class PromotionDetailJDBCDAO implements PromotionDetailDAO_Interface{
 		 PromotionDetailJDBCDAO dao = new PromotionDetailJDBCDAO();
 
 //		 insert
-		 PromotionDetailVO promotionDetailVO = new PromotionDetailVO();
-		 promotionDetailVO.setPromoId(1);
-		 promotionDetailVO.setProductId("ENP0009");
-		 promotionDetailVO.setProductPrice(1199);
-		 promotionDetailVO.setProductPromoQty(100);
-		 dao.insert(promotionDetailVO);
-		 System.out.println("Statement Processed....");
+//		 PromotionDetailVO promotionDetailVO = new PromotionDetailVO();
+//		 promotionDetailVO.setPromoId(1);
+//		 promotionDetailVO.setProductId("ENP0009");
+//		 promotionDetailVO.setProductPrice(1199);
+//		 promotionDetailVO.setProductPromoQty(100);
+//		 dao.insert(promotionDetailVO);
+//		 System.out.println("Statement Processed....");
 
 //		update
 //		PromotionDetailVO promotionDetailVO = new PromotionDetailVO();
@@ -296,7 +296,8 @@ public class PromotionDetailJDBCDAO implements PromotionDetailDAO_Interface{
 //		dao.update(promotionDetailVO);
 
 //		delete
-//		dao.delete(6,"ENP0007");
+		dao.delete(1, "ENP0001");
+		System.out.println("Statement Processed");
 
 
 //		getOne
