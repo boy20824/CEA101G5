@@ -53,7 +53,7 @@ public class RestaurantDAO implements Restaurant_interface {
 
 	private static final String GET_ALl_STMT = "SELECT * FROM RESTAURANT";
 	
-	private static final String GET_ALl_BY_CHAR_STMT = "SELECT * FROM WHERE STORE_CHAR = ?";
+	private static final String GET_ALl_BY_CHAR_STMT = "SELECT * FROM RESTAURANT WHERE STORE_CHAR = ?";
 	
 	private static final String UPDATE_GROUPS = "UPDATE RESTAURANT SET ACCEPT_GROUPS=?, STORE_FINAL_RESERVDATE=? WHERE STORE_ID=?";
 

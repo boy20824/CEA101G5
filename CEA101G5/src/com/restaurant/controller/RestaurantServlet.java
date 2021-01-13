@@ -138,9 +138,6 @@ public class RestaurantServlet extends HttpServlet {
 			
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-				System.out.println(req.getParameter("storeId"));
-				System.out.println(req.getParameter("storeFinalReservDate"));
-				System.out.println(req.getParameter("acceptGroups"));
 				String storeId = req.getParameter("storeId");
 				Integer storeFinalReservDate = new Integer(req.getParameter("storeFinalReservDate"));
 				Integer acceptGroups = new Integer(req.getParameter("acceptGroups"));
@@ -176,6 +173,32 @@ public class RestaurantServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("其他錯誤訊息:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-store-end/restaurant/updaterestaurantGroup.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("getRestByChar".equals(action)) { // 來自update_member_input.jsp的請求
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+				String storeChar = req.getParameter("storeChar");
+				
+				
+				/*************************** 3.修改完成轉交成功畫面(Send the Success view) *************/
+				req.setAttribute("storeChar", storeChar);
+				String url = "/front-customer-end/restaurant/BrowserByChar.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+				/*************************** 其他錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("其他錯誤訊息:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/restaurant/BrowserByChar.jsp");
 				failureView.forward(req, res);
 			}
 		}

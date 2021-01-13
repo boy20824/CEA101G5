@@ -3,8 +3,8 @@
 <%@ page import="com.member.model.*"%>
 <%@ page import="com.restaurant.model.*"%>
 
-<jsp:useBean id="listRestaurants_ByCompositeQuery" scope="request"
-	type="java.util.List<RestaurantVO>" />
+<%-- <jsp:useBean id="listRestaurants_ByCompositeQuery" scope="request" --%>
+<%-- 	type="java.util.List<RestaurantVO>" /> --%>
 <jsp:useBean id="restSvc" scope="page"
 	class="com.restaurant.model.RestaurantService" />
 <jsp:useBean id="restPicSvc" scope="page"
@@ -13,6 +13,7 @@
 	class="com.restaurantpicture.model.RestaurantPictureVO" />
 	<!-- 餐廳評論 -->
 <jsp:useBean id="cmtSvc" scope="page" class="com.restaurantcmt.model.RestaurantCmtService" />
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -217,7 +218,7 @@
 		</div>
 		<!-- 餐廳瀏覽  -->
 		<c:forEach var="restaurantVO"
-			items="${listRestaurants_ByCompositeQuery}">
+			items="${restSvc.getAllByChar(storeChar)}">
 			<div class="store-container">
 				<div class="store-img">
 					<img style="width: 250px; height: 280px;"
