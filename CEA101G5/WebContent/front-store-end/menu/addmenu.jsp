@@ -119,7 +119,6 @@ left:25%;
 				<input type="hidden" name="action" value="insert"> 
 				<input type="submit" value="確定新增" /> 
 				<input type="reset" value="取消" />
-				<input type="button" value="客製化選項" />
 			</div>
 		</div>
 	</FORM>

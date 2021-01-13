@@ -214,6 +214,7 @@
 		<!-- 餐廳瀏覽  -->
 		<c:forEach var="restaurantVO"
 			items="${listRestaurants_ByCompositeQuery}">
+			${listRestaurants_ByCompositeQuery}
 			<div class="store-container">
 				<div class="store-img">
 					<img style="width: 250px; height: 280px;"

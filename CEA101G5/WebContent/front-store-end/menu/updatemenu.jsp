@@ -16,6 +16,9 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <%@include file="../selectpage/selectstorepage.jsp"%>
 <script src="<%=request.getContextPath()%>/front-store-end/menu/updatemenujs.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/menu/addmenusupcharcss.css" />
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<script type="text/javascript" src="<%=request.getContextPath()%>/front-store-end/menu/addmenusupcharjs.js"></script>
 <style>
 .forDiv {
 	position: relative;
@@ -109,10 +112,53 @@ font {
 				<input type="hidden" name="menuId" value="<%=menuVO.getMenuId()%>">
 				<input type="hidden" name="menuStatus" value="0"> 
 				<input type="hidden" name="menuSellStatus" value="1">
+				<input type="button" value="客製化選項" class="addmenubox" /> 
 				<input type="submit" value="確定修改" /> 
 				<input type="button" onclick="history.back()" value="取消" /> 
+				
 			</div>
 		</div>
 	</form>
+<!-- 	客製化燈箱 -->
+	<form method="post" action="">
+	<div class="menuChar" style="display:none;">
+      <div class="menuCharTitle">
+        <i class="fas fa-arrow-left"><span>編輯選項類別</span></i>
+        <input type="button" value="新增" />
+      </div>
+      <div class="menuCharTop">
+        <div class="menuChars">
+          <p>選項的詳細內容</p>
+          <p>名稱*</p>
+          <input type="text" placeholder="請輸入客製化選項" />
+          <p>例如:配類選擇、加料選擇</p>
+        </div>
+      </div>
+      <div class="menuCharBottom">
+        <div class="menuCharDetail">
+          <div class="menuCharDetailTitle">
+            <p>客製化選項</p>
+            <p>+新增選項</p>
+          </div>
+          <p>新增選項以提供消費者更多選擇</p>
+        </div>
+        <div class="menuCharAdd">
+            <div class="put">
+                <img src="<%=request.getContextPath()%>/front-store-end/menu/1.png" alt="">
+                <input type="text" name="menuChar" />
+            </div>
+            <div class="put">
+                <img src="<%=request.getContextPath()%>/front-store-end/menu/1.png" alt="">
+                <input type="text" name="menuChar" />
+            </div>
+            <div class="put">
+                <img src="<%=request.getContextPath()%>/front-store-end/menu/1.png" alt="">
+                <input type="text" name="menuChar" />
+            </div>
+        </div>
+      </div>
+    </div>
+	</form>
+	
 </body>
 </html>

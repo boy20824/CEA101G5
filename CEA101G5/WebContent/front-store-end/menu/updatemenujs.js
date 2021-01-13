@@ -70,4 +70,12 @@ function init() {
 	});
 
 	$(".container").fadeIn(1000);
+	
+//	show客製化燈箱
+	$('.addmenubox').click(function(){
+		$('.menuChar').toggle();
+	})
+	
+	
+	
 }

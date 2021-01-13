@@ -1,0 +1,154 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* start */
+.menuChar input:focus{
+    outline: none;
+}
+.menuChar{
+    width: 400px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.4),0px 0px 5px rgba(0, 0, 0, 0.4);
+    margin-left: 2em;
+}
+.menuCharTop,.menuCharBottom{
+    padding-left: 2em;
+}
+.menuCharTop{
+    border-bottom: 1px solid gray;
+    margin-bottom:1em ;
+}
+.menuCharTitle{
+    background-color: #3A006F;
+    display: flex;
+    justify-content: space-between;
+    padding:0.4em 0 0.4em 1em;
+    margin-bottom: 1em;
+}
+.menuCharTitle span,.menuCharTitle i{
+    padding-top: 0.4em;
+    color:white;
+    font-size: 17px;
+}
+.menuCharTitle i:hover{
+	cursor: pointer;
+}
+.menuCharTitle span{
+    margin-left: 1em;
+}
+.menuCharTitle i{
+    margin-top: -0.1em;
+}
+.menuCharTitle input{
+    background-color:#2894FF;
+    color:white;
+    border:none;
+    font-size: 17px;
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    margin-right: 1em;
+}
+.menuCharTitle input:hover{
+    cursor: pointer;
+}
+.menuChars p:first-child{
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+.menuChars input{
+    border:none;
+    border-bottom: 2px solid gray;
+    color:black;
+    margin-top: 0.5em;
+    margin-bottom:0.5em ;
+    font-size: 18px;
+}
+.menuChars p:nth-child(2),.menuChars p:nth-child(4){
+    color:gray;
+}
+.menuChars p:nth-child(4){
+    padding-bottom: 1em;
+}
+.menuCharDetailTitle p:first-child{
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+.menuCharDetailTitle{
+    display: flex;
+    justify-content: space-between;
+}
+.menuCharDetailTitle p:last-child{
+    color:#2894FF;
+    padding-top: 0.5em;
+    padding-right: 1.5em;
+}
+.menuCharDetailTitle p:last-child:hover{
+    cursor: pointer;
+}
+.menuCharDetailTitle + p{
+    color:gray;
+}
+.menuCharAdd{
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+}
+.put{
+    position: relative;
+}
+.menuCharAdd input{
+    border:none;
+    border-bottom: 2px solid gray;
+    margin-top: 1em;
+    margin-left: 3em;
+}
+.menuCharAdd img{
+   width: 15%;
+   position: absolute;
+}
+.menuCharAdd .put img:hover{
+    cursor: pointer;
+}
+.menuCharBottom{
+    padding-bottom: 2em;
+}
