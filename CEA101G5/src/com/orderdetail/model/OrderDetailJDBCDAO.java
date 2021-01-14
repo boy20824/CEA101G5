@@ -579,7 +579,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO.setQuantity(2);
 		orderDetailVO.setProductReview("價格很划算, 是件值得購買的商品, CP值高！！ 推薦給大家參考～");
 		try {
-			orderDetailVO.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0001\\2.jpeg"));
+			orderDetailVO.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0001\\2.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -594,7 +594,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO2.setQuantity(2);
 		orderDetailVO2.setProductReview("價格很划算, 是件值得購買的商品, CP值高！！ 推薦給大家參考～");
 		try {
-			orderDetailVO2.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0008\\1.jpeg"));
+			orderDetailVO2.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0008\\1.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -609,7 +609,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO3.setQuantity(1);
 		orderDetailVO3.setProductReview("出貨快速, 包裝保護的非常好！！");
 		try {
-			orderDetailVO3.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0001\\5.jpeg"));
+			orderDetailVO3.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0001\\5.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -624,7 +624,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO4.setQuantity(1);
 		orderDetailVO4.setProductReview("超讚的商品品質, 超讚的CP值！");
 		try {
-			orderDetailVO4.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0003\\3.jpeg"));
+			orderDetailVO4.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0003\\3.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -639,7 +639,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO5.setQuantity(1);
 		orderDetailVO5.setProductReview("超讚的商品品質, 超讚的CP值！");
 		try {
-			orderDetailVO4.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0004\\3.jpeg"));
+			orderDetailVO4.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0004\\3.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -654,7 +654,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO6.setQuantity(1);
 		orderDetailVO6.setProductReview("超讚的商品品質, 超讚的CP值！");
 		try {
-			orderDetailVO6.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0005\\3.jpeg"));
+			orderDetailVO6.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0005\\3.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -669,7 +669,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO7.setQuantity(1);
 		orderDetailVO7.setProductReview("便宜的價格, 以後一定會在回購！！");
 		try {
-			orderDetailVO7.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0002\\4.jpeg"));
+			orderDetailVO7.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0002\\4.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -684,7 +684,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO8.setQuantity(1);
 		orderDetailVO8.setProductReview("便宜的價格, 以後一定會在回購！！");
 		try {
-			orderDetailVO8.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0006\\4.png"));
+			orderDetailVO8.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0006\\4.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -699,7 +699,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO9.setQuantity(1);
 		orderDetailVO9.setProductReview("便宜的價格, 以後一定會在回購！！");
 		try {
-			orderDetailVO9.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0007\\4.jpeg"));
+			orderDetailVO9.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0007\\4.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -714,7 +714,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailV10.setQuantity(1);
 		orderDetailV10.setProductReview("便宜的價格, 以後一定會在回購！！");
 		try {
-			orderDetailV10.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0009\\4.jpeg"));
+			orderDetailV10.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0009\\4.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -729,7 +729,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailV11.setQuantity(1);
 		orderDetailV11.setProductReview("出貨速度超快, 很推薦！！");
 		try {
-			orderDetailV11.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0001\\5.jpeg"));
+			orderDetailV11.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0001\\5.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -744,7 +744,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailV12.setQuantity(1);
 		orderDetailV12.setProductReview("出貨速度超快, 很推薦！！");
 		try {
-			orderDetailV12.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0002\\5.jpeg"));
+			orderDetailV12.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0002\\5.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -759,7 +759,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailV13.setQuantity(3);
 		orderDetailV13.setProductReview("顏色好看, 實體比想像中大, 外觀看起來還不錯！");
 		try {
-			orderDetailV13.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0003\\6.jpeg"));
+			orderDetailV13.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0003\\6.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -774,7 +774,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailV14.setQuantity(2);
 		orderDetailV14.setProductReview("便宜又有質感！");
 		try {
-			orderDetailV14.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0005\\7.jpeg"));
+			orderDetailV14.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0005\\7.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -789,7 +789,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailV15.setQuantity(2);
 		orderDetailV15.setProductReview("便宜又有質感！");
 		try {
-			orderDetailV15.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0004\\7.jpeg"));
+			orderDetailV15.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0004\\7.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -804,7 +804,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailV16.setQuantity(2);
 		orderDetailV16.setProductReview("出貨速度快, 包裝良好！！");
 		try {
-			orderDetailV16.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0002\\8.jpeg"));
+			orderDetailV16.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0002\\8.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -819,7 +819,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailV17.setQuantity(2);
 		orderDetailV17.setProductReview("出貨速度快, 包裝良好！！");
 		try {
-			orderDetailV17.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0003\\9.jpeg"));
+			orderDetailV17.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0003\\9.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -834,7 +834,7 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailV18.setQuantity(10);
 		orderDetailV18.setProductReview("再次回購！！老婆太愛吃了 =_=！");
 		try {
-			orderDetailV18.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032Desktop\\EatNAK_Shop_Dummy\\ENP0010\\10.jpeg"));
+			orderDetailV18.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0010\\10.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
