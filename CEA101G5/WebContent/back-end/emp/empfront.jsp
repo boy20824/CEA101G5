@@ -44,7 +44,7 @@
 			<a href="<%=request.getContextPath()%>/back-end/shopOrderMasterListAll.jsp">訂單處理</a> 
 			<a href="<%=request.getContextPath()%>/back-end/shopProductListAll.jsp"> 商品管理</a>
 			<a href="<%=request.getContextPath()%>/back-end/productqa/select_productqa_page.jsp">商品問與答</a>
-			<a href="<%=request.getContextPath()%>/back-end/shopBackEndPromotion.jsp"> 商品促銷活動設置</a>
+			<a href="<%=request.getContextPath()%>/back-end/shopBackEndPromotion.jsp"> 促銷活動設置</a>
 			<a href="#">廣告設置管理 </a> 
 		</span>
 		<span id="empStore">餐廳管理<br> 
