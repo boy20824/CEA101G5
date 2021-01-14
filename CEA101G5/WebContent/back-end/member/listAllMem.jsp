@@ -79,6 +79,9 @@ pageContext.setAttribute("list", list);
         <input type="text" name="memPhone">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出" class="btn btn-danger">
+        <c:forEach var="message" items="${errorMsgs}">
+		<div style="color: red">${message}</div>
+		</c:forEach>
     </FORM>
     </span>
 	<span style="display:inline-block;">
@@ -125,8 +128,8 @@ pageContext.setAttribute("list", list);
 				<!--<th>信用卡到期日</th> -->
 				<!--<th>信用卡CCV</th> -->
 				<th>大頭照</th>
-				<th>修改</th>
-				<th>刪除</th>
+<!-- 				<th>修改</th> -->
+<!-- 				<th>刪除</th> -->
 			</tr>
 			<%@ include file="page1.file"%>
 			<c:forEach var="memVO" items="${list}" begin="<%=pageIndex%>"
@@ -162,24 +165,24 @@ pageContext.setAttribute("list", list);
 					<%--<td>${memVO.memCardCCV}</td> --%>
 					<td><img width=50 height=50
 						src="<%=request.getContextPath()%>/back-end/member/memPhotoReader.do?memPhone=${memVO.memPhone}"></td>
-					<td>
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/back-end/member/mem.do"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="修改" class="btn btn-danger"> 
-							<input type="hidden" name="memPhone" value="${memVO.memPhone}">
-							<input type="hidden" name="action" value="getOne_For_Update">
-						</FORM>
-					</td>
-					<td>
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/back-end/member/mem.do"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="刪除" class="btn btn-danger"> 
-							<input type="hidden" name="memPhone" value="${memVO.memPhone}">
-							<input type="hidden" name="action" value="delete">
-						</FORM>
-					</td>
+<!-- 					<td> -->
+<!-- 						<FORM METHOD="post" -->
+<%-- 							ACTION="<%=request.getContextPath()%>/back-end/member/mem.do" --%>
+<!-- 							style="margin-bottom: 0px;"> -->
+<!-- 							<input type="submit" value="修改" class="btn btn-danger">  -->
+<%-- 							<input type="hidden" name="memPhone" value="${memVO.memPhone}"> --%>
+<!-- 							<input type="hidden" name="action" value="getOne_For_Update"> -->
+<!-- 						</FORM> -->
+<!-- 					</td> -->
+<!-- 					<td> -->
+<!-- 						<FORM METHOD="post" -->
+<%-- 							ACTION="<%=request.getContextPath()%>/back-end/member/mem.do" --%>
+<!-- 							style="margin-bottom: 0px;"> -->
+<!-- 							<input type="submit" value="刪除" class="btn btn-danger">  -->
+<%-- 							<input type="hidden" name="memPhone" value="${memVO.memPhone}"> --%>
+<!-- 							<input type="hidden" name="action" value="delete"> -->
+<!-- 						</FORM> -->
+<!-- 					</td> -->
 				</tr>
 			</c:forEach>
 		</table>

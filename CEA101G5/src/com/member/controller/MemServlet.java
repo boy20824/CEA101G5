@@ -58,7 +58,7 @@ public class MemServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				// 如果有錯誤，返回原本JSP
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/select_member_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/listAllMem.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -76,7 +76,7 @@ public class MemServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/select_member_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/listAllMem.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
