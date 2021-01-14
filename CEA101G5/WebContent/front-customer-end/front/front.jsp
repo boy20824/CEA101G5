@@ -165,6 +165,8 @@
 			<p>Recommend</p>
 		</div>
 		<!-- 餐廳瀏覽  -->
+		<jsp:useBean id="restSvc" scope="page" class="com.restaurant.model.RestaurantService" />
+		<c:forEach var="restSvclist" items="${restSvc.all}">
 		<div class="menu">
 			<li>
 				<div class="storecard">
@@ -191,131 +193,132 @@
 					</div>
 				</div>
 			</li>
-			<li>
-				<div class="storecard">
-					<div class="card__image">
-						<img src="img//圖片/louisa.png" alt="">
-					</div>
-					<div class="card__content">
-						<div class="card__title">Flex</div>
-						<p class="card__text">This is the shorthand for flex-grow,
-							flex-shrink and flex-basis combined. The second and third
-							parameters (flex-shrink and flex-basis) are optional. Default is
-							0 1 auto.</p>
-						<ul>
-							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span>
-							</li>
-							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span>
-							</li>
-							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span>
-							</li>
-							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" />
-								<span><p>餐廳地址</p></span></li>
-						</ul>
-						<button class="btn btn--block card__btn">Button</button>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="storecard">
-					<div class="card__image">
-						<img src="img//圖片/louisa.png" alt="">
-					</div>
-					<div class="card__content">
-						<div class="card__title">Flex</div>
-						<p class="card__text">This is the shorthand for flex-grow,
-							flex-shrink and flex-basis combined. The second and third
-							parameters (flex-shrink and flex-basis) are optional. Default is
-							0 1 auto.</p>
-						<ul>
-							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span>
-							</li>
-							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span>
-							</li>
-							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span>
-							</li>
-							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" />
-								<span><p>餐廳地址</p></span></li>
-						</ul>
-						<button class="btn btn--block card__btn">Button</button>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="storecard">
-					<div class="card__image">
-						<img src="img//圖片/louisa.png" alt="">
-					</div>
-					<div class="card__content">
-						<div class="card__title">Flex</div>
-						<p class="card__text">This is the shorthand for flex-grow,
-							flex-shrink and flex-basis combined. The second and third
-							parameters (flex-shrink and flex-basis) are optional. Default is
-							0 1 auto.</p>
-						<ul>
-							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span>
-							</li>
-							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span>
-							</li>
-							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span>
-							</li>
-							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" />
-								<span><p>餐廳地址</p></span></li>
-						</ul>
-						<button class="btn btn--block card__btn">Button</button>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="storecard">
-					<div class="card__image">
-						<img src="img//圖片/louisa.png" alt="">
-					</div>
-					<div class="card__content">
-						<div class="card__title">Flex</div>
-						<p class="card__text">This is the shorthand for flex-grow,
-							flex-shrink and flex-basis combined. The second and third
-							parameters (flex-shrink and flex-basis) are optional. Default is
-							0 1 auto.</p>
-						<ul>
-							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span>
-							</li>
-							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span>
-							</li>
-							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span>
-							</li>
-							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" />
-								<span><p>餐廳地址</p></span></li>
-						</ul>
-						<button class="btn btn--block card__btn">Button</button>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="storecard">
-					<div class="card__image">
-						<img src="img//圖片/louisa.png" alt="">
-					</div>
-					<div class="card__content">
-						<div class="card__title">Flex</div>
-						<p class="card__text">This is the shorthand for flex-grow,
-							flex-shrink and flex-basis combined. The second and third
-							parameters (flex-shrink and flex-basis) are optional. Default is
-							0 1 auto.</p>
-						<ul>
-							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span>
-							</li>
-							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span>
-							</li>
-							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span>
-							</li>
-							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" />
-								<span><p>餐廳地址</p></span></li>
-						</ul>
-						<button class="btn btn--block card__btn">Button</button>
-					</div>
-				</div>
-			</li>
+			</c:forEach>
+<!-- 			<li> -->
+<!-- 				<div class="storecard"> -->
+<!-- 					<div class="card__image"> -->
+<!-- 						<img src="img//圖片/louisa.png" alt=""> -->
+<!-- 					</div> -->
+<!-- 					<div class="card__content"> -->
+<!-- 						<div class="card__title">Flex</div> -->
+<!-- 						<p class="card__text">This is the shorthand for flex-grow, -->
+<!-- 							flex-shrink and flex-basis combined. The second and third -->
+<!-- 							parameters (flex-shrink and flex-basis) are optional. Default is -->
+<!-- 							0 1 auto.</p> -->
+<!-- 						<ul> -->
+<!-- 							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" /> -->
+<!-- 								<span><p>餐廳地址</p></span></li> -->
+<!-- 						</ul> -->
+<!-- 						<button class="btn btn--block card__btn">Button</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
+<!-- 			<li> -->
+<!-- 				<div class="storecard"> -->
+<!-- 					<div class="card__image"> -->
+<!-- 						<img src="img//圖片/louisa.png" alt=""> -->
+<!-- 					</div> -->
+<!-- 					<div class="card__content"> -->
+<!-- 						<div class="card__title">Flex</div> -->
+<!-- 						<p class="card__text">This is the shorthand for flex-grow, -->
+<!-- 							flex-shrink and flex-basis combined. The second and third -->
+<!-- 							parameters (flex-shrink and flex-basis) are optional. Default is -->
+<!-- 							0 1 auto.</p> -->
+<!-- 						<ul> -->
+<!-- 							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" /> -->
+<!-- 								<span><p>餐廳地址</p></span></li> -->
+<!-- 						</ul> -->
+<!-- 						<button class="btn btn--block card__btn">Button</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
+<!-- 			<li> -->
+<!-- 				<div class="storecard"> -->
+<!-- 					<div class="card__image"> -->
+<!-- 						<img src="img//圖片/louisa.png" alt=""> -->
+<!-- 					</div> -->
+<!-- 					<div class="card__content"> -->
+<!-- 						<div class="card__title">Flex</div> -->
+<!-- 						<p class="card__text">This is the shorthand for flex-grow, -->
+<!-- 							flex-shrink and flex-basis combined. The second and third -->
+<!-- 							parameters (flex-shrink and flex-basis) are optional. Default is -->
+<!-- 							0 1 auto.</p> -->
+<!-- 						<ul> -->
+<!-- 							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" /> -->
+<!-- 								<span><p>餐廳地址</p></span></li> -->
+<!-- 						</ul> -->
+<!-- 						<button class="btn btn--block card__btn">Button</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
+<!-- 			<li> -->
+<!-- 				<div class="storecard"> -->
+<!-- 					<div class="card__image"> -->
+<!-- 						<img src="img//圖片/louisa.png" alt=""> -->
+<!-- 					</div> -->
+<!-- 					<div class="card__content"> -->
+<!-- 						<div class="card__title">Flex</div> -->
+<!-- 						<p class="card__text">This is the shorthand for flex-grow, -->
+<!-- 							flex-shrink and flex-basis combined. The second and third -->
+<!-- 							parameters (flex-shrink and flex-basis) are optional. Default is -->
+<!-- 							0 1 auto.</p> -->
+<!-- 						<ul> -->
+<!-- 							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" /> -->
+<!-- 								<span><p>餐廳地址</p></span></li> -->
+<!-- 						</ul> -->
+<!-- 						<button class="btn btn--block card__btn">Button</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
+<!-- 			<li> -->
+<!-- 				<div class="storecard"> -->
+<!-- 					<div class="card__image"> -->
+<!-- 						<img src="img//圖片/louisa.png" alt=""> -->
+<!-- 					</div> -->
+<!-- 					<div class="card__content"> -->
+<!-- 						<div class="card__title">Flex</div> -->
+<!-- 						<p class="card__text">This is the shorthand for flex-grow, -->
+<!-- 							flex-shrink and flex-basis combined. The second and third -->
+<!-- 							parameters (flex-shrink and flex-basis) are optional. Default is -->
+<!-- 							0 1 auto.</p> -->
+<!-- 						<ul> -->
+<!-- 							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span> -->
+<!-- 							</li> -->
+<!-- 							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" /> -->
+<!-- 								<span><p>餐廳地址</p></span></li> -->
+<!-- 						</ul> -->
+<!-- 						<button class="btn btn--block card__btn">Button</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
 		</div>
 		<!--  商品瀏覽標題  -->
 		<div class="title1">
