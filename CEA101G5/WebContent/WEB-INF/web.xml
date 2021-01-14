@@ -335,6 +335,69 @@
 		<dispatcher>ASYNC</dispatcher>
 	</filter-mapping>
 	
+	
+	<filter>
+		<filter-name>EmpFeatureFilter</filter-name>
+		<filter-class>com.filter.EmpFeatureFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>EmpFeatureFilter</filter-name>
+		<url-pattern>/back-end/emp/listAllEmp.jsp</url-pattern>
+		<url-pattern>/back-end/empauthcategory/listAllEmpAuthCategory.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>EmpShopFilter</filter-name>
+		<filter-class>com.filter.EmpShopFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>EmpShopFilter</filter-name>
+		<url-pattern>/back-end/shopOrderMasterListAll.jsp</url-pattern>
+		<url-pattern>/back-end/shopProductListAll.jsp</url-pattern>
+		<url-pattern>/back-end/productqa/select_productqa_page.jsp</url-pattern>
+		<url-pattern>/back-end/shopBackEndPromotion.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>EmpStoreFilter</filter-name>
+		<filter-class>com.filter.EmpStoreFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>EmpStoreFilter</filter-name>
+		<url-pattern>/back-end/storeChar/listAllStoreChar.jsp</url-pattern>
+		<url-pattern>/back-end/restaurant/listAllStore.jsp</url-pattern>
+		<url-pattern>/back-end/restaurant/storeapply.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>EmpMemFilter</filter-name>
+		<filter-class>com.filter.EmpMemFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>EmpMemFilter</filter-name>
+		<url-pattern>/back-end/member/listAllMem.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	
 
 	<filter>
 		<filter-name>StoreLoginFilter</filter-name>
