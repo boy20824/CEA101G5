@@ -64,6 +64,7 @@ RestaurantService restSvc = new RestaurantService();
 						</li>
 					</ul></li>
 				<li><a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/updaterestaurantGroup.jsp">訂位選項設定</a></li>
+				<li><a href="<%=request.getContextPath()%>/front-store-end/front/front.jsp">回首頁</a></li>
 			</ul>
 		</span>
             <span><a href="<%=request.getContextPath()%>/front-store-end/foodorder/orderlist.jsp"><svg aria-hidden="true" focusable="false"
