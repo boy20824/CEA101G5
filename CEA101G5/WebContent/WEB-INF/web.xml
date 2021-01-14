@@ -318,13 +318,23 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>EmploginFilter</filter-name>
-		<url-pattern>/back-end/emp/EmpNoAuth.jsp</url-pattern>
+		<url-pattern>/back-end/shopOrderMasterListAll.jsp</url-pattern>
+		<url-pattern>/back-end/shopProductListAll.jsp</url-pattern>
+		<url-pattern>/back-end/productqa/select_productqa_page.jsp</url-pattern>
+		<url-pattern>/back-end/shopBackEndPromotion.jsp</url-pattern>
+		<url-pattern>/back-end/storeChar/listAllStoreChar.jsp</url-pattern>
+		<url-pattern>/back-end/restaurant/listAllStore.jsp</url-pattern>
+		<url-pattern>/back-end/restaurant/storeapply.jsp</url-pattern>
+		<url-pattern>/back-end/member/listAllMem.jsp</url-pattern>
+		<url-pattern>/back-end/emp/listAllEmp.jsp</url-pattern>
+		<url-pattern>/back-end/empauthcategory/listAllEmpAuthCategory.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>ASYNC</dispatcher>
 	</filter-mapping>
+	
 
 	<filter>
 		<filter-name>StoreLoginFilter</filter-name>
