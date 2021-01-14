@@ -190,7 +190,7 @@
 					<input type="text" class="form-control" id="checkOutMemId" value="${memLogin.getMemPhone()}" name="memPhone" readonly>
 				</div>
 				<div class="col-md-3">
-					<button type="button" class="btn btn-outline-secondary defaultInfoBtn" style="width: 100%;">匯入預設</button>
+					<button type="button" class="btn btn-outline-secondary defaultInfoBtn" id="importFromMemVOBtn" style="width: 100%;">匯入預設</button>
 				</div>
 				<div class="col-md-4">
 					<label for="checkOutRecipientName" class="form-label">收件人姓名*</label>
@@ -230,7 +230,7 @@
 				</div>
 				
 				<div class="col-md-3">
-					<button type="button" class="btn btn-outline-secondary defaultInfoBtn" style="width: 100%;">匯入預設</button>
+					<button type="button" class="btn btn-outline-secondary defaultInfoBtn" id="importCCFromMemVOBtn" style="width: 100%;">匯入預設</button>
 				</div>
 
 				<div class="col-md-4">
