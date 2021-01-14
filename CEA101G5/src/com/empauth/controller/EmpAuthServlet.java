@@ -10,7 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.emp.model.EmpService;
 import com.empauth.model.EmpAuthService;
 import com.empauth.model.EmpAuthVO;
 import com.empauthcategory.model.EmpAuthCategoryService;
@@ -31,6 +33,7 @@ public class EmpAuthServlet extends HttpServlet {
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		HttpSession session = req.getSession();
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_EmpAuthCategory_page.jsp的請求
 			
@@ -217,7 +220,35 @@ public class EmpAuthServlet extends HttpServlet {
 					EmpAuthService eaSvc = new EmpAuthService();
 					eaVO = eaSvc.addEmpAuth(emp_id,auth_no);
 					
+					EmpAuthService empauthSvc = new EmpAuthService();
 					
+					EmpAuthVO empFeature = empauthSvc.getOneEmpAuth(emp_id);
+					EmpAuthVO empShop = empauthSvc.getOneEmpAuth(emp_id);
+					EmpAuthVO empStore = empauthSvc.getOneEmpAuth(emp_id);
+					EmpAuthVO empMem = empauthSvc.getOneEmpAuth(emp_id);
+					EmpAuthVO empEmp = empauthSvc.getOneEmpAuth(emp_id);
+					List<EmpAuthVO> empauthList = empauthSvc.getAll();
+					
+					for(EmpAuthVO empAuthVO : empauthList) {
+						if(empAuthVO.getEmp_id().equals(emp_id)) {
+							if(empAuthVO.getAuth_no().equals("01")) {
+								session.setAttribute("empFeature", empFeature);
+							}
+							if(empAuthVO.getAuth_no().equals("02")) {
+								session.setAttribute("empShop", empShop);
+							}
+							if(empAuthVO.getAuth_no().equals("03")) {
+								session.setAttribute("empStore", empStore);
+							}
+							if(empAuthVO.getAuth_no().equals("04")) {
+								session.setAttribute("empMem", empMem);
+							}
+							if(empAuthVO.getAuth_no().equals("05")) {
+								session.setAttribute("empEmp", empEmp);
+					
+							}
+						}
+					}
 					/***************************3.新增完成,準備轉交(Send the Success view)***********/
 					String url = "/back-end/empauth/listAllEmpAuth.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
