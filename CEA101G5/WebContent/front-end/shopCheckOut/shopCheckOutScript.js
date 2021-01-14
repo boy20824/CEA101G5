@@ -203,14 +203,13 @@ importCCFromMemVOBtn.addEventListener("click", function() {
 		creditCardName.value = ajaxData["memName"];
 		creditCardExpiry.value = ajaxData["memCardExpirationDate"];
 		creditCardCVC.value = ajaxData["memCardCCV"];
+		
 	} else {
 		console.log("An error has occured...");
 		}
 	}
 	ajaxRequest.send("action=memVoToCheckOut");
 });
-
-
 
 function updateOrderDetails() {
 	let productPriceArr = document.querySelectorAll(".productPrice");
