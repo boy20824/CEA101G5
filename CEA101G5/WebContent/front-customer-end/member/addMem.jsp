@@ -145,6 +145,7 @@
 							</div>
 						</div>
 						<div class="memPhoneConfirm"></div>
+						<div>${errorMsgs.memPhone}</div>
 						<div class="input-group input-group-icon">
 							<input type="email" placeholder="Email Adress" name="memEmail"
 								value="${param.memEmail}" />
@@ -152,6 +153,7 @@
 								<i class="fa fa-envelope"></i>
 							</div>
 						</div>
+						<div>${errorMsgs.memEmail}</div>
 						<div class="input-group input-group-icon">
 							<input type="password" placeholder="Password" name="memPwd"
 								value="${param.memPwd}" />
@@ -159,6 +161,7 @@
 								<i class="fa fa-key"></i>
 							</div>
 						</div>
+						<div>${errorMsgs.memPwd}</div>
 						<div class="input-group input-group-icon">
 							<input type="text" placeholder="Your Name" name="memName"
 								value="${param.memName}" />
@@ -166,6 +169,7 @@
 								<i class="fas fa-file-signature"></i></i>
 							</div>
 						</div>
+						<div>${errorMsgs.memName}</div>
 						<div class="input-group input-group-icon">
 							<input type="text" placeholder="Your Address" name="memAddress"
 								value="${param.memAddress}" />
@@ -173,6 +177,7 @@
 								<i class="fas fa-map-marked-alt"></i></i>
 							</div>
 						</div>
+						<div>${errorMsgs.memAddress}</div>
 						<div class="input-group input-group-icon">
 							<input type="text" placeholder="Your ID Number"
 								name="memIdentity" value="${param.memIdentity}" />
@@ -187,6 +192,7 @@
 								<i class="far fa-id-badge"></i></i>
 							</div>
 						</div>
+						<div>${errorMsgs.memNick}</div>
 					</div>
 
 					<div class="row">
@@ -196,6 +202,7 @@
 								<input name="memBirth" id="Birthday" type="TEXT" />
 							</div>
 						</div>
+						<div>${errorMsgs.memBirth}</div>
 
 						<div class="col-half">
 							<h4>Gender</h4>
@@ -206,11 +213,13 @@
 									for="gender-female">Female</label>
 							</div>
 						</div>
+						<div>${errorMsgs.memSex}</div>
 					</div>
 
 					<div>
 						<h4>Your Photo</h4>
 						<input type="file" name="memPhoto" id="Photo">
+						<div>${errorMsgs.memPhoto}</div>
 					</div>
 
 

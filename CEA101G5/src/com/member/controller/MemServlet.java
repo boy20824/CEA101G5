@@ -364,9 +364,7 @@ public class MemServlet extends HttpServlet {
 
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
+			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
@@ -374,37 +372,37 @@ public class MemServlet extends HttpServlet {
 				String memPhone = req.getParameter("memPhone");
 				String memPhoneReg = "^09[0-9]{8}$";
 				if (memPhone == null || memPhone.trim().length() == 0) {
-					errorMsgs.add("會員手機號碼不得空白");
+					errorMsgs.put("memPhone","會員手機號碼不得空白");
 				} else if (!memPhone.trim().matches(memPhoneReg)) { // 手機號碼格式驗證
-					errorMsgs.add("手機號碼格式錯誤");
+					errorMsgs.put("memPhone","手機號碼格式錯誤");
 				}
 
 				String memPwd = req.getParameter("memPwd").trim();
 				String memPwdReg = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).*$";
 				// 密碼規則至少八位數，有一個大寫英文，至少要有一個英文字，
 				if (memPwd == null || memPwd.trim().length() == 0) {
-					errorMsgs.add("密碼不得空白");
+					errorMsgs.put("memPwd","密碼不得空白");
 				} else if (!memPwd.trim().matches(memPwdReg)) { // 密碼格式驗證
-					errorMsgs.add("密碼設定不符合規定");
+					errorMsgs.put("memPwd","密碼設定不符合規定");
 				}
 
 				String memName = req.getParameter("memName").trim();
 				String memNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (memName == null || memName.trim().length() == 0) {
-					errorMsgs.add("姓名不得空白");
+					errorMsgs.put("memName","姓名不得空白");
 				} else if (!memName.trim().matches(memNameReg)) { // 姓名格式驗證
-					errorMsgs.add("姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.put("memName","姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 				}
 
 				String memAddress = req.getParameter("memAddress").trim();
 				String memAddressReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,200}$";
 				if (!memAddress.trim().matches(memAddressReg)) { // 地址可以為空白。地址格式驗證
-					errorMsgs.add("地址: 只能是中文和數字");
+					errorMsgs.put("memAddress","地址: 只能是中文和數字");
 				}
 
 				Integer memSex = null;
 				if (req.getParameter("memSex") == null) {
-					errorMsgs.add("請選擇性別");
+					errorMsgs.put("memSex","請選擇性別");
 				} else {
 					memSex = new Integer(req.getParameter("memSex").trim());
 				}
@@ -412,12 +410,12 @@ public class MemServlet extends HttpServlet {
 				String memEmail = req.getParameter("memEmail").trim();
 				String memEmailReg = "^.+[\\x40]{1}.+[.]{1}.*$";
 				if (!memEmail.trim().matches(memEmailReg)) { // 信箱可以為空白。信箱格式驗證
-					errorMsgs.add("Email格式錯誤");
+					errorMsgs.put("memEmail","Email格式錯誤");
 				}
 
 				String memIdentity = req.getParameter("memIdentity").trim();
 				if (memIdentity == null || memIdentity.trim().length() == 0) {
-					errorMsgs.add("身分證字號格式錯誤");
+					errorMsgs.put("memIdentity","身分證字號格式錯誤");
 				}
 
 				java.sql.Date memBirth = null;
@@ -425,20 +423,20 @@ public class MemServlet extends HttpServlet {
 					memBirth = java.sql.Date.valueOf(req.getParameter("memBirth").trim());
 				} catch (IllegalArgumentException e) {
 					memBirth = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入生日日期!");
+					errorMsgs.put("memBirth","請輸入生日日期!");
 				}
 
 				String memNick = req.getParameter("memNick").trim();
 				String memNickReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (!memNick.trim().matches(memNickReg)) {
-					errorMsgs.add("暱稱只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.put("memNick","暱稱只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 				}
 
 				InputStream in = req.getPart("memPhoto").getInputStream();
 				byte[] memPhoto = null;
 				if (in.available() == 0) {
 					if (session.getAttribute("memPhoto") == null) {
-						errorMsgs.add("頭相未選擇上傳圖片");
+						errorMsgs.put("memPhoto","頭相未選擇上傳圖片");
 					} else {
 						memPhoto = (byte[]) session.getAttribute("memPhoto");
 						in.read(memPhoto);
@@ -479,7 +477,7 @@ public class MemServlet extends HttpServlet {
 				List<MemVO> listall = memSvctest.getAll();
 				for (MemVO memVOList : listall) {
 					if (memVOList.getMemPhone().equals(memPhone)) {
-						errorMsgs.add("手機號碼已被註冊，請重新輸入");
+						errorMsgs.put("memPhone","手機號碼已被註冊，請重新輸入");
 					}
 				}
 
@@ -529,7 +527,7 @@ public class MemServlet extends HttpServlet {
 
 				/*************************** 其他錯誤處理 **********************************/
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
+				errorMsgs.put("Exception",e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/member/addMem.jsp");
 				failureView.forward(req, res);
 			}

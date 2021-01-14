@@ -33,7 +33,7 @@
 </head>
 
 <body>
-	<img src="<%=request.getContextPath()%>/front-customer-end/"
+	<img src="<%=request.getContextPath()%>/front-customer-end/"/>
 </body>
 
 </html>
