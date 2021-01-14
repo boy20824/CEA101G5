@@ -243,11 +243,11 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_Interface {
 		
 //		testing : update()
 		LatestNewsVO latestNewsVO = new LatestNewsVO();
-		latestNewsVO.setNewsId(5);
+		latestNewsVO.setNewsId(6);
 		latestNewsVO.setNewsTitle("");
 		latestNewsVO.setNewsContentTxt("");
 		try {
-			latestNewsVO.setNewsContentImg(getPictureByteArray("/Users/jordan/desktop/Web/images/unnamed.jpg"));
+			latestNewsVO.setNewsContentImg(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\images\\unnamed.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
