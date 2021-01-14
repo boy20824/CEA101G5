@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.restaurant.model.*"%>
 <%
-RestaurantService restSvc = new RestaurantService();
-	RestaurantVO restaurantVO = (RestaurantVO) request.getAttribute("restaurantVO");
+// RestaurantService restSvc = new RestaurantService();
+// 	RestaurantVO restaurantVO = (RestaurantVO) request.getAttribute("restaurantVO");
 %>
 <html>
 
