@@ -94,7 +94,8 @@ img {
 			href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp"></a>
 ${ storeName}
 	<form method="post" ACTION="queueNo.do">
-		<input name="action" value="reset" type="hidden">
+		<input name="action" value="storeGetQueNo" type="hidden">
+		<input name="reset" value="1" type="hidden">
 		<input name="storeid" value="${storeid }" type="hidden">
 		<button type="submit" class="resetAll btn btn-primary" style="margin-left:90%;">重整</button>
 	</form>

@@ -5,9 +5,13 @@
 <%@ page import="com.queueno.model.*"%>
 <%@ page import="com.queueperiod.model.*"%>
 <%@ page import="com.restaurant.model.*"%>
+<%@ page import="com.queuetable.model.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
-
+	List<QueTableVO> queTableVO = new ArrayList<QueTableVO>();
+	queTableVO = (List<QueTableVO>) session.getAttribute("queTableVO");
+	pageContext.setAttribute("queTableVO", queTableVO);
+	
 	List<QuePeriodVO> list = new ArrayList<QuePeriodVO>();
 	list = (List<QuePeriodVO>) session.getAttribute("quePeriodVO"); // 取得server送來之list
 	pageContext.setAttribute("list", list);
@@ -102,19 +106,49 @@ img {
 					<div class="col-sm-2"></div>
 					<label for="inlineRadioOptions" class="col-sm-2 col-form-label">用餐人數</label>
 					<div class="col-sm-6">
-						<div class="form-check form-check-inline">
+					<div class="show form-check form-check-inline" >
+							<c:forEach var="queTableVO" items="${queTableVO}">
+								<c:choose>
+								<c:when test="${queTableVO.queuetableid==1 }">
+							<input class="form-check-input" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
+								id="inlineRadio1" value="${queueTableid }"> 
+								<label class="form-check-label" for="inlineRadio1">1~2人</label>
+								</c:when></c:choose>
+								<c:choose>
+								<c:when test="${queTableVO.queuetableid==2 }">
+							<input class="form-check-input" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
+								id="inlineRadio1" value="${queueTableid }"> 
+								<label class="form-check-label" for="inlineRadio1">3~4人</label>
+								</c:when></c:choose>
+								<c:choose>
+								<c:when test="${queTableVO.queuetableid==3 }">
+							<input class="form-check-input" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
+								id="inlineRadio1" value="${queueTableid }"> 
+								<label class="form-check-label" for="inlineRadio1">5~8人</label>
+								</c:when></c:choose>
+								<c:choose>
+								<c:when test="${queTableVO.queuetableid==4 }">
+							<input class="form-check-input" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
+								id="inlineRadio1" value="${queueTableid }"> 
+								<label class="form-check-label" for="inlineRadio1">10人</label>
+								</c:when></c:choose>
+							</c:forEach>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="show form-check form-check-inline" >
 							<input class="form-check-input" type="radio"
 								onchange="getNoCall();" name="inlineRadioOptions"
 								id="inlineRadio1" value="option1"> <label
 								class="form-check-label" for="inlineRadio1">1~2人</label>
 						</div>
-						<div class="form-check form-check-inline">
+						<div class="show form-check form-check-inline">
 							<input class="form-check-input" checked type="radio"
 								onchange="getNoCall();" name="inlineRadioOptions"
 								id="inlineRadio2" value="option2"> <label
 								class="form-check-label" for="inlineRadio2">3~4人</label>
 						</div>
-						<div class="form-check form-check-inline">
+						<div class="show form-check form-check-inline">
 							<input class="form-check-input" type="radio"
 								onchange="getNoCall();" name="inlineRadioOptions"
 								id="inlineRadio3" value="option3"> <label
@@ -260,6 +294,10 @@ img {
 	<script
 		src="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/js/customerPickupNo.js"></script>
 
+
+	<script>
+	$()
+	</script>
 	<!-- 		顯示動態時間 -->
 	<script type="text/javascript">
 		let now = new Date();

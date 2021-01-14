@@ -85,7 +85,9 @@ public class QueNoServlet extends HttpServlet {
 					}else {
 						num = 1;
 					}
-
+					
+					QueTableService queTableSvc = new QueTableService();
+					List<QueTableVO> queTableVO = queTableSvc.getStoreQueTable(storeid);
 					QuePeriodService quePeriodSvc = new QuePeriodService();
 					List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
 					periodCheck(quePeriodVO);//超過最後取號時間不得選取
@@ -104,6 +106,7 @@ public class QueNoServlet extends HttpServlet {
 //				session.setAttribute("pickupNo", ((TreeSet<Integer>) countSet).last());
 					session.setAttribute("pickupNo", num);
 					// SET �???�store??�list
+					session.setAttribute("queTableVO", queTableVO);
 					session.setAttribute("quePeriodVO", quePeriodVO);
 					session.setAttribute("storeid", storeid);
 //					count++;// 計數+1
@@ -121,13 +124,50 @@ public class QueNoServlet extends HttpServlet {
 				}
 			
 		} else if ("storeGetQueNo".equals(action)) {
+			String storeid = req.getParameter("storeid");
+			Integer reset = null;
+			try {
+				reset = new Integer(req.getParameter("reset"));
+			}catch(Exception e){
+				reset = null;
+			}
+			try{
+				
+			if(reset==1) {
+				
+				QueTableService queTableSvc = new QueTableService();
+				List<QueTableVO> queTableVO = queTableSvc.getStoreQueTable(storeid);
+				for(int i = 0; i<queTableVO.size();i++) {
+					Integer queuetableusable = queTableVO.get(i).getQueuetablettl();
+					Integer queuetableid = queTableVO.get(i).getQueuetableid();
+					String queuetabletype = queTableVO.get(i).getQueuetabletype();
+					Integer queuetablettl = queTableVO.get(i).getQueuetablettl();
+					queTableSvc.updateTable(queuetableid, queuetabletype, storeid, queuetablettl, queuetableusable, 0);
+				}
+				QueLineService queLineSvc = new QueLineService();
+				List<QueLineVO> queLineVO = queLineSvc.getStoreQueNo(storeid);
+				for(int i = 0; i<queLineVO.size(); i++) {
+					Integer queuelineno = queLineVO.get(i).getQueuelineno();
+					Integer queuetableid = queTableVO.get(i).getQueuetableid();
+					queLineSvc.updateQueLine(queuelineno, 0, storeid, queuetableid);
+				}
+				QuePeriodService quePeriodSvc = new QuePeriodService();
+				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
+				for(int i = 0; i<quePeriodVO.size(); i++) {
+					Integer queueperiodid = quePeriodVO.get(i).getQueueperiodid();
+					Integer queuest = quePeriodVO.get(i).getQueuest();
+					Timestamp queuestarttime = quePeriodVO.get(i).getQueuestarttime();
+					Timestamp queueendtime = quePeriodVO.get(i).getQueueendtime();
+					quePeriodSvc.updateQuePeriod(queueperiodid, storeid, queuest, queuestarttime, queueendtime, 0);
+				}
+			}}catch(Exception e){}
+			
 			int num =0;
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
-				String storeid = req.getParameter("storeid");
 				
 				QuePeriodService quePeriodSvc = new QuePeriodService();
 				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
@@ -612,9 +652,23 @@ public class QueNoServlet extends HttpServlet {
 			}
 			QueLineService queLineSvc = new QueLineService();
 			List<QueLineVO> queLineVO = queLineSvc.getStoreQueNo(storeid);
+			for(int i = 0; i<queLineVO.size(); i++) {
+				Integer queuelineno = queLineVO.get(i).getQueuelineno();
+				Integer queuetableid = queTableVO.get(i).getQueuetableid();
+				queLineSvc.updateQueLine(queuelineno, 0, storeid, queuetableid);
+			}
 			QuePeriodService quePeriodSvc = new QuePeriodService();
 			List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
-			
+			for(int i = 0; i<quePeriodVO.size(); i++) {
+				Integer queueperiodid = quePeriodVO.get(i).getQueueperiodid();
+				Integer queuest = quePeriodVO.get(i).getQueuest();
+				Timestamp queuestarttime = quePeriodVO.get(i).getQueuestarttime();
+				Timestamp queueendtime = quePeriodVO.get(i).getQueueendtime();
+				quePeriodSvc.updateQuePeriod(queueperiodid, storeid, queuest, queuestarttime, queueendtime, 0);
+			}
+			res.sendRedirect("/front-store-end/queue/queueNo/queueNo.do?&action=storeGetQueNo&storeid="+storeid);
+//			String url = "/front-store-end/queue/queueNo/queueNo.do?&action=storeGetQueNo&storeid="+storeid;
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
 			
 		}
 	}

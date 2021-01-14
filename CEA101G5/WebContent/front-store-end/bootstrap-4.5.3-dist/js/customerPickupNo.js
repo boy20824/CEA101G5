@@ -2,20 +2,25 @@
 
 $(":radio").click(function() {// 指派按鈕值給資料庫party欄位
 	switch ($(this).attr("value")) {
-	case "option1":
+	case "1":
 		$("[name='party']").attr("value", "2");
 		$("[name='queuetableid']").attr("value", "1");
 		$("[name='queuelineno']").attr("value", "1");
 		break;
-	case "option2":
+	case "2":
 		$("[name='party']").attr("value", "4");
 		$("[name='queuetableid']").attr("value", "2");
 		$("[name='queuelineno']").attr("value", "2");
 		break;
-	case "option3":
+	case "3":
 		$("[name='party']").attr("value", "8");
 		$("[name='queuetableid']").attr("value", "3");
 		$("[name='queuelineno']").attr("value", "3");
+		break;
+	case "4":
+		$("[name='party']").attr("value", "10");
+		$("[name='queuetableid']").attr("value", "4");
+		$("[name='queuelineno']").attr("value", "4");
 		break;
 	default:
 		break;
