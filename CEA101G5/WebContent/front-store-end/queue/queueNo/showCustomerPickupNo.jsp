@@ -278,5 +278,11 @@ div#helloName {
 // 		window.onload = getNoCall();
 </script>
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<c:if test="${check=='repeat' }">
+	<script>
+swal("已取過號，請確認", "fail", "error");
 
+</script>
+</c:if>
 </html>

@@ -8,12 +8,13 @@
 RestaurantService restSvc = new RestaurantService();
 
 String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
+String storeName = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreName();
 	// 取出servlet request 再設定pagecontext供查詢
 	List<QueTableVO> list = new ArrayList<QueTableVO>();
 	list = queTableSvc.getStoreQueTable(storeid);
 	pageContext.setAttribute("list", list);
 	pageContext.setAttribute("storeid", storeid);
-
+	pageContext.setAttribute("storeName", storeName);
 // 	String storeid = (String) request.getAttribute("storeid");
 %> 
 <%@include file="../sidebar.jsp" %>
@@ -42,7 +43,7 @@ String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId()
 
 </head>
 <body bgcolor='white'>
-
+${ storeName}
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
