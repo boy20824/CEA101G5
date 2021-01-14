@@ -192,7 +192,7 @@
 			<li>
 				<div class="storecard">
 					<div class="card__image">
-						<img src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restSvclist.storeId}&action=getFirst_For_Display" alt="">
+						<img style="width:280px;height:300px" src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restSvclist.storeId}&action=getFirst_For_Display" alt="">
 					</div>
 					<div class="card__content">
 						<div class="card__title">${restSvclist.storeName}</div>
