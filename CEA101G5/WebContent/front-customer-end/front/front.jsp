@@ -218,7 +218,7 @@
 							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" />
 								<span><p>餐廳地址:${restSvclist.storeAddress}</p></span></li>
 						</ul>
-						<button class="btn btn--block card__btn" onclick="window.location.href='<%=request.getContextPath()%>/front-customer-end/menu/menuindex.jsp?storeId=${restaurantVO.storeId}'">進店看看></button>
+						<button class="btn btn--block card__btn" onclick="location.href='<%=request.getContextPath()%>/front-customer-end/menu/menuindex.jsp?storeId=${restSvclist.storeId}'">進店看看></button>
 					</div>
 				</div>
 			</li>
