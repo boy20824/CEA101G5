@@ -352,6 +352,67 @@ public class RestaurantServlet extends HttpServlet {
 			}
 		}
 		
+		if ("easyupdate".equals(action)) { 
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+				
+				String storeId = req.getParameter("storeId");
+				String storeChar = req.getParameter("storeChar");
+				String storeInfo = req.getParameter("storeInfo");
+				String storeName = req.getParameter("storeName");
+				String storePhone = req.getParameter("storePhone");
+				String storeAddress = req.getParameter("storeAddress");
+				Integer storeStatus = new Integer(req.getParameter("storeStatus"));
+				java.sql.Timestamp storeOpenTime = java.sql.Timestamp.valueOf("1970-01-01 "+req.getParameter("storeOpenTime")+":00");
+				java.sql.Timestamp storeCloseTime = java.sql.Timestamp.valueOf("1970-01-01 "+req.getParameter("storeCloseTime")+":00");
+				
+				RestaurantVO restVO = new RestaurantVO();
+				
+				restVO.setStoreId(storeId);
+				restVO.setStoreChar(storeChar);
+				restVO.setStoreInfo(storeInfo);
+				restVO.setStoreName(storeName);
+				restVO.setStorePhone(storePhone);
+				restVO.setStoreAddress(storeAddress);
+				restVO.setStoreStatus(storeStatus);
+				restVO.setStoreOpenTime(storeOpenTime);
+				restVO.setStoreCloseTime(storeCloseTime);
+				
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("restVO", restVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-store-end/restaurant/restaurantPage.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				/*************************** 2.開始新增資料 ***************************************/
+				RestaurantService restSvc = new RestaurantService();
+				restVO = restSvc.easyupdateRestaurant(storeId,storeChar,storeInfo,
+						storeName,storePhone,storeAddress,storeStatus,storeOpenTime,storeCloseTime);
+				
+				RestaurantVO storeLogin = restSvc.getOneRestaurant(storeId) ;
+				session.setAttribute("storeLogin", storeLogin);
+				
+				/*************************** 3.新增完成轉交成功畫面(Send the Success view) ***********/
+				String url = "/front-store-end/restaurant/restaurantPage.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+				/*************************** 其他錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-store-end/restaurant/restaurantPage.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
 		if ("easyinsertWithPic".equals(action)) { 
 			
 			System.out.println(action);
@@ -360,7 +421,7 @@ public class RestaurantServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-//			try {
+			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 				
 				
@@ -442,16 +503,17 @@ public class RestaurantServlet extends HttpServlet {
 				restSvc.easyAddRestaurantWithPic(restVO,restPicVO);
 				
 				/*************************** 3.新增完成轉交成功畫面(Send the Success view) ***********/
-				String url = "/back-end/restaurant/listAllStore.jsp";
+				
+				String url = "/front-store-end/restaurant/restaurantPage.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
 				/*************************** 其他錯誤處理 **********************************/
-//			} catch (Exception e) {
-//				errorMsgs.put(e.getMessage(), "抓到你了!");
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front-store-end/restaurant/addrestaurant.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e) {
+				errorMsgs.put(e.getMessage(), "抓到你了!");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-store-end/restaurant/addrestaurant.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 		if ("delete".equals(action))

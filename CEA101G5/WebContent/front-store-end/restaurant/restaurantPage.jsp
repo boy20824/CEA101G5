@@ -154,10 +154,13 @@
 			<div class="col">
 				<div id="storeInfo">
 					<h6>詳細資訊</h6>
-					<textarea style="width: 80%; height: 8.7em" name="storeInfo">${storeLogin.storeInfo}</textarea>
+					<textarea style="width: 80%; height: 8.7em" name="storeInfo" value="${storeLogin.storeInfo}">${storeLogin.storeInfo}</textarea>
 				</div>
 
 				<div class="button">
+				<input type="hidden" name="storeId" value="${storeLogin.storeId}"> 
+				<input type="hidden" name="storeStatus" value="0">
+				<input type="hidden" name="action" value="easyupdate"> 
 					<input type="submit" value="修改餐廳資訊" /> 
 
 				</div>
@@ -167,5 +170,34 @@
 	</FORM>
 
 </body>
+<% 
+  java.sql.Timestamp storeOpenTime = null;
+  try {
+	  storeOpenTime = restaurantVO.getStoreOpenTime();
+   } catch (Exception e) {
+	   storeOpenTime = new java.sql.Timestamp(System.currentTimeMillis());
+   }
+  
+  java.sql.Timestamp storeCloseTime = null;
+  try {
+	  storeCloseTime = restaurantVO.getStoreCloseTime();
+   } catch (Exception e) {
+	   storeCloseTime = new java.sql.Timestamp(System.currentTimeMillis());
+   }
+%>
+<script>
+$('#OpenTime').timepicker({
+	timeFormat : "H:mm", // 時間隔式
+	interval : 60, //時間間隔
+	startTime : "10:00", // 開始時間
+	value : '${storeLogin.storeOpenTime}',
+});
 
+$('#CloseTime').timepicker({
+	timeFormat : "H:mm", // 時間隔式
+	interval : 60, //時間間隔
+	startTime : "14:00", // 開始時間
+	value : '${storeLogin.storeCloseTime}'
+});
+</script>
 </html>
