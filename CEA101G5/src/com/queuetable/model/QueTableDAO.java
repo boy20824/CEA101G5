@@ -30,7 +30,6 @@ public class QueTableDAO implements QueTableDAO_interface{
 	private static final String GET_ONE_STMT = "SELECT queue_table_id, store_id, queue_table_type, queue_table_ttl, queue_table_usable, queue_table_occ FROM queue_table where queue_table_id = ? AND store_id = ?";
 	private static final String GET_ALL_STMT = "SELECT queue_table_id, store_id, queue_table_type, queue_table_ttl, queue_table_usable, queue_table_occ FROM queue_table order by queue_table_id";
 	private static final String GET_PART_STMT = "SELECT queue_table_id, store_id, queue_table_type, queue_table_ttl, queue_table_usable, queue_table_occ FROM queue_table where store_id = ?";
-
 	// �s�W
 	@Override
 	public void insert(QueTableVO quetableVO) {
@@ -79,24 +78,24 @@ public class QueTableDAO implements QueTableDAO_interface{
 	// �ק�
 	@Override
 	public void update(QueTableVO quetableVO) {
-
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
+		
 		try {
-
+			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-
+			
 			pstmt.setString(1, quetableVO.getQueuetabletype());
 			pstmt.setInt(2, quetableVO.getQueuetablettl());
 			pstmt.setInt(3, quetableVO.getQueuetableusable());
 			pstmt.setInt(4, quetableVO.getQueuetableocc());
 			pstmt.setInt(5, quetableVO.getQueuetableid());
 			pstmt.setString(6, quetableVO.getStoreid());
-
+			
 			pstmt.executeUpdate();
-
+			
 			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -117,9 +116,9 @@ public class QueTableDAO implements QueTableDAO_interface{
 				}
 			}
 		}
-
+		
 	}
-
+	
 	// �R���A�����p�L�k�R
 	@Override
 	public void delete(Integer quetableid, String storeid) {

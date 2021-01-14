@@ -36,6 +36,7 @@ public class QueTableService {
 		return quetableVO;
 	}
 	
+	
 	public void deleteQueTable(Integer queuetableid, String storeid) {
 		dao.delete(queuetableid, storeid);
 	}
