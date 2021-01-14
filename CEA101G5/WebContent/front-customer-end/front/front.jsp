@@ -192,7 +192,7 @@
 			<li>
 				<div class="storecard">
 					<div class="card__image">
-						<img src="img//圖片/louisa.png" alt="">
+						<img src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantVO.storeId}&action=getFirst_For_Display" alt="">
 					</div>
 					<div class="card__content">
 						<div class="card__title">${restaurantVO.storeName}</div>
