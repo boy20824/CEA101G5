@@ -17,7 +17,13 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back-end/emp/css/css.css">
 <title>所有商城問答</title>
-
+<style>
+.lissAllProductQA {
+	width: 85%;
+	margin-left: 250px;
+	margin-top: 20px;
+}
+</style>
 </head>
 <body>
 	<div id="mySidebar" class="sidebar">
@@ -64,7 +70,7 @@
 
 	</div>
 	<div id=backSidebar></div>
-
+<div class="lissAllProductQA">
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -121,6 +127,7 @@
 	</c:forEach>
 </table>
 <%@ include file="/front-end/util/page2.file" %>
+</div>
 <div align="center">
 
 </div>
