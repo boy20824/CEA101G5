@@ -126,16 +126,16 @@
 					class="addMemForm" enctype="multipart/form-data">
 					<div class="row">
 						<%-- 錯誤表列 --%>
-						<div>
-							<c:if test="${not empty errorMsgs}">
-								<font style="color: red">請修正以下錯誤:</font>
-								<ul>
-									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color: red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if>
-						</div>
+<!-- 						<div> -->
+<%-- 							<c:if test="${not empty errorMsgs}"> --%>
+<!-- 								<font style="color: red">請修正以下錯誤:</font> -->
+<!-- 								<ul> -->
+<%-- 									<c:forEach var="message" items="${errorMsgs}"> --%>
+<%-- 										<li style="color: red">${message}</li> --%>
+<%-- 									</c:forEach> --%>
+<!-- 								</ul> -->
+<%-- 							</c:if> --%>
+<!-- 						</div> -->
 						<h4>Account</h4>
 						<div class="input-group input-group-icon">
 							<input type="text" placeholder="Your Phone Number"
@@ -144,8 +144,8 @@
 								<i class="fas fa-mobile-alt"></i></i>
 							</div>
 						</div>
+<%-- 						<div style="color:red;">${errorMsgs.memPhone}</div><br> --%>
 						<div class="memPhoneConfirm"></div>
-						<div>${errorMsgs.memPhone}</div>
 						<div class="input-group input-group-icon">
 							<input type="email" placeholder="Email Adress" name="memEmail"
 								value="${param.memEmail}" />
@@ -153,7 +153,7 @@
 								<i class="fa fa-envelope"></i>
 							</div>
 						</div>
-						<div>${errorMsgs.memEmail}</div>
+						<div style="color:red;">${errorMsgs.memEmail}</div>
 						<div class="input-group input-group-icon">
 							<input type="password" placeholder="Password" name="memPwd"
 								value="${param.memPwd}" />
@@ -161,7 +161,7 @@
 								<i class="fa fa-key"></i>
 							</div>
 						</div>
-						<div>${errorMsgs.memPwd}</div>
+						<div style="color:red;">${errorMsgs.memPwd}</div>
 						<div class="input-group input-group-icon">
 							<input type="text" placeholder="Your Name" name="memName"
 								value="${param.memName}" />
@@ -169,7 +169,7 @@
 								<i class="fas fa-file-signature"></i></i>
 							</div>
 						</div>
-						<div>${errorMsgs.memName}</div>
+						<div style="color:red;">${errorMsgs.memName}</div>
 						<div class="input-group input-group-icon">
 							<input type="text" placeholder="Your Address" name="memAddress"
 								value="${param.memAddress}" />
@@ -177,13 +177,14 @@
 								<i class="fas fa-map-marked-alt"></i></i>
 							</div>
 						</div>
-						<div>${errorMsgs.memAddress}</div>
+						<div style="color:red;">${errorMsgs.memAddress}</div>
 						<div class="input-group input-group-icon">
 							<input type="text" placeholder="Your ID Number"
 								name="memIdentity" value="${param.memIdentity}" />
 							<div class=" input-icon">
 								<i class="far fa-address-card"></i></i>
 							</div>
+							<div style="color:red;">${errorMsgs.memIdentity}</div>
 						</div>
 						<div class="input-group input-group-icon">
 							<input type="text" placeholder="Your Nickname" name="memNick"
@@ -192,7 +193,7 @@
 								<i class="far fa-id-badge"></i></i>
 							</div>
 						</div>
-						<div>${errorMsgs.memNick}</div>
+						<div style="color:red;">${errorMsgs.memNick}</div>
 					</div>
 
 					<div class="row">
@@ -202,7 +203,7 @@
 								<input name="memBirth" id="Birthday" type="TEXT" />
 							</div>
 						</div>
-						<div>${errorMsgs.memBirth}</div>
+						<div style="color:red;">${errorMsgs.memBirth}</div>
 
 						<div class="col-half">
 							<h4>Gender</h4>
@@ -213,13 +214,13 @@
 									for="gender-female">Female</label>
 							</div>
 						</div>
-						<div>${errorMsgs.memSex}</div>
+						<div style="color:red;">${errorMsgs.memSex}</div>
 					</div>
 
 					<div>
 						<h4>Your Photo</h4>
 						<input type="file" name="memPhoto" id="Photo">
-						<div>${errorMsgs.memPhoto}</div>
+						<div style="color:red;">${errorMsgs.memPhoto}</div>
 					</div>
 
 
