@@ -134,7 +134,7 @@ margin-left:200px
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="§R°£">
-			     <input type="hidden" name="storePictureId"  value="${restaurantPictureVO.storePictureId}">
+			     <input type="hidden" name="storePictureId"  value="${restPiclist.storePictureId}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>
