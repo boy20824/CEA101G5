@@ -252,38 +252,43 @@
 							value="<%=memVO.getMemNick()%>" /></td>
 					</tr>
 
-					<tr>
-						<td>商業營業統一編號:</td>
-						<td><input type="TEXT" name="memLice" size="45"
-							data-max-words="10" value="<%=memVO.getMemLice()%>" /></td>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<td>商業營業統一編號:</td> -->
+<!-- 						<td><input type="TEXT" name="memLice" size="45" -->
+<%-- 							data-max-words="10" value="<%=memVO.getMemLice()%>" /></td> --%>
+<!-- 					</tr> -->
 
-					<tr>
-						<td>信用卡卡號:</td>
-						<td><input type="TEXT" name="memCardNumber" size="45"
-							value="<%=memVO.getMemCardNumber()%>"></td>
-					</tr>
-					<tr>
-						<td>卡片持有者:</td>
-						<td><input type="TEXT" name="memCardHolder" size="45"
-							value="<%=memVO.getMemCardHolder()%>"></td>
-					</tr>
-					<tr>
-						<td>到期日:</td>
-						<td><input type="TEXT" name="memCardExpirationDate" size="45"
-							value="<%=memVO.getMemCardExpirationDate()%>" /></td>
-					</tr>
-					<tr>
-						<td>CCV:</td>
-						<td><input type="TEXT" name="memCardCCV" size="45"
-							value="<%=memVO.getMemCardCCV()%>" /></td>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<td>信用卡卡號:</td> -->
+<!-- 						<td><input type="TEXT" name="memCardNumber" size="45" -->
+<%-- 							value="<%=memVO.getMemCardNumber()%>"></td> --%>
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td>卡片持有者:</td> -->
+<!-- 						<td><input type="TEXT" name="memCardHolder" size="45" -->
+<%-- 							value="<%=memVO.getMemCardHolder()%>"></td> --%>
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td>到期日:</td> -->
+<!-- 						<td><input type="TEXT" name="memCardExpirationDate" size="45" -->
+<%-- 							value="<%=memVO.getMemCardExpirationDate()%>" /></td> --%>
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td>CCV:</td> -->
+<!-- 						<td><input type="TEXT" name="memCardCCV" size="45" -->
+<%-- 							value="<%=memVO.getMemCardCCV()%>" /></td> --%>
+<!-- 					</tr> -->
 
 					<tr>
 						<td colspan="2" align="center">
 						<input type="hidden" name="memAuth" value="<%=memVO.getMemAuth()%>"> 
 						<input type="hidden" name="memTotalRechar" value="<%=memVO.getMemTotalRechar()%>"> 
 						<input type="hidden" name="memCondition" value="<%=memVO.getMemCondition()%>"> 
+						<input type="hidden" name="memCardNumber" value="Null"> 
+						<input type="hidden" name="memCardHolder" value="Null"> 
+						<input type="hidden" name="memCardExpirationDate" value="Null"> 
+						<input type="hidden" name="memCardCCV" value="Null">
+						<input type="hidden" name="memLice" value="${memLogin.memLice}">
 						<input type="hidden" name="action" value="update"> 
 						<input type="hidden" name="comeFrom" value="fromMemUpdate"> 
 						<input type="submit" value="送出修改"></td>

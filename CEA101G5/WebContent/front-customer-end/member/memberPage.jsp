@@ -275,32 +275,32 @@
 						value="${memLogin.memNick}" readonly /></td>
 				</tr>
 
-				<tr>
-					<td>商業營業統一編號:</td>
-					<td><input type="TEXT" name="memLice" size="45"
-						data-max-words="10" value="${memLogin.memLice}" readonly /></td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td>商業營業統一編號:</td> -->
+<!-- 					<td><input type="TEXT" name="memLice" size="45" -->
+<%-- 						data-max-words="10" value="${memLogin.memLice}" readonly /></td> --%>
+<!-- 				</tr> -->
 
-				<tr>
-					<td>信用卡卡號:</td>
-					<td><input type="TEXT" name="memCardNumber" size="45"
-						value="${memLogin.memCardNumber}" readonly /></td>
-				</tr>
-				<tr>
-					<td>卡片持有者:</td>
-					<td><input type="TEXT" name="memCardHolder" size="45"
-						value="${memLogin.memCardHolder}" readonly /></td>
-				</tr>
-				<tr>
-					<td>到期日:</td>
-					<td><input type="TEXT" name="memCardExpirationDate" size="45"
-						value="${memLogin.memCardExpirationDate}" readonly /></td>
-				</tr>
-				<tr>
-					<td>CCV:</td>
-					<td><input type="TEXT" name="memCardCCV" size="45"
-						value="${memLogin.memCardCCV}" readonly /></td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td>信用卡卡號:</td> -->
+<!-- 					<td><input type="TEXT" name="memCardNumber" size="45" -->
+<%-- 						value="${memLogin.memCardNumber}" readonly /></td> --%>
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td>卡片持有者:</td> -->
+<!-- 					<td><input type="TEXT" name="memCardHolder" size="45" -->
+<%-- 						value="${memLogin.memCardHolder}" readonly /></td> --%>
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td>到期日:</td> -->
+<!-- 					<td><input type="TEXT" name="memCardExpirationDate" size="45" -->
+<%-- 						value="${memLogin.memCardExpirationDate}" readonly /></td> --%>
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td>CCV:</td> -->
+<!-- 					<td><input type="TEXT" name="memCardCCV" size="45" -->
+<%-- 						value="${memLogin.memCardCCV}" readonly /></td> --%>
+<!-- 				</tr> -->
 
 				<tr>
 					<td colspan="2" align="center">
