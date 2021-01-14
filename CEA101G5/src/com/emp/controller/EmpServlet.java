@@ -23,6 +23,7 @@ public class EmpServlet extends HttpServlet {
 		doPost(req, res);
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
@@ -396,7 +397,6 @@ public class EmpServlet extends HttpServlet {
 				
 				
 				String empId = empSvc.getOneAccount(empAccount).getEmp_id();
-				
 				EmpAuthService empauthSvc = new EmpAuthService();
 				
 				EmpAuthVO empFeature = empauthSvc.getOneEmpAuth(empId);
@@ -404,24 +404,23 @@ public class EmpServlet extends HttpServlet {
 				EmpAuthVO empStore = empauthSvc.getOneEmpAuth(empId);
 				EmpAuthVO empMem = empauthSvc.getOneEmpAuth(empId);
 				EmpAuthVO empEmp = empauthSvc.getOneEmpAuth(empId);
-				
 				List<EmpAuthVO> empauthList = empauthSvc.getAll();
 				
 				for(EmpAuthVO empAuthVO : empauthList) {
 					if(empAuthVO.getEmp_id().equals(empId)) {
-						if(empAuthVO.getAuth_no().equals(01)) {
+						if(empAuthVO.getAuth_no().equals("01")) {
 							session.setAttribute("empFeature", empFeature);
 						}
-						if(empAuthVO.getAuth_no().equals(02)) {
+						if(empAuthVO.getAuth_no().equals("02")) {
 							session.setAttribute("empShop", empShop);
 						}
-						if(empAuthVO.getAuth_no().equals(03)) {
+						if(empAuthVO.getAuth_no().equals("03")) {
 							session.setAttribute("empStore", empStore);
 						}
-						if(empAuthVO.getAuth_no().equals(04)) {
+						if(empAuthVO.getAuth_no().equals("04")) {
 							session.setAttribute("empMem", empMem);
 						}
-						if(empAuthVO.getAuth_no().equals(05)) {
+						if(empAuthVO.getAuth_no().equals("05")) {
 							session.setAttribute("empEmp", empEmp);
 				
 						}
