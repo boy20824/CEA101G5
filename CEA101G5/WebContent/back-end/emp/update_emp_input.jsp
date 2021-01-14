@@ -94,6 +94,10 @@
 		<td><input type="TEXT" name="emp_pwd" size="45"	value="<%=empVO.getEmp_password()%>" /></td>
 	</tr>
 	<tr>
+					<td>雇用日期:</td>
+					<td><input name="emp_date" id="f_date1" type="text"></td>
+				<tr>
+	<tr>
 					<td>員工狀態</td>
 					<td><select name="emp_status">
 							<option>員工狀態</option>
@@ -104,10 +108,6 @@
 				</tr>
 	
 	<tr>
-		<td>員工狀態:</td>
-		<td><input type="TEXT" name="emp_status" size="45" value="<%=empVO.getEmp_status()%>" /></td>
-	</tr>
-	<tr>
 		<td>圖片</td>
 		<td><input type="file" name="emp_image" size="45"></td>
 	</tr>
@@ -116,10 +116,10 @@
 <br>
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="emp_id" value="<%=empVO.getEmp_id()%>">
-<input type="submit" value="送出修改"></FORM>
+<input type="submit" value="送出修改" ></FORM>
 </body>
 <div align="center">
-<button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/back-end/back-empselect.jsp">回首頁</a></button>
+<button type="button" class="btn btn-danger"><a href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp">回首頁</a></button>
 </div>
 
 
