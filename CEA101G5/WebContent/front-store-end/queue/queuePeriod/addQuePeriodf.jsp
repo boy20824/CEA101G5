@@ -10,7 +10,7 @@ Integer queueperiodid =new Integer(request.getParameter("queueperiodid"));
 pageContext.setAttribute("storeid", storeid); 
 pageContext.setAttribute("queueperiodid", queueperiodid);
 %>
-
+${storeid }
 <html lang="en">
 <head>
 <meta charset="UTF-8" />

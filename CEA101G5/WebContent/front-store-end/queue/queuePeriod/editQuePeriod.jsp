@@ -6,18 +6,18 @@
 <%@ page import="com.restaurant.model.*"%>
 
 <%
-QuePeriodService quePeriodSvc = new QuePeriodService(); 
-// RestaurantService restSvc = new RestaurantService();
+// QuePeriodService quePeriodSvc = new QuePeriodService(); 
+// // RestaurantService restSvc = new RestaurantService();
 
-String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
-String storeName = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreName();
-	List<QuePeriodVO> list = new ArrayList<QuePeriodVO>();
-	list = quePeriodSvc.getOneQuePeriod(storeid);
-	// 取出servlet request 再設定pagecontext供查詢
+// String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
+// String storeName = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreName();
+// 	List<QuePeriodVO> list = new ArrayList<QuePeriodVO>();
+// 	list = quePeriodSvc.getOneQuePeriod(storeid);
+// 	// 取出servlet request 再設定pagecontext供查詢
 // 	list = (List<QuePeriodVO>) request.getAttribute("quePeriodVO");
-	pageContext.setAttribute("list", list);
-// 	pageContext.setAttribute("storeid", storeid);
-	pageContext.setAttribute("storeName", storeName);
+// 	pageContext.setAttribute("list", list);
+// // 	pageContext.setAttribute("storeid", storeid);
+// 	pageContext.setAttribute("storeName", storeName);
 // 	String storeid = (String) request.getAttribute("storeid");
 %>
 <%@include file="../sidebar.jsp" %>
@@ -47,7 +47,8 @@ div.label{
 </style>
 </head>
 <body bgcolor='white'>
-${ storeName}
+${storeLogin.storeId}
+${storeName}
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
@@ -74,11 +75,13 @@ ${ storeName}
 				<%
 					int count = 1;// 序列號
 				%>
-<%-- 				<jsp:useBean id="quePeriodSvc" scope="page" class="com.queueperiod.model.QuePeriodService" /> --%>
+				<jsp:useBean id="quePeriodSvc" scope="page" class="com.queueperiod.model.QuePeriodService" />
 <%-- <c:forEach var="quePeriodVO" items="${quePeriodSvc.all}"> --%>
 <%-- <c:choose> --%>
 <%-- <c:when test="${quePeriodVO.storeid='S000001' }"> --%>
-				<c:forEach var="quePeriodVO" items="${list}">
+				<c:forEach var="quePeriodVO" items="${quePeriodSvc.all}">
+				<c:choose>
+				<c:when test="${quePeriodVO.storeid==storeLogin.storeId }">
 					<tr>
 						<td scope="row"><%=count%></td>
 						<td><fmt:formatDate value="${quePeriodVO.queuestarttime}"
@@ -96,7 +99,7 @@ ${ storeName}
 								pattern="HH:mm" /></td>
 						<td><fmt:formatDate value="${quePeriodVO.queueendtime}"
 								pattern="HH:mm" /></td>
-						<td><input id="storeid" name="storeid" value="${storeid }"
+						<td><input id="storeid" name="storeid" value="${storeLogin.storeId}"
 							type="hidden"> <input name="queuest"
 							value="${quePeriodVO.queuest}" type="hidden"> <input
 							name="queuestarttime" value="${quePeriodVO.queuestarttime}"
@@ -106,7 +109,7 @@ ${ storeName}
 							value="${quePeriodVO.queueperiodid}" type="hidden"> <input
 							name="update" value="時段修改" type="button" class="btn btn-primary"></td>
 						<td><form method="post" action="queuePeriod.do" style="width:100px;">
-						<input id="storeid" name="storeid" value="${storeid }"
+						<input id="storeid" name="storeid" value="${storeLogin.storeId}"
 							type="hidden"> <input id="queueperiodid"
 							class="queueperiodid" name="queueperiodid"
 							value="${quePeriodVO.queueperiodid}" type="hidden">
@@ -117,14 +120,14 @@ ${ storeName}
 					<%
 						count++;
 					%>
-<%-- 					</c:when> --%>
-<%-- 					</c:choose> --%>
+ 					</c:when> 
+ 					</c:choose> 
 				</c:forEach>
 			</tbody>
 		</table>
 		<div class="row">
 			<div class="col-4"></div>
-			<input id="storeid4Ajax" value="${storeid }" type="hidden">
+			<input id="storeid4Ajax" value="${storeLogin.storeId}" type="hidden">
 			<input id="add" onClick="showAddPage()" name="add" value="新增時段"
 				type="button" class="btn btn-primary">
 			<div class="col-2"></div>
