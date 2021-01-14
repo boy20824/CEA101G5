@@ -116,15 +116,15 @@ margin-left:200px
 
 <div>
 <div class="restauranPicBlock">
-<table>
-	<tr>
-		<th>storepicid</th>
-		<th>storeid</th>
-		<th>storepic</th>
+<table class="table table-striped">
+	<tr class=".bg-secondary">
+		<th>圖片編號</th>
+		<th>店家編號</th>
+		<th>圖片</th>
+		<th>刪除</th>
 	</tr>
 	<jsp:useBean id="restPicSvc" scope="page" class="com.restaurantpicture.model.RestaurantPictureService" />
-	<%@ include file="page1.file" %> 
-	<c:forEach var="restPiclist" items="${restPicSvc.getStorePicByStoreId(storeLogin.storeId)}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="restPiclist" items="${restPicSvc.getStorePicByStoreId(storeLogin.storeId)}">
 		
 		<tr>
 			<td><input type="checkbox">${restPiclist.storePictureId}</td>
@@ -133,14 +133,13 @@ margin-left:200px
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
+			     <input type="submit" value="刪除" class="btn btn-secondary">
 			     <input type="hidden" name="storePictureId"  value="${restPiclist.storePictureId}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
 </div>
 </div>
 </body>

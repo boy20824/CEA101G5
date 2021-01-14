@@ -94,9 +94,7 @@ pageContext.setAttribute("list", list);
 				<th colspan="2" style="text-align: center">申請狀態</th>
 
 			</tr>
-			<%@ include file="page1.file"%>
-			<c:forEach var="memVO" items="${list}" begin="<%=pageIndex%>"
-				end="<%=pageIndex+rowsPerPage-1%>">
+			<c:forEach var="memVO" items="${list}">
 				<c:if test="${memVO.memLice!=0 && memVO.memCondition == 3}">
 
 					<tr>
@@ -136,7 +134,6 @@ pageContext.setAttribute("list", list);
 				</c:if>
 			</c:forEach>
 		</table>
-		<%@ include file="page2.file"%>
 	</div>
 </body>
 
