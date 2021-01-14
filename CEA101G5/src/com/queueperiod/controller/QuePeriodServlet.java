@@ -137,6 +137,7 @@ public class QuePeriodServlet extends HttpServlet {
 			Integer queendtime = new Integer(req.getParameter("queueendtime"));	
 			
 			Integer queueperiodid = new Integer(req.getParameter("queueperiodid"));
+			System.out.println(queueperiodid);
 			String storeid = req.getParameter("storeid");
 			Integer queuest = new Integer(req.getParameter("queuest"));
 										// ??��?��?                      ??��?�段

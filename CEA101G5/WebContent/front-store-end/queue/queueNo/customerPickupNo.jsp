@@ -4,8 +4,10 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.queueno.model.*"%>
 <%@ page import="com.queueperiod.model.*"%>
+<%@ page import="com.restaurant.model.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
+
 	List<QuePeriodVO> list = new ArrayList<QuePeriodVO>();
 	list = (List<QuePeriodVO>) session.getAttribute("quePeriodVO"); // 取得server送來之list
 	pageContext.setAttribute("list", list);
@@ -424,6 +426,7 @@ swal("新增成功", "ok", "success");
 <c:if test="${check=='repeat' }">
 	<script>
 swal("已取過號，請確認", "fail", "error");
+
 </script>
 </c:if>
 <c:if test="${check=='alert' }">

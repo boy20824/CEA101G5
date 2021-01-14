@@ -10,13 +10,14 @@ QuePeriodService quePeriodSvc = new QuePeriodService(); //創建 實體
 RestaurantService restSvc = new RestaurantService();
 
 String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
-
+String storeName = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreName();
 	List<QuePeriodVO> list = new ArrayList<QuePeriodVO>();
 	list = quePeriodSvc.getOneQuePeriod(storeid);
 	// 取出servlet request 再設定pagecontext供查詢
 // 	list = (List<QuePeriodVO>) request.getAttribute("quePeriodVO");
 	pageContext.setAttribute("list", list);
 	pageContext.setAttribute("storeid", storeid);
+	pageContext.setAttribute("storeName", storeName);
 // 	String storeid = (String) request.getAttribute("storeid");
 %>
 <%@include file="../sidebar.jsp" %>
@@ -46,7 +47,7 @@ div.label{
 </style>
 </head>
 <body bgcolor='white'>
-
+${ storeName}
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
@@ -174,7 +175,7 @@ div.label{
 			data : {
 				storeid : $("#storeid4Ajax").val(),
 				queueperiodid : $(e.target).prev($(".queueperiodid")).val(),
-
+				count : <%=count%>,
 			},
 			success : function(dates) {
 				//alert(dates);
