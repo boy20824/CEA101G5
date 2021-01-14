@@ -27,7 +27,6 @@
 // 	pageContext.setAttribute("list", list);
 %>
 <html>
-
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -186,6 +185,7 @@ div#helloName {
 									style="text-align: center;"
 									aria-label="Amount (to the nearest dollar)" >
 								<c:out value="${queLineVO.queuenocall }" />
+								<c:set var="base" value="${queLineVO.queuenocall }"></c:set>
 				</div>
 				</c:when>
 				</c:choose>
@@ -209,13 +209,15 @@ div#helloName {
 				<div class="form-control"
 					aria-label="Amount (to the nearest dollar)">
 <!-- 					抓出queNo後序號碼排序 -->
-					<c:forEach var="queNoVOList" items="${queNoSvc.all}" begin="0"
-						end="4">
-<%-- 						<c:choose>  --%>
-<%--  							<c:when test="${storeid==queNoVOList.storeid && queNoVO.queuetableid==queNoVOList.queuetableid }">  --%>
+					<c:forEach var="queNoVOList" items="${queNoSvc.all}">
+						<c:choose> 
+ 							<c:when test="${storeid==queNoVOList.storeid && queNoVO.queuetableid==queNoVOList.queuetableid }">
+ 							<c:choose>
+ 							<c:when test="${queNoVOList.queuenum > base }">
 							<c:out value="${queNoVOList.queuenum }" />
-<%--  							</c:when>  --%>
-<%--  						</c:choose> --%>
+							</c:when></c:choose>
+ 							</c:when> 
+ 						</c:choose>
  											</c:forEach>
 					<%-- 						<c:forEach var="queNoVOList" items="${list}" begin="1" end="4"> --%>
 					<%-- 							<div>${queNoVOList.queuelineno} </div> --%>

@@ -26,7 +26,7 @@ public class QuePeriodDAO implements QuePeriodDAO_interface {
 	private static final String GET_PART_STMT = "SELECT queue_period_id, store_id, queue_st,  queue_start_time,  queue_end_time, queue_no_current FROM queue_period where store_id = ?";
 	private static final String DELETE = "DELETE FROM queue_period where queue_period_id = ? AND store_id = ?";
 	private static final String UPDATE = "UPDATE queue_period set queue_st=?, queue_start_time=?, queue_end_time=?, queue_no_current=? where queue_period_id=? AND store_id=?";
-
+	
 	// �s�W
 	@Override
 	public void insert(QuePeriodVO queperiodVO) {

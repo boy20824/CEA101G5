@@ -74,7 +74,7 @@ img {
 	z-index: 4;
 	margin-top: 10;
 }
-.pickup{
+.pickup, .resetAll{
 	background-color: #FA7E23; 
 	border-color: #FA7E23;
 }
@@ -93,6 +93,11 @@ img {
 		<a class="icon"
 			href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp"></a>
 ${ storeName}
+	<form method="post" ACTION="queueNo.do">
+		<input name="action" value="reset" type="hidden">
+		<input name="storeid" value="${storeid }" type="hidden">
+		<button type="submit" class="resetAll btn btn-primary" style="margin-left:90%;">重整</button>
+	</form>
 	</div>
 	<div class="container">
 		<div class="row reserve2"></div>
@@ -231,61 +236,7 @@ ${ storeName}
 								value="${queTableVO.queuetableusable}" type="hidden">
 						</div>
 
-
-
-						<div class="col-2">
-							<div class="queuenums">預備叫號</div>
-							<div class="queue_nums">
-								<c:choose>
-									<c:when test="${queTableVO.queuetableid==1 }">
-										<c:forEach var="queNoVO" items="${queNoVO}" begin="0" end="3">
-											<c:choose>
-												<c:when test="${queNoVO.queuetableid==1 }">
-													<div>
-														<c:out value="${queNoVO.queuenum } " />
-													</div>
-												</c:when>
-											</c:choose>
-										</c:forEach>
-									</c:when>
-									<c:when test="${queTableVO.queuetableid==2 }">
-										<c:forEach var="queNoVO" items="${queNoVO}" begin="0" end="3">
-											<c:choose>
-												<c:when test="${queNoVO.queuetableid==2 }">
-													<div>
-														<c:out value="${queNoVO.queuenum } " />
-													</div>
-												</c:when>
-											</c:choose>
-										</c:forEach>
-									</c:when>
-									<c:when test="${queTableVO.queuetableid==3 }">
-										<c:forEach var="queNoVO" items="${queNoVO}" begin="0" end="3">
-											<c:choose>
-												<c:when test="${queNoVO.queuetableid==3 }">
-													<div>
-														<c:out value="${queNoVO.queuenum } " />
-													</div>
-												</c:when>
-											</c:choose>
-										</c:forEach>
-									</c:when>
-									<c:when test="${queTableVO.queuetableid==4 }">
-										<c:forEach var="queNoVO" items="${queNoVO}" begin="0" end="3">
-											<c:choose>
-												<c:when test="${queNoVO.queuetableid==4 }">
-													<div>
-														<c:out value="${queNoVO.queuenum } " />
-													</div>
-												</c:when>
-											</c:choose>
-										</c:forEach>
-									</c:when>
-								</c:choose>
-							</div>
-						</div>
-
-						<div class="col-2">
+<div class="col-2">
 							<div class="nocall">目前叫號</div>
 							<c:choose>
 								<c:when test="${queTableVO.queuetableid==1}">
@@ -295,6 +246,7 @@ ${ storeName}
 												<div id="queuenum" class="no_call">${queLineVO.queuenocall}</div>
 												<input class="queuenum" value="${queLineVO.queuenocall}"
 													type="hidden">
+													<c:set var="check1" value="${queLineVO.queuenocall}"></c:set>
 											</c:when>
 										</c:choose>
 									</c:forEach>
@@ -306,6 +258,7 @@ ${ storeName}
 												<div id="queuenum" class="no_call">${queLineVO.queuenocall}</div>
 												<input class="queuenum" value="${queLineVO.queuenocall}"
 													type="hidden">
+													<c:set var="check2" value="${queLineVO.queuenocall}"></c:set>
 											</c:when>
 										</c:choose>
 									</c:forEach>
@@ -317,6 +270,7 @@ ${ storeName}
 												<div id="queuenum" class="no_call">${queLineVO.queuenocall}</div>
 												<input class="queuenum" value="${queLineVO.queuenocall}"
 													type="hidden">
+													<c:set var="check3" value="${queLineVO.queuenocall}"></c:set>
 											</c:when>
 										</c:choose>
 									</c:forEach>
@@ -328,12 +282,75 @@ ${ storeName}
 												<div id="queuenum" class="no_call">${queLineVO.queuenocall}</div>
 												<input class="queuenum" value="${queLineVO.queuenocall}"
 													type="hidden">
+													<c:set var="check4" value="${queLineVO.queuenocall}"></c:set>
 											</c:when>
 										</c:choose>
 									</c:forEach>
 								</c:when>
 							</c:choose>
 						</div>
+
+						<div class="col-2">
+							<div class="queuenums">預備叫號</div>
+							<div class="queue_nums">
+								<c:choose>
+									<c:when test="${queTableVO.queuetableid==1 }">
+										<c:forEach var="queNoVO" items="${queNoVO}">
+											<c:choose>
+												<c:when test="${queNoVO.queuetableid==1 }">
+													<div>
+														<c:if test="${queNoVO.queuenum>check1 }">
+														<c:out value="${queNoVO.queuenum } " />
+														</c:if>
+													</div>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</c:when>
+									<c:when test="${queTableVO.queuetableid==2 }">
+										<c:forEach var="queNoVO" items="${queNoVO}">
+											<c:choose>
+												<c:when test="${queNoVO.queuetableid==2 }">
+													<div>
+													<c:if test="${queNoVO.queuenum>check2 }">
+														<c:out value="${queNoVO.queuenum } " />
+														</c:if>
+													</div>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</c:when>
+									<c:when test="${queTableVO.queuetableid==3 }">
+										<c:forEach var="queNoVO" items="${queNoVO}">
+											<c:choose>
+												<c:when test="${queNoVO.queuetableid==3 }">
+													<div>
+													<c:if test="${queNoVO.queuenum>check3 }">
+														<c:out value="${queNoVO.queuenum } " />
+														</c:if>
+													</div>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</c:when>
+									<c:when test="${queTableVO.queuetableid==4 }">
+										<c:forEach var="queNoVO" items="${queNoVO}">
+											<c:choose>
+												<c:when test="${queNoVO.queuetableid==4 }">
+													<div>
+													<c:if test="${queNoVO.queuenum>check4 }">
+														<c:out value="${queNoVO.queuenum } " />
+														</c:if>
+													</div>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</c:when>
+								</c:choose>
+							</div>
+						</div>
+
+						
 
 						<div class="col-2">
 							<button type="button" class="call btn btn-danger">叫號</button>
@@ -563,10 +580,10 @@ ${ storeName}
 		//建立好Get連接
 		var url = "updateNoCall.jsp?storeid="
 				+ document.getElementById("storeid").value 
-				+ "&queuetableid="	+ $(e.target).parent().prev().prev().prev().prev().children(".queuetableid").val() 
-				+ "&queuenum="	+ $(e.target).parent().prev().children(".queuenum").val()
-				+ "&queuetableocc=" + $(e.target).parent().prev().prev().prev().children(".queuetableocc").val()
-				+ "&queuetableusable=" + $(e.target).parent().prev().prev().prev().children(".quetableusable").val()	
+				+ "&queuetableid="	+ $(e.target).parents(".tabledata").find(".queuetableid").val() 
+				+ "&queuenum="	+ $(e.target).parents(".tabledata").find(".queuenum").val()
+				+ "&queuetableocc=" + $(e.target).parents(".tabledata").find(".queuetableocc").val()
+				+ "&queuetableusable=" + $(e.target).parents(".tabledata").find(".quetableusable").val()	
 		xhr.open("Get", url, true);
 		//送出請求 
 		xhr.send();
