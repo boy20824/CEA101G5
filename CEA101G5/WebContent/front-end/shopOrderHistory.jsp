@@ -119,7 +119,7 @@
         <div id="signInContainer" class="container">
             <button id="signInCloseButton" type="button" class="btn-close" aria-label="Close"></button>
             <main class="form-signin">
-                <form method="POST" action="<%=request.getContextPath()%>/back-end/member/mem.do">
+                <form method="POST" action="<%=request.getContextPath()%>/back-end/member/mem.do?">
                     <img class="mb-4" src="<%=request.getContextPath()%>/front-end/shared/logoMain2.png" alt="" width="125" height="125">
                     <h1 class="h3 mb-3 fw-normal">登入</h1>
                     <div class="form-group">
@@ -130,11 +130,10 @@
                         <input type="hidden" name="action" value="shopLogin">
                         <div class="checkbox mb-3">
                             <label>
-                                <input type="checkbox" value="remember-me"> Remember me
+                                <small>Enak 新朋友？ <a href="<%=request.getContextPath()%>/front-customer-end/member/addMem.jsp">註冊</a></small>
                             </label>
                         </div>
-                        <button id="signInButton" class="w-100 btn btn-lg btn-warning" type="submit">Sign
-                            in</button>
+                        <button id="signInButton" class="w-100 btn btn-lg btn-warning" type="submit">Sign in</button>
                         <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
                     </div>
                 </form>

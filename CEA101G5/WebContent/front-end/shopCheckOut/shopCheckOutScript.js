@@ -10,6 +10,14 @@ window.addEventListener('wheel', function (e) {
     }
 });
 
+// checkOutLoginController
+let checkOutLoginController = document.getElementById("checkOutLoginController");
+if (checkOutLoginController.value == 0) {
+	$("#signInMain").fadeIn(200);
+	$("#signInCloseButton").hide();
+	signInMainVisibility = true;
+}
+
 // User Signing In
 let signInMainVisibility = false;
 
@@ -148,6 +156,61 @@ for (let i = 0; i < qtyToPurchaseArr.length; i++) {
 		
 	});
 }
+
+// Import Information From MemVO For CheckOut
+let importFromMemVOBtn = document.getElementById("importFromMemVOBtn");
+
+importFromMemVOBtn.addEventListener("click", function() {
+	let checkOutRecipientName = document.getElementById("checkOutRecipientName");
+	let checkOutRecipientEmail = document.getElementById("checkOutRecipientEmail");
+	let checkOutRecipientMobNumber = document.getElementById("checkOutRecipientMobNumber");
+	let checkOutDeliveryAddress = document.getElementById("checkOutDeliveryAddress");
+	
+	let ajaxRequest = new XMLHttpRequest();
+	let url = window.location.origin + "/CEA101G5/back-end/member/mem.do";
+	ajaxRequest.open("POST", url, true);
+	ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	ajaxRequest.onload = function () {
+	if (ajaxRequest.status >= 200 && ajaxRequest.status < 400) {
+		let ajaxData = JSON.parse(ajaxRequest.responseText);
+		checkOutRecipientName.value = ajaxData["memName"]; 
+		checkOutRecipientEmail.value = ajaxData["memEmail"]; 
+		checkOutRecipientMobNumber.value = ajaxData["memPhone"]; 
+		checkOutDeliveryAddress.value = ajaxData["memAddress"]; 
+	} else {
+		console.log("An error has occured...");
+		}
+	}
+	ajaxRequest.send("action=memVoToCheckOut");
+});
+
+let importCCFromMemVOBtn = document.getElementById("importCCFromMemVOBtn");
+
+importCCFromMemVOBtn.addEventListener("click", function() {
+	let creditCardNumber = document.getElementById("creditCardNumber");
+	let creditCardName = document.getElementById("creditCardName");
+	let creditCardExpiry = document.getElementById("creditCardExpiry");
+	let creditCardCVC = document.getElementById("creditCardCVC");
+	
+	let ajaxRequest = new XMLHttpRequest();
+	let url = window.location.origin + "/CEA101G5/back-end/member/mem.do";
+	ajaxRequest.open("POST", url, true);
+	ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	ajaxRequest.onload = function () {
+	if (ajaxRequest.status >= 200 && ajaxRequest.status < 400) {
+		let ajaxData = JSON.parse(ajaxRequest.responseText);
+		creditCardNumber.value = ajaxData["memCardNumber"];
+		creditCardName.value = ajaxData["memName"];
+		creditCardExpiry.value = ajaxData["memCardExpirationDate"];
+		creditCardCVC.value = ajaxData["memCardCCV"];
+	} else {
+		console.log("An error has occured...");
+		}
+	}
+	ajaxRequest.send("action=memVoToCheckOut");
+});
+
+
 
 function updateOrderDetails() {
 	let productPriceArr = document.querySelectorAll(".productPrice");

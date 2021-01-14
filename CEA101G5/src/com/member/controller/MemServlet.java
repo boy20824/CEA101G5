@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
+import com.google.gson.Gson;
 import com.member.model.MemRedis;
 import com.member.model.MemSMSSender;
 import com.member.model.MemService;
@@ -34,6 +35,7 @@ public class MemServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=UTF-8");
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
 
@@ -719,7 +721,7 @@ public class MemServlet extends HttpServlet {
 			}
 		}
 
-//		Logging In & Out For Shop
+		// Shop
 		if ("shopLogin".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -805,7 +807,18 @@ public class MemServlet extends HttpServlet {
 				e.printStackTrace(System.err);
 			}
 		}
-//		Logging In & Out For Shop
+		
+		if ("memVoToCheckOut".equals(action)) {
+			MemVO memVO = (MemVO) session.getAttribute("memLogin");
+			
+			Gson gson = new Gson();
+			String memVOTOJson = gson.toJson(memVO);
+			PrintWriter out = res.getWriter();
+			out.write(memVOTOJson);
+		}
+		// Shop
+		
+		
 
 	}
 }

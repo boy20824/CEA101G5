@@ -130,13 +130,11 @@ addToPromoBtn.addEventListener("click", function() {
 	}
 	
 	document.getElementById("formPromoPrice").value = null;
-	addToPromoAnimation();
 });
 
 removeFromPromoBtn.addEventListener("click", function() {
 	let formProductId = document.getElementById("formProductId");
 	ajaxRemoveProductFromPromo(formProductId.value);
-	removeFromPromoAnimation()
 });
 
 // Functions
@@ -192,8 +190,9 @@ function ajaxAddProductToPromo(productId, productPromoPrice) {
 		if (ajaxRequest.status >= 200 && ajaxRequest.status < 400) {
 			ajaxData = JSON.parse(ajaxRequest.responseText);
 			
-			let productVO = "<tr><td class='col-1'><img class='rounded' src='" + window.location.origin + "/CEA101G5/shop/productphotoreader.do?productId=" + ajaxData["productId"] + "'></td><td class='col-1'>" + ajaxData["productId"] + "</td><td class='col-3'>" + ajaxData["productDescription"] + "</td><td class='col-1 tdAlignMiddle'>" + "$" + ajaxData["productMSRP"] + "</td><td class='col-1 tdAlignMiddle'>" + "$" + ajaxData["productPrice"] + "</td><td class='col-1 tdAlignMiddle'>" + "$" + ajaxData["productPromoPrice"] + "</td></tr>";
+			let productVO = "<tr><td class='col-1'><img class='rounded' src='" + window.location.origin + "/CEA101G5/shop/productphotoreader.do?productId=" + ajaxData["productId"] + "'></td><td class='col-1'>" + ajaxData["productId"] + "</td><td class='col-3'>" + ajaxData["productName"] + "</td><td class='col-1 tdAlignMiddle'>" + "$" + ajaxData["productMSRP"] + "</td><td class='col-1 tdAlignMiddle'>" + "$" + ajaxData["productPrice"] + "</td><td class='col-1 tdAlignMiddle'>" + "$" + ajaxData["productPromoPrice"] + "</td></tr>";
 			promoListTable.insertAdjacentHTML("beforeend", productVO);
+			addToPromoAnimation();
 			
 		} else {
 			console.log("An error has occured...");
@@ -213,6 +212,7 @@ function ajaxRemoveProductFromPromo(productId) {
 		if (ajaxRequest.status >= 200 && ajaxRequest.status < 400) {
 			let trToRemove = document.getElementById("tr" + productId);
 			trToRemove.remove();
+			removeFromPromoAnimation()
 		} else {
 			console.log("An error has occured...");
 		}
