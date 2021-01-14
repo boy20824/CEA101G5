@@ -141,6 +141,9 @@ margin-left:200px
 	</c:forEach>
 </table>
 </div>
+<div >
+<button style="margin-left:50%" class="btn btn-secondary" onclick="location.href='<%=request.getContextPath()%>/front-store-end/restaurant/addRestaurantPicturePage.jsp'">新增餐廳照片</button>
+</div>
 </div>
 </body>
  
