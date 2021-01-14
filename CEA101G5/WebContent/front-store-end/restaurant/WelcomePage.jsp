@@ -107,9 +107,6 @@ RestaurantService restSvc = new RestaurantService();
 		</span> <label for="side-menu-switch"> <i class="fas fa-angle-right"></i>
 		</label>
         </div>
-        <div class="welcomePageBlock">
-            <img src="<%=request.getContextPath()%>/front-store-end/restaurant/img/welcomeLogo.png" alt="">
-        </div>
         <div class="welcomePageBtn">
             <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/restaurant/addrestaurant.jsp'">餐廳資訊管理</button>
             <button type="submit" onclick="location.href='<%=request.getContextPath()%>/front-store-end/foodorder/orderlist.jsp'">外帶訂單管理</button>
