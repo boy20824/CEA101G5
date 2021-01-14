@@ -413,8 +413,8 @@ public class QueNoServlet extends HttpServlet {
 				
 				// 顯示桌種??��?��?�碼?��
 //				List<QueNoVO> list = queNoSvc2.getQueNoByStoreIdAndTableId(storeid, queuetableid);
-				QueNoVO queNoVO2 = new QueNoVO();
-				queNoVO2 = queNoSvc.getQueNoByPhoneAndStore(memphone, storeid);
+//				QueNoVO queNoVO2 = new QueNoVO();
+//				queNoVO2 = queNoSvc.getQueNoByPhoneAndStore(memphone, storeid);
 				
 				QuePeriodService quePeriodSvc = new QuePeriodService();
 				QuePeriodVO quePeriodVO = quePeriodSvc.getOneQuePeriod(queueperiodid, storeid);
@@ -462,7 +462,7 @@ public class QueNoServlet extends HttpServlet {
 				HttpSession session = req.getSession();
 				session.setAttribute("memberName", memberName);
 				session.setAttribute("queNoVO", queNoVO);
-				session.setAttribute("queNoVO2", queNoVO2);
+//				session.setAttribute("queNoVO2", queNoVO2);
 				session.setAttribute("expectTime", expectTime);
 				session.setAttribute("storeid", storeid);
 				
@@ -479,7 +479,7 @@ public class QueNoServlet extends HttpServlet {
 					HttpSession session = req.getSession();
 					session.setAttribute("memberName", memberName);
 					session.setAttribute("queNoVO", queNoVO);
-					session.setAttribute("queNoVO2", queNoVO2);
+//					session.setAttribute("queNoVO2", queNoVO2);
 					session.setAttribute("storeid", storeid);
 					// 已取過號，沒新增
 					req.setAttribute("check", "repeat");
