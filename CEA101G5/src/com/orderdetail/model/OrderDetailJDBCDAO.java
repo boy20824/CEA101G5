@@ -572,66 +572,66 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		
 
 		
-		OrderDetailVO orderDetailVO = new OrderDetailVO();
-		orderDetailVO.setOrderId(1);
-		orderDetailVO.setProductId("ENP0010");
-		orderDetailVO.setProductPrice(2600);
-		orderDetailVO.setQuantity(2);
-		orderDetailVO.setProductReview("價格很划算, 是件值得購買的商品, CP值高！！ 推薦給大家參考～");
-		try {
-			orderDetailVO.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0001\\2.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailVO.setProductReviewStatus(1);
-		dao.update(orderDetailVO);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailVO2 = new OrderDetailVO();
-		orderDetailVO2.setOrderId(1);
-		orderDetailVO2.setProductId("ENP0008");
-		orderDetailVO2.setProductPrice(1999);
-		orderDetailVO2.setQuantity(2);
-		orderDetailVO2.setProductReview("價格很划算, 是件值得購買的商品, CP值高！！ 推薦給大家參考～");
-		try {
-			orderDetailVO2.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0008\\1.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailVO2.setProductReviewStatus(1);
-		dao.update(orderDetailVO2);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailVO3 = new OrderDetailVO();
-		orderDetailVO3.setOrderId(2);
-		orderDetailVO3.setProductId("ENP0001");
-		orderDetailVO3.setProductPrice(299);
-		orderDetailVO3.setQuantity(1);
-		orderDetailVO3.setProductReview("出貨快速, 包裝保護的非常好！！");
-		try {
-			orderDetailVO3.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0001\\5.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailVO3.setProductReviewStatus(1);
-		dao.update(orderDetailVO3);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailVO4 = new OrderDetailVO();
-		orderDetailVO4.setOrderId(3);
-		orderDetailVO4.setProductId("ENP0003");
-		orderDetailVO4.setProductPrice(329);
-		orderDetailVO4.setQuantity(1);
-		orderDetailVO4.setProductReview("超讚的商品品質, 超讚的CP值！");
-		try {
-			orderDetailVO4.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0003\\3.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailVO4.setProductReviewStatus(1);
-		dao.update(orderDetailVO3);
-		System.out.println("Statement Processed...");
-		
+//		OrderDetailVO orderDetailVO = new OrderDetailVO();
+//		orderDetailVO.setOrderId(1);
+//		orderDetailVO.setProductId("ENP0010");
+//		orderDetailVO.setProductPrice(2600);
+//		orderDetailVO.setQuantity(2);
+//		orderDetailVO.setProductReview("價格很划算, 是件值得購買的商品, CP值高！！ 推薦給大家參考～");
+//		try {
+//			orderDetailVO.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0001\\2.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailVO.setProductReviewStatus(1);
+//		dao.update(orderDetailVO);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailVO2 = new OrderDetailVO();
+//		orderDetailVO2.setOrderId(1);
+//		orderDetailVO2.setProductId("ENP0008");
+//		orderDetailVO2.setProductPrice(1999);
+//		orderDetailVO2.setQuantity(2);
+//		orderDetailVO2.setProductReview("價格很划算, 是件值得購買的商品, CP值高！！ 推薦給大家參考～");
+//		try {
+//			orderDetailVO2.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0008\\1.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailVO2.setProductReviewStatus(1);
+//		dao.update(orderDetailVO2);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailVO3 = new OrderDetailVO();
+//		orderDetailVO3.setOrderId(2);
+//		orderDetailVO3.setProductId("ENP0001");
+//		orderDetailVO3.setProductPrice(299);
+//		orderDetailVO3.setQuantity(1);
+//		orderDetailVO3.setProductReview("出貨快速, 包裝保護的非常好！！");
+//		try {
+//			orderDetailVO3.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0001\\2.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailVO3.setProductReviewStatus(1);
+//		dao.update(orderDetailVO3);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailVO4 = new OrderDetailVO();
+//		orderDetailVO4.setOrderId(3);
+//		orderDetailVO4.setProductId("ENP0003");
+//		orderDetailVO4.setProductPrice(329);
+//		orderDetailVO4.setQuantity(1);
+//		orderDetailVO4.setProductReview("超讚的商品品質, 超讚的CP值！");
+//		try {
+//			orderDetailVO4.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0003\\3.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailVO4.setProductReviewStatus(1);
+//		dao.update(orderDetailVO4);
+//		System.out.println("Statement Processed...");
+//		
 		OrderDetailVO orderDetailVO5 = new OrderDetailVO();
 		orderDetailVO5.setOrderId(3);
 		orderDetailVO5.setProductId("ENP0004");
@@ -639,208 +639,208 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_Interface {
 		orderDetailVO5.setQuantity(1);
 		orderDetailVO5.setProductReview("超讚的商品品質, 超讚的CP值！");
 		try {
-			orderDetailVO4.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0004\\3.jpeg"));
+			orderDetailVO5.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0004\\3.jpeg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		orderDetailVO5.setProductReviewStatus(1);
 		dao.update(orderDetailVO5);
 		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailVO6 = new OrderDetailVO();
-		orderDetailVO6.setOrderId(3);
-		orderDetailVO6.setProductId("ENP0005");
-		orderDetailVO6.setProductPrice(390);
-		orderDetailVO6.setQuantity(1);
-		orderDetailVO6.setProductReview("超讚的商品品質, 超讚的CP值！");
-		try {
-			orderDetailVO6.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0005\\3.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailVO6.setProductReviewStatus(1);
-		dao.update(orderDetailVO6);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailVO7 = new OrderDetailVO();
-		orderDetailVO7.setOrderId(4);
-		orderDetailVO7.setProductId("ENP0002");
-		orderDetailVO7.setProductPrice(249);
-		orderDetailVO7.setQuantity(1);
-		orderDetailVO7.setProductReview("便宜的價格, 以後一定會在回購！！");
-		try {
-			orderDetailVO7.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0002\\4.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailVO7.setProductReviewStatus(1);
-		dao.update(orderDetailVO7);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailVO8 = new OrderDetailVO();
-		orderDetailVO8.setOrderId(4);
-		orderDetailVO8.setProductId("ENP0006");
-		orderDetailVO8.setProductPrice(3500);
-		orderDetailVO8.setQuantity(1);
-		orderDetailVO8.setProductReview("便宜的價格, 以後一定會在回購！！");
-		try {
-			orderDetailVO8.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0006\\4.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailVO8.setProductReviewStatus(1);
-		dao.update(orderDetailVO8);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailVO9 = new OrderDetailVO();
-		orderDetailVO9.setOrderId(4);
-		orderDetailVO9.setProductId("ENP0007");
-		orderDetailVO9.setProductPrice(490);
-		orderDetailVO9.setQuantity(1);
-		orderDetailVO9.setProductReview("便宜的價格, 以後一定會在回購！！");
-		try {
-			orderDetailVO9.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0007\\4.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailVO9.setProductReviewStatus(1);
-		dao.update(orderDetailVO9);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailV10 = new OrderDetailVO();
-		orderDetailV10.setOrderId(4);
-		orderDetailV10.setProductId("ENP0009");
-		orderDetailV10.setProductPrice(1400);
-		orderDetailV10.setQuantity(1);
-		orderDetailV10.setProductReview("便宜的價格, 以後一定會在回購！！");
-		try {
-			orderDetailV10.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0009\\4.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailV10.setProductReviewStatus(1);
-		dao.update(orderDetailV10);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailV11 = new OrderDetailVO();
-		orderDetailV11.setOrderId(5);
-		orderDetailV11.setProductId("ENP0001");
-		orderDetailV11.setProductPrice(299);
-		orderDetailV11.setQuantity(1);
-		orderDetailV11.setProductReview("出貨速度超快, 很推薦！！");
-		try {
-			orderDetailV11.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0001\\5.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailV11.setProductReviewStatus(1);
-		dao.update(orderDetailV11);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailV12 = new OrderDetailVO();
-		orderDetailV12.setOrderId(5);
-		orderDetailV12.setProductId("ENP0002");
-		orderDetailV12.setProductPrice(249);
-		orderDetailV12.setQuantity(1);
-		orderDetailV12.setProductReview("出貨速度超快, 很推薦！！");
-		try {
-			orderDetailV12.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0002\\5.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailV12.setProductReviewStatus(1);
-		dao.update(orderDetailV12);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailV13 = new OrderDetailVO();
-		orderDetailV13.setOrderId(6);
-		orderDetailV13.setProductId("ENP0003");
-		orderDetailV13.setProductPrice(329);
-		orderDetailV13.setQuantity(3);
-		orderDetailV13.setProductReview("顏色好看, 實體比想像中大, 外觀看起來還不錯！");
-		try {
-			orderDetailV13.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0003\\6.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailV13.setProductReviewStatus(1);
-		dao.update(orderDetailV13);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailV14 = new OrderDetailVO();
-		orderDetailV14.setOrderId(7);
-		orderDetailV14.setProductId("ENP0005");
-		orderDetailV14.setProductPrice(390);
-		orderDetailV14.setQuantity(2);
-		orderDetailV14.setProductReview("便宜又有質感！");
-		try {
-			orderDetailV14.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0005\\7.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailV14.setProductReviewStatus(1);
-		dao.update(orderDetailV14);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailV15 = new OrderDetailVO();
-		orderDetailV15.setOrderId(7);
-		orderDetailV15.setProductId("ENP0004");
-		orderDetailV15.setProductPrice(199);
-		orderDetailV15.setQuantity(2);
-		orderDetailV15.setProductReview("便宜又有質感！");
-		try {
-			orderDetailV15.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0004\\7.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailV15.setProductReviewStatus(1);
-		dao.update(orderDetailV15);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailV16 = new OrderDetailVO();
-		orderDetailV16.setOrderId(8);
-		orderDetailV16.setProductId("ENP0002");
-		orderDetailV16.setProductPrice(249);
-		orderDetailV16.setQuantity(2);
-		orderDetailV16.setProductReview("出貨速度快, 包裝良好！！");
-		try {
-			orderDetailV16.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0002\\8.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailV16.setProductReviewStatus(1);
-		dao.update(orderDetailV16);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailV17 = new OrderDetailVO();
-		orderDetailV17.setOrderId(9);
-		orderDetailV17.setProductId("ENP0003");
-		orderDetailV17.setProductPrice(329);
-		orderDetailV17.setQuantity(2);
-		orderDetailV17.setProductReview("出貨速度快, 包裝良好！！");
-		try {
-			orderDetailV17.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0003\\9.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailV17.setProductReviewStatus(1);
-		dao.update(orderDetailV17);
-		System.out.println("Statement Processed...");
-		
-		OrderDetailVO orderDetailV18 = new OrderDetailVO();
-		orderDetailV18.setOrderId(10);
-		orderDetailV18.setProductId("ENP0010");
-		orderDetailV18.setProductPrice(2600);
-		orderDetailV18.setQuantity(10);
-		orderDetailV18.setProductReview("再次回購！！老婆太愛吃了 =_=！");
-		try {
-			orderDetailV18.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0010\\10.jpeg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailV18.setProductReviewStatus(1);
-		dao.update(orderDetailV18);
-		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailVO6 = new OrderDetailVO();
+//		orderDetailVO6.setOrderId(3);
+//		orderDetailVO6.setProductId("ENP0005");
+//		orderDetailVO6.setProductPrice(390);
+//		orderDetailVO6.setQuantity(1);
+//		orderDetailVO6.setProductReview("超讚的商品品質, 超讚的CP值！");
+//		try {
+//			orderDetailVO6.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0005\\3.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailVO6.setProductReviewStatus(1);
+//		dao.update(orderDetailVO6);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailVO7 = new OrderDetailVO();
+//		orderDetailVO7.setOrderId(4);
+//		orderDetailVO7.setProductId("ENP0002");
+//		orderDetailVO7.setProductPrice(249);
+//		orderDetailVO7.setQuantity(1);
+//		orderDetailVO7.setProductReview("便宜的價格, 以後一定會在回購！！");
+//		try {
+//			orderDetailVO7.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0002\\4.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailVO7.setProductReviewStatus(1);
+//		dao.update(orderDetailVO7);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailVO8 = new OrderDetailVO();
+//		orderDetailVO8.setOrderId(4);
+//		orderDetailVO8.setProductId("ENP0006");
+//		orderDetailVO8.setProductPrice(3500);
+//		orderDetailVO8.setQuantity(1);
+//		orderDetailVO8.setProductReview("便宜的價格, 以後一定會在回購！！");
+//		try {
+//			orderDetailVO8.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0006\\4.png"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailVO8.setProductReviewStatus(1);
+//		dao.update(orderDetailVO8);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailVO9 = new OrderDetailVO();
+//		orderDetailVO9.setOrderId(4);
+//		orderDetailVO9.setProductId("ENP0007");
+//		orderDetailVO9.setProductPrice(490);
+//		orderDetailVO9.setQuantity(1);
+//		orderDetailVO9.setProductReview("便宜的價格, 以後一定會在回購！！");
+//		try {
+//			orderDetailVO9.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0007\\4.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailVO9.setProductReviewStatus(1);
+//		dao.update(orderDetailVO9);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailV10 = new OrderDetailVO();
+//		orderDetailV10.setOrderId(4);
+//		orderDetailV10.setProductId("ENP0009");
+//		orderDetailV10.setProductPrice(1400);
+//		orderDetailV10.setQuantity(1);
+//		orderDetailV10.setProductReview("便宜的價格, 以後一定會在回購！！");
+//		try {
+//			orderDetailV10.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0009\\4.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailV10.setProductReviewStatus(1);
+//		dao.update(orderDetailV10);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailV11 = new OrderDetailVO();
+//		orderDetailV11.setOrderId(5);
+//		orderDetailV11.setProductId("ENP0001");
+//		orderDetailV11.setProductPrice(299);
+//		orderDetailV11.setQuantity(1);
+//		orderDetailV11.setProductReview("出貨速度超快, 很推薦！！");
+//		try {
+//			orderDetailV11.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0001\\5.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailV11.setProductReviewStatus(1);
+//		dao.update(orderDetailV11);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailV12 = new OrderDetailVO();
+//		orderDetailV12.setOrderId(5);
+//		orderDetailV12.setProductId("ENP0002");
+//		orderDetailV12.setProductPrice(249);
+//		orderDetailV12.setQuantity(1);
+//		orderDetailV12.setProductReview("出貨速度超快, 很推薦！！");
+//		try {
+//			orderDetailV12.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0002\\5.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailV12.setProductReviewStatus(1);
+//		dao.update(orderDetailV12);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailV13 = new OrderDetailVO();
+//		orderDetailV13.setOrderId(6);
+//		orderDetailV13.setProductId("ENP0003");
+//		orderDetailV13.setProductPrice(329);
+//		orderDetailV13.setQuantity(3);
+//		orderDetailV13.setProductReview("顏色好看, 實體比想像中大, 外觀看起來還不錯！");
+//		try {
+//			orderDetailV13.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0003\\6.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailV13.setProductReviewStatus(1);
+//		dao.update(orderDetailV13);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailV14 = new OrderDetailVO();
+//		orderDetailV14.setOrderId(7);
+//		orderDetailV14.setProductId("ENP0005");
+//		orderDetailV14.setProductPrice(390);
+//		orderDetailV14.setQuantity(2);
+//		orderDetailV14.setProductReview("便宜又有質感！");
+//		try {
+//			orderDetailV14.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0005\\7.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailV14.setProductReviewStatus(1);
+//		dao.update(orderDetailV14);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailV15 = new OrderDetailVO();
+//		orderDetailV15.setOrderId(7);
+//		orderDetailV15.setProductId("ENP0004");
+//		orderDetailV15.setProductPrice(199);
+//		orderDetailV15.setQuantity(2);
+//		orderDetailV15.setProductReview("便宜又有質感！");
+//		try {
+//			orderDetailV15.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0004\\7.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailV15.setProductReviewStatus(1);
+//		dao.update(orderDetailV15);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailV16 = new OrderDetailVO();
+//		orderDetailV16.setOrderId(8);
+//		orderDetailV16.setProductId("ENP0002");
+//		orderDetailV16.setProductPrice(249);
+//		orderDetailV16.setQuantity(2);
+//		orderDetailV16.setProductReview("出貨速度快, 包裝良好！！");
+//		try {
+//			orderDetailV16.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0002\\8.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailV16.setProductReviewStatus(1);
+//		dao.update(orderDetailV16);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailV17 = new OrderDetailVO();
+//		orderDetailV17.setOrderId(9);
+//		orderDetailV17.setProductId("ENP0003");
+//		orderDetailV17.setProductPrice(329);
+//		orderDetailV17.setQuantity(2);
+//		orderDetailV17.setProductReview("出貨速度快, 包裝良好！！");
+//		try {
+//			orderDetailV17.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0003\\9.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailV17.setProductReviewStatus(1);
+//		dao.update(orderDetailV17);
+//		System.out.println("Statement Processed...");
+//		
+//		OrderDetailVO orderDetailV18 = new OrderDetailVO();
+//		orderDetailV18.setOrderId(10);
+//		orderDetailV18.setProductId("ENP0010");
+//		orderDetailV18.setProductPrice(2600);
+//		orderDetailV18.setQuantity(10);
+//		orderDetailV18.setProductReview("再次回購！！老婆太愛吃了 =_=！");
+//		try {
+//			orderDetailV18.setProductReviewPhoto(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\EatNAK_Shop_Dummy\\ENP0010\\10.jpeg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailV18.setProductReviewStatus(1);
+//		dao.update(orderDetailV18);
+//		System.out.println("Statement Processed...");
 		
 		
 		
