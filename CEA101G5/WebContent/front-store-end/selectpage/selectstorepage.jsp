@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.restaurant.model.*"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 RestaurantService restSvc = new RestaurantService();
 %>
@@ -29,12 +29,14 @@ RestaurantService restSvc = new RestaurantService();
 			<ul>
 				<li>餐廳設定
 					<ul>
-						<li>
-						<a href="<%=request.getContextPath()%>/front-store-end/restaurant/addrestaurant.jsp">餐廳資訊設定</a>
-						</li>
-						<li>
-						功能開關選項
-						</li>
+					<c:if test="${empty sessionScope.storeLogin}">
+						<li><a href="<%=request.getContextPath()%>/front-store-end/restaurant/addrestaurant.jsp">餐廳資訊設定</a></li>
+					</c:if>	
+					<c:if test="${not empty sessionScope.storeLogin}">
+						<li><a href="<%=request.getContextPath()%>/front-store-end/restaurant/restaurantPage.jsp">餐廳資訊設定</a></li>
+					</c:if>	
+						<li><a href="<%=request.getContextPath()%>/front-store-end/restaurant/addRestaurantPicturePage.jsp">餐廳照片管理</a></li>
+						<li>功能開關選項</li>
 					</ul>
 				</li>
 				<li>餐點設定
@@ -60,7 +62,8 @@ RestaurantService restSvc = new RestaurantService();
 						<a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/editQueTable.jsp">餐桌管理</a>
 						</li>
 					</ul></li>
-				<li>定位選項設定</li>
+				<li><a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/updaterestaurantGroup.jsp">訂位選項設定</a></li>
+				<li><a href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">回首頁</a></li>
 			</ul>
 		</span>
             <span><a href="<%=request.getContextPath()%>/front-store-end/foodorder/orderlist.jsp"><svg aria-hidden="true" focusable="false"

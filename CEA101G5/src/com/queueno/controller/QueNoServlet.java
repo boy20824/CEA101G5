@@ -17,7 +17,6 @@ import com.member.model.*;
 
 public class QueNoServlet extends HttpServlet {
 	
-	static int count = 1;
 	
 	Timer timer = new Timer();
 
@@ -31,18 +30,20 @@ public class QueNoServlet extends HttpServlet {
 //		}
 //		System.out.println(storeMap);
 		// reset??��?��?�碼 ??��?��?��??
+		deleteAllNum();
+		
 		Integer dayTime = 60 * 60 * 1000;
 		// 設�?��?��?�年???(-1)?��??��?��??
-		Date date = new Date(120, 11, 23, 18, 31, 2);
-		System.out.println(date);
+		Date date = new Date(121, 0, 14, 15, 44, 1);
 		TimerTask timerTask = new TimerTask() {
-
+			
 			@Override
 			public void run() {
-				count = 1;
-//				countSet.clear();
+				deleteAllNum();
+				System.out.println("排程開始");
 			}
 		};
+		System.out.println(date);
 //		timer.schedule(timerTask,  10*1000);
 //		timer.scheduleAtFixedRate(timerTask, new Date(), dayTime);
 		timer.scheduleAtFixedRate(timerTask, date, dayTime);
@@ -140,6 +141,11 @@ public class QueNoServlet extends HttpServlet {
 				
 				QueNoService queNoSvc = new QueNoService();
 				List<QueNoVO> queNoVO = queNoSvc.getQueNoByStoreId(storeid);
+				List<QueNoVO> queNoVO1 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 1);
+				List<QueNoVO> queNoVO2 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 2);
+				List<QueNoVO> queNoVO3 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 3);
+				List<QueNoVO> queNoVO4 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 4);
+				
 				
 				if(queNoVO.size()!=0) {
 					for(int i = 0; i < queNoVO.size(); i++) {
@@ -163,6 +169,10 @@ public class QueNoServlet extends HttpServlet {
 					session.setAttribute("queTableVO", queTableVO);
 					session.setAttribute("queLineVO", queLineVO);
 					session.setAttribute("queNoVO", queNoVO);
+					session.setAttribute("queNoVO1", queNoVO1);
+					session.setAttribute("queNoVO2", queNoVO2);
+					session.setAttribute("queNoVO3", queNoVO3);
+					session.setAttribute("queNoVO4", queNoVO4);
 					session.setAttribute("storeid", storeid);
 //					count++;// 計數+1
 //				req.setAttribute("pickupNo", count);
@@ -180,6 +190,7 @@ public class QueNoServlet extends HttpServlet {
 		}
 			
 			if ("storeInsert".equals(action)) {
+				int num = 0;
 				System.out.println("startinsert");
 				
 //			try {
@@ -223,6 +234,15 @@ public class QueNoServlet extends HttpServlet {
 				
 				QueNoService queNoSvc = new QueNoService();
 				List<QueNoVO> queNoVO = queNoSvc.getQueNoByStoreId(storeid);
+				
+				if(queNoVO.size()!=0) {
+					for(int i = 0; i < queNoVO.size(); i++) {
+						if(num <= queNoVO.get(i).getQueuenum())
+							num = queNoVO.get(i).getQueuenum()+1;
+					}
+				}else {
+					num = 1;
+				}
 				// 用來檢查是否有取過號
 				List<String> noList = new ArrayList<String>();
 				for(int i = 0; i<queNoVO.size();i++) {
@@ -244,14 +264,14 @@ public class QueNoServlet extends HttpServlet {
 						if(memList.contains(memphone)) {
 							// 已有會員該店尚未取過號-->>新增取號
 							req.setAttribute("check", "addNo");
-							queNoVO1 = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno, queuetableid);
-							count++;
+							queNoVO1 = queNoSvc.addQueNo(num, memphone, party, queuenotime, storeid, queueperiodid, queuelineno, queuetableid);
+							System.out.println("新增成功");
 						}else {
 							// 新增會員-->>新增取號
 							memSvc.easyAddMem(memphone, psw, memName);
-							queNoVO1 = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno, queuetableid);
+							queNoVO1 = queNoSvc.addQueNo(num, memphone, party, queuenotime, storeid, queueperiodid, queuelineno, queuetableid);
 							req.setAttribute("check", "addNo");
-							count++;
+							System.out.println("新增成功");
 						}
 					}
 //-------------------------------------------------------------------------------
@@ -280,7 +300,7 @@ public class QueNoServlet extends HttpServlet {
 					session.setAttribute("queLineVO", queLineVO);
 					session.setAttribute("queNoVO", queNoVO);
 					session.setAttribute("storeid", storeid);
-					session.setAttribute("pickupNo", count);
+					session.setAttribute("pickupNo", num);
 //					req.setAttribute("quePeriodVO", quePeriodVO);
 //					req.setAttribute("queTableVO", queTableVO);
 //					req.setAttribute("queLineVO", queLineVO);
@@ -307,7 +327,7 @@ public class QueNoServlet extends HttpServlet {
 					session.setAttribute("queLineVO", queLineVO);
 					session.setAttribute("queNoVO", queNoVO);
 					session.setAttribute("storeid", storeid);
-					session.setAttribute("pickupNo", count);
+					session.setAttribute("pickupNo", num);
 					String url = "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);
 					successView.forward(req, res);
@@ -315,7 +335,7 @@ public class QueNoServlet extends HttpServlet {
 			}
 			
 			if ("insert".equals(action)) {
-				
+				int num =0;
 				System.out.println("startinsert");
 				/*********************** 1.?��?��請�?��?�數 - 輸入?��式�?�錯誤�?��?? *************************/
 				Integer queuenum = new Integer(req.getParameter("queuenum"));
@@ -328,8 +348,16 @@ public class QueNoServlet extends HttpServlet {
 				Integer queuelineno = new Integer(req.getParameter("queuelineno").trim());
 				Integer queuetableid = new Integer(req.getParameter("queuetableid").trim());
 				String psw = "Enak1234";
-				
-				
+				QueNoService queNoSvc = new QueNoService();
+				List<QueNoVO> queNoVO1 = queNoSvc.getQueNoByStoreId(storeid);
+				if(queNoVO1.size()!=0) {
+					for(int i = 0; i < queNoVO1.size(); i++) {
+						if(num <= queNoVO1.get(i).getQueuenum())
+							num = queNoVO1.get(i).getQueuenum()+1;
+					}
+				}else {
+					num = 1;
+				}
 				QueNoVO queNoVO = new QueNoVO();
 				queNoVO.setQueuenum(queuenum);
 				queNoVO.setMemphone(memphone);
@@ -341,7 +369,6 @@ public class QueNoServlet extends HttpServlet {
 				queNoVO.setStoreid(storeid);
 				/*************************** 2.??��?�新增�?��?? ***************************************/
 				// ?��增至資�?�庫
-				QueNoService queNoSvc = new QueNoService();
 				
 				// 顯示桌種??��?��?�碼?��
 //				List<QueNoVO> list = queNoSvc2.getQueNoByStoreIdAndTableId(storeid, queuetableid);
@@ -372,14 +399,14 @@ public class QueNoServlet extends HttpServlet {
 						// 已有會員該店尚未取過號-->>新增取號
 						System.out.println("新增成功");
 						req.setAttribute("check", "addNo");
-						queNoVO = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
+						queNoVO = queNoSvc.addQueNo(num, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
 								queuetableid);
 //						count++;
 					}else {
 						// 新增會員-->>新增取號
 						System.out.println("新增成功");
 						memSvc.easyAddMem(memphone, psw, memberName);
-						queNoVO = queNoSvc.addQueNo(queuenum, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
+						queNoVO = queNoSvc.addQueNo(num, memphone, party, queuenotime, storeid, queueperiodid, queuelineno,
 								queuetableid);
 						req.setAttribute("check", "addNo");
 //						count++;
@@ -569,7 +596,26 @@ public class QueNoServlet extends HttpServlet {
 			String url = "/front-store-end/queue/queueNo/listAllQueNo.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
-
+		}
+		
+		if("reset".equals(action)) {
+			String storeid = req.getParameter("storeid");
+			
+			QueTableService queTableSvc = new QueTableService();
+			List<QueTableVO> queTableVO = queTableSvc.getStoreQueTable(storeid);
+			for(int i = 0; i<queTableVO.size();i++) {
+				Integer queuetableusable = queTableVO.get(i).getQueuetablettl();
+				Integer queuetableid = queTableVO.get(i).getQueuetableid();
+				String queuetabletype = queTableVO.get(i).getQueuetabletype();
+				Integer queuetablettl = queTableVO.get(i).getQueuetablettl();
+				queTableSvc.updateTable(queuetableid, queuetabletype, storeid, queuetablettl, queuetableusable, 0);
+			}
+			QueLineService queLineSvc = new QueLineService();
+			List<QueLineVO> queLineVO = queLineSvc.getStoreQueNo(storeid);
+			QuePeriodService quePeriodSvc = new QuePeriodService();
+			List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
+			
+			
 		}
 	}
 	
@@ -601,6 +647,14 @@ public class QueNoServlet extends HttpServlet {
 //		return time2;
 //	}
 	
+	public void deleteAllNum() {
+		QueNoService queNoSvc = new QueNoService();
+		List<QueNoVO> queNoVO = queNoSvc.getAll();
+		for(int i = 0; i<queNoVO.size(); i++) {
+			queNoSvc.deleteQueNo(queNoVO.get(i).getMemphone());
+		}
+	}
+	
 	public Timestamp strToTsp(String str) {
 		System.out.println("transforming");
 		@SuppressWarnings("deprecation")
@@ -611,18 +665,18 @@ public class QueNoServlet extends HttpServlet {
 		return time1;
 	}
 
-	public int TimeToReset(int hr, int min, int sec) {
-		Date date = new Date();
-		Integer hrCheck = date.getHours();
-		Integer minCheck = date.getMinutes();
-		Integer secCheck = date.getSeconds();
-
-		System.out.println(hrCheck);
-		System.out.println(minCheck);
-		System.out.println(secCheck);
-		if (hrCheck.equals(hr) && minCheck.equals(min) && secCheck.equals(sec)) {
-			count = 0;
-		}
-		return count;
-	}
+//	public int TimeToReset(int hr, int min, int sec) {
+//		Date date = new Date();
+//		Integer hrCheck = date.getHours();
+//		Integer minCheck = date.getMinutes();
+//		Integer secCheck = date.getSeconds();
+//
+//		System.out.println(hrCheck);
+//		System.out.println(minCheck);
+//		System.out.println(secCheck);
+//		if (hrCheck.equals(hr) && minCheck.equals(min) && secCheck.equals(sec)) {
+//			count = 0;
+//		}
+//		return count;
+//	}
 }
