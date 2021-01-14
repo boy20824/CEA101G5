@@ -1,5 +1,6 @@
 package com.productphoto.model;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 
@@ -11,5 +12,5 @@ public interface ProductPhotoDAO_Interface {
 	public List<ProductPhotoVO> getAll(String productId);
 	
 	
-	public void insert2 (ProductPhotoVO productPhotoVO , java.sql.Connection con);
+	public PreparedStatement insert2 (ProductPhotoVO productPhotoVO , java.sql.PreparedStatement con);
 }

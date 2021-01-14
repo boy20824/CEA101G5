@@ -629,16 +629,19 @@ public class ProductJNDIDAO implements ProductDAO_Interface {
 			rs.next();
 			StringBuilder productId =new StringBuilder(rs.getString(1));
 			rs.close();
-			
+			pstmt.close();
 			ProductPhotoJNDIDAO dao =new ProductPhotoJNDIDAO();
+			
+			pstmt = con.prepareStatement("INSERT INTO PRODUCT_PHOTO (PRODUCT_PHOTO_ID, PRODUCT_ID, PRODUCT_PHOTO) VALUES (SEQ_PRODUCT_PHOTO_ID.NEXTVAL, ?, ?)");
 			
 			for(byte[] pic:productPhotoList) {
 				ProductPhotoVO productPhotoVO = new ProductPhotoVO();
 				productPhotoVO.setProductId(productId.toString());
 				productPhotoVO.setProductPhoto(pic);
-				dao.insert2(productPhotoVO, con);
+				dao.insert2(productPhotoVO, pstmt);
 				
 			}
+			pstmt.executeBatch();
 			con.commit();
 			con.setAutoCommit(true);
 			

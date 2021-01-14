@@ -75,44 +75,46 @@ public class ProductPhotoJNDIDAO implements ProductPhotoDAO_Interface {
 	}
 		
 	@Override
-	public void insert2(ProductPhotoVO productPhotoVO , java.sql.Connection con) {
+	public PreparedStatement insert2(ProductPhotoVO productPhotoVO , java.sql.PreparedStatement pstmt) {
 	
-		PreparedStatement pstmt = null;
+		
 		
 		try {
 			
-			pstmt = con.prepareStatement(INSERT_STMT);
+			
 			
 			pstmt.setString(1, productPhotoVO.getProductId());
 			pstmt.setBytes(2, productPhotoVO.getProductPhoto());
 		
-			pstmt.executeUpdate();
+			pstmt.addBatch();
 		
 		} catch (SQLException se) {
-			if (con != null) {
-				try {
-					// 3●設定於當有exception發生時之catch區塊內
-					System.err.print("Transaction is being ");
-					System.err.println("rolled back-由-emp");
-					con.rollback();
-				} catch (SQLException excep) {
-					throw new RuntimeException("rollback error occured. "
-							+ excep.getMessage());
-				}
-			}
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-		}
+//			if (con != null) {
+//				try {
+//					// 3●設定於當有exception發生時之catch區塊內
+//					System.err.print("Transaction is being ");
+//					System.err.println("rolled back-由-emp");
+//					con.rollback();
+//				} catch (SQLException excep) {
+//					throw new RuntimeException("rollback error occured. "
+//							+ excep.getMessage());
+//				}
+//			}
+//			throw new RuntimeException("A database error occured. "
+//					+ se.getMessage());
+//			// Clean up JDBC resources
+		} 
+//		finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//		}
 		
+		return pstmt;
 	}
 	
 	@Override
