@@ -17,7 +17,7 @@ $('document').ready(function(){
     	let str="";
             for(mydata in data){
             	if(data[mydata].menuStatus==0 && data[mydata].menuSellStatus==1){
-            		  str+=`<div class="list animate__animated  animate__tada"><img src="/CEA101G5/menu/MenuServlet.do?menuId=`+data[mydata].menuId+`&action=getOnePicture" />
+            		  str+=`<div class="list animate__animated  animate__fadeInUp"><img src="/CEA101G5/menu/MenuServlet.do?menuId=`+data[mydata].menuId+`&action=getOnePicture" />
                           <div class="detail">
                             <ul>
                               <li class="detailTitle"><p>`+data[mydata].menuName+`</p></li>
@@ -52,6 +52,7 @@ $('document').ready(function(){
             let menuNumber =[];
             for(mydata in data){
             	if(data[mydata].menuStatus==0 && data[mydata].menuSellStatus==1){
+//            		加阿哪次不加
             		menuNumber.push(mydata)
             	}
     		}
@@ -60,20 +61,52 @@ $('document').ready(function(){
           
             let memberId =document.querySelector(".memberId") 
             let quantity =document.querySelectorAll('span[name="quantity"]')
+            let detailTitle=document.querySelectorAll('.detailTitle >p')
             // 點擊按鈕後觸發加入購物車事件
             
             for(let i=0;i<add.length;i++){
             	add[i].addEventListener('click', function(){
-         
-            		$.ajax({
-            			url:'/CEA101G5//menu/MenuServlet.do?menuId='+data[menuNumber[i]].menuId+'&quantity='+quantity[i].innerText+'&action=add',
-            			type : "GET",
-            			dataType : "json",
-            			success : function(data) { 
-                    	showCar(data);
-                    	quantity[i].innerText=1;
-            			}
-            		})     		         		
+            		
+            		
+//            		加阿哪次不加
+            		document.getElementById('mu')
+            		mu.play();
+            		
+            		Swal.fire({
+            			  title: '確認餐點?',
+            			  text: "您確定要購買數量 :"+quantity[i].innerText+" 餐點名稱:"+detailTitle[i].innerText+" ?",
+            			  icon: 'question',
+            			  showCancelButton: true,
+            			  confirmButtonColor: '#3085d6',
+            			  cancelButtonColor: '#d33',
+            			  confirmButtonText: '是的,加入購物車!'
+            			}).then((result) => {
+            			  if (result.isConfirmed) {
+            			    Swal.fire(
+            			      '太棒了!',
+            			      '你成功加入購物車.',
+            			      'success'
+            			    )
+            			    mu.pause();
+            			    mu.currentTime = 0;
+            				$.ajax({
+                    			url:'/CEA101G5//menu/MenuServlet.do?menuId='+data[menuNumber[i]].menuId+'&quantity='+quantity[i].innerText+'&action=add',
+                    			type : "GET",
+                    			dataType : "json",
+                    			success : function(data) { 
+                            	showCar(data);
+                            	quantity[i].innerText=1;
+                    			}
+                    		})    
+            			  }
+//                  		加阿哪次不加
+            			  mu.pause();
+          			      mu.currentTime = 0;
+            			})
+            		
+            		
+            		
+            	 		         		
             	})
             	
             }     

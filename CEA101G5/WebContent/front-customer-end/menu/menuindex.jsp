@@ -42,6 +42,7 @@ response.setDateHeader("Expires", 0);
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front-customer-end/menu/css/css.css" />
+ <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="<%=request.getContextPath()%>/front-customer-end/menu/js/all.js"></script>
 <link href="<%=request.getContextPath()%>/front-customer-end/menu/css/all.css" rel="stylesheet" />
@@ -49,6 +50,7 @@ response.setDateHeader("Expires", 0);
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-customer-end/menu/slick/slick-theme.css" />
 <script src="<%=request.getContextPath()%>/front-customer-end/menu/js/ajax.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <style>
 .ratings {
 	position: relative;
@@ -74,6 +76,11 @@ response.setDateHeader("Expires", 0);
 
 </head>
 <body>
+
+<!-- 加阿哪次不加 -->
+<audio id="mu" src="1.mp4" preload=true  ></audio>
+
+
 
 	<!--存放外會員進來的參數以及餐點編號 -->
 	<input type="hidden" class="storeId" value="${restaurantVO.storeId}" />
@@ -233,11 +240,11 @@ response.setDateHeader("Expires", 0);
 			<div class="listBar">
 				<h1>菜單</h1>
 				<ul>
-					<li class="menuChar">主餐</li>
-					<li class="menuChar">副餐</li>
-					<li class="menuChar">湯品</li>
-					<li class="menuChar">甜品</li>
-					<li class="menuChar">飲品</li>
+					<li class="menuChar"><i class="fal fa-meat"></i>主餐</li>
+					<li class="menuChar"><i class="fal fa-wheat"></i>副餐</li>
+					<li class="menuChar"><i class="fad fa-soup"></i>湯品</li>
+					<li class="menuChar"><i class="fad fa-snake"></i>甜品</li>
+					<li class="menuChar"><i class="fas fa-cocktail"></i>飲品</li>
 				</ul>
 			</div>
 			<!-- 餐點資訊表 -->

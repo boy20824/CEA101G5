@@ -1,0 +1,175 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* start */
+.containeer{
+    background-color: #fafafa;
+    padding-top: 2em;
+    height: 1000px;
+    margin:0 auto;
+}
+.sbar{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+.char{
+    color:#a5a5ab;
+    height: 72px;
+    width: 120px;
+    line-height:72px;
+    text-align: center;
+    margin-left:4px;
+    margin-right:4px;
+    font-weight:700;
+    box-shadow:0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+    transition: all 0.5s;
+    background:white;
+}
+.char:hover{
+    cursor:pointer;
+}
+span{
+    padding-left:5px ;
+}
+.char:active{
+    background:#ffb400; 
+    color:#404044;
+}
+
+.-on{
+    background:#ffb400;
+    color:#404044;
+    margin-top: -3px;
+	padding-bottom:3px;
+    height:74px;
+    line-height:74px;
+}
+.context{
+    display:flex;
+    width: 1300px;
+    margin:0 auto;
+    flex-wrap: wrap;
+}
+.menu{
+    display:flex;
+    align-items:center;
+    box-shadow: 0px 1px 18px -12px rgba(0, 0, 0, 0.75);
+    padding:1em;
+    width: 540px;
+    margin-right: 2em;
+    background:white;
+    margin-bottom: 20px;
+}
+.menu:hover{
+    background:#ffc107;
+}
+.img img{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position:center center ;
+    margin-right: 1.5em;
+}
+.text1{
+    display: flex;
+    height: 5em;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.menuName{
+    line-height: 1.5;
+    color: #404044;
+    font-weight: 400;
+    font-size: 18px;
+}
+.detail{
+    font-family: "Muli", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 300;
+    color: #8b8b92;
+}
+.price{
+    text-align: right;
+}
+.money{
+    font-size: 30px;
+    color: #404044;
+    line-height: 1.4;
+    margin-bottom: 0.2em;
+}
+.buttonAll{
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+.del,.addd{
+    border-radius: 50%;
+    border-style: none;
+    background:black;
+    color:white;
+    height: 20px;
+    width:20px;
+}
+.del:focus,.addd:focus{
+    outline:none;
+}
+.del:hover,.addd:hover{
+    cursor:pointer;
+}
+.add{
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding:5px 3px 5px 3px;
+    margin-left: 10px;
+}
+.add:focus{
+    outline:none;
+}
+.add:hover{
+    cursor:pointer;
+}
