@@ -6,8 +6,8 @@
 <%@ page import="com.restaurant.model.*"%>
 
 <%
-QuePeriodService quePeriodSvc = new QuePeriodService(); //創建 實體
-RestaurantService restSvc = new RestaurantService();
+QuePeriodService quePeriodSvc = new QuePeriodService(); 
+// RestaurantService restSvc = new RestaurantService();
 
 String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
 String storeName = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreName();
@@ -16,7 +16,7 @@ String storeName = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreNa
 	// 取出servlet request 再設定pagecontext供查詢
 // 	list = (List<QuePeriodVO>) request.getAttribute("quePeriodVO");
 	pageContext.setAttribute("list", list);
-	pageContext.setAttribute("storeid", storeid);
+// 	pageContext.setAttribute("storeid", storeid);
 	pageContext.setAttribute("storeName", storeName);
 // 	String storeid = (String) request.getAttribute("storeid");
 %>
