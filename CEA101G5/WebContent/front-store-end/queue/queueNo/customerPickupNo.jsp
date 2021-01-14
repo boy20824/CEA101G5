@@ -110,52 +110,52 @@ img {
 							<c:forEach var="queTableVO" items="${queTableVO}">
 								<c:choose>
 								<c:when test="${queTableVO.queuetableid==1 }">
-							<input class="form-check-input" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
-								id="inlineRadio1" value="${queueTableid }"> 
+							<input class="form-check-input fortable" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
+								id="inlineRadio1" value="${queTableVO.queuetableid }"> 
 								<label class="form-check-label" for="inlineRadio1">1~2人</label>
 								</c:when></c:choose>
 								<c:choose>
 								<c:when test="${queTableVO.queuetableid==2 }">
-							<input class="form-check-input" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
-								id="inlineRadio1" value="${queueTableid }"> 
+							<input class="form-check-input fortable" type="radio" checked onchange="getNoCall();" name="inlineRadioOptions"
+								id="inlineRadio1" value="${queTableVO.queuetableid }"> 
 								<label class="form-check-label" for="inlineRadio1">3~4人</label>
 								</c:when></c:choose>
 								<c:choose>
 								<c:when test="${queTableVO.queuetableid==3 }">
-							<input class="form-check-input" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
-								id="inlineRadio1" value="${queueTableid }"> 
+							<input class="form-check-input fortable" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
+								id="inlineRadio1" value="${queTableVO.queuetableid }"> 
 								<label class="form-check-label" for="inlineRadio1">5~8人</label>
 								</c:when></c:choose>
 								<c:choose>
 								<c:when test="${queTableVO.queuetableid==4 }">
-							<input class="form-check-input" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
-								id="inlineRadio1" value="${queueTableid }"> 
+							<input class="form-check-input fortable" type="radio" onchange="getNoCall();" name="inlineRadioOptions"
+								id="inlineRadio1" value="${queTableVO.queuetableid }"> 
 								<label class="form-check-label" for="inlineRadio1">10人</label>
 								</c:when></c:choose>
 							</c:forEach>
 						</div>
 					</div>
-					<div class="col-sm-6">
-						<div class="show form-check form-check-inline" >
-							<input class="form-check-input" type="radio"
-								onchange="getNoCall();" name="inlineRadioOptions"
-								id="inlineRadio1" value="option1"> <label
-								class="form-check-label" for="inlineRadio1">1~2人</label>
-						</div>
-						<div class="show form-check form-check-inline">
-							<input class="form-check-input" checked type="radio"
-								onchange="getNoCall();" name="inlineRadioOptions"
-								id="inlineRadio2" value="option2"> <label
-								class="form-check-label" for="inlineRadio2">3~4人</label>
-						</div>
-						<div class="show form-check form-check-inline">
-							<input class="form-check-input" type="radio"
-								onchange="getNoCall();" name="inlineRadioOptions"
-								id="inlineRadio3" value="option3"> <label
-								class="form-check-label" for="inlineRadio3">5~8人 </label>
-						</div>
+<!-- 					<div class="col-sm-6"> -->
+<!-- 						<div class="show form-check form-check-inline" > -->
+<!-- 							<input class="form-check-input" type="radio" -->
+<!-- 								onchange="getNoCall();" name="inlineRadioOptions" -->
+<!-- 								id="inlineRadio1" value="option1"> <label -->
+<!-- 								class="form-check-label" for="inlineRadio1">1~2人</label> -->
+<!-- 						</div> -->
+<!-- 						<div class="show form-check form-check-inline"> -->
+<!-- 							<input class="form-check-input" checked type="radio" -->
+<!-- 								onchange="getNoCall();" name="inlineRadioOptions" -->
+<!-- 								id="inlineRadio2" value="option2"> <label -->
+<!-- 								class="form-check-label" for="inlineRadio2">3~4人</label> -->
+<!-- 						</div> -->
+<!-- 						<div class="show form-check form-check-inline"> -->
+<!-- 							<input class="form-check-input" type="radio" -->
+<!-- 								onchange="getNoCall();" name="inlineRadioOptions" -->
+<!-- 								id="inlineRadio3" value="option3"> <label -->
+<!-- 								class="form-check-label" for="inlineRadio3">5~8人 </label> -->
+<!-- 						</div> -->
 						
-					</div>
+<!-- 					</div> -->
 				</div>
 
 				<div class="row">
@@ -296,7 +296,30 @@ img {
 
 
 	<script>
-	$()
+	$(".fortable").change(function(){
+		switch($(this).val()){
+		case "1":
+			$("#party").attr("value", "2");
+			$("[name='queuetableid']").attr("value", "1");
+			$("[name='queuelineno']").attr("value", "1");
+			break;
+		case "2":
+			$("#party").val(4);
+			$("[name='queuetableid']").attr("value", "2");
+			$("[name='queuelineno']").attr("value", "2");
+			break;
+		case "3":
+			$("#party").val(8);
+			$("[name='queuetableid']").attr("value", "3");
+			$("[name='queuelineno']").attr("value", "3");
+			break;
+		case "4":
+			$("#party").val(10);
+			$("[name='queuetableid']").attr("value", "4");
+			$("[name='queuelineno']").attr("value", "4");
+			break;
+		}
+	});
 	</script>
 	<!-- 		顯示動態時間 -->
 	<script type="text/javascript">
