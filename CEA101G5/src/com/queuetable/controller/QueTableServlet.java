@@ -219,7 +219,6 @@ List<QueTableVO> queTableVO1 = queTableSvc.getStoreQueTable(storeid);
 			successView.forward(req, res);
 //			String url = "/front-store-end/queue/queueTable/select_page.jsp";
 //			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
 		}
 
 		

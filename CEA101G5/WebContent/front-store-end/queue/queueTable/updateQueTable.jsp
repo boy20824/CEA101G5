@@ -4,13 +4,13 @@
 <%@ page import="java.util.*"%>
 
 <% 
-String storeid = request.getParameter("storeid"); 
+// String storeid = request.getParameter("storeid"); 
 Integer queuetableid =new Integer(request.getParameter("queuetableid"));
-pageContext.setAttribute("storeid", storeid);
+// pageContext.setAttribute("storeid", storeid);
 pageContext.setAttribute("queuetableid", queuetableid);
 
 %>
-
+${queuetableid }
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -25,7 +25,7 @@ pageContext.setAttribute("queuetableid", queuetableid);
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/customerPickupNo.css" />
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-store-end/restaurant/css/css.css" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>addQueTable.jsp</title>
+<title>updateQueTable.jsp</title>
 <style>
 .btn{
 	background-color: #FA7E23; 
@@ -103,8 +103,8 @@ input.inputH{
 				</div>
 			</div>
 			<div class="row reserve1"></div>
-			<input name="storeid" value="${storeid }" hidden="hidden">
-			<input name="queuetableid" value="${queuetableid }" type="hidden"> 		
+			<input name="storeid" value="${storeLogin.storeId}" hidden="hidden">
+			<input name="queuetableid" value="${queuetableid}" type="hidden"> 		
 			<input
 				type="hidden" name="action" value="updateTableAmount"> 
 				<input

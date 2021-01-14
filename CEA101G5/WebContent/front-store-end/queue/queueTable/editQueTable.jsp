@@ -4,17 +4,17 @@
 <%@ page import="java.util.*"%>
 
 <%
-	QueTableService queTableSvc = new QueTableService();
-RestaurantService restSvc = new RestaurantService();
+// 	QueTableService queTableSvc = new QueTableService();
+// RestaurantService restSvc = new RestaurantService();
 
-String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
-String storeName = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreName();
-	// 取出servlet request 再設定pagecontext供查詢
-	List<QueTableVO> list = new ArrayList<QueTableVO>();
-	list = queTableSvc.getStoreQueTable(storeid);
-	pageContext.setAttribute("list", list);
-	pageContext.setAttribute("storeid", storeid);
-	pageContext.setAttribute("storeName", storeName);
+// String storeid = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreId();
+// String storeName = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreName();
+// 	// 取出servlet request 再設定pagecontext供查詢
+// 	List<QueTableVO> list = new ArrayList<QueTableVO>();
+// 	list = queTableSvc.getStoreQueTable(storeid);
+// 	pageContext.setAttribute("list", list);
+// 	pageContext.setAttribute("storeid", storeid);
+// 	pageContext.setAttribute("storeName", storeName);
 // 	String storeid = (String) request.getAttribute("storeid");
 %> 
 <%@include file="../sidebar.jsp" %>
@@ -43,7 +43,8 @@ String storeName = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreNa
 
 </head>
 <body bgcolor='white'>
-${ storeName}
+${storeLogin.storeId}
+${storeName}
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
@@ -69,7 +70,11 @@ ${ storeName}
 				<%
 					int count = 1;
 				%>
-				<c:forEach var="queTableVO" items="${list}">
+				<jsp:useBean id="queTableSvc" scope="page" class="com.queuetable.model.QueTableService"/> 
+				
+				<c:forEach var="queTableVO" items="${queTableSvc.getStoreQueTable(storeLogin.storeId)}">
+				<c:choose>
+				<c:when test="${queTableVO.storeid==storeLogin.storeId}">
 					<tr>
 						<th scope="row"><%=count%></th>
 						<c:choose>
@@ -88,13 +93,14 @@ ${ storeName}
 						</c:choose>
 						<td>${queTableVO.queuetablettl}</td>
 						<td>${queTableVO.queuetableusable}</td>
-						<td><input id="storeid" name="storeid" value="${storeid }"
+						<td><input id="storeid" name="storeid" value="${storeLogin.storeId}"
 							type="hidden"> <input
 							class="queuetableid" name="queuetableid"
 							value="${queTableVO.queuetableid }" type="hidden"> <input
 							name="update" value="修改桌數" type="button" class="edit btn btn-primary"></td>
 							<td><form method="post" action="queueTable.do" style="width:100px;">
-						<input id="storeid" name="storeid" value="${storeid }"
+							
+						<input id="storeid" name="storeid" value="${storeLogin.storeId}"
 							type="hidden"> <input id="queuetalbeid"
 							class="queuetableid" name="queuetableid"
 							value="${queTableVO.queuetableid}" type="hidden">
@@ -102,6 +108,7 @@ ${ storeName}
 							<input
 							name="delete" value="時段刪除" type="submit" class="delete btn btn-primary"></form></td>
 					</tr>
+					</c:when></c:choose>
 					<%
 						count++;
 					%>
@@ -110,7 +117,7 @@ ${ storeName}
 		</table>
 		<div class="row">
 			<div class="col-4"></div>
-			<input id="storeid4Ajax" value="${storeid }" type="hidden">
+			<input id="storeid4Ajax" value="${storeLogin.storeId}" type="hidden">
 			<input id="add" onClick="showAddPage()" name="add" value="新增桌型"
 				type="button" class="btn btn-primary">
 		</div>
