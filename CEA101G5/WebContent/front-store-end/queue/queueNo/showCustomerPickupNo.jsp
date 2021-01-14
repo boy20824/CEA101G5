@@ -12,15 +12,8 @@
 <%
 
 	QueNoVO queNoVO = (QueNoVO) session.getAttribute("queNoVO");
-	QueNoVO queNoVO2 = (QueNoVO) session.getAttribute("queNoVO2");
-	List<QuePeriodVO> quePeriodVO = new ArrayList<QuePeriodVO>();
-	quePeriodVO = (List<QuePeriodVO>) session.getAttribute("quePeriodVO");
-	String memberName = (String) session.getAttribute("memberName");
-	String storeid = (String) session.getAttribute("storeid");
 	session.setAttribute("queNoVO", queNoVO);
-	session.setAttribute("queNoVO2", queNoVO);
-	session.setAttribute("quePeriodVO", quePeriodVO);
-	session.setAttribute("memberName", memberName);
+	String storeid = (String) session.getAttribute("storeid");
 	session.setAttribute("storeid", storeid);
 // 	List<QueNoVO> list = new ArrayList<QueNoVO>();//取得by storeid and tableid 未決定時段
 // 	list = (List<QueNoVO>) session.getAttribute("list");
@@ -98,9 +91,9 @@ div#helloName {
 					您好！！
 				</h1>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<h1>
-					${memberName }
+					${memLogin.memName}
 				</h1>
 			</div>
 		</div>
@@ -111,7 +104,9 @@ div#helloName {
 					<div class="col-sm-2"></div>
 					<label for="inputEmail3" class="col-sm-2 col-form-label">候位時段</label>
 					<div class="col-sm-6">
-					<c:forEach var="quePeriodVO" items="${quePeriodVO}">
+<jsp:useBean id="quePeriodSvc" scope="page" class="com.queueperiod.model.QuePeriodService"/>
+<jsp:useBean id="queNoVO2" scope="page" class="com.queueno.model.QueNoVO"/>	
+					<c:forEach var="quePeriodVO" items="${quePeriodSvc.getOneQuePeriod(storeid)}">
 					<c:choose>
 					<c:when test="${queNoVO2.queueperiodid==quePeriodVO.queueperiodid}">
 					<c:choose>

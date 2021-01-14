@@ -16,7 +16,6 @@
 	list = (List<QuePeriodVO>) session.getAttribute("quePeriodVO"); // 取得server送來之list
 	pageContext.setAttribute("list", list);
 	Integer pickupNo = (Integer) session.getAttribute("pickupNo");
-	String storeid = (String) session.getAttribute("storeid");
 %>
 <html>
 <head>
@@ -193,7 +192,7 @@ img {
 					<label for="validationServer01" class="col-sm-2 col-form-label">您的大名</label>
 					<div class="col-sm-6">
 						<input name="memberName" type="text" class="form-control <%-- is-(in)valid --%>"
-							minlength="1" maxlength="10" id="memberName" placeholder="王大明"
+							minlength="1" maxlength="10" id="memberName" placeholder="王大明" value="${memLogin.memName}"
 							required>
 					</div>
 				</div>
@@ -202,7 +201,7 @@ img {
 					<label for="inputPassword3" class="col-sm-2 col-form-label">您的手機</label>
 					<div class="col-sm-6">
 						<input id="memphone" name="memphone" type="tel"
-							class="form-control" placeholder="請輸入手機號碼：如 0987654321"
+							class="form-control" placeholder="請輸入手機號碼：如 0987654321" value="${memLogin.memPhone}"
 							minlength="10" maxlength="10"
 							 required />
 					</div>
@@ -245,7 +244,7 @@ img {
 							value="2"> <input type="hidden" id="queuelineno"
 							name="queuelineno" value="2"> <input type="hidden"
 							id="queuenotime" name="queuenotime" class="quenotime"> <input
-							type="hidden" id="storeid" name="storeid" value="${storeid }">
+							type="hidden" id="storeid" name="storeid" value="${storeid}">
 						<input type="hidden" name="action" value="insert">
 						<button id="submit" type="submit" class="pickup btn btn-primary"
 							value="送出新增">確認取號</button>

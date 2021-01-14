@@ -12,7 +12,6 @@
 
 <%
     RestaurantService restSvc = new RestaurantService();
-    String storeName = ((RestaurantVO)session.getAttribute("storeLogin")).getStoreName();
 
 	List<QuePeriodVO> quePeriodVO = new ArrayList<QuePeriodVO>();
 	quePeriodVO = (List<QuePeriodVO>) session.getAttribute("quePeriodVO"); // 取得server送來之list
@@ -32,7 +31,6 @@
 
 	Integer pickupNo = (Integer) session.getAttribute("pickupNo");
 	String storeid = (String) session.getAttribute("storeid");
-	pageContext.setAttribute("storeName", storeName);
 %>
 <c:if test="${not empty errorMsgs}">
 	<font style="color: red">請修正以下錯誤:</font>
@@ -92,7 +90,6 @@ img {
 		</nav>
 		<a class="icon"
 			href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp"></a>
-${ storeName}
 	<form method="post" ACTION="queueNo.do">
 		<input name="action" value="storeGetQueNo" type="hidden">
 		<input name="reset" value="1" type="hidden">

@@ -389,11 +389,12 @@ public class QueNoServlet extends HttpServlet {
 				Integer queuetableid = new Integer(req.getParameter("queuetableid").trim());
 				String psw = "Enak1234";
 				QueNoService queNoSvc = new QueNoService();
-				List<QueNoVO> queNoVO1 = queNoSvc.getQueNoByStoreId(storeid);
-				if(queNoVO1.size()!=0) {
-					for(int i = 0; i < queNoVO1.size(); i++) {
-						if(num <= queNoVO1.get(i).getQueuenum())
-							num = queNoVO1.get(i).getQueuenum()+1;
+				// 設定取號號碼
+				List<QueNoVO> callNum = queNoSvc.getQueNoByStoreId(storeid);
+				if(callNum.size()!=0) {
+					for(int i = 0; i < callNum.size(); i++) {
+						if(num <= callNum.get(i).getQueuenum())
+							num = callNum.get(i).getQueuenum()+1;
 					}
 				}else {
 					num = 1;
@@ -416,13 +417,13 @@ public class QueNoServlet extends HttpServlet {
 				queNoVO2 = queNoSvc.getQueNoByPhoneAndStore(memphone, storeid);
 				
 				QuePeriodService quePeriodSvc = new QuePeriodService();
-				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
+				QuePeriodVO quePeriodVO = quePeriodSvc.getOneQuePeriod(queueperiodid, storeid);
 //				
 				// 用來檢查是否有取過號
-				List<QueNoVO> queNoVO3 = queNoSvc.getQueNoByStoreId(storeid);
+				List<QueNoVO> numCheck = queNoSvc.getQueNoByStoreId(storeid);
 				List<String> noList = new ArrayList<String>();
-				for(int i = 0; i<queNoVO3.size();i++) {
-					noList.add(queNoVO3.get(i).getMemphone());
+				for(int i = 0; i<numCheck.size();i++) {
+					noList.add(numCheck.get(i).getMemphone());
 				}
 				
 				MemService memSvc = new MemService();
@@ -453,9 +454,8 @@ public class QueNoServlet extends HttpServlet {
 					}
 				/*************************** 3.?��增�?��??,準�?��?�交(Send the Success view) ***********/
 				// 預期時間+組數
-				List<QueNoVO> queNoVO4 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
-				Date udate =new Date( req.getParameter("queuenotime"));
-				Long long2 = udate.getTime()+ queNoVO4.size()*5*60*1000;
+				int queNoAmount = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid).size();
+				Long long2 = quePeriodVO.getQueuestarttime().getTime()+ queNoAmount*5*60*1000;
 				Timestamp expectTime = new Timestamp(long2);
 				
 				
@@ -463,7 +463,6 @@ public class QueNoServlet extends HttpServlet {
 				session.setAttribute("memberName", memberName);
 				session.setAttribute("queNoVO", queNoVO);
 				session.setAttribute("queNoVO2", queNoVO2);
-				session.setAttribute("quePeriodVO", quePeriodVO);
 				session.setAttribute("expectTime", expectTime);
 				session.setAttribute("storeid", storeid);
 				
@@ -481,7 +480,6 @@ public class QueNoServlet extends HttpServlet {
 					session.setAttribute("memberName", memberName);
 					session.setAttribute("queNoVO", queNoVO);
 					session.setAttribute("queNoVO2", queNoVO2);
-					session.setAttribute("quePeriodVO", quePeriodVO);
 					session.setAttribute("storeid", storeid);
 					// 已取過號，沒新增
 					req.setAttribute("check", "repeat");
