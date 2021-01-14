@@ -153,6 +153,7 @@
 		<th>商品編號</th>
 		<th>商品名稱</th>
 		<th>商品圖片</th>
+		<th>修改圖片</th>
 		<th>商品描述</th>
 		<th>商品原價</th>
 		<th>商品售價</th>
@@ -162,12 +163,23 @@
 		<!-- 我是不是要給一個商品照片欄位? -->
 		<th>修改</th>
 	</tr>
+<!-- 	呼叫照片的service -->
+	<jsp:useBean id="picSvc" scope="page" class="com.productphoto.model.ProductPhotoService"/>
+	
 	<c:forEach var="pVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/shop/product.do" style="margin-bottom: 0px;">
+		<FORM METHOD="post" enctype="multipart/form-data" ACTION="<%=request.getContextPath()%>/shop/product.do" style="margin-bottom: 0px;">
 			<tr>
 				<td>${pVO.productId}</td>
-				<td><input type="text" name="productName" value="${pVO.productName}" style="height: 100px; "></td>
-				<td><img src="<%=request.getContextPath()%>/shop/productphotoreader.do?productId=${pVO.getProductId()}" class="card-img-top" alt="..." width="100" height="100"></td>
+				<td><input type="text" name="productName" value="${pVO.productName}" "></td>
+				<td><img src="<%=request.getContextPath()%>/shop/productphotoreader.do?productId=${pVO.getProductId()}"  alt="..." width="200px" height="200px"></td>
+				<td>
+				<select name="picId">
+				<c:forEach var="pic" items="${picSvc.getAllProductPhotoById(pVO.productId)}">
+					<option value="${pic.productPhotoId}">${pic.productPhotoId}</option>
+					</c:forEach>
+				</select>
+				<input type="file" accept="image/*" name="pic">
+				</td>
 				<td><input type="text" name="productDescription" value="${pVO.productDescription}"></td>
 				<td><input type="text" name="productMSRP"  value="${pVO.productMSRP}" style="width: 50px;"/></td>
 				<td><input type="text" name="productPrice" value="${pVO.productPrice}" style="width: 50px;"/></td>
