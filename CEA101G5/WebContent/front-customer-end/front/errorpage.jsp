@@ -32,8 +32,13 @@
 </style>
 </head>
 
-<body>
-	<img src="<%=request.getContextPath()%>/front-customer-end/"/>
+<body style="background-color:#F7F7F7">
+<div style="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;">
+	<img style="width: 80%" src="<%=request.getContextPath()%>/front-customer-end/front/img/error.png"/>
+</div>
 </body>
 
 </html>
