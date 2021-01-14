@@ -151,7 +151,6 @@ public class MemServlet extends HttpServlet {
 
 		if ("update".equals(action)) { // 來自update_member_input.jsp的請求
 			String comeFrom = req.getParameter("comeFrom");
-			System.out.println(action);
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -161,7 +160,6 @@ public class MemServlet extends HttpServlet {
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 				String memPhone = req.getParameter("memPhone");
-				System.out.println(req.getParameter("memPhone"));
 
 				String memPwd = req.getParameter("memPwd").trim();
 				String memPwdReg = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).*$";
@@ -218,7 +216,6 @@ public class MemServlet extends HttpServlet {
 				}
 
 				Integer memSex = new Integer(req.getParameter("memSex"));
-				System.out.println(req.getParameter("memSex"));
 				String memIdentity = req.getParameter("memIdentity").trim();
 				java.sql.Date memBirth = java.sql.Date.valueOf(req.getParameter("memBirth").trim());
 
@@ -241,7 +238,6 @@ public class MemServlet extends HttpServlet {
 					in.close();
 				}
 
-				System.out.println(memPhoto);
 
 				String memCardNumber = req.getParameter("memCardNumber");
 				String memCardHolder = req.getParameter("memCardHolder");
@@ -271,10 +267,17 @@ public class MemServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO);
+					if ("fromMemUpdate".equals(comeFrom)) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/member/update_member_input.jsp");
+							.getRequestDispatcher("/front-customer-end/member/memberPageUpdate.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
+					}else {
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/back-end/member/update_member_input.jsp");
+						failureView.forward(req, res);
+						return; // 程式中斷
+					}
 				}
 
 				/*************************** 2.開始修改資料 *****************************************/
@@ -301,8 +304,17 @@ public class MemServlet extends HttpServlet {
 				/*************************** 其他錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("其他錯誤訊息:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/update_member_input.jsp");
-				failureView.forward(req, res);
+				if ("fromMemUpdate".equals(comeFrom)) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-customer-end/member/memberPageUpdate.jsp");
+					failureView.forward(req, res);
+					return; // 程式中斷
+					}else {
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/back-end/member/update_member_input.jsp");
+						failureView.forward(req, res);
+						return; // 程式中斷
+					}
 			}
 		}
 

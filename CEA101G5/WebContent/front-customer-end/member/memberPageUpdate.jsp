@@ -68,6 +68,20 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 
+<style>
+.orderSet{
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #81726A;
+  cursor: pointer;
+  font-weight:bold;
+ font-size: 20px;
+  }
+</style>
 
 </head>
 
@@ -129,10 +143,11 @@
 				</li>
 				<li>
 					<div class="memChoseList">
-						<a href="#"><i class="fas fa-concierge-bell"></i></i></i></a> <a
-							href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">
-							<p>訂位資訊</p>
-						</a>
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-customer-end/reserveorder/listAllReserveOrder.jsp" >
+						<a href="#"></a><i class="fas fa-concierge-bell"></i></i></i>
+     						<input type="hidden" name="memId" value="${memLogin.memPhone}" />
+							<p><input type="submit" value="預約定位" class="orderSet" /></p>
+	 					</FORM>
 					</div>
 				</li>
 				<li>
@@ -145,27 +160,36 @@
 				</li>
 				<li>
 					<div class="memChoseList">
-						<a href="#"><i class="fas fa-pizza-slice"></i></i></a> <a
-							href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">
+						<a href="<%=request.getContextPath()%>/front-customer-end/foodorder/orderok/orderok.jsp"><i class="fas fa-pizza-slice"></i></i></a> <a
+							href="<%=request.getContextPath()%>/front-customer-end/foodorder/orderok/orderok.jsp">
 							<p>外帶訂單</p>
 						</a>
 					</div>
 				</li>
 				<li>
 					<div class="memChoseList">
-						<a href="#"><i class="far fa-comments"></i></i></a> <a
-							href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">
+						<a href="<%=request.getContextPath()%>/front-store-end/queue/queueNo/showCustomerPickupNo.jsp"><i class="fas fa-vote-yea"></i></i></i></a> <a
+							href="<%=request.getContextPath()%>/front-store-end/customerorder/showCustomerPickuoNo.jsp">
+							<p>取號資訊</p>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div class="memChoseList">
+						<a href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp"><i class="far fa-comments"></i></i></a> <a
+							href="<%=request.getContextPath()%>/front-customer-end/customerorder/customerorder.jsp">
 							<p>歷史評論</p>
 						</a>
 					</div>
 				</li>
 				<li>
 					<div class="memChoseList">
-						<a href="#"><i class="fas fa-exclamation-circle"></i></a> <a
+						<a href="#"><i class="fas fa-shopping-bag"></i></a> <a
 							href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">
-							<p>檢舉資訊</p>
+							<p>購物訂單</p>
 						</a>
 					</div>
+		</li>
 		</div>
 
 		<FORM METHOD="post"
@@ -173,7 +197,24 @@
 			name="form1" enctype="multipart/form-data">
 			<div id="memberPageTableBlock">
 				<table id="memberPageTable">
-
+				<tr>
+				
+									<%-- 錯誤表列 --%>
+						<div>
+						<td colspan="2">
+							<c:if test="${not empty errorMsgs}">
+							
+								<font style="color: red">請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+						</td>
+						</div>
+				
+				</tr>
 					<tr>
 						<td colspan="2" align="center"><font color="#475665"
 							id="joinUs">你的資料</font></td>
@@ -284,10 +325,10 @@
 						<input type="hidden" name="memAuth" value="<%=memVO.getMemAuth()%>"> 
 						<input type="hidden" name="memTotalRechar" value="<%=memVO.getMemTotalRechar()%>"> 
 						<input type="hidden" name="memCondition" value="<%=memVO.getMemCondition()%>"> 
-						<input type="hidden" name="memCardNumber" value="Null"> 
-						<input type="hidden" name="memCardHolder" value="Null"> 
-						<input type="hidden" name="memCardExpirationDate" value="Null"> 
-						<input type="hidden" name="memCardCCV" value="Null">
+						<input type="hidden" name="memCardNumber" value="${memLogin.memLice}"> 
+						<input type="hidden" name="memCardHolder" value="${memLogin.memLice}"> 
+						<input type="hidden" name="memCardExpirationDate" value="${memLogin.memLice}"> 
+						<input type="hidden" name="memCardCCV" value="${memLogin.memLice}">
 						<input type="hidden" name="memLice" value="${memLogin.memLice}">
 						<input type="hidden" name="action" value="update"> 
 						<input type="hidden" name="comeFrom" value="fromMemUpdate"> 
