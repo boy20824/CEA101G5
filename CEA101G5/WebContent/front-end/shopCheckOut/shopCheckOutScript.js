@@ -10,6 +10,14 @@ window.addEventListener('wheel', function (e) {
     }
 });
 
+// checkOutLoginController
+let checkOutLoginController = document.getElementById("checkOutLoginController");
+if (checkOutLoginController.value == 0) {
+	$("#signInMain").fadeIn(200);
+	$("#signInCloseButton").hide();
+	signInMainVisibility = true;
+}
+
 // User Signing In
 let signInMainVisibility = false;
 

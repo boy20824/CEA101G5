@@ -112,6 +112,10 @@
     </div>
 
     <!-- Signing In -->
+    <input type="hidden" id="checkOutLoginController" name="checkOutLoginController" value="0">
+    <c:if test = "${memLogin != null}">
+		<script>document.getElementById("checkOutLoginController").value = 1;</script>
+	</c:if>
     <div id="signInMain" class="signInBackground">
         <div id="signInContainer" class="container">
             <button id="signInCloseButton" type="button" class="btn-close" aria-label="Close"></button>
@@ -127,11 +131,10 @@
                         <input type="hidden" name="action" value="shopLogin">
                         <div class="checkbox mb-3">
                             <label>
-                                <input type="checkbox" value="remember-me"> Remember me
+                                <small>Enak 新朋友？ <a href="<%=request.getContextPath()%>/front-customer-end/member/addMem.jsp">註冊</a></small>
                             </label>
                         </div>
-                        <button id="signInButton" class="w-100 btn btn-lg btn-warning" type="submit">Sign
-                            in</button>
+                        <button id="signInButton" class="w-100 btn btn-lg btn-warning" type="submit">Sign in</button>
                         <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
                     </div>
                 </form>
