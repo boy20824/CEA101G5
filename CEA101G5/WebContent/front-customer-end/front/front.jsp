@@ -54,6 +54,27 @@
 		$(".forfiexed2").slideUp(10);
 	}
 </script>
+<style type="text/css">
+.ratings {
+	position: relative;
+	vertical-align: middle;
+	display: inline-block;
+	color: #ddd; /*背景星星顏色*/
+	overflow: hidden;
+	font-size: 16px; /*調整字體大小可放大縮小星星*/
+	text-shadow: 0px 1px 0 #999;
+}
+
+.full_star {
+	/*調整寬度可變更星等*/
+	position: absolute;
+	left: 0;
+	top: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #F5E960; /*前景星星顏色*/
+}
+</style>
 </head>
 
 <body style="overflow-y: scroll;overflow-x: hidden;">
@@ -174,22 +195,30 @@
 						<img src="img//圖片/louisa.png" alt="">
 					</div>
 					<div class="card__content">
-						<div class="card__title">Flex</div>
-						<p class="card__text">This is the shorthand for flex-grow,
-							flex-shrink and flex-basis combined. The second and third
-							parameters (flex-shrink and flex-basis) are optional. Default is
-							0 1 auto.</p>
+						<div class="card__title">${restaurantVO.storeName}</div>
+						<p class="card__text">${restaurantVO.storeInfo}</p>
 						<ul>
-							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱</p></span>
+							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱:${restaurantVO.storeName}</p></span>
 							</li>
-							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p>餐廳評分</p></span>
+							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p><span class="store-text-word">餐廳評分: <span class="ratings">
+										<span class="empty_star">★★★★★</span> <span class="full_star"
+										style="width:${restaurantVO.storeRatingTotal}%">★★★★★</span></span></span></p></span>
 							</li>
-							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話</p></span>
+							<c:set var="rating" value="${0}" />
+			       			<c:forEach var="cmtVO" items="${cmtSvc.getAll(restaurantVO.storeId)}">
+			       				<c:set var="rating" value="${rating + cmtVO.storeRating }" />
+          					</c:forEach>
+        					<input type="hidden" class="rating" value="${rating/cmtSvc.getAll(restaurantVO.storeId).size()*10}" />
+        					<script>
+          						let rate = document.querySelector('.rating')
+          						document.querySelector('.full_star').style.width=Math.round(rate.value)+'%'
+          					</script>
+							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話:${restaurantVO.storePhone}</p></span>
 							</li>
 							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" />
-								<span><p>餐廳地址</p></span></li>
+								<span><p>餐廳地址:${restaurantVO.storeAddress}</p></span></li>
 						</ul>
-						<button class="btn btn--block card__btn">Button</button>
+						<button class="btn btn--block card__btn" onclick="window.location.href='<%=request.getContextPath()%>/front-customer-end/menu/menuindex.jsp?storeId=${restaurantVO.storeId}'">進店看看></button>
 					</div>
 				</div>
 			</li>
