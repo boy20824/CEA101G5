@@ -321,6 +321,7 @@ span.item-remove:hover{
 
 .content {
     margin-left: 5%;
+    height:800px;
 }
 .content >p:first-child{
     margin-top: 3em;
@@ -336,7 +337,7 @@ span.item-remove:hover{
 }
 .detail img{
     width: 20em;
-    height: 10em;
+    height: 12em;
     margin-bottom: 1em;
 }
 .detailMenu{

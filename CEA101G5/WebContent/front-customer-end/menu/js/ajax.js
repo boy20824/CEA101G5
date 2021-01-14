@@ -17,7 +17,7 @@ $('document').ready(function(){
     	let str="";
             for(mydata in data){
             	if(data[mydata].menuStatus==0 && data[mydata].menuSellStatus==1){
-            		  str+=`<div class="list"><img src="/CEA101G5/menu/MenuServlet.do?menuId=`+data[mydata].menuId+`&action=getOnePicture" />
+            		  str+=`<div class="list animate__animated  animate__tada"><img src="/CEA101G5/menu/MenuServlet.do?menuId=`+data[mydata].menuId+`&action=getOnePicture" />
                           <div class="detail">
                             <ul>
                               <li class="detailTitle"><p>`+data[mydata].menuName+`</p></li>

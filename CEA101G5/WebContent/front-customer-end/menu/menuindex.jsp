@@ -48,6 +48,7 @@ response.setDateHeader("Expires", 0);
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-customer-end/menu/slick/slick.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-customer-end/menu/slick/slick-theme.css" />
 <script src="<%=request.getContextPath()%>/front-customer-end/menu/js/ajax.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <style>
 .ratings {
 	position: relative;

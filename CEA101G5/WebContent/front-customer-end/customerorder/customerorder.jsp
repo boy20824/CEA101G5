@@ -73,7 +73,7 @@
         <% int i = 0 ; %>
         <c:forEach var="foodOrderVO" items="${list}">
         <div class="detail">
-            <img src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${foodOrderVO.storeId}&action=getOne_For_Display" alt="">
+            <img src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${foodOrderVO.storeId}&action=getFirst_For_Display" alt="">
             <div class="detailMenu">
                 <h1>${restaurantSvc.getOneRestaurant(foodOrderVO.storeId).storeName}</h1>
 				<!--取得總價 -->
