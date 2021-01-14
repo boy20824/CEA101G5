@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import com.foodorderdetail.model.FoodOrderDetailVO;
+import com.menu.model.MenuService;
+import com.menu.model.MenuVO;
 import com.orderdetail.model.*;
 import com.product.model.*;
 import com.productphoto.model.*;
@@ -156,6 +158,30 @@ public class ProductServlet extends HttpServlet {
 			String productDescription = req.getParameter("productDescription");
 			String productName=req.getParameter("productName");
 			
+//			圖片更新
+			String picId = req.getParameter("picId");
+			
+			// 檔案上傳
+			
+			ProductPhotoService productPhotoSvc;
+			
+			Part part = req.getPart("pic");
+			InputStream in = part.getInputStream();
+			byte[] productPic = null;
+			if (in.available() == 0) { // 如果沒有檔案,則從原本的資料庫將資料重新寫入
+				productPhotoSvc = new ProductPhotoService();
+				ProductPhotoVO productPhotoVO = productPhotoSvc.getOneProductPhoto(Integer.parseInt(picId),productId);
+				productPic = productPhotoVO.getProductPhoto();
+
+			} else {
+				productPic = new byte[in.available()];
+				in.read(productPic);
+				in.close();
+			}
+			productPhotoSvc = new ProductPhotoService();
+			productPhotoSvc.updateProductPhoto(Integer.parseInt(picId),productId,productPic);
+			
+			
 			Integer productMSRP = null;
 			try {
 				productMSRP = new Integer(req.getParameter("productMSRP").trim());
@@ -189,6 +215,7 @@ public class ProductServlet extends HttpServlet {
 			//因為原本的update要給他一個VO  所以所有屬性都要set才會過
 			ProductService pSvc = new ProductService();
 			pSvc.testU(productId,productName ,productDescription , productMSRP, productPrice,categoryId,productStatus );
+			
 			
 			String searchyn = req.getParameter("searchyn");
 			if ("yes".equals(searchyn)) {
