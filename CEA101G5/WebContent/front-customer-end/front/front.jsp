@@ -192,31 +192,31 @@
 			<li>
 				<div class="storecard">
 					<div class="card__image">
-						<img src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restaurantVO.storeId}&action=getFirst_For_Display" alt="">
+						<img src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${restSvclist.storeId}&action=getFirst_For_Display" alt="">
 					</div>
 					<div class="card__content">
-						<div class="card__title">${restaurantVO.storeName}</div>
-						<p class="card__text">${restaurantVO.storeInfo}</p>
+						<div class="card__title">${restSvclist.storeName}</div>
+						<p class="card__text">${restSvclist.storeInfo}</p>
 						<ul>
-							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱:${restaurantVO.storeName}</p></span>
+							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱:${restSvclist.storeName}</p></span>
 							</li>
 							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p><span class="store-text-word">餐廳評分: <span class="ratings">
 										<span class="empty_star">★★★★★</span> <span class="full_star"
-										style="width:${restaurantVO.storeRatingTotal}%">★★★★★</span></span></span></p></span>
+										style="width:${restSvclist.storeRatingTotal}%">★★★★★</span></span></span></p></span>
 							</li>
 							<c:set var="rating" value="${0}" />
 			       			<c:forEach var="cmtVO" items="${cmtSvc.getAll(restaurantVO.storeId)}">
 			       				<c:set var="rating" value="${rating + cmtVO.storeRating }" />
           					</c:forEach>
-        					<input type="hidden" class="rating" value="${rating/cmtSvc.getAll(restaurantVO.storeId).size()*10}" />
+        					<input type="hidden" class="rating" value="${rating/cmtSvc.getAll(restSvclist.storeId).size()*10}" />
         					<script>
           						let rate = document.querySelector('.rating')
           						document.querySelector('.full_star').style.width=Math.round(rate.value)+'%'
           					</script>
-							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話:${restaurantVO.storePhone}</p></span>
+							<li><img src="img/ICON/phone-solid.svg" alt="" /> <span><p>餐廳電話:${restSvclist.storePhone}</p></span>
 							</li>
 							<li><img src="img/ICON/map-marker-alt-solid.svg" alt="" />
-								<span><p>餐廳地址:${restaurantVO.storeAddress}</p></span></li>
+								<span><p>餐廳地址:${restSvclist.storeAddress}</p></span></li>
 						</ul>
 						<button class="btn btn--block card__btn" onclick="window.location.href='<%=request.getContextPath()%>/front-customer-end/menu/menuindex.jsp?storeId=${restaurantVO.storeId}'">進店看看></button>
 					</div>
