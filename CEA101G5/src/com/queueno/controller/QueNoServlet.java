@@ -21,19 +21,9 @@ public class QueNoServlet extends HttpServlet {
 	Timer timer = new Timer();
 
 	public void init() {
-		// 取號map
-//		RestaurantService rstSvc = new RestaurantService();
-//		List<RestaurantVO> storeList = rstSvc.getAll();
-//		Map<String, Integer> storeMap = new HashMap<String, Integer>();
-//		for(int i = 0; i < storeList.size(); i++) {
-//			storeMap.put(storeList.get(i).getStoreId(),0);
-//		}
-//		System.out.println(storeMap);
-		// reset??��?��?�碼 ??��?��?��??
 		deleteAllNum();
 		
-		Integer dayTime = 60 * 60 * 1000;
-		// 設�?��?��?�年???(-1)?��??��?��??
+		Integer dayTime =   60 * 1000;
 		Date date = new Date(121, 0, 14, 15, 44, 1);
 		TimerTask timerTask = new TimerTask() {
 			
