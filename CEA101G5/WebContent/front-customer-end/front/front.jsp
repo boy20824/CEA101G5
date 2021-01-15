@@ -93,7 +93,7 @@
 					</c:if>
 
 					<a href=""> <i class="fas fa-bullhorn"></i>尋找美食
-					</a> <a href=""> <i class="fas fa-bullhorn"></i>購物商城
+					</a> <a href="<%=request.getContextPath()%>/front-end/shopMain.jsp"> <i class="fas fa-bullhorn"></i>購物商城
 					</a> <a
 						href="<%=request.getContextPath()%>/front-store-end/restaurant/WelcomePage.jsp">
 						<i class="fas fa-bullhorn"></i>商家入口

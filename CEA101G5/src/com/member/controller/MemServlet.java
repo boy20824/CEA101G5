@@ -25,8 +25,6 @@ import redis.clients.jedis.Jedis;
 public class MemServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	public static final String ACCOUNT_SID = "ACd807bf62b6cf033835cc5d6e7f0c8a52";
-	public static final String AUTH_TOKEN = "5a5437b229b95f39202dec5be94ca6f6";
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
