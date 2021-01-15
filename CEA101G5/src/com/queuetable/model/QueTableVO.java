@@ -1,6 +1,6 @@
 package com.queuetable.model;
 
-public class QueTableVO {
+public class QueTableVO implements java.io.Serializable{
 	private Integer queuetableid;
 	private String queuetabletype;
 	private String storeid;

@@ -47,6 +47,7 @@
 <title>storePickupAndNoCall</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="refresh" content="300;url=<%=request.getContextPath()%>/front-store-end/queue/queueNo/queueNo.do?action=storeGetQueNo&storeid=${storeLogin.storeId}"/>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/front-store-end/bootstrap-4.5.3-dist/css/bootstrap-grid.min.css" />
 <link rel="stylesheet"
@@ -133,11 +134,23 @@ img {
 							</div>
 							<div class="col-sm-1"></div>
 							<div class="col-sm-8">
-								<select class="form-control" name="party" id="party"
-									style="width: 275px">
+							<jsp:useBean id="tableList" scope="page" class="com.queuetable.model.QueTableService"/>
+								<select class="form-control" name="party" id="party" style="width: 275px">
+								<c:forEach var="tableList" items="${tableList.getStoreQueTable(storeLogin.storeId) }">
+								<c:choose>
+								<c:when test="${tableList.queuetableid==1 }">
 									<option value="2">2人以下</option>
+									</c:when>
+								<c:when test="${tableList.queuetableid==2 }">
 									<option value="4">3~4人</option>
+									</c:when>
+								<c:when test="${tableList.queuetableid==3 }">
 									<option value="8">5~8人</option>
+									</c:when>
+								<c:when test="${tableList.queuetableid==4 }">
+									<option value="10">10人</option>
+									</c:when></c:choose>
+									</c:forEach>
 								</select>
 							</div>
 						</div>
@@ -245,6 +258,7 @@ img {
 												<input class="queuenum" value="${queLineVO.queuenocall}"
 													type="hidden">
 													<c:set var="check1" value="${queLineVO.queuenocall}"></c:set>
+													<!--  check用來檢查預備叫號            -->
 											</c:when>
 										</c:choose>
 									</c:forEach>
@@ -293,56 +307,57 @@ img {
 							<div class="queue_nums">
 								<c:choose>
 									<c:when test="${queTableVO.queuetableid==1 }">
+													<div>
 										<c:forEach var="queNoVO" items="${queNoVO}">
 											<c:choose>
 												<c:when test="${queNoVO.queuetableid==1 }">
-													<div>
+																					<!-- check檢查叫號 -->
 														<c:if test="${queNoVO.queuenum>check1 }">
 														<c:out value="${queNoVO.queuenum } " />
 														</c:if>
-													</div>
 												</c:when>
 											</c:choose>
 										</c:forEach>
+													</div>
 									</c:when>
 									<c:when test="${queTableVO.queuetableid==2 }">
+													<div>
 										<c:forEach var="queNoVO" items="${queNoVO}">
 											<c:choose>
 												<c:when test="${queNoVO.queuetableid==2 }">
-													<div>
 													<c:if test="${queNoVO.queuenum>check2 }">
 														<c:out value="${queNoVO.queuenum } " />
 														</c:if>
-													</div>
 												</c:when>
 											</c:choose>
 										</c:forEach>
+													</div>
 									</c:when>
 									<c:when test="${queTableVO.queuetableid==3 }">
+													<div>
 										<c:forEach var="queNoVO" items="${queNoVO}">
 											<c:choose>
 												<c:when test="${queNoVO.queuetableid==3 }">
-													<div>
 													<c:if test="${queNoVO.queuenum>check3 }">
 														<c:out value="${queNoVO.queuenum } " />
 														</c:if>
-													</div>
 												</c:when>
 											</c:choose>
 										</c:forEach>
+													</div>
 									</c:when>
 									<c:when test="${queTableVO.queuetableid==4 }">
+													<div>
 										<c:forEach var="queNoVO" items="${queNoVO}">
 											<c:choose>
 												<c:when test="${queNoVO.queuetableid==4 }">
-													<div>
 													<c:if test="${queNoVO.queuenum>check4 }">
 														<c:out value="${queNoVO.queuenum } " />
 														</c:if>
-													</div>
 												</c:when>
 											</c:choose>
 										</c:forEach>
+													</div>
 									</c:when>
 								</c:choose>
 							</div>
@@ -562,7 +577,7 @@ img {
 				default:
 					break;}
 }
-
+	
 
 // 	function updateNoCall() {
 	$(".call").click(function(e) {
@@ -712,6 +727,5 @@ swal("已取過號，請確認", "fail", "error");
 swal("別按了，已過取號時段", "fail", "error");
 </script>
 </c:if>
-
 
 </html>

@@ -18,36 +18,34 @@ import com.member.model.*;
 public class QueNoServlet extends HttpServlet {
 	
 	
-	Timer timer = new Timer();
-
-	public void init() {
-		deleteAllNum();
-		
-		Integer dayTime =  15 * 60 * 1000;
-		Date date = new Date(121, 0, 14, 15, 44, 1);
-		TimerTask timerTask = new TimerTask() {
-			
-			@Override
-			public void run() {
-				deleteAllNum();
-				System.out.println("排程開始");
-			}
-		};
-		System.out.println(date);
-//		timer.schedule(timerTask,  10*1000);
-//		timer.scheduleAtFixedRate(timerTask, new Date(), dayTime);
-		timer.scheduleAtFixedRate(timerTask, date, dayTime);
-	}
-
-	public void destroy() {
-		timer.cancel();
-	}
+//	Timer timer = new Timer();
+//	public void init() {
+//		deleteAllNum();
+//		
+//		Integer dayTime =  15 * 60 * 1000;
+//		Date date = new Date(121, 0, 14, 15, 44, 1);
+//		TimerTask timerTask = new TimerTask() {
+//			
+//			@Override
+//			public void run() {
+//				deleteAllNum();
+//				System.out.println("排程開始");
+//			}
+//		};
+//		System.out.println(date);
+////		timer.schedule(timerTask,  10*1000);
+////		timer.scheduleAtFixedRate(timerTask, new Date(), dayTime);
+//		timer.scheduleAtFixedRate(timerTask, date, dayTime);
+//	}
+//	public void destroy() {
+//		timer.cancel();
+//	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public synchronized void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
