@@ -137,9 +137,8 @@ public class QueNoServlet extends HttpServlet {
 				QueLineService queLineSvc = new QueLineService();
 				List<QueLineVO> queLineVO = queLineSvc.getStoreQueNo(storeid);
 				for(int i = 0; i<queLineVO.size(); i++) {
-					Integer queuelineno = queLineVO.get(i).getQueuelineno();
 					Integer queuetableid = queTableVO.get(i).getQueuetableid();
-					queLineSvc.updateQueLine(queuelineno, 0, storeid, queuetableid);
+					queLineSvc.updateQueLine(queuetableid, 0, storeid, queuetableid);
 				}
 				QuePeriodService quePeriodSvc = new QuePeriodService();
 				List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
@@ -338,9 +337,13 @@ public class QueNoServlet extends HttpServlet {
 //					req.setAttribute("storeid", storeid);
 //					req.setAttribute("pickupNo", count);
 //				count++;
+//					res.sendRedirect(req.getContextPath()+"/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
+					
 					String url = "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);
 					successView.forward(req, res);
+					
+					
 					/*************************** ?��他可?��??�錯誤�?��?? **********************************/
 //			} catch (Exception e) {
 //				errorMsgs.add(e.getMessage());
@@ -358,6 +361,7 @@ public class QueNoServlet extends HttpServlet {
 					session.setAttribute("queNoVO", queNoVO);
 					session.setAttribute("storeid", storeid);
 					session.setAttribute("pickupNo", num);
+//					res.sendRedirect(req.getContextPath()+"/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp");
 					String url = "/front-store-end/queue/queueNo/storePickupNoAndNoCall.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);
 					successView.forward(req, res);

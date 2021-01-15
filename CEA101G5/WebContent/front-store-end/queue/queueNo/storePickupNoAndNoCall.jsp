@@ -229,9 +229,9 @@ img {
 						<div class="col-2">
 							<div class="tableavail">空桌數</div>
 							<div class="queuetableusable">${queTableVO.queuetableusable}</div>
-							<input class="queuetableocc" value="${queTableVO.queuetableocc }"
-								type="hidden"> <input class="quetableusable"
-								value="${queTableVO.queuetableusable}" type="hidden">
+							<input class="queuetablettl" value="${queTableVO.queuetablettl}" type="hidden"> 
+							<input class="queuetableocc" value="${queTableVO.queuetableocc}" type="hidden"> 
+								<input class="quetableusable" value="${queTableVO.queuetableusable}" type="hidden">
 						</div>
 
 <div class="col-2">
@@ -352,7 +352,7 @@ img {
 
 						<div class="col-2">
 							<button type="button" class="call btn btn-danger">叫號</button>
-							<button type="button" class="clear btn btn-success">收桌</button>
+							<button type="button" class="clear btn btn-success" disabled="true">收桌</button>
 						</div>
 
 					</div>
@@ -566,6 +566,10 @@ img {
 
 // 	function updateNoCall() {
 	$(".call").click(function(e) {
+		$(e.target).next(".clear").prop("disabled", false);
+		if($(e.target).parents(".tabledata").find(".queuetableusable").text()==='1'){
+			$(e.target).prop("disabled", true);
+		}	
 		var xhr = new XMLHttpRequest();	
 		//設定好回呼函數   
 		xhr.onload = function() {
@@ -621,6 +625,11 @@ img {
 
 // 	function updateNoCall() {
 	$(".clear").click(function(e) {
+			$(e.target).prev(".call").prop("disabled", false);
+		if($(e.target).parents(".tabledata").find(".queuetableusable").text()==($(e.target).parents(".tabledata").find(".queuetablettl").val()-1)){
+			$(e.target).prop("disabled", true);
+		}
+		
 		var xhr = new XMLHttpRequest();	
 		//設定好回呼函數   
 		xhr.onload = function() {
