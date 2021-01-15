@@ -263,15 +263,17 @@
 	<div id="productReviewContainer" class="container productReviewContainer qaAndReviewDisplayController">
 		<c:forEach var="orderDetailVO" items="${orderDetailVOList}">
 			<c:if test = "${orderDetailVO.getProductReview() != null}">
-				<div class="productReview">
-					<div class="productReviewUnit">
-						<p id="productQAQuestionMemName">${memService.getOneMem(orderMasterService.getOrderById(orderDetailVO.getOrderId()).getMemPhone()).getMemName()}</p>
-						<p id="productQAQuestionMemPhone">${orderMasterService.getOrderById(orderDetailVO.getOrderId()).getMemPhone()}</p>
-						<p id="productQAQuestionTS">${orderDetailVO.getProductReviewTS()}</p>
-						<p>${orderDetailVO.getProductReview()}</p>
-						<img src="<%=request.getContextPath()%>/shop/orderdetailphotoreader.do?productId=${orderDetailVO.getProductId()}&orderId=${orderDetailVO.getOrderId()}">
+				<c:if test = "${orderDetailVO.getProductReviewStatus() != 0}">
+					<div class="productReview">
+						<div class="productReviewUnit">
+							<p id="productQAQuestionMemName">${memService.getOneMem(orderMasterService.getOrderById(orderDetailVO.getOrderId()).getMemPhone()).getMemName()}</p>
+							<p id="productQAQuestionMemPhone">${orderMasterService.getOrderById(orderDetailVO.getOrderId()).getMemPhone()}</p>
+							<p id="productQAQuestionTS">${orderDetailVO.getProductReviewTS()}</p>
+							<p>${orderDetailVO.getProductReview()}</p>
+							<img src="<%=request.getContextPath()%>/shop/orderdetailphotoreader.do?productId=${orderDetailVO.getProductId()}&orderId=${orderDetailVO.getOrderId()}">
+						</div>
 					</div>
-				</div>
+				</c:if>
 			</c:if>			
 		</c:forEach>
 	</div>
