@@ -137,7 +137,7 @@ response.setDateHeader("Expires", 0);
 			
 			<!--end shopping-cart-header -->
 
-			<div class="forCar" style="overflow: auto; height: 500px;width:320px;">
+			<div class="forCar animate__animated  animate__zoomInDown" style="overflow: auto; height: 500px;width:320px;">
 				<c:forEach var="item" items="${memuList}">
 					<div id="${item.menuId}" class="carlist">
 						<ul class="shopping-cart-items">
