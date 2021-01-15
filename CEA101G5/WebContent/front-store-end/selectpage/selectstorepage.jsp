@@ -60,7 +60,7 @@
 						<a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/editQueTable.jsp">餐桌管理</a>
 						</li>
 					</ul></li>
-				<li><a href="<%=request.getContextPath()%>/front-store-end/queue/queueTable/updaterestaurantGroup.jsp">訂位選項設定</a></li>
+				<li><a href="<%=request.getContextPath()%>/front-store-end/restaurant/updaterestaurantGroup.jsp">訂位選項設定</a></li>
 				<li><a href="<%=request.getContextPath()%>/front-customer-end/front/front.jsp">回首頁</a></li>
 			</ul>
 		</span>
