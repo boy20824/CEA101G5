@@ -100,6 +100,8 @@
                     <input type="radio" id="status3" class="status" name="status" value="3" ${(foodOrderVO.foodOrderStatus>='3')?'disabled':'' }><label for="status3">未取餐</label>
                     <input type="hidden" name="action" value="update">
                     <input type="hidden" name="foodOrderId" value="${foodOrderVO.foodOrderId}">
+                    <input type="hidden" name="memPhone" value="${memSvc.getOneMem(foodOrderVO.memPhone).memPhone }">
+                    <input type="hidden" name="memEmail" value="${memSvc.getOneMem(foodOrderVO.memPhone).memEmail }">
                 </form>
             </div>
         </div>
