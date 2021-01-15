@@ -61,7 +61,9 @@ public class ProductPhotoJDBCDAO implements ProductPhotoDAO_Interface {
 			}
 		}
 	}
-	public void insert2 (ProductPhotoVO productPhotoVO , java.sql.PreparedStatement con) {};
+	public PreparedStatement insert2 (ProductPhotoVO productPhotoVO , java.sql.PreparedStatement pstmt) {
+		return pstmt;
+	};
 	@Override
 	public void update(ProductPhotoVO productPhotoVO) {
 		Connection con = null;
