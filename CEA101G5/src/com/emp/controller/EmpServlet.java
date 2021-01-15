@@ -298,6 +298,16 @@ public class EmpServlet extends HttpServlet {
 				empVO.setEmp_status(emp_status);
 				empVO.setEmp_image(emp_image);
 
+				// 判斷帳號是否有重複
+				EmpService empSvctest = new EmpService();
+				List<EmpVO> listall = empSvctest.getAll();
+				for (EmpVO empVOList : listall) {
+					if (empVOList.getEmp_account().equals(emp_account)) {
+						errorMsgs.add("帳號已被註冊，請重新輸入");
+					}
+				}
+				
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("empVO", empVO); // 含有輸入格式錯誤的empVO物件,也存入req
