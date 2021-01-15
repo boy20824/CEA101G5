@@ -8,7 +8,7 @@ import com.twilio.type.PhoneNumber;
 public class MemSMSSender {
 
 	public static final String ACCOUNT_SID = "ACd807bf62b6cf033835cc5d6e7f0c8a52";
-	public static final String AUTH_TOKEN = "94b99e84084f2733946deca5fe77626f";
+	public static final String AUTH_TOKEN = "202c3228fa148fdf010bd8f83813e05e";
 
 		
 		public void sendSMS(String memPhone,String messageText) {
@@ -20,7 +20,7 @@ public class MemSMSSender {
 					(new PhoneNumber("+886"+sendPhone), // to
 					new PhoneNumber("+12055574165"), // from
 					messageText).create();
-
+			
 			System.out.println(message.getSid());
 		}
 		

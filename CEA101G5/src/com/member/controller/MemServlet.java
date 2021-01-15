@@ -524,14 +524,15 @@ public class MemServlet extends HttpServlet {
 				MemSMSSender memSMS = new MemSMSSender();
 				memSMS.sendSMS(memPhone, messageText);
 				
-				MemVO memRegister = memSvc.getOneMem(memPhone);
-				session.setAttribute("memRegister", memRegister);
+//				MemVO memRegister = memSvc.getOneMem(memPhone);
+//				session.setAttribute("memRegister", memRegister);
 				
+				System.out.println("我在這");
 				jedis.close();
 				
+				req.setAttribute("memVO", memVO);
 				String url = "/front-customer-end/member/SMSAuth.jsp";
 //				String url = "/front-customer-end/member/JoinSuccess.jsp";
-				req.setAttribute("memVO", memVO);
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
