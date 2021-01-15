@@ -9,6 +9,7 @@
     List<ReserveOrderVO> list = reserveOrderSvc.getFors(((RestaurantVO)(session.getAttribute("storeLogin"))).getStoreId(),0);
     pageContext.setAttribute("list",list);
 %>
+<%@include file="../selectpage/selectstorepage.jsp" %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
 
 <html>

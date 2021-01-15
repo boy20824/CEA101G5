@@ -18,7 +18,7 @@
     String ss = "S000003";
     pageContext.setAttribute("ss",ss);
 %>
-
+<%@include file="../selectpage/selectstorepage.jsp" %>
 
 <html>
 <head>

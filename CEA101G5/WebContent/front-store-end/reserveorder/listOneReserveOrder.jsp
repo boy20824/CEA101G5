@@ -17,6 +17,7 @@
 	list = reserveOrderSvc.getOneReserveOrder(paramA);
 	pageContext.setAttribute("list",list);
 %>
+<%@include file="../selectpage/selectstorepage.jsp" %>
 
 <html>
 <head>

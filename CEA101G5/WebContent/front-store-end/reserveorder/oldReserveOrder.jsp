@@ -10,7 +10,7 @@
     pageContext.setAttribute("list",list);
 %>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
-
+<%@include file="../selectpage/selectstorepage.jsp" %>
 <html>
 <head>
 <title>歷史訂位資訊</title>
