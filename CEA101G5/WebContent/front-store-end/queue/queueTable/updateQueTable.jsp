@@ -10,7 +10,6 @@ Integer queuetableid =new Integer(request.getParameter("queuetableid"));
 pageContext.setAttribute("queuetableid", queuetableid);
 
 %>
-${queuetableid }
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
