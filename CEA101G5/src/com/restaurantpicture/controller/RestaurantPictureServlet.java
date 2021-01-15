@@ -31,8 +31,6 @@ public class RestaurantPictureServlet extends HttpServlet {
 
 		String action = req.getParameter("action");
 
-		System.out.println("action: "+action);
-
 		if ("getFirst_For_Display".equals(action)) {
 			res.setContentType("image/gif");
 			ServletOutputStream out = res.getOutputStream();
