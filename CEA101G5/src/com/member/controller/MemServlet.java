@@ -524,8 +524,8 @@ public class MemServlet extends HttpServlet {
 				MemSMSSender memSMS = new MemSMSSender();
 				memSMS.sendSMS(memPhone, messageText);
 				
-//				MemVO memRegister = memSvc.getOneMem(memPhone);
-//				session.setAttribute("memRegister", memRegister);
+				MemVO memRegister = memSvc.getOneMem(memPhone);
+				session.setAttribute("memRegister", memRegister);
 				
 				System.out.println("我在這");
 				jedis.close();

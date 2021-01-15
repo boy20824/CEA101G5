@@ -11,7 +11,7 @@ public class MemSMSSender {
 	public static final String AUTH_TOKEN = "202c3228fa148fdf010bd8f83813e05e";
 
 		
-		public void sendSMS(String memPhone,String messageText) {
+		public static void sendSMS(String memPhone,String messageText) {
 			
 			Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 			
@@ -26,14 +26,14 @@ public class MemSMSSender {
 		
 //		以下為測試
 //		public static void main(String[] args) {
-//			String phone ="0921842859";
+//			String phone ="0976339135";
 //			String message ="0921842859";
 //			
 //			MemSMSSender.sendSMS(phone,message);
 //		}
 		
 		
-//		public void sendSMS(String memPhone,String messageText) {
+//		public static void sendSMS(String memPhone,String messageText) {
 //
 //
 //			  try {
@@ -41,7 +41,7 @@ public class MemSMSSender {
 //			      int port	     = 8000;            //SMS Gateway Port
 //
 //			      String user    = "0921842859";//帳號
-//			      String passwd  = ""; //密碼
+//			      String passwd  = "adoy10240"; //密碼
 //			      String tel     = memPhone; //手機號碼
 //			      String message = new String(messageText.getBytes(),"big5"); //簡訊內容
 //
