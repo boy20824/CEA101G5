@@ -100,18 +100,16 @@ ${storeName}
 						<td><fmt:formatDate value="${quePeriodVO.queueendtime}"
 								pattern="HH:mm" /></td>
 						<td><input id="storeid" name="storeid" value="${storeLogin.storeId}"
-							type="hidden"> <input name="queuest"
-							value="${quePeriodVO.queuest}" type="hidden"> <input
-							name="queuestarttime" value="${quePeriodVO.queuestarttime}"
-							type="hidden"> <input name="queueendtime"
-							value="${quePeriodVO.queueendtime}" type="hidden"> <input
-							id="queueperiodid" class="queueperiodid" name="queueperiodid"
-							value="${quePeriodVO.queueperiodid}" type="hidden"> <input
-							name="update" value="時段修改" type="button" class="btn btn-primary"></td>
+							type="hidden"> 
+							<input name="queuest" value="${quePeriodVO.queuest}" type="hidden"> 
+							<input class="queuestarttime" name="queuestarttime" value="${quePeriodVO.queuestarttime}" type="hidden"> 
+							<input class="queueendtime" name="queueendtime" value="${quePeriodVO.queueendtime}" type="hidden"> 
+							<input id="queueperiodid" class="queueperiodid" name="queueperiodid" value="${quePeriodVO.queueperiodid}" type="hidden"> 
+							<input name="update" value="時段修改" type="button" class="btn btn-primary"></td>
+							
 						<td><form method="post" action="queuePeriod.do" style="width:100px;">
-						<input id="storeid" name="storeid" value="${storeLogin.storeId}"
-							type="hidden"> <input id="queueperiodid"
-							class="queueperiodid" name="queueperiodid"
+						<input id="storeid" name="storeid" value="${storeLogin.storeId}" type="hidden"> 
+							<input id="queueperiodid" class="queueperiodid" name="queueperiodid"
 							value="${quePeriodVO.queueperiodid}" type="hidden">
 							<input name="action" value="delete" type="hidden">
 							<input
@@ -167,8 +165,9 @@ ${storeName}
 		});
 	}
 	$("[name='update']").click(function(e) {
-		console.log($("#storeid").val());
-		console.log($(e.target).prev($(".queueperiodid")).val());
+		console.log($(e.target).prev($(".queueendtime")).val());
+		console.log($(e.target).prev($(".queuestarttime")).val());
+		console.log("ddd");
 		var url = "address";
 		// 		var target = $(e.target);
 		$.ajax({
@@ -179,6 +178,8 @@ ${storeName}
 				storeid : $("#storeid4Ajax").val(),
 				queueperiodid : $(e.target).prev($(".queueperiodid")).val(),
 				count : <%=count%>,
+				queueendtime : $(e.target).prev($(".queueendtime")).val(),
+				queuestarttime : $(e.target).prev($(".queuestarttime")).val(),
 			},
 			success : function(dates) {
 				//alert(dates);

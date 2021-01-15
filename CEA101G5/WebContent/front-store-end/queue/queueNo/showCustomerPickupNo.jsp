@@ -15,6 +15,8 @@
 	session.setAttribute("queNoVO", queNoVO);
 	String storeid = (String) session.getAttribute("storeid");
 	session.setAttribute("storeid", storeid);
+	String memName = (String) session.getAttribute("memberName");
+	session.setAttribute("memName", memName);
 // 	List<QueNoVO> list = new ArrayList<QueNoVO>();//取得by storeid and tableid 未決定時段
 // 	list = (List<QueNoVO>) session.getAttribute("list");
 // 	pageContext.setAttribute("list", list);
@@ -93,7 +95,7 @@ div#helloName {
 			</div>
 			<div class="col-sm-3">
 				<h1>
-					${memLogin.memName}
+				${memName}
 				</h1>
 			</div>
 		</div>

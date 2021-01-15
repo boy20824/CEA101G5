@@ -23,7 +23,7 @@ public class QueNoServlet extends HttpServlet {
 	public void init() {
 		deleteAllNum();
 		
-		Integer dayTime =   60 * 1000;
+		Integer dayTime =  5 * 60 * 1000;
 		Date date = new Date(121, 0, 14, 15, 44, 1);
 		TimerTask timerTask = new TimerTask() {
 			
@@ -371,6 +371,7 @@ public class QueNoServlet extends HttpServlet {
 				Integer queuenum = new Integer(req.getParameter("queuenum"));
 				String memphone = req.getParameter("memphone").trim();
 				String memberName = req.getParameter("memberName").trim();
+				System.out.println(memberName);
 				Integer party = new Integer(req.getParameter("party"));
 				Timestamp queuenotime = strToTsp(req.getParameter("queuenotime"));
 				String storeid = req.getParameter("storeid").trim();

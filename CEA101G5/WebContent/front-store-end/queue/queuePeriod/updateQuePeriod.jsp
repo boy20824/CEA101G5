@@ -6,10 +6,12 @@
 
 <% 
 String storeid = request.getParameter("storeid"); 
-Integer queueperiodid =new Integer(request.getParameter("queueperiodid"));
 pageContext.setAttribute("storeid", storeid);
+
+Integer queueperiodid =new Integer(request.getParameter("queueperiodid"));
 pageContext.setAttribute("queueperiodid", queueperiodid);
 
+String aa = request.getParameter("queuestarttime");
 %>
 
 <html lang="en">
