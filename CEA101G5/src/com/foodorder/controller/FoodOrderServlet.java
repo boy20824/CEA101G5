@@ -104,10 +104,10 @@ public class FoodOrderServlet extends HttpServlet {
 			Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 			
 			if(Integer.parseInt(status) == 1 ) {
-				 Twilio.init("AC7d57641ebe9e035722647a8aebec3ab3", "c25fd56d29afebf3ab4dbc81e240278a");
+				 Twilio.init("AC7d57641ebe9e035722647a8aebec3ab3", "b95a4a716787028eda8ecaf29f425bd9");
 
 			        Message message = Message
-			                .creator(new PhoneNumber("+886985845289"), // to
+			                .creator(new PhoneNumber("+886976339135"), // to
 			                        new PhoneNumber("+14074567528"), // from
 			                        "Hello 訂單已完成")
 			                .create();
