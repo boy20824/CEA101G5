@@ -23,7 +23,7 @@ public class QueNoServlet extends HttpServlet {
 	public void init() {
 		deleteAllNum();
 		
-		Integer dayTime =  5 * 60 * 1000;
+		Integer dayTime =  15 * 60 * 1000;
 		Date date = new Date(121, 0, 14, 15, 44, 1);
 		TimerTask timerTask = new TimerTask() {
 			
@@ -81,6 +81,7 @@ public class QueNoServlet extends HttpServlet {
 					QuePeriodService quePeriodSvc = new QuePeriodService();
 					List<QuePeriodVO> quePeriodVO = quePeriodSvc.getOneQuePeriod(storeid);
 					periodCheck(quePeriodVO);//超過最後取號時間不得選取
+					// 判斷商家有無新增時段
 					if(quePeriodVO.isEmpty()) {
 						req.setAttribute("check", "alert");
 					}

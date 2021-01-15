@@ -3,6 +3,7 @@
 <%@ page import="com.queueperiod.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.sql.*" %>
 
 <% 
 String storeid = request.getParameter("storeid"); 
@@ -11,8 +12,23 @@ pageContext.setAttribute("storeid", storeid);
 Integer queueperiodid =new Integer(request.getParameter("queueperiodid"));
 pageContext.setAttribute("queueperiodid", queueperiodid);
 
-String aa = request.getParameter("queuestarttime");
+// String aa = request.getParameter("questarttime");
+// pageContext.setAttribute("aa", aa);
+// java.util.Date udate = new java.util.Date(request.getParameter("questarttime"));
+// long long1 = udate.getTime();
+// Timestamp queuestarttime = new Timestamp(long1);
+// pageContext.setAttribute("queuestarttime", queuestarttime);
+
+// java.util.Date udate1 = new java.util.Date(request.getParameter("queueendtime"));
+// long long2 = udate.getTime();
+// Timestamp queueendtime = new Timestamp(long1);
+// pageContext.setAttribute("queueendtime", queueendtime);
+
+
 %>
+<%-- ${aa} --%>
+<%-- ${queuestarttime } --%>
+<%-- ${queueendtime } --%>
 
 <html lang="en">
 <head>
@@ -92,6 +108,9 @@ select{
 						<c:forEach var="i" begin="0" end="47">
 						<c:choose>
 						<c:when test="${i%2==0 }">
+<%-- 						<fmt:formatDate value="${queuestarttime}"  --%>
+<%-- 								pattern="HH:mm" /> ~ <fmt:formatDate --%>
+<%-- 								value="${queuestarttime}" pattern="HH:mm" />  --%>
 						<option value="${i}"><%=hr+minEven %></option>
 						</c:when>
 						<c:otherwise>

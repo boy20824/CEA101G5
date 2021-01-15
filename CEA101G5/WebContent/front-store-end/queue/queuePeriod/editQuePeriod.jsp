@@ -93,15 +93,22 @@ div.label{
 								<td>未開放</td>
 							</c:when>
 						</c:choose>
+						
 						<td><fmt:formatDate value="${quePeriodVO.queuestarttime}"
 								pattern="HH:mm" /></td>
+								
+								
 						<td><fmt:formatDate value="${quePeriodVO.queueendtime}"
 								pattern="HH:mm" /></td>
+								
+								
 						<td><input id="storeid" name="storeid" value="${storeLogin.storeId}"
 							type="hidden"> 
 							<input name="queuest" value="${quePeriodVO.queuest}" type="hidden"> 
+							
 							<input class="queuestarttime" name="queuestarttime" value="${quePeriodVO.queuestarttime}" type="hidden"> 
 							<input class="queueendtime" name="queueendtime" value="${quePeriodVO.queueendtime}" type="hidden"> 
+							
 							<input id="queueperiodid" class="queueperiodid" name="queueperiodid" value="${quePeriodVO.queueperiodid}" type="hidden"> 
 							<input name="update" value="時段修改" type="button" class="btn btn-primary"></td>
 							
@@ -163,8 +170,8 @@ div.label{
 		});
 	}
 	$("[name='update']").click(function(e) {
-		console.log($(e.target).prev($(".queueendtime")).val());
-		console.log($(e.target).prev($(".queuestarttime")).val());
+		console.log($(e.target).parents().find(".queueendtime").val());
+		console.log($(e.target).parents().find(".queuestarttime").val());
 		console.log("ddd");
 		var url = "address";
 		// 		var target = $(e.target);
@@ -178,6 +185,8 @@ div.label{
 				count : <%=count%>,
 				queueendtime : $(e.target).prev($(".queueendtime")).val(),
 				queuestarttime : $(e.target).prev($(".queuestarttime")).val(),
+				queendtime : $(e.target).parents().find(".queueendtime").val(),
+				questarttime : $(e.target).parents().find(".queuestarttime").val(),
 			},
 			success : function(dates) {
 				//alert(dates);
