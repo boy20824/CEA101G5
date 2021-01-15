@@ -3,8 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.restaurant.model.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <%
-	RestaurantVO restaurantVO = (RestaurantVO) request.getAttribute("restaurantVO");
+	RestaurantVO restaurantVO = (RestaurantVO) request.getAttribute("restVO");
+	
 %>
 <%@include file="../selectpage/selectstorepage.jsp" %>
 <html>

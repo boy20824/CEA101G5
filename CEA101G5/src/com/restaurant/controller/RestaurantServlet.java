@@ -503,6 +503,10 @@ public class RestaurantServlet extends HttpServlet {
 				restSvc.easyAddRestaurantWithPic(restVO,restPicVO);
 				
 				/*************************** 3.新增完成轉交成功畫面(Send the Success view) ***********/
+				RestaurantVO storeLogin = restVO;
+				session.setAttribute("storeLogin",storeLogin);
+				
+				
 				String url = "/front-store-end/restaurant/restaurantPage.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
