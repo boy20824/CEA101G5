@@ -27,7 +27,7 @@ public class QueNoDAO implements QueNoDAO_interface{
 	private static final String GET_NUM_BY_STORE = "SELECT queue_num, mem_phone, party, queue_no_time, store_id, queue_period_id, queue_line_no, queue_table_id FROM queue_no where store_id = ? order by queue_num";
 	private static final String GET_NUM_BY_PHONE = "SELECT * FROM queue_no where mem_phone=?";
 	private static final String GET_NUM_BY_PHONE_AND_STORE = "SELECT * FROM queue_no where mem_phone=? AND store_id = ?";
-	private static final String GET_NUM_BY_STORE_AND_TABLE = "SELECT * FROM queue_no where store_id = ? AND queue_table_id=?";
+	private static final String GET_NUM_BY_STORE_AND_TABLE = "SELECT * FROM queue_no where store_id = ? AND queue_table_id=? order by queue_num";
 
 	
 	// ?���?

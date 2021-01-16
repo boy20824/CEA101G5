@@ -11,26 +11,26 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-    RestaurantService restSvc = new RestaurantService();
+//     RestaurantService restSvc = new RestaurantService();
 
-	List<QuePeriodVO> quePeriodVO = new ArrayList<QuePeriodVO>();
-	quePeriodVO = (List<QuePeriodVO>) session.getAttribute("quePeriodVO"); // 取得server送來之list
-	pageContext.setAttribute("quePeriodVO", quePeriodVO);
+// 	List<QuePeriodVO> quePeriodVO = new ArrayList<QuePeriodVO>();
+// 	quePeriodVO = (List<QuePeriodVO>) session.getAttribute("quePeriodVO"); // 取得server送來之list
+// 	pageContext.setAttribute("quePeriodVO", quePeriodVO);
 
-	List<QueTableVO> queTableVO = new ArrayList<QueTableVO>();
-	queTableVO = (List<QueTableVO>) session.getAttribute("queTableVO");
-	pageContext.setAttribute("queTableVO", queTableVO);
+// 	List<QueTableVO> queTableVO = new ArrayList<QueTableVO>();
+// 	queTableVO = (List<QueTableVO>) session.getAttribute("queTableVO");
+// 	pageContext.setAttribute("queTableVO", queTableVO);
 
-	List<QueLineVO> queLineVO = new ArrayList<QueLineVO>();
-	queLineVO = (List<QueLineVO>) session.getAttribute("queLineVO");
-	pageContext.setAttribute("queLineVO", queLineVO);
+// 	List<QueLineVO> queLineVO = new ArrayList<QueLineVO>();
+// 	queLineVO = (List<QueLineVO>) session.getAttribute("queLineVO");
+// 	pageContext.setAttribute("queLineVO", queLineVO);
 
-	List<QueNoVO> queNoVO = new ArrayList<QueNoVO>();
-	queNoVO = (List<QueNoVO>) session.getAttribute("queNoVO");
-	pageContext.setAttribute("queNoVO", queNoVO);
+// 	List<QueNoVO> queNoVO = new ArrayList<QueNoVO>();
+// 	queNoVO = (List<QueNoVO>) session.getAttribute("queNoVO");
+// 	pageContext.setAttribute("queNoVO", queNoVO);
 
-	Integer pickupNo = (Integer) session.getAttribute("pickupNo");
-	String storeid = (String) session.getAttribute("storeid");
+// 	Integer pickupNo = (Integer) session.getAttribute("pickupNo");
+// 	String storeid = (String) session.getAttribute("storeid");
 %>
 <c:if test="${not empty errorMsgs}">
 	<font style="color: red">請修正以下錯誤:</font>
@@ -101,110 +101,6 @@ img {
 	<div class="container">
 		<div class="row reserve2"></div>
 		<div class="row">
-			<div class="col-4 left">
-				<div class="row left-top">
-					<div class="row" id="display">
-						<div style="font-size: 60px; text-align: center;" id="nowTime"></div>
-					</div>
-				</div>
-				<form id="info">
-					<div class="row left-mid">
-						<div class="form-group row">
-							<div class="col-sm-2">
-								<label for="name" class="col-sm-2 col-form-label">Name:</label>
-							</div>
-							<div class="col-sm-1"></div>
-							<div class="col-sm-9">
-								<input name="memName" class="form-control" id="name" required>
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-2">
-								<label for="phone" class="col-sm-2 col-form-label">Phone:</label>
-							</div>
-							<div class="col-sm-1"></div>
-							<div class="col-sm-9">
-								<input name="memphone" type="tel" class="form-control" required
-									id="memphone" minlength="10" maxlength="10">
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-2">
-								<label for="party" class="col-sm-2 col-form-label">Party:</label>
-							</div>
-							<div class="col-sm-1"></div>
-							<div class="col-sm-8">
-							<jsp:useBean id="tableList" scope="page" class="com.queuetable.model.QueTableService"/>
-								<select class="form-control" name="party" id="party" style="width: 275px">
-								<c:forEach var="tableList" items="${tableList.getStoreQueTable(storeLogin.storeId) }">
-								<c:choose>
-								<c:when test="${tableList.queuetableid==1 }">
-									<option value="2">2人以下</option>
-									</c:when>
-								<c:when test="${tableList.queuetableid==2 }">
-									<option value="4">3~4人</option>
-									</c:when>
-								<c:when test="${tableList.queuetableid==3 }">
-									<option value="8">5~8人</option>
-									</c:when>
-								<c:when test="${tableList.queuetableid==4 }">
-									<option value="10">10人</option>
-									</c:when></c:choose>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
-
-<%-- 						<jsp:useBean id="quePeriodSvc" scope="page" --%>
-<%-- 							class="com.queueperiod.model.QuePeriodService" /> --%>
-						<div class="form-group row">
-							<div class="col-sm-2">
-								<label for="queueperiodid" class="col-sm-2 col-form-label">Period:</label>
-							</div>
-							<div class="col-sm-1"></div>
-							<div class="col-sm-8">
-											<c:if test="${!empty quePeriodVO }">
-											
-								<select class="form-control" name="queueperiodid"
-									id="queueperiodid" style="width: 275px" required>
-									<c:forEach var="quePeriodVO" items="${quePeriodVO}">
-										<c:choose>
-											<c:when test="${quePeriodVO.queuest==1 }">
-												<option value="${quePeriodVO.queueperiodid}"><fmt:formatDate
-														value="${quePeriodVO.queuestarttime}" pattern="HH:mm" />
-													~
-													<fmt:formatDate value="${quePeriodVO.queueendtime}"
-														pattern="HH:mm" /></option>
-											</c:when>
-										</c:choose>
-									</c:forEach>
-								</select>
-								</c:if>
-								<c:if test="${empty quePeriodVO }">
-								<select class="form-control" name="queueperiodid"
-									id="queueperiodid" style="width: 275px" required>
-								<option value="999"><c:out value="取號時段已結束"></c:out></option></select>
-								</c:if>
-							</div>
-						</div>
-					</div>
-					<div class="row left-bot">
-						<div class="input-group-prepend">
-							<h3>預計取號</h3>
-
-						</div>
-						<input name="storeid" id="storeid" value="${storeid }" hidden="hidden" /> 
-						<input style="text-align: center;" name="queuenum" type="text" class="form-control"
-							value="<%=pickupNo%>" aria-label="Amount (to the nearest dollar)" readonly> 
-						<input type="hidden" id="queuenotime" name="queuenotime" class="quenotime"> 
-						<input type="hidden" id="queuetableid" name="queuetableid" value="1">
-						<input type="hidden" id="queuelineno" name="queuelineno" value="1">
-						<input type="hidden" name="action" value="storeInsert">
-						<button id="submit" type="submit" class="pickup btn btn-primary"
-							value="送出新增">新增取號</button>
-					</div>
-				</form>
-			</div>
 
 			<!-- 表格右邊 -->
 			<!-- 第一種桌子 -->

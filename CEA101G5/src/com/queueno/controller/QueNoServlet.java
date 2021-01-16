@@ -658,9 +658,10 @@ public class QueNoServlet extends HttpServlet {
 				Timestamp queueendtime = quePeriodVO.get(i).getQueueendtime();
 				quePeriodSvc.updateQuePeriod(queueperiodid, storeid, queuest, queuestarttime, queueendtime, 0);
 			}
-			res.sendRedirect("/front-store-end/queue/queueNo/queueNo.do?&action=storeGetQueNo&storeid="+storeid);
-//			String url = "/front-store-end/queue/queueNo/queueNo.do?&action=storeGetQueNo&storeid="+storeid;
-//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			res.sendRedirect(req.getContextPath()+"/front-store-end/restaurant/WelcomePage.jsp");
+			String url = "/front-store-end/queue/queueNo/queueNo.do?&action=storeGetQueNo&storeid="+storeid;
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
 			
 		}
 	}

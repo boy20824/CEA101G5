@@ -1,12 +1,45 @@
 <%@page contentType="text/html;charset=utf-8"  language="java" import="java.sql.*" errorPage=""%> 
 <%@page import="org.json.JSONObject"%>
+<%@page import="com.queueno.model.*" %>
+<%@page import="java.util.List" %>
+<%@page import="java.util.ArrayList" %>
 <%
 //取得前端送來的資料 (前端來的資料都是字串)
 String storeid = request.getParameter("storeid");
 Integer queuetableid = new Integer(request.getParameter("queuetableid"));// 同queuelineno
-Integer queuenocall = new Integer(request.getParameter("queuenum"))+1;
+Integer queuenocall = new Integer(request.getParameter("queuenum"));
+// show桌子現況
 Integer queuetableocc = new Integer(request.getParameter("queuetableocc"))+1;
 Integer queuetableusable = new Integer(request.getParameter("queuetableusable"))-1;
+
+	// 對應桌子叫號
+	QueNoService queNoSvc = new QueNoService();
+	List<QueNoVO> table2List = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
+	List<QueNoVO> table4List = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
+	List<QueNoVO> table8List = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
+	List<QueNoVO> table10List = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
+	
+	List<Integer> showCalls = new ArrayList<Integer>();
+	switch(queuetableid){
+	case 1:
+		queuenocall = getNum(table2List, queuenocall);
+		showCalls = showNum(table2List, queuenocall);
+		break;
+	case 2:
+		queuenocall = getNum(table4List, queuenocall);
+		showCalls = showNum(table4List, queuenocall);
+		break;
+	case 3:
+		queuenocall = getNum(table8List, queuenocall);
+		showCalls = showNum(table8List, queuenocall);
+		break;
+	case 4:
+		queuenocall = getNum(table10List, queuenocall);
+		showCalls = showNum(table10List, queuenocall);
+		break;
+	}
+	
+	
 
 //載入JDBC驅動程式類別 
 Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -55,8 +88,10 @@ JSONObject noCall = new JSONObject();
 if(rs.next()){
 	noCall.put("queuenocall", rs.getInt("queue_no_call"));
 	noCall.put("queuetableid", rs.getInt("queue_table_id"));
-	if(rss.next())
+	if(rss.next()){
 	noCall.put("queuetableusable", rss.getInt("queue_table_usable"));
+	}
+	noCall.put("queuenextcall", showCalls);
 };
   
 //輸出JSONObject
@@ -70,3 +105,33 @@ stmt.close();
 %>   
 
 
+<%!
+public int getNum(List<QueNoVO> tableList, int queuenocall){
+	for(int i = 0; i<tableList.size();i++){
+		if(queuenocall<tableList.get(i).getQueuenum()){
+			queuenocall = tableList.get(i).getQueuenum();
+		break;
+		}
+	}
+	return queuenocall;
+}
+%>
+<%!
+	// 預備號
+public List<Integer> showNum(List<QueNoVO> tableList, int queuenocall){
+	List<Integer> nextCalls = new ArrayList<Integer>();
+	for(int i =0; i<tableList.size(); i++){
+		if(queuenocall<tableList.get(i).getQueuenum()){
+		nextCalls.add(tableList.get(i).getQueuenum());
+		}
+	}
+	// forShow
+	List<Integer> showCalls = new ArrayList<Integer>();
+	for(int j = 0; j<6; j++){
+		if(nextCalls.size()>j){
+		showCalls.add(nextCalls.get(j));
+		}
+	}
+	return showCalls;
+}
+%>
