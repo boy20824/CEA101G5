@@ -271,7 +271,7 @@ nav a + a::before {
   display: none;
   margin: 20px 0;
   float: right;
-  background: lightgray;
+  background: #F6F6F6;
   width: 320px;
   position: fixed;
   top:4em;
@@ -279,6 +279,7 @@ nav a + a::before {
   border-radius: 3px;
   padding: 20px;
   z-index: 99;
+  font-family:lato;
 }
 span.item-remove{
 	color: red;
@@ -409,16 +410,15 @@ span.item-remove:hover{
 
 /* 擗輒蝪⊥���� */
 .container{
-  padding-top:20vh;
+  padding-top:15vh;
   padding-left: 5vw;
 }
 .text{
-  width: 30vw;
-  border: 10px solid #e2e7ca;
+  width: 15vw;
+  border: 2px solid #e2e7ca;
 }
 .cb-slideshow img{
-  width: 100%;
-  height: 40vh;
+  height: 30vh;
 }
 .restaurantInfo{
   width: 90%;
@@ -427,9 +427,10 @@ span.item-remove:hover{
   align-items: flex-start;
   margin-right: 10vw;
   margin-bottom: 4vh;
+  font-family:lato;
 }
 .info ul{
-  margin-left: -15em;
+  margin-left: -33em;
 }
 .info p{
 display: inline-block;
@@ -438,7 +439,7 @@ display: inline-block;
   padding-top:1.5vh;
   margin-left:1vw ;
   padding-bottom:2vh ;
-  font-size: 1.5vw;
+  font-size: 1.3vw;
 }
 .info img{
   width: 3vw;
@@ -514,21 +515,21 @@ width: 90%;
 /* 擗���” */
 .list{
   display:flex;
-  margin-bottom: 10vh;
+  margin-bottom: 5vh;
   position: relative;
   border:1px solid gray;
   margin-right: 9vw;
-  border-radius: 1vw;
-  box-shadow: 2px 2px 3px #000;
+  border-radius: 0.3vw;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   padding: 0.5em;
 }
 .list:hover{
-  box-shadow: 5px 5px 10px rgb(26, 26, 26);
+  border:2px solid black;
 }
 .list>img{
   padding:1px;
-  width: 30vw;
-  height: 45vh;
+  width: 12vw;
+  height: 25vh;
   border-radius: 1vw;
 }
 .detail{
@@ -541,18 +542,20 @@ width: 90%;
   height: 4vh;
 }
 .detail .prize{
-  font-size: 3vw;
+  font-size: 1.8vw;
+  font-family:lato;
+  margin-bottom:30px;
 }
 .detailTitle p{
   margin-top: 1vw;
   font-weight:bold;
-  font-size: 2vw;
+  font-size: 1.5vw;
   margin-bottom: 2vh;
 }
 .word p{
-  padding-top: 3vh;
+  padding-top: 1vh;
   text-align:justify;
-  font-size: 1.6vw;
+  font-size: 1.2vw;
   line-height:1.5;
 }
 .prize{
@@ -709,7 +712,7 @@ width: 90%;
 }
 .data-slick >div{
   height: 5em;
-  border-top:10px solid #fcfcfc;
+  border-top:5px solid #fcfcfc;
   padding:1em 0px 1em 0px;
   text-align:justify;
   text-indent:32px;
@@ -722,7 +725,7 @@ width: 90%;
 input.addd{
 	background: black;
     border-radius: 100%;
-    padding: 1em;
+    padding: 1em 1em 1em 1em;
     margin-right: 2em;
     border: none;
 }

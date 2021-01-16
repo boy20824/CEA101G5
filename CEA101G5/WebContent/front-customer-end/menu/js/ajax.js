@@ -28,7 +28,7 @@ $('document').ready(function(){
                               </li>
                               <li class="prize">
                                 <span>`+data[mydata].menuPrice+`</span>
-                                <img src="/CEA101G5/front-customer-end/menu/img/ICON/dollar-sign-solid.svg" alt="" />
+                                <i class="fas fa-dollar-sign"></i>
                               </li>
                               <li class="bth">
                               <input type="button" value="餐店備註">

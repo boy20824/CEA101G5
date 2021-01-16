@@ -38,9 +38,12 @@ response.setDateHeader("Expires", 0);
 
 <html lang="en">
 <head>
+<title>餐廳資訊</title>
+<link rel="icon"
+	href="<%=request.getContextPath()%>/front-customer-end/front/img/favicon.ico"
+	type="image/x-icon" />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Document</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front-customer-end/menu/css/css.css" />
  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -71,6 +74,7 @@ response.setDateHeader("Expires", 0);
 	overflow: hidden;
 	color: #D56A16; /*前景星星顏色*/
 }
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 </style>
 
 

@@ -3,6 +3,7 @@
 <%@ page import="com.member.model.*"%>
 <%@ page import="com.restaurant.model.*"%>
 
+
 <jsp:useBean id="listRestaurants_ByCompositeQuery" scope="request"
 	type="java.util.List<RestaurantVO>" />
 <jsp:useBean id="restSvc" scope="page"
@@ -11,7 +12,6 @@
 	class="com.restaurantpicture.model.RestaurantPictureService" />
 <jsp:useBean id="restaurantPictureVO" scope="page"
 	class="com.restaurantpicture.model.RestaurantPictureVO" />
-	<!-- 餐廳評論 -->
 <jsp:useBean id="cmtSvc" scope="page" class="com.restaurantcmt.model.RestaurantCmtService" />
 
 <!DOCTYPE html>
@@ -89,6 +89,7 @@
 }
 
 .full_star {
+	width: 0%;
 	/*調整寬度可變更星等*/
 	position: absolute;
 	left: 0;
@@ -235,19 +236,10 @@
 								<p>
 									<i class="fas fa-star"></i> <span class="store-text-word">餐廳評分: <span class="ratings">
 										<span class="empty_star">★★★★★</span> <span class="full_star"
-										style="width:${restaurantVO.storeRatingTotal}%">★★★★★</span></span></span>
+										style="width:${rating/cmtSvc.getAll(restaurantVO.storeId).size()*10}%">★★★★★</span></span></span>
 								</p>
 								
 							</div></li>
-							<c:set var="rating" value="${0}" />
-			       			<c:forEach var="cmtVO" items="${cmtSvc.getAll(restaurantVO.storeId)}">
-			       				<c:set var="rating" value="${rating + cmtVO.storeRating }" />
-          					</c:forEach>
-        					<input type="hidden" class="rating" value="${rating/cmtSvc.getAll(restaurantVO.storeId).size()*10}" />
-        					<script>
-          						let rate = document.querySelector('.rating')
-          						document.querySelector('.full_star').style.width=Math.round(rate.value)+'%'
-          					</script>
 						<li><div>
 								<p>
 									<i class="fas fa-phone"></i> <span class="store-text-word">餐廳電話:${restaurantVO.storePhone}</span>
@@ -262,6 +254,18 @@
 					<button class="btn btn--block card__btn"
 						onclick="window.location.href='<%=request.getContextPath()%>/front-customer-end/menu/menuindex.jsp?storeId=${restaurantVO.storeId}'">查看更多</button>
 				</div>
+				<div class="data-slick">
+			       <c:set var="rating" value="${0}" />
+			       <c:forEach var="cmtVO" items="${cmtSvc.getAll(restaurantVO.storeId)}">
+			       		<c:set var="rating" value="${rating + cmtVO.storeRating }" />
+          		<div><div class="dog">${cmtVO.storeCmtContent }</div></div>
+          			</c:forEach>
+        			</div>
+        			<input type="hidden" class="rating" value="${rating/cmtSvc.getAll(restaurantVO.storeId).size()*10}" />
+        			<script>
+          				let rate = document.querySelector('.rating')
+          				document.querySelector('.full_star').style.width=Math.round(rate.value)+'%'
+          			</script>
 			</div>
 		</c:forEach>
 		<!--  底端列  -->
