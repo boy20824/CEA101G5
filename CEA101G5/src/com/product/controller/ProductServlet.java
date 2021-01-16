@@ -134,7 +134,7 @@ public class ProductServlet extends HttpServlet {
 			
 			List<OrderDetailVO> orderDetailVOListNumOfReviews = new ArrayList<OrderDetailVO>();
 			for (OrderDetailVO orderDetailVO : orderDetailVOList) {
-				if (orderDetailVO.getProductReview() != null) {
+				if (orderDetailVO.getProductReview() != null && orderDetailVO.getProductReviewStatus() != 0) {
 					orderDetailVOListNumOfReviews.add(orderDetailVO);
 				}
 			}
