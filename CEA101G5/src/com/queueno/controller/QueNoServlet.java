@@ -169,10 +169,10 @@ public class QueNoServlet extends HttpServlet {
 				
 				QueNoService queNoSvc = new QueNoService();
 				List<QueNoVO> queNoVO = queNoSvc.getQueNoByStoreId(storeid);
-				List<QueNoVO> queNoVO1 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 1);
-				List<QueNoVO> queNoVO2 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 2);
-				List<QueNoVO> queNoVO3 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 3);
-				List<QueNoVO> queNoVO4 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 4);
+//				List<QueNoVO> queNoVO1 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 1);
+//				List<QueNoVO> queNoVO2 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 2);
+//				List<QueNoVO> queNoVO3 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 3);
+//				List<QueNoVO> queNoVO4 = queNoSvc.getQueNoByStoreIdAndTableId(storeid, 4);
 				
 				
 				if(queNoVO.size()!=0) {
@@ -197,10 +197,10 @@ public class QueNoServlet extends HttpServlet {
 					session.setAttribute("queTableVO", queTableVO);
 					session.setAttribute("queLineVO", queLineVO);
 					session.setAttribute("queNoVO", queNoVO);
-					session.setAttribute("queNoVO1", queNoVO1);
-					session.setAttribute("queNoVO2", queNoVO2);
-					session.setAttribute("queNoVO3", queNoVO3);
-					session.setAttribute("queNoVO4", queNoVO4);
+//					session.setAttribute("queNoVO1", queNoVO1);
+//					session.setAttribute("queNoVO2", queNoVO2);
+//					session.setAttribute("queNoVO3", queNoVO3);
+//					session.setAttribute("queNoVO4", queNoVO4);
 					session.setAttribute("storeid", storeid);
 //					count++;// 計數+1
 //				req.setAttribute("pickupNo", count);
