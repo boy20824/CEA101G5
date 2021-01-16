@@ -223,7 +223,7 @@ response.setDateHeader("Expires", 0);
           				<div><div class="dog">${cmtVO.storeCmtContent }</div></div>
           			</c:forEach>
         			</div>
-        			<input type="hidden" class="rating" value="${rating/cmtSvc.getAll(restaurantVO.storeId).size()*10}" />
+        			<input type="hidden" class="rating" value="${rating/cmtSvc.getAll(restaurantVO.storeId).size()*10*2}" />
         			<script>
           				let rate = document.querySelector('.rating')
           				document.querySelector('.full_star').style.width=Math.round(rate.value)+'%'

@@ -200,15 +200,17 @@
 						<ul>
 							<li><img src="img/ICON/utensils-solid.svg" alt="" /> <span><p>餐廳名稱:${restSvclist.storeName}</p></span>
 							</li>
+<!-- 							餐廳service -->
+							<jsp:useBean id="cmtSvc" scope="page" class="com.restaurantcmt.model.RestaurantCmtService" />
 							<li><img src="img/ICON/star-solid.svg" alt="" /> <span><p><span class="store-text-word">餐廳評分: <span class="ratings">
 										<span class="empty_star">★★★★★</span> <span class="full_star"
 										style="width:${restSvclist.storeRatingTotal}%">★★★★★</span></span></span></p></span>
 							</li>
 							<c:set var="rating" value="${0}" />
-			       			<c:forEach var="cmtVO" items="${cmtSvc.getAll(restaurantVO.storeId)}">
+			       			<c:forEach var="cmtVO" items="${cmtSvc.getAll(restSvclist.storeId)}">
 			       				<c:set var="rating" value="${rating + cmtVO.storeRating }" />
           					</c:forEach>
-        					<input type="hidden" class="rating" value="${rating/cmtSvc.getAll(restSvclist.storeId).size()*10}" />
+        					<input type="hidden" class="rating" value="${rating/cmtSvc.getAll(restSvclist.storeId).size()*10*2}" />
         					<script>
           						let rate = document.querySelector('.rating')
           						document.querySelector('.full_star').style.width=Math.round(rate.value)+'%'

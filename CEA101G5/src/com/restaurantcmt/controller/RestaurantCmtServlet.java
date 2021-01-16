@@ -46,6 +46,7 @@ public class RestaurantCmtServlet extends HttpServlet {
 			String storeCmtContent = req.getParameter("cmt");
 			Integer storeRating=0;
 			String foodOrderId = req.getParameter("foodOrderId");
+			System.out.println(storeCmtContent);
 //			取得餐廳評分
 			Enumeration<String> enu= req.getParameterNames();
 			int i =0;
@@ -58,9 +59,8 @@ public class RestaurantCmtServlet extends HttpServlet {
 			}
 			if(storeCmtContent==null) {
 				storeCmtContent=" ";
-			}else {
-				storeCmtContent=" ";
 			}
+			
 				/*************************** 2.開始查詢資料 *****************************************/
 				RestaurantCmtService cmtSvc = new RestaurantCmtService();
 				FoodOrderService foodSvc = new FoodOrderService();
