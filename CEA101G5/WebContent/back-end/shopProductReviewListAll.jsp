@@ -150,6 +150,7 @@
 	<tr>
 		<th>訂單編號</th>
 		<th>商品編號</th><!-- 應該不用弄成商品名稱ㄅ -->
+		<th>商品評論圖片</th>
 		<th>商品評論內容</th>
 		<th>商品評論時間</th>
 		<th>顯示狀態</th>
@@ -161,7 +162,7 @@
 			<tr>
 				<td>${odVO.orderId}</td>
 				<td>${odVO.productId}</td>
-				<td><img src="<%=request.getContextPath()%>/shop/orderdetailphotoreader.do?&productId=${odVO.getProductId()}&orderId=${odVO.getOrderId()}" class="card-img-top" alt="..." width="100" height="100"></td>
+				<td style="width: 250; padding: 10px"><img style="width: 100%; height: auto;"src="<%=request.getContextPath()%>/shop/orderdetailphotoreader.do?&productId=${odVO.getProductId()}&orderId=${odVO.getOrderId()}" class="card-img-top" alt="..." width="100" height="100"></td>
 				<td>${odVO.productReview}</td>
 				<td><fmt:formatDate value="${odVO.productReviewTS}" pattern="yyyy-MM-dd HH:mm"/></td>
 				<td>

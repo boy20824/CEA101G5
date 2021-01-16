@@ -229,31 +229,31 @@ public class LatestNewsJDBCDAO implements LatestNewsDAO_Interface {
 		LatestNewsJDBCDAO dao = new LatestNewsJDBCDAO();
 		
 //		testing : insert()
-//		LatestNewsVO LatestNewsVO = new LatestNewsVO();
-//		LatestNewsVO.setNewsTitle("���լ��ʥD�D");
-//		LatestNewsVO.setNewsContentTxt("���լ��ʤ��e");
-//		try {
-//			LatestNewsVO.setNewsContentImg(getPictureByteArray("/Users/jordan/desktop/cat.png"));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		LatestNewsVO.setNewsStatus(1);
-//		dao.insert(LatestNewsVO);
-//		System.out.println("Statement Processed...");
-		
-//		testing : update()
-		LatestNewsVO latestNewsVO = new LatestNewsVO();
-		latestNewsVO.setNewsId(6);
-		latestNewsVO.setNewsTitle("");
-		latestNewsVO.setNewsContentTxt("");
+		LatestNewsVO LatestNewsVO = new LatestNewsVO();
+		LatestNewsVO.setNewsTitle("");
+		LatestNewsVO.setNewsContentTxt("");
 		try {
-			latestNewsVO.setNewsContentImg(getPictureByteArray("C:\\Users\\CJ02032\\Desktop\\images\\unnamed.jpg"));
+			LatestNewsVO.setNewsContentImg(getPictureByteArray("/Users/jordan/desktop/web/images/700430_HEAD.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		latestNewsVO.setNewsStatus(1);
-		dao.update(latestNewsVO);
+		LatestNewsVO.setNewsStatus(1);
+		dao.insert(LatestNewsVO);
 		System.out.println("Statement Processed...");
+		
+//		testing : update()
+//		LatestNewsVO latestNewsVO = new LatestNewsVO();
+//		latestNewsVO.setNewsId(5);
+//		latestNewsVO.setNewsTitle("");
+//		latestNewsVO.setNewsContentTxt("");
+//		try {
+//			latestNewsVO.setNewsContentImg(getPictureByteArray("/Users/jordan/desktop/web/images/easter-sale-banner_139523-89.jpg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		latestNewsVO.setNewsStatus(1);
+//		dao.update(latestNewsVO);
+//		System.out.println("Statement Processed...");
 		
 //		testing : getOne()
 //		LatestNewsVO latestNewsVO = dao.getOne(7);
