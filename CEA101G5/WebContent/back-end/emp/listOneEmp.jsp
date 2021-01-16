@@ -78,7 +78,6 @@
 		<th>員工編號</th>
 		<th>員工姓名</th>
 		<th>帳號</th>
-		<th>密碼</th>
 		<th>到職日</th>
 		<th>員工狀態</th>
 		<th>圖片</th>
@@ -88,7 +87,6 @@
 		<td>${empVO.emp_id}</td>
 		<td>${empVO.emp_name}</td>
 		<td>${empVO.emp_account}</td>
-		<td>${empVO.emp_password}</td>
 		<td>${empVO.emp_date}</td>
 		<td>${empVO.emp_status}</td>
 		<td ><img width=100 height=100
