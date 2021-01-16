@@ -17,70 +17,39 @@
 <title>預定中的訂位</title>
 
 <style>
+.orderBlock{
+margin-left:300px;
+margin-top:100px;
+}
 
-  table#table-1 {
-	background-color: #f3853d;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
+.orderBlock a{
+	width: 100%;
+    background-color: #FF615F;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 575px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top:30px;
+    
+}
 
-<style>
-  table {
- 	width: 900px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	text-align:center;
-  }
-  table, th, td {
-     border: 1px solid #404040; 
-     border-spacing: 0; 
-     background-color: #F6F6F6;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-  .button{
-	  background-color:#FF615F;
-	  border-radius: 5px;
-	  border:1px;
-	  color:white;
-	  font-family: #606060;
-	  text-decoration:none;
-  }
-  body{
-  	magin:0;
-  	padding:0;
-  	text-align:center;
-/*   	background-image: url("images/r1.jpg"); */
-  	background-size: cover;
-  	background-attachment: fixed;
-  	background-position: center;
-  	background-repeat: no-repeat;
-  }
-  .info{
-  	text-align: center;
-  	margin: 50px auto;
-  }
-  .tableborder{
-  background-color: white;
-  margin:20px;
-  }
+.table-striped{
+width:80%;
+margin-top:50px;
+}
+
+.button{
+ margin: inherit;
+ margin: initial;
+  marg
+
 </style>
 
 </head>
 <body bgcolor='white'>
+<div class="orderBlock">
 <a href="<%=request.getContextPath() %>/front-store-end/reserveorder/oldReserveOrder.jsp" class="button">查詢歷史訂位訊息</a>
 
 <%-- 錯誤表列 --%>
@@ -95,8 +64,10 @@
 
 <div class="tableborder">
 <%@ include file="page1.file" %> 
-<table class="info">
-	<caption>預定中的訂位</caption>
+<table class="table table-striped">
+<tr>
+	<td colspan="9" style="text-align:center ;background-color: #FF615F; color:white;">預定中的訂位</td>
+	</tr>
 	<tr>
 		<th>會員電話</th>
 		<th>用餐日期</th>
@@ -129,7 +100,7 @@
 			
 				<td>
 				  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" style="margin-bottom: 0px;">
-				     <input type="submit" value="未到店用餐" class="button"><!-- 送出該筆要修改的資料 -->
+				     <input type="submit" value="未到店用餐" class="button btn btn-danger"><!-- 送出該筆要修改的資料 -->
 				     <input type="hidden" name="reserveid"  value="${reserveOrderVO.reserveId}">
 				     <input type="hidden" name="storeid" value="${reserveOrderVO.storeId}">
 				     <input type="hidden" name="memphone" value="${reserveOrderVO.memPhone}">
@@ -148,7 +119,7 @@
 			</td>
 			<td>
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" style="margin-bottom: 0px;">
-						 <input type="submit" value="店家因素取消" class="button"><!-- 送出該筆要修改的資料 -->
+						 <input type="submit" value="店家因素取消" class="button btn btn-danger"><!-- 送出該筆要修改的資料 -->
 					     <input type="hidden" name="reserveid"  value="${reserveOrderVO.reserveId}">
 					     <input type="hidden" name="storeid" value="${reserveOrderVO.storeId}">
 					     <input type="hidden" name="memphone" value="${reserveOrderVO.memPhone}">
@@ -182,7 +153,7 @@
     <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/front-store-end/reserveorder/listOneReserveOrder.jsp" >
         <b>依客戶電話查詢:</b>
         <input type="text" name="phonesearch">
-        <input type="submit" value="送出">
+        <input type="submit" value="送出" class="btn btn-danger">
     </FORM>
 <script>
     if ( window.history.replaceState ) {
@@ -190,6 +161,6 @@
     }
 
 </script>
-
+</div>
 </body>
 </html>

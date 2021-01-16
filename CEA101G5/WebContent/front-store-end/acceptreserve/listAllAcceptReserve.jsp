@@ -22,89 +22,54 @@
 
 <html>
 <head>
-<title>所有訂位時段資料 - listAllAcceptReserve.jsp</title>
-
+<title>所有訂位時段資料</title>
 <style>
-  table#table-1 {
-	background-color: #f3853d;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
+.tableborder{
+margin-left:300px;
+margin-top:100px;
 
-<style>
-  table {
- 	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	text-align:center;
-  }
-  table, th, td {
-     border: 1px solid #404040; 
-     border-spacing: 0; 
-     background-color: #F6F6F6;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-  .button{
-	  background-color:#FF615F;
-	  border-radius: 5px;
-	  border:1px;
-	  color:white;
-	  font-family: #606060;
-	  text-decoration:none;
-  }
-  body{
-  	magin:0;
-  	padding:0;
-  	text-align:center;
-/*   	background-image: url("images/r1.jpg"); */
-  	background-size: cover;
-  	background-attachment: fixed;
-  	background-position: center;
-  	background-repeat: no-repeat;
-  }
-  .info{
-  	text-align: center;
-  	margin: 50px auto;
-  }
-  .tableborder{
-  background-color: white;
-  margin:20px;
-  }
-  #openp{
-  background-color: #228b22;
-  }
+}
+.tableborder a{
+	width: 100%;
+    background-color: #FF615F;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 575px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.table-striped{
+width:80%;
+margin-top:50px;
+}
 
+.button{
+ margin: inherit;
+ margin: initial;
+  margin: unset;
+}
 </style>
 
 </head>
 <body bgcolor='white'>
-
+<div class="tableborder">
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 		<c:forEach var="message" items="${errorMsgs}">
 			${message}
 		</c:forEach>
 </c:if>
-<br><a href="<%=request.getContextPath() %>/front-store-end/reserveorder/oldReserveOrder.jsp" class="button">查詢歷史訂位訊息</a>
-<br>
-<a href="<%=request.getContextPath() %>/front-store-end/reserveorder/listAllReserveOrder.jsp" class="button">查詢預定中的訂位</a><br>
-<a href="<%=request.getContextPath() %>/front-store-end/reservesituation/listAllReserveSituation.jsp" class="button">查詢訂位狀況</a><br>
-<table class="info">
-	<caption>管理時段</caption>
+<a href="<%=request.getContextPath() %>/front-store-end/reserveorder/oldReserveOrder.jsp" class="button">查詢歷史訂位訊息</a>
+<br><br><br>
+<a href="<%=request.getContextPath() %>/front-store-end/reserveorder/listAllReserveOrder.jsp" class="button">查詢預定中的訂位</a>
+<br><br><br>
+<a href="<%=request.getContextPath() %>/front-store-end/reservesituation/listAllReserveSituation.jsp" class="button">查詢訂位狀況</a>
+<br><br><br>
+<table class="table table-striped">
+	<tr>
+	<td colspan="5" style="text-align:center ;background-color: #FF615F; color:white;">管理時段</td>
+	</tr>
 	<tr>
 		<th>時段編號</th>
 		<th>開始時間</th>
@@ -132,7 +97,7 @@
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/acceptreserve/acceptreserve.do" style="margin-bottom: 0px;">
 			     <c:if test="${arVO.periodStatus==0}">
-					<input type="submit" value="開啟" class="button" id="openp">
+					<input type="submit" value="開啟" class="button btn btn-danger" id="openp">
 					<input type="hidden" name="periodstatus"  value=1>
 					<input type="hidden" name="delperiod" value="open">
 					<input type="hidden" name="reservesituationdate" value="<%=tomorrow %>">
@@ -141,7 +106,7 @@
 					<input type="hidden" name="reservedgroups" value=0>
 				</c:if>
 				<c:if test="${arVO.periodStatus==1}">
-					<input type="submit" value="關閉" class="button" id="closep">
+					<input type="submit" value="關閉" class="button btn btn-danger" id="closep">
 					<input type="hidden" name="periodstatus" value=0>
 					<input type="hidden" name="delperiod" value="close">
 					<input type="hidden" name="reservesituationdate" value="<%=today %>">
@@ -164,7 +129,10 @@
 </table>
 <%@ include file="page2.file" %>
 <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/acceptreserve/acceptreserve.do" name="form1">
-<table class="info">
+<table class="table table-striped" style="text-align:center">
+	<tr>
+	<td colspan="2" style="text-align:center ;background-color: #FF615F; color:white;">新增時段</td>
+	</tr>
 	<tr>
 		<th>開始時間</th>
 		<th>結束時間</th>
@@ -198,7 +166,8 @@
 <input type="hidden" name="acceptdays" value="${storeLogin.storeFinalReservDate}"><!-- 這個允許訂位天數的名稱我亂取的  還要跟餐廳拿 -->
 <input type="hidden" name="acceptgroups" value="${storeLogin.acceptGroups}"><!-- 這個也要跟餐廳拿 -->
 <input type="hidden" name="reservedgroups" value=0>
-<input type="submit" value="新增時段" class="button"></FORM>
+<input type="submit" value="新增時段" class="button btn btn-danger"></FORM>
+</div>
 <% 
   java.sql.Timestamp starttime = null;
   try {

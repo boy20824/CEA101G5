@@ -16,74 +16,18 @@
 <title>訂位狀況資料</title>
 
 <style>
-  table#table-1 {
-	background-color: #f3853d;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
-  table {
- 	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	text-align:center;
-  }
-  table, th, td {
-     border: 1px solid #404040; 
-     border-spacing: 0; 
-     background-color: #F6F6F6;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-  .button{
-	  background-color:#FF615F;
-	  border-radius: 5px;
-	  border:1px;
-	  color:white;
-	  font-family: #606060;
-	  text-decoration:none;
-  }
-  body{
-  	magin:0;
-  	padding:0;
-  	text-align:center;
-/*   	background-image: url("images/r1.jpg"); */
-  	background-size: cover;
-  	background-attachment: fixed;
-  	background-position: center;
-  	background-repeat: no-repeat;
-  }
-  .info{
-  	text-align: center;
-  	margin: 50px auto;
-  }
-  .tableborder{
-  background-color: white;
-  margin:20px;
-  }
-  #openp{
-  background-color: #228b22;
-  }
+.table-striped{
+width:80%;
+margin-top:50px;
+margin-left:200px;
+}
 
 </style>
 
 </head>
 <body bgcolor='white'>
-
+<div>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -94,7 +38,10 @@
 	</ul>
 </c:if>
 <div class="tableborder">
-<table class="info">
+<table class="table table-striped" style="text-align:center">
+	<tr>
+	<td colspan="7" style="text-align:center ;background-color: #FF615F; color:white;">訂位狀況資料</td>
+	</tr>
 	<tr>
 		<th>日期</th>
 		<th>餐廳編號</th>
@@ -122,6 +69,6 @@
 </table>
 </div>
 <%@ include file="page2.file" %>
-
+</div>
 </body>
 </html>
