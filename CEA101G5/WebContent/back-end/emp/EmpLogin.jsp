@@ -63,7 +63,7 @@ pageContext.setAttribute("list", list);
 	<div>
 		<c:if test="${empty sessionScope.empLogin}">
 			<a href="<%=request.getContextPath()%>/back-end/emp/EmpLogin.jsp"
-				id="sidebarlogin"> 員工登入/ </a>
+				id="sidebarlogin"> 員工登入/登出  </a>
 		</c:if>
 		<c:if test="${not empty sessionScope.empLogin}">
 			<a href="<%=request.getContextPath()%>/back-end/emp/emp.do?action=logout" id="sidebarlogin">員工登入/登出 </a>
