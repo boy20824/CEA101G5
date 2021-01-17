@@ -13,6 +13,8 @@
 
 	QueNoVO queNoVO = (QueNoVO) session.getAttribute("queNoVO");
 	session.setAttribute("queNoVO", queNoVO);
+	QueNoVO queNoVO2 = (QueNoVO) session.getAttribute("queNoVO2");
+	session.setAttribute("queNoVO2", queNoVO2);
 	String storeid = (String) session.getAttribute("storeid");
 	session.setAttribute("storeid", storeid);
 	String memName = (String) session.getAttribute("memberName");
@@ -70,6 +72,7 @@ div#helloName {
 }
 </style>
 </head>
+
 <div class="header">
 		<!-- Just an image -->
 		<nav class="navbar navbar-light bg-light">
@@ -107,18 +110,18 @@ div#helloName {
 					<label for="inputEmail3" class="col-sm-2 col-form-label">候位時段</label>
 					<div class="col-sm-6">
 <jsp:useBean id="quePeriodSvc" scope="page" class="com.queueperiod.model.QuePeriodService"/>
-<jsp:useBean id="queNoVO2" scope="page" class="com.queueno.model.QueNoVO"/>	
+<%-- <jsp:useBean id="queNoVO2" scope="page" class="com.queueno.model.QueNoVO"/>	 --%>
 					<c:forEach var="quePeriodVO" items="${quePeriodSvc.getOneQuePeriod(storeid)}">
 					<c:choose>
-					<c:when test="${queNoVO2.queueperiodid==quePeriodVO.queueperiodid}">
+					<c:when test="${queNoVO.queueperiodid==quePeriodVO.queueperiodid}">
 					<c:choose>
-					<c:when test="${queNoVO2.queueperiodid==1}">
+					<c:when test="${queNoVO.queueperiodid==1}">
 						<div class="form-control" id="queueperiodid"><fmt:formatDate value="${quePeriodVO.queuestarttime}" pattern="HH:mm"/> ~ <fmt:formatDate value="${quePeriodVO.queueendtime}" pattern="HH:mm"/></div>
-						</c:when><c:when test="${queNoVO2.queueperiodid==2 }">
+						</c:when><c:when test="${queNoVO.queueperiodid==2 }">
 						<div class="form-control" id="queueperiodid"><fmt:formatDate value="${quePeriodVO.queuestarttime}" pattern="HH:mm"/> ~ <fmt:formatDate value="${quePeriodVO.queueendtime}" pattern="HH:mm"/></div>
-						</c:when><c:when test="${queNoVO2.queueperiodid==3 }">
+						</c:when><c:when test="${queNoVO.queueperiodid==3 }">
 						<div class="form-control" id="queueperiodid"><fmt:formatDate value="${quePeriodVO.queuestarttime}" pattern="HH:mm"/> ~ <fmt:formatDate value="${quePeriodVO.queueendtime}" pattern="HH:mm"/></div>
-						</c:when><c:when test="${queNoVO2.queueperiodid==4 }">
+						</c:when><c:when test="${queNoVO.queueperiodid==4 }">
 						<div class="form-control" id="queueperiodid"><fmt:formatDate value="${quePeriodVO.queuestarttime}" pattern="HH:mm"/> ~ <fmt:formatDate value="${quePeriodVO.queueendtime}" pattern="HH:mm"/></div>
 						</c:when></c:choose></c:when></c:choose>
 </c:forEach>

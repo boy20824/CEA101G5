@@ -1,6 +1,6 @@
 package com.queueline.model;
 
-public class QueLineVO {
+public class QueLineVO  implements java.io.Serializable{
 	private Integer queuelineno;
 	private Integer queuenocall;
 	private String storeid;

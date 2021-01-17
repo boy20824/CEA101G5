@@ -10,7 +10,7 @@ public class SmsSender {
     public static final String ACCOUNT_SID =
             "AC344fdb90110d3ba15570f7099542490e";
     public static final String AUTH_TOKEN =
-            "ff2fc999e4a136e6ff530019f3934541";
+            "48a757bdd1a2a295125e46e2cac20961";
     
     public void sendSMS(String memPhone) {
     	
@@ -20,7 +20,7 @@ public class SmsSender {
     	Message message = Message.creator
     			(new PhoneNumber("+886"+sendPhone),
     			new PhoneNumber("+14158783336"),
-    			"已到叫號，請儘速請往入座！！").create();
+    			"已到叫號，請儘速前往入座！！").create();
     	System.out.println(message.getSid());
     }
 

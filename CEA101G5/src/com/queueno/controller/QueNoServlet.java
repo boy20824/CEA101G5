@@ -21,6 +21,7 @@ public class QueNoServlet extends HttpServlet {
 //	Timer timer = new Timer();
 //	public void init() {
 //		deleteAllNum();
+//		System.out.println("歸零");
 //		
 //		Integer dayTime =  15 * 60 * 1000;
 //		Date date = new Date(121, 0, 14, 15, 44, 1);
@@ -29,9 +30,9 @@ public class QueNoServlet extends HttpServlet {
 //			@Override
 //			public void run() {
 //				deleteAllNum();
-//				System.out.println("排程開始");
 //			}
 //		};
+//		System.out.println("排程開始");
 //		System.out.println(date);
 ////		timer.schedule(timerTask,  10*1000);
 ////		timer.scheduleAtFixedRate(timerTask, new Date(), dayTime);
@@ -150,7 +151,7 @@ public class QueNoServlet extends HttpServlet {
 				}
 			}}catch(Exception e){}
 			
-			int num =0;
+			int num =0; 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -374,7 +375,6 @@ public class QueNoServlet extends HttpServlet {
 				Integer queuenum = new Integer(req.getParameter("queuenum"));
 				String memphone = req.getParameter("memphone").trim();
 				String memberName = req.getParameter("memberName").trim();
-				System.out.println(memberName);
 				Integer party = new Integer(req.getParameter("party"));
 				Timestamp queuenotime = strToTsp(req.getParameter("queuenotime"));
 				String storeid = req.getParameter("storeid").trim();
@@ -452,7 +452,6 @@ public class QueNoServlet extends HttpServlet {
 				int queNoAmount = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid).size();
 				Long long2 =(time1).getTime()+ queNoAmount*5*60*1000;
 				Timestamp expectTime = new Timestamp(long2);
-				
 				
 				HttpSession session = req.getSession();
 				session.setAttribute("memberName", memberName);
