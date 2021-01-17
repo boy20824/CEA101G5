@@ -43,8 +43,8 @@ public class ReserveSituationService {
 		return rsVO;
 	}
 
-	public void deleteReserveSituation(Date reserveSituationDate,String storeId,Integer periodId) {
-		dao.delete(reserveSituationDate,storeId, periodId);
+	public void deleteReserveSituation(String storeId,Integer periodId) {
+		dao.delete(storeId, periodId);
 	}
 
 	public ReserveSituationVO getOneReserveSituation(Date reserveSituationDate,String storeId,Integer periodId) {

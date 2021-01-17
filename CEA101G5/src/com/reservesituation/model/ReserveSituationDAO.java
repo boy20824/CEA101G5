@@ -29,7 +29,7 @@ public class ReserveSituationDAO implements ReserveSituationDAO_interface {
 	private static final String GET_ONE_STMT = 
 		"SELECT RESERV_SITUATION_DATE,STORE_ID,PERIOD_ID,ACCEPT_GROUPS,RESERVED_GROUPS FROM RESERVE_SITUATION WHERE RESERV_SITUATION_DATE = ? AND STORE_ID = ? AND PERIOD_ID = ?";
 	private static final String DELETE = 
-		"DELETE FROM RESERVE_SITUATION WHERE RESERV_SITUATION_DATE > ? AND STORE_ID = ? AND PERIOD_ID = ?";
+		"DELETE FROM RESERVE_SITUATION WHERE STORE_ID = ? AND PERIOD_ID = ?";
 	private static final String UPDATE = 
 		"UPDATE RESERVE_SITUATION SET ACCEPT_GROUPS = ?,RESERVED_GROUPS = ? WHERE RESERV_SITUATION_DATE = ? AND STORE_ID = ? AND PERIOD_ID = ?";
 	private static final String SEARCH = "SELECT RESERV_SITUATION_DATE,STORE_ID,PERIOD_ID,ACCEPT_GROUPS,RESERVED_GROUPS FROM RESERVE_SITUATION WHERE RESERV_SITUATION_DATE = ? AND STORE_ID = ? ORDER BY PERIOD_ID";
@@ -395,7 +395,7 @@ public class ReserveSituationDAO implements ReserveSituationDAO_interface {
 	}
 
 	@Override
-	public void delete(Date reserveSituationDate, String storeId, Integer periodId) {
+	public void delete(String storeId, Integer periodId) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -405,9 +405,8 @@ public class ReserveSituationDAO implements ReserveSituationDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setDate(1, reserveSituationDate);
-			pstmt.setString(2, storeId);
-			pstmt.setInt(3, periodId);
+			pstmt.setString(1, storeId);
+			pstmt.setInt(2, periodId);
 
 			pstmt.executeUpdate();
 

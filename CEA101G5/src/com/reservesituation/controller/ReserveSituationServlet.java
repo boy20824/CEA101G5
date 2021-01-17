@@ -332,7 +332,6 @@ public class ReserveSituationServlet extends HttpServlet {
 	
 			try {
 				/***************************1.接收請求參數***************************************/
-				java.sql.Date reserveSituationDate = java.sql.Date.valueOf(req.getParameter("reservesituationdate").trim());
 				
 				String storeId = new String(req.getParameter("storeid").trim());
 				
@@ -340,7 +339,7 @@ public class ReserveSituationServlet extends HttpServlet {
 				
 				/***************************2.開始刪除資料***************************************/
 				ReserveSituationService rsSvc = new ReserveSituationService();
-				rsSvc.deleteReserveSituation(reserveSituationDate,storeId, periodId);
+				rsSvc.deleteReserveSituation(storeId, periodId);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 				String url = "/front-store-end/acceptreserve/listAllAcceptReserve.jsp";
