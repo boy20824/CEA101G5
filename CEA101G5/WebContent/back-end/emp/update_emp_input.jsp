@@ -92,7 +92,7 @@
 	</tr>
 	<tr>
 		<td>密碼:</td>
-		<td><input type="TEXT" name="emp_pwd" size="45"	value="<%=empVO.getEmp_password()%>" /></td>
+		<td><input type="password" name="emp_pwd" size="45"	value="<%=empVO.getEmp_password()%>" /></td>
 	</tr>
 	<tr>
 					<td>雇用日期:</td>
@@ -117,7 +117,7 @@
 <br>
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="emp_id" value="<%=empVO.getEmp_id()%>">
-<input type="submit" value="送出修改" ></FORM>
+<input type="submit" value="送出修改"  class="btn btn-danger"></FORM>
 </body>
 <div align="center">
 <button type="button" class="btn btn-danger"><a href="<%=request.getContextPath()%>/back-end/emp/listAllEmp.jsp">回首頁</a></button>
