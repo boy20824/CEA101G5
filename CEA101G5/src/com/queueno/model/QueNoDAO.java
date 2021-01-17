@@ -28,6 +28,7 @@ public class QueNoDAO implements QueNoDAO_interface{
 	private static final String GET_NUM_BY_PHONE = "SELECT * FROM queue_no where mem_phone=?";
 	private static final String GET_NUM_BY_PHONE_AND_STORE = "SELECT * FROM queue_no where mem_phone=? AND store_id = ?";
 	private static final String GET_NUM_BY_STORE_AND_TABLE = "SELECT * FROM queue_no where store_id = ? AND queue_table_id=? order by queue_num";
+	private static final String GET_PHONE_BY_STORE_AND_NUM = "SELECT mem_phone FROM queue_no where store_id = ? AND queue_num=? order by queue_num";
 
 	
 	// ?���?
@@ -272,6 +273,52 @@ public class QueNoDAO implements QueNoDAO_interface{
 				}
 			}
 			return quenoVO;
+		}
+		
+		public String findPhoneByStoreAndNum(String storeid, Integer queue_num) {
+			String memphone = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(GET_PHONE_BY_STORE_AND_NUM);
+				
+				pstmt.setString(1, storeid);
+				pstmt.setInt(2, queue_num);
+				
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+				memphone = rs.getString("mem_phone");
+				}
+				// Handle any driver errors
+			}  catch (SQLException se) {
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return memphone;
 		}
 		
 		// ??��??+店�?�查�?

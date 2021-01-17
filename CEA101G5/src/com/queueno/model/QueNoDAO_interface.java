@@ -17,6 +17,8 @@ public interface QueNoDAO_interface {
 	public List<QueNoVO> getAll();
 	
 	public List<QueNoVO> findByStoreidAndTableid(String storeid, Integer queuetableid);
+	
+	public String findPhoneByStoreAndNum(String storeid, Integer queuenum);
 
 	public QueNoVO findByPhone(String memphone);
 	

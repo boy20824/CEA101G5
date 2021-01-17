@@ -586,6 +586,12 @@ public class QueNoJDBCDAO implements QueNoDAO_interface {
 		}
 		return list;
 	}
+
+	@Override
+	public String findPhoneByStoreAndNum(String storeid, Integer queuenum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

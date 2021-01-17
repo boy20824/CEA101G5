@@ -234,7 +234,9 @@ img {
 
 				<div class="form-group row">
 					<div class="col-sm-1"></div>
-					<div class="col-sm-5"><span class="badge badge-secondary">預設密碼:Enak1234</span></div>
+					<div class="col-sm-5">
+<!-- 					<span class="badge badge-secondary">預設密碼:Enak1234</span> -->
+					</div>
 					<div class="col-sm-2">
 						<a class="btn btn-light" href="<%=request.getContextPath() %>/front-customer-end/front/front.jsp" role="button">放棄取號</a>
 					</div>

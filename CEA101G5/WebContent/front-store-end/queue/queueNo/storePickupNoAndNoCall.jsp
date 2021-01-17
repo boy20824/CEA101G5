@@ -77,6 +77,36 @@ img {
 	background-color: #FA7E23; 
 	border-color: #FA7E23;
 }
+.btn-box {
+   
+  display:inline-block;
+  vertical-align:middle;
+  width: 40px;
+  height: 20px;
+  border-radius:100px;
+  background-color: #FA7E23;
+  box-shadow: 0px 3px 0px rgba(0,0,0,.13) inset;
+}
+.btn-box .sms {
+  display:inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius:50%;
+  background-color: #fff;
+  margin-left: 0;/*動畫從ml為0開始*/
+  transition: .5s;
+  box-shadow:1px 2px 5px rgba(0,0,0,.3);
+}
+.checkbox {
+  position:absolute;
+  opacity:0;
+}
+.checkbox:checked + .btn-box {
+  background-color: #8f8;
+}
+.checkbox:checked + .btn-box .sms {
+  margin-left: 20px;
+}
 </style>
 </head>
 <body>
@@ -97,6 +127,16 @@ img {
 		<input name="storeid" value="${storeid }" type="hidden">
 		<button type="submit" class="resetAll btn btn-primary" style="margin-left:90%;">重整</button>
 	</form>
+<!-- <div> -->
+<!--   <label style="margin-left:90%;"> -->
+<!--     <input type="checkbox" name="" id="" class="checkbox"> -->
+<!--     <span class="btn-box"> -->
+<!--       <span class="sms"></span>       -->
+<!--     </span> -->
+<!--     <input name="sms" value="1" type="hidden"> -->
+<!--     <span class="text" style=" color:black;">發送簡訊通知中</span> -->
+<!--   </label> -->
+<!-- </div> -->
 	</div>
 	<div class="container">
 		<div class="row reserve2"></div>

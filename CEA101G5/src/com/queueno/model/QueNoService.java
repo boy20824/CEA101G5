@@ -62,6 +62,10 @@ public class QueNoService {
 		return dao.findByPhone(memphone);
 	}
 	
+	public String getPhoneByStoreAndNum(String storeid, Integer queuenum) {
+		return dao.findPhoneByStoreAndNum(storeid, queuenum);
+	}
+	
 	public QueNoVO getOneQueNo(Integer queuenum, String memphone) {
 		return dao.findByPrimaryKey(queuenum, memphone);
 	}

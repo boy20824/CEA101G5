@@ -104,7 +104,7 @@
 							value="${queTableVO.queuetableid}" type="hidden">
 							<input name="action" value="delete" type="hidden">
 							<input
-							name="delete" value="時段刪除" type="submit" class="delete btn btn-primary"></form></td>
+							name="delete" value="餐桌刪除" type="submit" class="delete btn btn-primary"></form></td>
 					</tr>
 					</c:when></c:choose>
 					<%

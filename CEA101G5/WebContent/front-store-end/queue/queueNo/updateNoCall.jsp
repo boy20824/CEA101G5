@@ -12,9 +12,10 @@ Integer queuenocall = new Integer(request.getParameter("queuenum"));
 Integer queuetableocc = new Integer(request.getParameter("queuetableocc"))+1;
 Integer queuetableusable = new Integer(request.getParameter("queuetableusable"))-1;
 
+
 	// 對應桌子叫號
 	QueNoService queNoSvc = new QueNoService();
-	List<QueNoVO> table2List = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
+	List<QueNoVO> table2List = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid); // 2人桌，號碼列
 	List<QueNoVO> table4List = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
 	List<QueNoVO> table8List = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
 	List<QueNoVO> table10List = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid);
@@ -39,7 +40,10 @@ Integer queuetableusable = new Integer(request.getParameter("queuetableusable"))
 		break;
 	}
 	
-	
+	// 叫號發簡訊
+	String memphone = queNoSvc.getPhoneByStoreAndNum(storeid, queuenocall);
+// SmsSender sms = new SmsSender();
+// sms.sendSMS(memphone);
 
 //載入JDBC驅動程式類別 
 Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -81,7 +85,6 @@ stmtt.setInt(2, queuetableid);
 //執行PreparedStatement
 ResultSet rss = stmtt.executeQuery();
 //取回一筆資料
-
 
 //將資料轉成JSONObject		 
 JSONObject noCall = new JSONObject();
