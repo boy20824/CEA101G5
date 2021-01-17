@@ -44,7 +44,6 @@ margin-left:200px;
 	</tr>
 	<tr>
 		<th>日期</th>
-		<th>餐廳編號</th>
 		<th>用餐時間</th>
 		<th>可訂桌數</th>
 		<th>已訂桌數</th>
@@ -54,7 +53,6 @@ margin-left:200px;
 		
 		<tr>
 			<td>${ReserveSituationVO.reserveSituationDate}</td>
-			<td>${ReserveSituationVO.storeId}</td><!-- 缺餐廳model -->
 			<td><fmt:formatDate value="${arSvc.getOneAcceptReserve(ReserveSituationVO.storeId,ReserveSituationVO.periodId).startTime}" pattern="HH:mm"/></td>
 			<td>${ReserveSituationVO.acceptGroups}</td>
 			<td>${ReserveSituationVO.reservedGroups}</td> 

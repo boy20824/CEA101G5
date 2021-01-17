@@ -212,7 +212,7 @@ response.setDateHeader("Expires", 0);
      </FORM>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-customer-end/reserveorder/addReserveOrder.jsp" >
      <input type="hidden" name="storeId" value="${restaurantVO.storeId}" />
-					<input type="submit" value="預約定位" class="orderSet" />
+					<input type="submit" value="預約訂位" class="orderSet" />
 	 </FORM>
 				</div>
 			</div>
