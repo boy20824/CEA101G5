@@ -288,7 +288,7 @@ tr .radio-item input:checked + label + span {
 	</tr>
 		<td><input name="reservetime" id="zzz" type="hidden" class="bookingDate"></td>
 	<tr>
-		<td>大人人數:
+		<td>用餐人數:
 			<td><select name="reserveadult" size="1" id="adult">
 				<option></option>
 				<option value=1>1</option>
