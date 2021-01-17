@@ -8,7 +8,7 @@ public interface Restaurant_interface {
 
 	public void insert(RestaurantVO restaurantVO);
 	public void easyinsert(RestaurantVO restaurantVO);
-	public void easyInsertWithPics(RestaurantVO restaurantVO,RestaurantPictureVO restaurantPictureVO);
+	public String easyInsertWithPics(RestaurantVO restaurantVO,RestaurantPictureVO restaurantPictureVO);
 	public void update(RestaurantVO restaurantVO);
 	public void delete(String storeId);
 	public RestaurantVO findByPrimaryKey(String storeId);

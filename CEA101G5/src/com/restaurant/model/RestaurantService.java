@@ -154,8 +154,8 @@ public class RestaurantService {
 		dao.delete(storeId);
 	}
 	
-	public void easyAddRestaurantWithPic(RestaurantVO restaurantVO,RestaurantPictureVO restaurantPictureVO) {
-		dao.easyInsertWithPics(restaurantVO,restaurantPictureVO);
+	public String easyAddRestaurantWithPic(RestaurantVO restaurantVO,RestaurantPictureVO restaurantPictureVO) {
+		return dao.easyInsertWithPics(restaurantVO,restaurantPictureVO);
 	}
 
 }

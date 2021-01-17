@@ -563,10 +563,11 @@ public class RestaurantDAO implements Restaurant_interface {
 	}
 	
 	@Override
-	public void easyInsertWithPics(RestaurantVO restaurantVO,RestaurantPictureVO restaurantPictureVO) {
+	public String easyInsertWithPics(RestaurantVO restaurantVO,RestaurantPictureVO restaurantPictureVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		String next_storeId = null;
 
 		try {
 
@@ -589,7 +590,7 @@ public class RestaurantDAO implements Restaurant_interface {
 			pstmt.setTimestamp(9, restaurantVO.getStoreCloseTime());
 			pstmt.executeUpdate();
 			//掘取對應的自增主鍵值
-			String next_storeId = null;
+			
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
 				next_storeId = rs.getString(1);
@@ -639,6 +640,7 @@ public class RestaurantDAO implements Restaurant_interface {
 				}
 			}
 		}
+		return next_storeId;
 	}
 	
 	@Override

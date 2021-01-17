@@ -500,10 +500,10 @@ public class RestaurantServlet extends HttpServlet {
 				
 				/*************************** 2.開始新增資料 ***************************************/
 				RestaurantService restSvc = new RestaurantService();
-				restSvc.easyAddRestaurantWithPic(restVO,restPicVO);
+				String storeId = restSvc.easyAddRestaurantWithPic(restVO,restPicVO);
 				
 				/*************************** 3.新增完成轉交成功畫面(Send the Success view) ***********/
-				RestaurantVO storeLogin = restVO;
+				RestaurantVO storeLogin = restSvc.getOneRestaurant(storeId);
 				session.setAttribute("storeLogin",storeLogin);
 				
 				
