@@ -32,6 +32,8 @@
     <script src="orderlistjs.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.0.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <style>
     body {
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; }
@@ -52,23 +54,32 @@
 </style>
     <div class="storeDetail">
         <h1>訂單清單</h1>
+        <div class="nav" style="display:flex;justify-content: space-between; color:#2775b6">
+        <style>
+        	.nav:hover{
+        		cursor:pointer;
+        	}
+        </style>
+        	<div class="OK">
+        	已完成
+        	</div >
+        	<div class="OK1">
+        	已取餐
+        	</div>
+        	<div class="notOK">
+        	遲到未取餐
+        	</div>
+        </div>
+       
         <c:forEach var="foodOrderVO" items="${list}">
-        <div class="list">
+        <div class="list animate__animated animate__flipInX">
             <p class="orderMenu">訂單明細
             <span  class="statusName" style="margin-left:1.5em;color:orange">
            	<c:choose>
-    			<c:when test="${foodOrderVO.foodOrderStatus == 1}">
-    				已完成
-    			</c:when>
-    			<c:when test="${foodOrderVO.foodOrderStatus == 2}">
-    				已取餐
-    			</c:when>
-    			<c:when test="${foodOrderVO.foodOrderStatus == 3}">
-    				遲到未取餐
-    			</c:when>
-    			<c:otherwise>
-    				製作中
-    			</c:otherwise>
+    			<c:when test="${foodOrderVO.foodOrderStatus == 1}">已完成</c:when>
+    			<c:when test="${foodOrderVO.foodOrderStatus == 2}">已取餐</c:when>
+    			<c:when test="${foodOrderVO.foodOrderStatus == 3}">遲到未取餐</c:when>
+    			<c:otherwise>製作中</c:otherwise>
 			</c:choose>
             </span>
             </p>
@@ -107,6 +118,39 @@
         </div>
         </c:forEach>
     </div>
+<!--     前端餐點狀態分類 -->
+     		<script>
+            	let statusName = document.querySelectorAll('.statusName')
+            	let list = document.querySelectorAll('.list')
+            	$('.OK').click(function(){
+            		
+            		for(let i=0;i<statusName.length;i++){
+            			list[i].style.display="block"
+            			if(statusName[i].innerText!=="已完成"){
+            				list[i].style.display="none";
+            			}
+            		}
+            	})
+            	$('.OK1').click(function(){
+            	
+            		for(let i=0;i<statusName.length;i++){
+            			list[i].style.display="block"
+            			if(statusName[i].innerText!=="已取餐"){
+            				list[i].style.display="none";
+            			}
+            		}
+            	})
+            	$('.notOK').click(function(){
+            		
+            		for(let i=0;i<statusName.length;i++){
+            			list[i].style.display="block"
+            			if(statusName[i].innerText!=="遲到未取餐"){
+            				list[i].style.display="none";
+            			}
+            		}
+            	})
+            	
+            </script>
 <script>
 var storeId = document.querySelector('.storeId');
 var MyPoint = "/TogetherWS/"+storeId.value;
