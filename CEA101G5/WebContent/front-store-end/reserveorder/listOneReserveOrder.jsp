@@ -24,18 +24,44 @@
 <title>依客戶電話查詢訂位</title>
 
 <style>
+.orderBlock{
+margin-left:300px;
+margin-top:100px;
+}
+
+.orderBlock a{
+	width: 100%;
+    background-color: #FF615F;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 575px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top:30px;
+    
+}
+
+.table-striped{
+width:80%;
+margin-top:50px;
+}
+
+.button{
+ margin: inherit;
+ margin: initial;
+  marg
 
 </style>
 <jsp:useBean id="arSvc" scope="page" class="com.acceptreserve.model.AcceptReserveService"/>
 </head>
 <body bgcolor='white'>
 
-<a href="<%=request.getContextPath() %>/front-store-end/reserveorder/listAllReserveOrder.jsp" class="button">回首頁</a>
-
-<div class="tableborder">
+<div class="orderBlock">
+<a href="<%=request.getContextPath() %>/front-store-end/reserveorder/listAllReserveOrder.jsp" class="button">回預定中的訂位</a>
 <%@ include file="page1.file" %> 
-	<table class="info">
-	<caption>依<%=paramA %>電話查詢</caption>
+	<table class="table table-striped">
+	<td colspan="9" style="text-align:center ;background-color: #FF615F; color:white;">依<%=paramA %>電話查詢</td>
 		<tr>
 			<th>會員電話</th>
 			<th>用餐日期</th>
@@ -75,7 +101,7 @@
 			<c:if test="${reserveOrderVO.reserveStatus == 0}">
 				<td>
 				  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" style="margin-bottom: 0px;">
-				     <input type="submit" value="未到店用餐" class="button"><!-- 送出該筆要修改的資料 -->
+				     <input type="submit" value="未到店用餐" class="button btn btn-danger"><!-- 送出該筆要修改的資料 -->
 				     <input type="hidden" name="reserveid"  value="${reserveOrderVO.reserveId}">
 				     <input type="hidden" name="storeid" value="${reserveOrderVO.storeId}">
 				     <input type="hidden" name="memphone" value="${reserveOrderVO.memPhone}">
@@ -94,7 +120,7 @@
 			</td>
 			<td>
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" style="margin-bottom: 0px;">
-						 <input type="submit" value="店家因素取消" class="button"><!-- 送出該筆要修改的資料 -->
+						 <input type="submit" value="店家因素取消" class="button btn btn-danger"><!-- 送出該筆要修改的資料 -->
 					     <input type="hidden" name="reserveid"  value="${reserveOrderVO.reserveId}">
 					     <input type="hidden" name="storeid" value="${reserveOrderVO.storeId}">
 					     <input type="hidden" name="memphone" value="${reserveOrderVO.memPhone}">
