@@ -60,6 +60,12 @@
         		cursor:pointer;
         	}
         </style>
+        <div class="all">
+        	全部
+        	</div >
+        <div class="do">
+        	製作中
+        	</div >
         	<div class="OK">
         	已完成
         	</div >
@@ -122,6 +128,22 @@
      		<script>
             	let statusName = document.querySelectorAll('.statusName')
             	let list = document.querySelectorAll('.list')
+            	$('.all').click(function(){
+            		
+            		for(let i=0;i<statusName.length;i++){
+            			list[i].style.display="block"
+            			
+            		}
+            	})
+            	$('.do').click(function(){
+            		
+            		for(let i=0;i<statusName.length;i++){
+            			list[i].style.display="block"
+            			if(statusName[i].innerText!=="製作中"){
+            				list[i].style.display="none";
+            			}
+            		}
+            	})
             	$('.OK').click(function(){
             		
             		for(let i=0;i<statusName.length;i++){

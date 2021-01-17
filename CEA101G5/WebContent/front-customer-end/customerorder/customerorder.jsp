@@ -100,7 +100,7 @@
                 <img src="<%=request.getContextPath()%>/front-customer-end/customerorder/取消.png" alt="">
             </div>
             <div class="picture">
-                <img src="<%=request.getContextPath()%>/front-customer-end/customerorder/餐廳.jpg" alt="">
+                <img src="<%=request.getContextPath()%>/back-end/restaurantpicture/restaurantPicture.do?storeId=${foodOrderVO.storeId}&action=getFirst_For_Display" alt="">
             </div>
             <div class="restaurantContent">
                 <p>是否滿意<span>${restaurantSvc.getOneRestaurant(foodOrderVO.storeId).storeName}餐廳</span>?</p>
