@@ -55,14 +55,14 @@ width:500px;
 
 
 					<div class="col-10">
-						<label for="acceptGroups">可接受訂位組數</label> 
+						<label for="acceptGroups">可接受訂位桌數</label> 
 						 <select size="1" name="acceptGroups" style="width:200px">
 							<c:forEach var="acceptGroupslist"  begin="1" end="60" step="1">
 								<option value="${acceptGroupslist}"
 									${(storeLogin.acceptGroups==restaurantVO.acceptGroups)? 'selected':'' }>${acceptGroupslist}
 							</c:forEach>
 						</select>
-						<p>可接受訂位組數 : ${storeLogin.acceptGroups} 組</p>
+						<p>目前可接受訂位桌數 : ${storeLogin.acceptGroups} 組</p>
 					</div>
 
 				</div>
