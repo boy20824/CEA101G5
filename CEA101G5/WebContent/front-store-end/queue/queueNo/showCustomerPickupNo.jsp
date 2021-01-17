@@ -143,7 +143,7 @@ div#helloName {
 
 						<div class="form-control" id="queuenotime">
 							<fmt:formatDate value="${expectTime}"
-								pattern="yyyy-MM-dd HH:mm" />
+								pattern="HH:mm" />
 						</div>
 
 					</div>

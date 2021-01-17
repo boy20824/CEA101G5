@@ -448,8 +448,9 @@ public class QueNoServlet extends HttpServlet {
 					}
 				/*************************** 3.?��增�?��??,準�?��?�交(Send the Success view) ***********/
 				// 預期時間+組數
+				Timestamp time1 = new Timestamp(System.currentTimeMillis());
 				int queNoAmount = queNoSvc.getQueNoByStoreIdAndTableId(storeid, queuetableid).size();
-				Long long2 = quePeriodVO.getQueuestarttime().getTime()+ queNoAmount*5*60*1000;
+				Long long2 =(time1).getTime()+ queNoAmount*5*60*1000;
 				Timestamp expectTime = new Timestamp(long2);
 				
 				
