@@ -576,7 +576,7 @@ public class MemServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-custom-end/member/SMSAuth.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/member/SMSAuth.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -594,7 +594,7 @@ public class MemServlet extends HttpServlet {
 				/*************************** 其他錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("其他錯誤訊息:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-custom-end/member/SMSAuth.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-customer-end/member/SMSAuth.jsp");
 				failureView.forward(req, res);
 			}
 		}
