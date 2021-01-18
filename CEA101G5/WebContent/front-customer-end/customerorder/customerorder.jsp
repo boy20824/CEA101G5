@@ -68,7 +68,7 @@
 			</div>
 		</div>
 
-    <div class="content">
+    <div class="content" style="height:800px;padding-top:30px">
         <p>過去的訂單</p>
         <% int i = 0 ; %>
         <c:forEach var="foodOrderVO" items="${list}">

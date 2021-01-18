@@ -83,7 +83,7 @@ response.setDateHeader("Expires", 0);
 				</c:if>
 			</div>
 		</div>
-
+		<div style="height:800px;">
 		<%@ include file="page1.file"%>
 		<c:forEach var="foodOrderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			<div style="position:relative">
@@ -133,7 +133,7 @@ response.setDateHeader("Expires", 0);
 	</div>
 	</c:forEach>
 	<%@ include file="page2.file"%>
-
+	</div>
 
 
 	<!--  底端列  -->

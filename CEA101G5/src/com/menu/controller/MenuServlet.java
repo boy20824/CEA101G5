@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.menu.model.MenuService;
@@ -88,6 +89,7 @@ public class MenuServlet extends HttpServlet {
 		}
 		
 		if ("clear".equals(action)) {
+			boolean isClear = false;
 			HttpSession session = req.getSession();
 			List<MenuVO> list = (ArrayList<MenuVO>) session.getAttribute("memuList");
 			String storeId=req.getParameter("storeId");
@@ -95,8 +97,23 @@ public class MenuServlet extends HttpServlet {
 				if(!(list.get(0).getStoreId()).equals(storeId)) {
 					list.clear();
 					session.setAttribute("memuList", list);
+					isClear = true;
 				}
 			}
+			
+			// 傳送給前端
+			res.setContentType("text/plain");
+			res.setCharacterEncoding("UTF-8");
+			PrintWriter out = res.getWriter();
+			JSONObject obj = new JSONObject();
+			try {
+				obj.put("isClear", isClear);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			out.print(obj);
+			out.flush();
+			out.close();
 		}
 		
 
@@ -128,6 +145,7 @@ public class MenuServlet extends HttpServlet {
 			if (list == null) {
 				list = new ArrayList<>();
 				list.add(menuVO);
+				menuVO1 = new JSONObject(menuVO);
 			} else {
 				
 //				確認該餐點物件是否存在
@@ -141,12 +159,12 @@ public class MenuServlet extends HttpServlet {
 							menuVO1 = new JSONObject(menuVO);
 							break;
 						}
+						
 					}
 				} else {
 //					餐點不存在所以新增數量並且加入購物車
-					menuVO.setQuantity(Integer.parseInt(quantity));
 					list.add(menuVO);
-					 menuVO1 = new JSONObject(menuVO);
+					menuVO1 = new JSONObject(menuVO);
 				}
 			}
 //			將購物車集合存入session

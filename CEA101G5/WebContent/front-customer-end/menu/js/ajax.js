@@ -156,7 +156,6 @@ $('document').ready(function(){
 
     // 購物車添加
     function showCar(data){
-    	
     	var dom = document.getElementById(data.menuId);
     	if(dom != null) {
     		dom.querySelector('.item-quantity').innerText = "Quantity:"+data.quantity;
@@ -193,7 +192,12 @@ $('document').ready(function(){
 			type : "GET",
 			dataType : "json",
 			success : function(data) { 
-				
+				if(data.isClear) {
+					$('.carlist').remove();
+					$('.badge').text(0);
+					$('.main-color-text').text('$0');
+					
+				}
 			}
 		})     		
     	 // 點擊購物車移除觸發刪除事件
