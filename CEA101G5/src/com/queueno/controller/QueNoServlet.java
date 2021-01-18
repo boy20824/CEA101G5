@@ -128,7 +128,7 @@ public class QueNoServlet extends HttpServlet {
 				QueTableService queTableSvc = new QueTableService();
 				List<QueTableVO> queTableVO = queTableSvc.getStoreQueTable(storeid);
 				for(int i = 0; i<queTableVO.size();i++) {
-					Integer queuetableusable = queTableVO.get(i).getQueuetablettl();
+					Integer queuetableusable = queTableVO.get(i).getQueuetableusable();
 					Integer queuetableid = queTableVO.get(i).getQueuetableid();
 					String queuetabletype = queTableVO.get(i).getQueuetabletype();
 					Integer queuetablettl = queTableVO.get(i).getQueuetablettl();

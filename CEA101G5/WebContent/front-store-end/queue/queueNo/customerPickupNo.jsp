@@ -367,7 +367,7 @@ img {
 			let noCurrent = JSON.parse(jsonStr);
 			let html;
 			if (noCurrent.queuenocurrent === undefined) {
-				html = "<center>查無資料</center>"
+				html = "<center>0</center>"
 			} else {
 				html = "<div>" + noCurrent.queuenocurrent + "</div>";
 			}
@@ -407,7 +407,7 @@ img {
 			let noCall = JSON.parse(jsonStr);
 			let html;
 			if (noCall.queuenocall === undefined) {
-				html = "<center>查無資料</center>"
+				html = "<center>0</center>"
 			} else {
 				html = "<div>" + noCall.queuenocall + "</div>";
 			}

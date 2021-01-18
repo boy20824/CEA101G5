@@ -28,9 +28,10 @@ public class SmsSender {
 //        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 //
 //        Message message = Message
-//                .creator(new PhoneNumber("+886"+"0963377555"), // to
+////                .creator(new PhoneNumber("+886"+"0963377555"), // to
+//                		.creator(new PhoneNumber("+12103841215"), // to
 //                        new PhoneNumber("+14158783336"), // from
-//                        "已到叫號，請儘速請往入座！！")
+//                        "已到叫號，請儘速前往入座！！")
 //                .create();
 //
 //        System.out.println(message.getSid());

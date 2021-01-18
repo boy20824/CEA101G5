@@ -8,7 +8,7 @@
 <%@ page import="com.queuetable.model.*"%>
 <%@ page import="com.queueline.model.*"%>
 <%@ page import="com.restaurant.model.*"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 
 <%
     RestaurantService restSvc = new RestaurantService();
@@ -519,7 +519,7 @@ img {
 		let html2 = "<div>" + noCall.queuetableusable + "</div>";
 		
 		if (noCall.queuenocall === undefined) {
-			html = "<center>查無資料</center>"
+			html = "<center>0</center>"
 		} else {
 			html = "<div>" + noCall.queuenocall + "</div>";
 		}

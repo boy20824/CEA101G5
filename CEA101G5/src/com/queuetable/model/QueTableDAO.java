@@ -29,7 +29,7 @@ public class QueTableDAO implements QueTableDAO_interface{
 	private static final String DELETE = "DELETE FROM queue_table where queue_table_id = ? AND store_id = ?";
 	private static final String GET_ONE_STMT = "SELECT queue_table_id, store_id, queue_table_type, queue_table_ttl, queue_table_usable, queue_table_occ FROM queue_table where queue_table_id = ? AND store_id = ?";
 	private static final String GET_ALL_STMT = "SELECT queue_table_id, store_id, queue_table_type, queue_table_ttl, queue_table_usable, queue_table_occ FROM queue_table order by queue_table_id";
-	private static final String GET_PART_STMT = "SELECT queue_table_id, store_id, queue_table_type, queue_table_ttl, queue_table_usable, queue_table_occ FROM queue_table where store_id = ?";
+	private static final String GET_PART_STMT = "SELECT queue_table_id, store_id, queue_table_type, queue_table_ttl, queue_table_usable, queue_table_occ FROM queue_table where store_id = ? order by queue_table_id";
 	// �s�W
 	@Override
 	public void insert(QueTableVO quetableVO) {
