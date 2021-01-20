@@ -94,12 +94,12 @@
 				<tr>
 					<td>員工姓名:</td>
 					<td><input type="TEXT" name="emp_name" size="45"
-						value="<%=(empVO == null) ? "" : empVO.getEmp_name()%>" /></td>
+						value="<%=(empVO == null) ? "雷恩" : empVO.getEmp_name()%>" /></td>
 				</tr>
 				<tr>
 					<td>帳號:</td>
 					<td><input type="TEXT" name="emp_account" size="45"
-						value="<%=(empVO == null) ? "" : empVO.getEmp_account()%>" /></td>
+						value="<%=(empVO == null) ? "A5" : empVO.getEmp_account()%>" /></td>
 				</tr>
 				<tr>
 					<td>密碼:</td>
