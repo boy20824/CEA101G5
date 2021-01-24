@@ -230,9 +230,7 @@ public class QueNoServlet extends HttpServlet {
 				Integer party = new Integer(req.getParameter("party").trim());
 				Timestamp queuenotime = strToTsp(req.getParameter("queuenotime"));
 				String storeid = req.getParameter("storeid").trim();
-				
 				Integer queueperiodid = new Integer(req.getParameter("queueperiodid").trim());
-				
 				Integer queuelineno = new Integer(req.getParameter("queuelineno").trim());
 				Integer queuetableid = new Integer(req.getParameter("queuetableid").trim());
 				String psw = "Enak1234";
