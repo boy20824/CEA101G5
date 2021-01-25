@@ -59,7 +59,7 @@ margin-top:50px;
 		<c:forEach var="message" items="${errorMsgs}">
 			${message}
 		</c:forEach>
-</c:if>
+</c:if><br><br><br>
 <a href="<%=request.getContextPath() %>/front-store-end/reserveorder/oldReserveOrder.jsp" class="button">查詢歷史訂位訊息</a>
 <br><br><br>
 <a href="<%=request.getContextPath() %>/front-store-end/reserveorder/listAllReserveOrder.jsp" class="button">查詢預定中的訂位</a>
