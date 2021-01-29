@@ -13,6 +13,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+
+import hibernate.util.HibernateUtil;
 import util.Util;
 
 public class ProductQAJNDIDAO implements ProductQADAO_Interface {
@@ -36,46 +39,62 @@ public class ProductQAJNDIDAO implements ProductQADAO_Interface {
 	private static final String GET_ALL_STMT = 
 		"SELECT * FROM PRODUCT_QA ORDER BY PQA_ID";
 	private static final String DELETE =
-			"DELETE FROM PRODUCT_QA WHERE PQA_ID=?";
+		"DELETE FROM PRODUCT_QA WHERE PQA_ID=?";
 	private static final String GET_ALL_BYPRODUCTID_STMT = 
 		"SELECT * FROM PRODUCT_QA WHERE PRODUCT_ID = ? ORDER BY PQA_ID DESC";
 	private static final String GET_ALL_NULL=
-			" SELECT * FROM PRODUCT_QA WHERE product_reply IS NULL";
+		"SELECT * FROM PRODUCT_QA WHERE product_reply IS NULL";
+	
 	@Override
 	public void insert(ProductQAVO productQAVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		
 		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
-			
-			pstmt.setString(1, productQAVO.getProductId());
-			pstmt.setString(2, productQAVO.getMemPhone());
-			pstmt.setString(3, productQAVO.getProductQues());
-			pstmt.setString(4, productQAVO.getProductReply());
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			System.out.println(productQAVO.getProductQues());
+			session.beginTransaction();
+			session.saveOrUpdate(productQAVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
 		}
 	}
+	
+//	@Override
+//	public void insert(ProductQAVO productQAVO) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(INSERT_STMT);
+//			
+//			pstmt.setString(1, productQAVO.getProductId());
+//			pstmt.setString(2, productQAVO.getMemPhone());
+//			pstmt.setString(3, productQAVO.getProductQues());
+//			pstmt.setString(4, productQAVO.getProductReply());
+//			
+//			pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 	
 	@Override
 	public void update(ProductQAVO productQAVO) {

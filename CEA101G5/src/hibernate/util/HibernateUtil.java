@@ -9,16 +9,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+
+import com.productqa.model.ProductQAVO;
 
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory;
 
     static {
-    	// µù¥UªA°È
+    	// ï¿½ï¿½ï¿½Uï¿½Aï¿½ï¿½
     	final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         try {
-        	// ³Ð«ØSessionFactory
+        	// ï¿½Ð«ï¿½SessionFactory
         	sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
         } catch (Throwable ex) {
         	// The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory

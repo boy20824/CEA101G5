@@ -25,7 +25,7 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 
 		<!--Java物件與資料庫表格的映射檔 -->
-		
+        <mapping class="com.productqa.model.ProductQAVO" />
 
 	</session-factory>
 	

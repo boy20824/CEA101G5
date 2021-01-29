@@ -2,14 +2,37 @@ package com.product.model;
 
 import java.io.Serializable;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name="PRODUCT")
 public class ProductVO implements Serializable {
+	
+	
+	@Id
+	@Column(name="PRODUCT_ID")
 	private String productId;
+	
+	@Column(name="PRODUCT_NAME")
 	private String productName;
+	
+	@Column(name="PRODUCT_DESCRIPTION")
 	private String productDescription;
+	
+	@Column(name="PRODUCT_MSRP")
 	private Integer productMSRP;
+	
+	@Column(name="PRODUCT_PRICE")
 	private Integer productPrice;
+	
+	@Column(name="PRODUCT_QTY_SOLD")
 	private Integer productQtySold;
+	
+	@Column(name="CATEGORY_ID")
 	private Integer categoryId;
+	
+	@Column(name="PRODUCT_STATUS")
 	private Integer productStatus;
 	
 	private Integer productQty;
