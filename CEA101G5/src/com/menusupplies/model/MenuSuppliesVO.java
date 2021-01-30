@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class MenuSuppliesVO implements Serializable{
 	private String menuSupcharId;
 	private String menuId;
+	
 	public String getMenuSupcharId() {
 		return menuSupcharId;
 	}

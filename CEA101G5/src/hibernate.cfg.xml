@@ -25,8 +25,10 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 
 		<!--Java物件與資料庫表格的映射檔 -->
+		<mapping resource="com/menusupchar/model/MenuSupchar.hbm.xml"/>		
+		<mapping resource="com/menusupchardetail/model/MenuSupcharDetail.hbm.xml"/>
+		<mapping resource="com/menusupplies/model/MenuSupplies.hbm.xml"/>
 		
-
 	</session-factory>
 	
 </hibernate-configuration>
