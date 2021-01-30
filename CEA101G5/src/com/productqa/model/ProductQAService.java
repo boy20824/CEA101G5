@@ -38,15 +38,19 @@ public class ProductQAService {
 	public ProductQAVO getQAById(Integer pqaId) {
 		return dao.getOne(pqaId);
 	}
+	
 	public void deletePqaId(Integer pqaId) {
 		dao.delete(pqaId);
 	}
+	
 	public List<ProductQAVO> getAllQA() {
 		return dao.getAll();
 	}
+	
 	public List<ProductQAVO> getAllQANull() {
 		return dao.getAllNull();
 	}
+	
 	public List<ProductQAVO> getAllQAByProductId(String productId) {
 		return dao.getQAByProductId(productId);
 	}

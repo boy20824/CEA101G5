@@ -11,8 +11,8 @@ public class ProductQAVO implements Serializable {
 	
 	@Id
 	@Column(name="PQA_ID")
-	@SequenceGenerator(name="name2", sequenceName="SEQ_PQA_ID", allocationSize=1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="name2")
+	@SequenceGenerator(name="SEQ_PQA_ID", sequenceName="SEQ_PQA_ID", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ_PQA_ID")
 	private Integer pqaId;
 	
 	@Column(name="PRODUCT_ID")
