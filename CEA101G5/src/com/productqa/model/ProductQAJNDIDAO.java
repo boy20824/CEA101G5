@@ -113,6 +113,40 @@ public class ProductQAJNDIDAO implements ProductQADAO_Interface {
 	
 	}
 	
+	@Override
+	public List<ProductQAVO> getAll() {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<ProductQAVO> list = null;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from ProductQAVO order by pqaId desc");
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+		return list;
+		
+	}
+	
+	@Override
+	public void delete(Integer pqaId) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
+		try {
+			session.beginTransaction();
+			ProductQAVO productQAVO = session.get(ProductQAVO.class, pqaId);
+			session.delete(productQAVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+	}
+	
 //	@Override
 //	public void insert(ProductQAVO productQAVO) {
 //		Connection con = null;
@@ -187,37 +221,37 @@ public class ProductQAJNDIDAO implements ProductQADAO_Interface {
 //		}
 //	}
 	
-	@Override
-	public void delete(Integer pqaId) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(DELETE);
-			pstmt.setInt(1, pqaId);
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+//	@Override
+//	public void delete(Integer pqaId) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(DELETE);
+//			pstmt.setInt(1, pqaId);
+//			
+//			pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 	
 	
 //	@Override
@@ -273,59 +307,59 @@ public class ProductQAJNDIDAO implements ProductQADAO_Interface {
 //		return productQAVO;
 //	}
 	
-	@Override
-	public List<ProductQAVO> getAll() {
-		List<ProductQAVO> list = new ArrayList<ProductQAVO>();
-		ProductQAVO productQAVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_STMT);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				productQAVO = new ProductQAVO();
-				productQAVO.setPqaId(rs.getInt("PQA_ID"));
-				productQAVO.setProductId(rs.getString("PRODUCT_ID"));
-				productQAVO.setMemPhone(rs.getString("MEM_PHONE"));
-				productQAVO.setProductQues(rs.getString("PRODUCT_QUES"));
-				productQAVO.setProductQuesTstamp(rs.getDate("PRODUCT_QUES_TSTAMP"));
-				productQAVO.setProductReply(rs.getNString("PRODUCT_REPLY"));
-				productQAVO.setProductReplyTstamp(rs.getDate("PRODUCT_REPLY_TSTAMP"));
-				list.add(productQAVO);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return list;
-	}
+//	@Override
+//	public List<ProductQAVO> getAll() {
+//		List<ProductQAVO> list = new ArrayList<ProductQAVO>();
+//		ProductQAVO productQAVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(GET_ALL_STMT);
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				productQAVO = new ProductQAVO();
+//				productQAVO.setPqaId(rs.getInt("PQA_ID"));
+//				productQAVO.setProductId(rs.getString("PRODUCT_ID"));
+//				productQAVO.setMemPhone(rs.getString("MEM_PHONE"));
+//				productQAVO.setProductQues(rs.getString("PRODUCT_QUES"));
+//				productQAVO.setProductQuesTstamp(rs.getDate("PRODUCT_QUES_TSTAMP"));
+//				productQAVO.setProductReply(rs.getNString("PRODUCT_REPLY"));
+//				productQAVO.setProductReplyTstamp(rs.getDate("PRODUCT_REPLY_TSTAMP"));
+//				list.add(productQAVO);
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		return list;
+//	}
 	
 //	@Override
 //	public List<ProductQAVO> getQAByProductId(String productId) {
