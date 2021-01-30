@@ -10,7 +10,6 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import org.apache.naming.java.javaURLContextFactory;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
