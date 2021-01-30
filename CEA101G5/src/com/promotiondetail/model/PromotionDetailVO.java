@@ -1,14 +1,33 @@
 package com.promotiondetail.model;
 
-public class PromotionDetailVO {
+import java.io.Serializable;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="PROMOTION_DETAIL")
+public class PromotionDetailVO implements Serializable {
+
+	@Id
+	@Column(name="PROMO_ID")
 	private Integer promoId;
+	
+	@Id
+	@Column(name="PRODUCT_ID")
 	private String productId;
+	
+	@Column(name="PRODUCT_PRICE")
 	private Integer productPrice;
+	
+	@Column(name="PRODUCT_PROMO_QTY")
 	private Integer productPromoQty;
 	
 	public PromotionDetailVO() {
-		
+	}
+	
+	public PromotionDetailVO(Integer promoId, String productId) {
+		this.promoId = promoId;
+		this.productId = productId;
 	}
 	
 	public Integer getPromoId() {

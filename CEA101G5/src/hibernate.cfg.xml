@@ -26,6 +26,7 @@
 
 		<!--Java物件與資料庫表格的映射檔 -->
         <mapping class="com.productqa.model.ProductQAVO" />
+        <mapping class="com.promotiondetail.model.PromotionDetailVO" />
 
 	</session-factory>
 	

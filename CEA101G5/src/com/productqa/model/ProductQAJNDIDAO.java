@@ -21,31 +21,6 @@ import util.Util;
 
 public class ProductQAJNDIDAO implements ProductQADAO_Interface {
 	
-	private static DataSource dataSource = null;
-	static {
-		try {
-			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/CEA101G5");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private static final String INSERT_STMT = 
-		"INSERT INTO PRODUCT_QA (PQA_ID, PRODUCT_ID, MEM_PHONE, PRODUCT_QUES, PRODUCT_REPLY) VALUES (SEQ_PQA_ID.NEXTVAL, ?, ?, ?, ?)";
-	private static final String UPDATE_STMT = 
-		"UPDATE PRODUCT_QA SET PRODUCT_ID = ?, MEM_PHONE = ?, PRODUCT_QUES = ?, PRODUCT_REPLY = ? WHERE PQA_ID = ?";
-	private static final String GET_ONE_STMT = 
-		"SELECT * FROM PRODUCT_QA WHERE PQA_ID = ?";
-	private static final String GET_ALL_STMT = 
-		"SELECT * FROM PRODUCT_QA ORDER BY PQA_ID";
-	private static final String DELETE =
-		"DELETE FROM PRODUCT_QA WHERE PQA_ID=?";
-	private static final String GET_ALL_BYPRODUCTID_STMT = 
-		"SELECT * FROM PRODUCT_QA WHERE PRODUCT_ID = ? ORDER BY PQA_ID DESC";
-	private static final String GET_ALL_NULL=
-		"SELECT * FROM PRODUCT_QA WHERE product_reply IS NULL";
-	
 	@Override
 	public void insert(ProductQAVO productQAVO) {
 		
@@ -146,6 +121,50 @@ public class ProductQAJNDIDAO implements ProductQADAO_Interface {
 			session.getTransaction().rollback();
 		}
 	}
+	
+	@Override
+	public List<ProductQAVO> getAllNull() {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<ProductQAVO> list = null;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from ProductQAVO where productReply = null");
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+		return list;
+	
+	}
+	
+//	private static DataSource dataSource = null;
+//	static {
+//		try {
+//			Context context = new InitialContext();
+//			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/CEA101G5");
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	private static final String INSERT_STMT = 
+//		"INSERT INTO PRODUCT_QA (PQA_ID, PRODUCT_ID, MEM_PHONE, PRODUCT_QUES, PRODUCT_REPLY) VALUES (SEQ_PQA_ID.NEXTVAL, ?, ?, ?, ?)";
+//	private static final String UPDATE_STMT = 
+//		"UPDATE PRODUCT_QA SET PRODUCT_ID = ?, MEM_PHONE = ?, PRODUCT_QUES = ?, PRODUCT_REPLY = ? WHERE PQA_ID = ?";
+//	private static final String GET_ONE_STMT = 
+//		"SELECT * FROM PRODUCT_QA WHERE PQA_ID = ?";
+//	private static final String GET_ALL_STMT = 
+//		"SELECT * FROM PRODUCT_QA ORDER BY PQA_ID";
+//	private static final String DELETE =
+//		"DELETE FROM PRODUCT_QA WHERE PQA_ID=?";
+//	private static final String GET_ALL_BYPRODUCTID_STMT = 
+//		"SELECT * FROM PRODUCT_QA WHERE PRODUCT_ID = ? ORDER BY PQA_ID DESC";
+//	private static final String GET_ALL_NULL=
+//		"SELECT * FROM PRODUCT_QA WHERE product_reply IS NULL";
 	
 //	@Override
 //	public void insert(ProductQAVO productQAVO) {
@@ -416,6 +435,60 @@ public class ProductQAJNDIDAO implements ProductQADAO_Interface {
 //		return list;
 //	}
 	
+//	@Override
+//	public List<ProductQAVO> getAllNull() {
+//		List<ProductQAVO> list = new ArrayList<ProductQAVO>();
+//		ProductQAVO productQAVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(GET_ALL_NULL);
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				productQAVO = new ProductQAVO();
+//				productQAVO.setPqaId(rs.getInt("PQA_ID"));
+//				productQAVO.setProductId(rs.getString("PRODUCT_ID"));
+//				productQAVO.setMemPhone(rs.getString("MEM_PHONE"));
+//				productQAVO.setProductQues(rs.getString("PRODUCT_QUES"));
+//				productQAVO.setProductQuesTstamp(rs.getDate("PRODUCT_QUES_TSTAMP"));
+//				productQAVO.setProductReply(rs.getNString("PRODUCT_REPLY"));
+//				productQAVO.setProductReplyTstamp(rs.getDate("PRODUCT_REPLY_TSTAMP"));
+//				list.add(productQAVO);
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		return list;
+//	}
+	
 	public static void main(String[] args) {
 		ProductQAJDBCDAO dao = new ProductQAJDBCDAO();
 		
@@ -477,57 +550,4 @@ public class ProductQAJNDIDAO implements ProductQADAO_Interface {
 		
 	}
 
-	@Override
-	public List<ProductQAVO> getAllNull() {
-		List<ProductQAVO> list = new ArrayList<ProductQAVO>();
-		ProductQAVO productQAVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_NULL);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				productQAVO = new ProductQAVO();
-				productQAVO.setPqaId(rs.getInt("PQA_ID"));
-				productQAVO.setProductId(rs.getString("PRODUCT_ID"));
-				productQAVO.setMemPhone(rs.getString("MEM_PHONE"));
-				productQAVO.setProductQues(rs.getString("PRODUCT_QUES"));
-				productQAVO.setProductQuesTstamp(rs.getDate("PRODUCT_QUES_TSTAMP"));
-				productQAVO.setProductReply(rs.getNString("PRODUCT_REPLY"));
-				productQAVO.setProductReplyTstamp(rs.getDate("PRODUCT_REPLY_TSTAMP"));
-				list.add(productQAVO);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return list;
-	}
 }
