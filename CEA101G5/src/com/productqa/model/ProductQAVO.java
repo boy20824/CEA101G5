@@ -3,13 +3,34 @@ package com.productqa.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="PRODUCT_QA")
 public class ProductQAVO implements Serializable {
+	
+	@Id
+	@Column(name="PQA_ID")
+	@SequenceGenerator(name="SEQ_PQA_ID", sequenceName="SEQ_PQA_ID", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ_PQA_ID")
 	private Integer pqaId;
+	
+	@Column(name="PRODUCT_ID")
 	private String productId;
+	
+	@Column(name="MEM_PHONE")
 	private String memPhone;
+	
+	@Column(name="PRODUCT_QUES")
 	private String productQues;
+	
+	@Column(name="PRODUCT_QUES_TSTAMP")
 	private Date productQuesTstamp;
+	
+	@Column(name="PRODUCT_REPLY")
 	private String productReply;
+	
+	@Column(name="PRODUCT_REPLY_TSTAMP")
 	private Date productReplyTstamp;
 	
 	public ProductQAVO() {

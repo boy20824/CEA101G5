@@ -10,7 +10,7 @@ public class SmsSender {
     public static final String ACCOUNT_SID =
             "AC344fdb90110d3ba15570f7099542490e";
     public static final String AUTH_TOKEN =
-            "48a757bdd1a2a295125e46e2cac20961";
+            "b1fbc84ff17ec44cd933b867a1cce458";
     
     public void sendSMS(String memPhone) {
     	

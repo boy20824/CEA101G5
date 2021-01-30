@@ -42,8 +42,8 @@ Integer queuetableusable = new Integer(request.getParameter("queuetableusable"))
 	
 	// 叫號發簡訊
 	String memphone = queNoSvc.getPhoneByStoreAndNum(storeid, queuenocall);
-// SmsSender sms = new SmsSender();
-// sms.sendSMS(memphone);
+SmsSender sms = new SmsSender();
+sms.sendSMS(memphone);
 
 //載入JDBC驅動程式類別 
 Class.forName("oracle.jdbc.driver.OracleDriver");

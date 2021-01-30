@@ -279,7 +279,7 @@ img {
 
 						<div class="col-2">
 							<div class="tableavail">空桌數</div>
-							<div class="queuetableusable">${queTableVO.queuetableusable}</div>
+							<div class="queuetableusable">${queTableVO.queuetablettl}</div>
 							<input class="queuetablettl" value="${queTableVO.queuetablettl}" type="hidden"> 
 							<input class="queuetableocc" value="${queTableVO.queuetableocc}" type="hidden"> 
 								<input class="quetableusable" value="${queTableVO.queuetableusable}" type="hidden">
@@ -492,6 +492,32 @@ img {
 	//minDate:               '-1970-01-01', // 去除今日(不含)之前
 	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 	});
+</script>
+
+<script>
+
+// $.ajax({
+// 	type: "POST",
+// 	async: false,
+// 	url: "queueNo.do",
+// 	dates:{
+// 		action: "storeInsert",
+// 		memPhone: $("#info").find("#memPhone").val(),
+// 		memName: $("#info").find("#name").val(),
+// 		queuenum: $("#info").find("name:['queuenum']").val(),
+// 		party: $("#info").find("#party").val(),
+// 		queuenotime: $("#info").find("#queuenotime").val(),
+// 		storeid: $("#info").find("#storeid").val(),
+// 		queueperiodid: $("#info").find("#queueperiodid").val(),
+// 		queuelineno: $("#info").find("#queuelineno").val(),
+// 		queuetableid: $("#info").find("#queuetableid").val(),
+// 		psw: "Enak1234",
+// 	},
+// 	success: function(dates){
+		
+// 	},
+	
+// })
 </script>
 
 <script>
