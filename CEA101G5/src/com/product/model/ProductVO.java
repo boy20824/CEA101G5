@@ -4,11 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name="PRODUCT")
 public class ProductVO implements Serializable {
-	
 	
 	@Id
 	@Column(name="PRODUCT_ID")
