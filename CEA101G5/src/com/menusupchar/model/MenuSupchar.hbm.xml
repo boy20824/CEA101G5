@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.menusupchar.model.MenuSupcharVO" table="MENU_SUPCHAR" >
+        
+        <id name="menuSupcharId" column="MENU_SUPCHAR_ID">
+            <generator class="sequence">
+                <param name="sequence_name">SEQ_MENU_SUPCHAR_ID</param>
+            </generator>  
+        </id>
+        
+        
+        <property name="menuSupcharName" column="MENU_SUPCHAR_NAME" />
+        
+        <set name="menuSupcharDetails" table="MENU_SUPCHAR_DETAIL" lazy="false" cascade="all"  inverse="true"  order-by="menuSupcharDetailId asc">			
+			<key>
+				<column name="MENU_SUPCHAR_ID" />
+			</key>
+			<one-to-many class="com.menusupchardetail.model.MenuSupcharDetailVO" />
+		</set>
+    </class>
+</hibernate-mapping>

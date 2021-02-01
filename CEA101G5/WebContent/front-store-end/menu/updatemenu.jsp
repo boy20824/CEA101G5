@@ -120,17 +120,19 @@ font {
 		</div>
 	</form>
 <!-- 	客製化燈箱 -->
-	<form method="post" action="">
+	<form method="post" action="<%=request.getContextPath()%>/menu/MenuSupchar.do">
+	<input type="hidden" name="menuId" value="<%=menuVO.getMenuId()%>">
+	<input type="hidden" name="action" value="insert">
 	<div class="menuChar" style="display:none;">
       <div class="menuCharTitle">
         <i class="fas fa-arrow-left"><span>編輯選項類別</span></i>
-        <input type="button" value="新增" />
+        <input type="submit" value="新增" />
       </div>
       <div class="menuCharTop">
         <div class="menuChars">
           <p>選項的詳細內容</p>
           <p>名稱*</p>
-          <input type="text" placeholder="請輸入客製化選項" />
+          <input type="text" placeholder="請輸入客製化選項" name="menuSupcharName" />
           <p>例如:配類選擇、加料選擇</p>
         </div>
       </div>
@@ -145,15 +147,15 @@ font {
         <div class="menuCharAdd">
             <div class="put">
                 <img src="<%=request.getContextPath()%>/front-store-end/menu/1.png" alt="">
-                <input type="text" name="menuChar" />
+                <input type="text" name="memuSupcharDetailName" />
             </div>
             <div class="put">
                 <img src="<%=request.getContextPath()%>/front-store-end/menu/1.png" alt="">
-                <input type="text" name="menuChar" />
+                <input type="text" name="memuSupcharDetailName" />
             </div>
             <div class="put">
                 <img src="<%=request.getContextPath()%>/front-store-end/menu/1.png" alt="">
-                <input type="text" name="menuChar" />
+                <input type="text" name="memuSupcharDetailName" />
             </div>
         </div>
       </div>
