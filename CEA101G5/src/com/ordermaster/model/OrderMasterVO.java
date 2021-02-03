@@ -2,22 +2,65 @@ package com.ordermaster.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.*;
+
+import com.orderdetail.model.OrderDetailVO;
+
+@Entity
+@Table(name="ORDER_MASTER")
 public class OrderMasterVO implements Serializable {
+	
+	@OneToMany(mappedBy="")
+	
+	@Id
+	@Column(name="ORDER_ID")
+	@SequenceGenerator(name="SEQ_ORDER_ID", sequenceName="SEQ_ORDER_ID", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ_ORDER_ID")
 	private Integer orderId;
+	
+	@Column(name="ORDER_DATE")
 	private Date orderDate;
+	
+	@Column(name="MEM_PHONE")
 	private String memPhone;
+	
+	@Column(name="RECIPIENT_NAME")
 	private String recipientName;
+	
+	@Column(name="RECIPIENT_MOB_NUMBER")
 	private String recipientMobNumber;
+	
+	@Column(name="RECIPIENT_TEL_NUMBER")
 	private String recipientTelNumber;
+	
+	@Column(name="RECIPIENT_EMAIL")
 	private String recipientEmail;
+	
+	@Column(name="BUSINESS_NUMBER")
 	private String businessNumber;
+
+	@Column(name="DELIVERY_METHOD")
 	private Integer deliveryMethod;
+	
+	@Column(name="DELIVERY_ADDRESS")
 	private String deliveryAddress;
+	
+	@Column(name="ORDER_MEMO")
 	private String orderMemo;
+	
+	@Column(name="INVOICE_PRICE")
 	private String invoicePrice;
+	
+	@Column(name="INVOICE_PAID_DATE")
 	private Date invoicePaidDate;
+	
+	@Column(name="DELIVERY_TIME")
 	private Date deliveryTime;
+	
+	@Column(name="ORDER_STATUS")
 	private Integer orderStatus;
 	
 	public OrderMasterVO() {

@@ -3,14 +3,36 @@ package com.orderdetail.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="ORDER_DETAIL")
 public class OrderDetailVO implements Serializable {
+	
+	@Id
+	@Column(name="ORDER_ID")
 	private Integer orderId;
+	
+	@Id
+	@Column(name="PRODUCT_ID")
 	private String productId;
+	
+	@Column(name="PRODUCT_PRICE")
 	private Integer productPrice;
+	
+	@Column(name="QUANTITY")
 	private Integer quantity;
+	
+	@Column(name="PRODUCT_REVIEW")
 	private String productReview;
+	
+	@Column(name="PRODUCT_REVIEW_PHOTO")
 	private byte[] productReviewPhoto;
+	
+	@Column(name="PRODUCT_REVIEW_TS")
 	private Date productReviewTS;
+	
+	@Column(name="PRODUCT_REVIEW_STATUS")
 	private Integer productReviewStatus;
 	
 	public OrderDetailVO() {
