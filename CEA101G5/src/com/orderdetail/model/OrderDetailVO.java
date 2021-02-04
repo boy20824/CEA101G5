@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.ordermaster.model.OrderMasterVO;
+
 @Entity
 @Table(name="ORDER_DETAIL")
 public class OrderDetailVO implements Serializable {
@@ -34,6 +36,8 @@ public class OrderDetailVO implements Serializable {
 	
 	@Column(name="PRODUCT_REVIEW_STATUS")
 	private Integer productReviewStatus;
+	
+	private OrderMasterVO orderMasterVO;
 	
 	public OrderDetailVO() {
 		super();
@@ -101,6 +105,14 @@ public class OrderDetailVO implements Serializable {
 
 	public void setProductReviewStatus(Integer productReviewStatus) {
 		this.productReviewStatus = productReviewStatus;
-	}	
+	}
+	
+	public void setOrderMasterVO(OrderMasterVO orderMasterVO) {
+		this.orderMasterVO = orderMasterVO;
+	}
+	
+	public OrderMasterVO getOrderMasterVO() {
+		return orderMasterVO;
+	}
 
 }

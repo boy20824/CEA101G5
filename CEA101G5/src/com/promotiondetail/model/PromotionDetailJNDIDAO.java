@@ -70,7 +70,7 @@ public class PromotionDetailJNDIDAO implements PromotionDetailDAO_Interface {
 	 
 	@Override
 	public PromotionDetailVO getOne(String productId) {
-		// Method Not Used In Actual Operation //
+		// Method Not Used In Deployment //
 		PromotionDetailVO promotionDetailVO = new PromotionDetailVO();
 		return promotionDetailVO;
 	}
@@ -83,8 +83,7 @@ public class PromotionDetailJNDIDAO implements PromotionDetailDAO_Interface {
 		
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from PromotionDetailVO where promoId = ?0 order by productId");
-			query.setParameter(0, promoId);
+			Query query = session.createQuery("from PromotionDetailVO");
 			list = query.list();
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {

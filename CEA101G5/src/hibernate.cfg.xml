@@ -34,6 +34,8 @@
         <mapping class="com.productqa.model.ProductQAVO" />
         <mapping class="com.promotiondetail.model.PromotionDetailVO" />
         <mapping class="com.product.model.ProductVO" />
+        <mapping class="com.ordermaster.model.OrderMasterVO" />
+        <mapping class="com.orderdetail.model.OrderDetailVO" />
 
 
 	</session-factory>

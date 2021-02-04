@@ -14,12 +14,121 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 import com.orderdetail.model.*;
 import com.product.model.ProductVO;
+import com.productqa.model.ProductQAVO;
 
+import hibernate.util.HibernateUtil;
 import util.Util;
 
 public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
+	
+	@Override
+	public OrderMasterVO getOne(Integer orderId) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		OrderMasterVO orderMasterVO = null;
+		
+		try {
+			session.beginTransaction();
+			orderMasterVO = session.get(OrderMasterVO.class, orderId);
+			session.getTransaction().commit();
+			
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+		return orderMasterVO;
+		
+	}
+	
+	@Override
+	public List<OrderMasterVO> getAll() {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<OrderMasterVO> list = null;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from OrderMasterVO order by orderId desc");
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+		return list;
+	
+	}
+	
+	@Override
+	public void insertWithOrderDetail(OrderMasterVO orderMasterVO, List<ProductVO> list) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
+		try {
+			session.beginTransaction();
+			
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+	}
+	
+	@Override
+	public void updateOM(Integer orderStatus,Integer orderId) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		OrderMasterVO orderMasterVO = null;
+		
+		try {
+			session.beginTransaction();
+			orderMasterVO = session.get(OrderMasterVO.class, orderId);
+			orderMasterVO.setOrderStatus(orderStatus);
+			session.saveOrUpdate(orderMasterVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+	}
+	
+	public List<OrderMasterVO> getAllByMemPhone(String memPhone) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<OrderMasterVO> list = null;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from OrderMasterVO where memPhone = ?0 order by orderId desc");
+			query.setParameter(0, memPhone);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+		return list;
+		
+	}
+	
+	@Override
+	public void insert(OrderMasterVO orderMasterVO) {
+		// Method Not Used In Deployment //
+	}
+	
+	@Override
+	public void update(OrderMasterVO orderMasterVO) {
+		// Method Not Used In Deployment //
+	}
+	
+	@Override
+	public void delete(Integer orderId) {
+		// Method Not Used In Deployment //
+	}
 	
 	private static DataSource dataSource = null;
 	static {
@@ -46,386 +155,386 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 	private static final String GET_ALL_BYMEMPHONE = 
 		"SELECT * FROM ORDER_MASTER WHERE MEM_PHONE = ? ORDER BY ORDER_ID DESC";
 
-	@Override
-	public void insert(OrderMasterVO orderMasterVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
-			
-			pstmt.setString(1, orderMasterVO.getMemPhone());
-			pstmt.setString(2, orderMasterVO.getRecipientName());
-			pstmt.setString(3, orderMasterVO.getRecipientMobNumber());
-			pstmt.setString(4, orderMasterVO.getRecipientTelNumber());
-			pstmt.setString(5, orderMasterVO.getRecipientEmail());
-			pstmt.setString(6, orderMasterVO.getBusinessNumber());
-			pstmt.setInt(7, orderMasterVO.getDeliveryMethod());
-			pstmt.setString(8, orderMasterVO.getDeliveryAddress());
-			pstmt.setString(9, orderMasterVO.getOrderMemo());
-			pstmt.setString(10, orderMasterVO.getInvoicePrice());
-			pstmt.setInt(11, orderMasterVO.getOrderStatus());
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+//	@Override
+//	public void insert(OrderMasterVO orderMasterVO) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(INSERT_STMT);
+//			
+//			pstmt.setString(1, orderMasterVO.getMemPhone());
+//			pstmt.setString(2, orderMasterVO.getRecipientName());
+//			pstmt.setString(3, orderMasterVO.getRecipientMobNumber());
+//			pstmt.setString(4, orderMasterVO.getRecipientTelNumber());
+//			pstmt.setString(5, orderMasterVO.getRecipientEmail());
+//			pstmt.setString(6, orderMasterVO.getBusinessNumber());
+//			pstmt.setInt(7, orderMasterVO.getDeliveryMethod());
+//			pstmt.setString(8, orderMasterVO.getDeliveryAddress());
+//			pstmt.setString(9, orderMasterVO.getOrderMemo());
+//			pstmt.setString(10, orderMasterVO.getInvoicePrice());
+//			pstmt.setInt(11, orderMasterVO.getOrderStatus());
+//			
+//			pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();					
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 
-	@Override
-	public void update(OrderMasterVO orderMasterVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(UPDATE_STMT);
-			
-			pstmt.setString(1, orderMasterVO.getMemPhone());
-			pstmt.setString(2, orderMasterVO.getRecipientName());
-			pstmt.setString(3, orderMasterVO.getRecipientMobNumber());
-			pstmt.setString(4, orderMasterVO.getRecipientTelNumber());
-			pstmt.setString(5, orderMasterVO.getRecipientEmail());
-			pstmt.setString(6, orderMasterVO.getBusinessNumber());
-			pstmt.setInt(7, orderMasterVO.getDeliveryMethod());
-			pstmt.setString(8, orderMasterVO.getDeliveryAddress());
-			pstmt.setString(9, orderMasterVO.getOrderMemo());
-			pstmt.setString(10, orderMasterVO.getInvoicePrice());
-			pstmt.setInt(11, orderMasterVO.getOrderStatus());
-			pstmt.setInt(12, orderMasterVO.getOrderId());
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+//	@Override
+//	public void update(OrderMasterVO orderMasterVO) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(UPDATE_STMT);
+//			
+//			pstmt.setString(1, orderMasterVO.getMemPhone());
+//			pstmt.setString(2, orderMasterVO.getRecipientName());
+//			pstmt.setString(3, orderMasterVO.getRecipientMobNumber());
+//			pstmt.setString(4, orderMasterVO.getRecipientTelNumber());
+//			pstmt.setString(5, orderMasterVO.getRecipientEmail());
+//			pstmt.setString(6, orderMasterVO.getBusinessNumber());
+//			pstmt.setInt(7, orderMasterVO.getDeliveryMethod());
+//			pstmt.setString(8, orderMasterVO.getDeliveryAddress());
+//			pstmt.setString(9, orderMasterVO.getOrderMemo());
+//			pstmt.setString(10, orderMasterVO.getInvoicePrice());
+//			pstmt.setInt(11, orderMasterVO.getOrderStatus());
+//			pstmt.setInt(12, orderMasterVO.getOrderId());
+//			
+//			pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();					
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 
-	@Override
-	public void delete(Integer orderId) {
-	}
+//	@Override
+//	public void delete(Integer orderId) {
+//	}
 
-	@Override
-	public OrderMasterVO getOne(Integer orderId) {
-		OrderMasterVO orderMasterVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(GET_ONE_STMT);
-			pstmt.setInt(1, orderId);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				orderMasterVO = new OrderMasterVO();
-				orderMasterVO.setOrderId(rs.getInt("ORDER_ID"));
-				orderMasterVO.setOrderDate(rs.getDate("ORDER_DATE"));
-				orderMasterVO.setMemPhone(rs.getString("MEM_PHONE"));
-				orderMasterVO.setRecipientName(rs.getString("RECIPIENT_NAME"));
-				orderMasterVO.setRecipientMobNumber(rs.getString("RECIPIENT_MOB_NUMBER"));
-				orderMasterVO.setRecipientTelNumber(rs.getString("RECIPIENT_TEL_NUMBER"));
-				orderMasterVO.setRecipientEmail(rs.getString("RECIPIENT_EMAIL"));
-				orderMasterVO.setBusinessNumber(rs.getString("BUSINESS_NUMBER"));
-				orderMasterVO.setDeliveryMethod(rs.getInt("DELIVERY_METHOD"));
-				orderMasterVO.setDeliveryAddress(rs.getString("DELIVERY_ADDRESS"));
-				orderMasterVO.setOrderMemo(rs.getNString("ORDER_MEMO"));
-				orderMasterVO.setInvoicePrice(rs.getString("INVOICE_PRICE"));
-				orderMasterVO.setInvoicePaidDate(rs.getDate("INVOICE_PAID_DATE"));
-				orderMasterVO.setDeliveryTime(rs.getDate("DELIVERY_TIME"));
-				orderMasterVO.setOrderStatus(rs.getInt("ORDER_STATUS"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-				rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return orderMasterVO;
-	}
+//	@Override
+//	public OrderMasterVO getOne(Integer orderId) {
+//		OrderMasterVO orderMasterVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(GET_ONE_STMT);
+//			pstmt.setInt(1, orderId);
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				orderMasterVO = new OrderMasterVO();
+//				orderMasterVO.setOrderId(rs.getInt("ORDER_ID"));
+//				orderMasterVO.setOrderDate(rs.getDate("ORDER_DATE"));
+//				orderMasterVO.setMemPhone(rs.getString("MEM_PHONE"));
+//				orderMasterVO.setRecipientName(rs.getString("RECIPIENT_NAME"));
+//				orderMasterVO.setRecipientMobNumber(rs.getString("RECIPIENT_MOB_NUMBER"));
+//				orderMasterVO.setRecipientTelNumber(rs.getString("RECIPIENT_TEL_NUMBER"));
+//				orderMasterVO.setRecipientEmail(rs.getString("RECIPIENT_EMAIL"));
+//				orderMasterVO.setBusinessNumber(rs.getString("BUSINESS_NUMBER"));
+//				orderMasterVO.setDeliveryMethod(rs.getInt("DELIVERY_METHOD"));
+//				orderMasterVO.setDeliveryAddress(rs.getString("DELIVERY_ADDRESS"));
+//				orderMasterVO.setOrderMemo(rs.getNString("ORDER_MEMO"));
+//				orderMasterVO.setInvoicePrice(rs.getString("INVOICE_PRICE"));
+//				orderMasterVO.setInvoicePaidDate(rs.getDate("INVOICE_PAID_DATE"));
+//				orderMasterVO.setDeliveryTime(rs.getDate("DELIVERY_TIME"));
+//				orderMasterVO.setOrderStatus(rs.getInt("ORDER_STATUS"));
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//				rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		return orderMasterVO;
+//	}
 
-	@Override
-	public List<OrderMasterVO> getAll() {
-		List<OrderMasterVO> list = new ArrayList<OrderMasterVO>();
-		OrderMasterVO orderMasterVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_STMT);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				orderMasterVO = new OrderMasterVO();
-				orderMasterVO.setOrderId(rs.getInt("ORDER_ID"));
-				orderMasterVO.setOrderDate(rs.getDate("ORDER_DATE"));
-				orderMasterVO.setMemPhone(rs.getString("MEM_PHONE"));
-				orderMasterVO.setRecipientName(rs.getString("RECIPIENT_NAME"));
-				orderMasterVO.setRecipientMobNumber(rs.getString("RECIPIENT_MOB_NUMBER"));
-				orderMasterVO.setRecipientTelNumber(rs.getString("RECIPIENT_TEL_NUMBER"));
-				orderMasterVO.setRecipientEmail(rs.getString("RECIPIENT_EMAIL"));
-				orderMasterVO.setBusinessNumber(rs.getString("BUSINESS_NUMBER"));
-				orderMasterVO.setDeliveryMethod(rs.getInt("DELIVERY_METHOD"));
-				orderMasterVO.setDeliveryAddress(rs.getString("DELIVERY_ADDRESS"));
-				orderMasterVO.setOrderMemo(rs.getNString("ORDER_MEMO"));
-				orderMasterVO.setInvoicePrice(rs.getString("INVOICE_PRICE"));
-				orderMasterVO.setInvoicePaidDate(rs.getDate("INVOICE_PAID_DATE"));
-				orderMasterVO.setDeliveryTime(rs.getDate("DELIVERY_TIME"));
-				orderMasterVO.setOrderStatus(rs.getInt("ORDER_STATUS"));
-				list.add(orderMasterVO);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return list;
-	}
+//	@Override
+//	public List<OrderMasterVO> getAll() {
+//		List<OrderMasterVO> list = new ArrayList<OrderMasterVO>();
+//		OrderMasterVO orderMasterVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(GET_ALL_STMT);
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				orderMasterVO = new OrderMasterVO();
+//				orderMasterVO.setOrderId(rs.getInt("ORDER_ID"));
+//				orderMasterVO.setOrderDate(rs.getDate("ORDER_DATE"));
+//				orderMasterVO.setMemPhone(rs.getString("MEM_PHONE"));
+//				orderMasterVO.setRecipientName(rs.getString("RECIPIENT_NAME"));
+//				orderMasterVO.setRecipientMobNumber(rs.getString("RECIPIENT_MOB_NUMBER"));
+//				orderMasterVO.setRecipientTelNumber(rs.getString("RECIPIENT_TEL_NUMBER"));
+//				orderMasterVO.setRecipientEmail(rs.getString("RECIPIENT_EMAIL"));
+//				orderMasterVO.setBusinessNumber(rs.getString("BUSINESS_NUMBER"));
+//				orderMasterVO.setDeliveryMethod(rs.getInt("DELIVERY_METHOD"));
+//				orderMasterVO.setDeliveryAddress(rs.getString("DELIVERY_ADDRESS"));
+//				orderMasterVO.setOrderMemo(rs.getNString("ORDER_MEMO"));
+//				orderMasterVO.setInvoicePrice(rs.getString("INVOICE_PRICE"));
+//				orderMasterVO.setInvoicePaidDate(rs.getDate("INVOICE_PAID_DATE"));
+//				orderMasterVO.setDeliveryTime(rs.getDate("DELIVERY_TIME"));
+//				orderMasterVO.setOrderStatus(rs.getInt("ORDER_STATUS"));
+//				list.add(orderMasterVO);
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		return list;
+//	}
 	
-	@Override
-	public void insertWithOrderDetail(OrderMasterVO orderMasterVO, List<ProductVO> list) {
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = dataSource.getConnection();
-			
-			con.setAutoCommit(false);
-			
-			String cols[] = {"ORDER_ID"};
-			pstmt = con.prepareStatement(INSERT_STMT, cols);
-			pstmt.setString(1, orderMasterVO.getMemPhone());
-			pstmt.setString(2, orderMasterVO.getRecipientName());
-			pstmt.setString(3, orderMasterVO.getRecipientMobNumber());
-			pstmt.setString(4, orderMasterVO.getRecipientTelNumber());
-			pstmt.setString(5, orderMasterVO.getRecipientEmail());
-			pstmt.setString(6, orderMasterVO.getBusinessNumber());
-			pstmt.setInt(7, orderMasterVO.getDeliveryMethod());
-			pstmt.setString(8, orderMasterVO.getDeliveryAddress());
-			pstmt.setString(9, orderMasterVO.getOrderMemo());
-			pstmt.setString(10, orderMasterVO.getInvoicePrice());
-			pstmt.setInt(11, orderMasterVO.getOrderStatus());
-			pstmt.executeUpdate();
-			
-			Integer nextOrderId = null;
-			ResultSet rs = pstmt.getGeneratedKeys();
-			if (rs.next()) {
-				nextOrderId = rs.getInt(1);
-				System.out.println("Success: Auto-Generated Key(ORDER_ID: " + nextOrderId  + ")");
-			} else {
-				System.out.println("Failure: Auto-Generated Key(ORDER_ID)");
-			}
-			rs.close();
-			
-			OrderDetailJDBCDAO orderDetailJDBCDAO = new OrderDetailJDBCDAO();
-			for (ProductVO productVO : list) {
-				productVO.setOrderId(nextOrderId);
-				orderDetailJDBCDAO.insert(productVO, con);
-			}
-			
-			con.commit();
-			con.setAutoCommit(true);
-			
-		} catch (SQLException e) {
-			if (con != null) {
-				try {
-					con.rollback();
-				} catch (SQLException exception) {
-					e.printStackTrace();
-				}
-			}
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+//	@Override
+//	public void insertWithOrderDetail(OrderMasterVO orderMasterVO, List<ProductVO> list) {
+//		
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			
+//			con.setAutoCommit(false);
+//			
+//			String cols[] = {"ORDER_ID"};
+//			pstmt = con.prepareStatement(INSERT_STMT, cols);
+//			pstmt.setString(1, orderMasterVO.getMemPhone());
+//			pstmt.setString(2, orderMasterVO.getRecipientName());
+//			pstmt.setString(3, orderMasterVO.getRecipientMobNumber());
+//			pstmt.setString(4, orderMasterVO.getRecipientTelNumber());
+//			pstmt.setString(5, orderMasterVO.getRecipientEmail());
+//			pstmt.setString(6, orderMasterVO.getBusinessNumber());
+//			pstmt.setInt(7, orderMasterVO.getDeliveryMethod());
+//			pstmt.setString(8, orderMasterVO.getDeliveryAddress());
+//			pstmt.setString(9, orderMasterVO.getOrderMemo());
+//			pstmt.setString(10, orderMasterVO.getInvoicePrice());
+//			pstmt.setInt(11, orderMasterVO.getOrderStatus());
+//			pstmt.executeUpdate();
+//			
+//			Integer nextOrderId = null;
+//			ResultSet rs = pstmt.getGeneratedKeys();
+//			if (rs.next()) {
+//				nextOrderId = rs.getInt(1);
+//				System.out.println("Success: Auto-Generated Key(ORDER_ID: " + nextOrderId  + ")");
+//			} else {
+//				System.out.println("Failure: Auto-Generated Key(ORDER_ID)");
+//			}
+//			rs.close();
+//			
+//			OrderDetailJDBCDAO orderDetailJDBCDAO = new OrderDetailJDBCDAO();
+//			for (ProductVO productVO : list) {
+//				productVO.setOrderId(nextOrderId);
+//				orderDetailJDBCDAO.insert(productVO, con);
+//			}
+//			
+//			con.commit();
+//			con.setAutoCommit(true);
+//			
+//		} catch (SQLException e) {
+//			if (con != null) {
+//				try {
+//					con.rollback();
+//				} catch (SQLException exception) {
+//					e.printStackTrace();
+//				}
+//			}
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 	
-	@Override
-	public void updateOM(Integer orderStatus,Integer orderId) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(UPDATEOM);
-			
-			pstmt.setInt(1, orderStatus);
-			pstmt.setInt(2, orderId);
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+//	@Override
+//	public void updateOM(Integer orderStatus,Integer orderId) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(UPDATEOM);
+//			
+//			pstmt.setInt(1, orderStatus);
+//			pstmt.setInt(2, orderId);
+//			
+//			pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();					
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 	
-	public List<OrderMasterVO> getAllByMemPhone(String memPhone) {
-		List<OrderMasterVO> list = new ArrayList<OrderMasterVO>();
-		OrderMasterVO orderMasterVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_BYMEMPHONE);
-			pstmt.setString(1, memPhone);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				orderMasterVO = new OrderMasterVO();
-				orderMasterVO.setOrderId(rs.getInt("ORDER_ID"));
-				orderMasterVO.setOrderDate(rs.getDate("ORDER_DATE"));
-				orderMasterVO.setMemPhone(rs.getString("MEM_PHONE"));
-				orderMasterVO.setRecipientName(rs.getString("RECIPIENT_NAME"));
-				orderMasterVO.setRecipientMobNumber(rs.getString("RECIPIENT_MOB_NUMBER"));
-				orderMasterVO.setRecipientTelNumber(rs.getString("RECIPIENT_TEL_NUMBER"));
-				orderMasterVO.setRecipientEmail(rs.getString("RECIPIENT_EMAIL"));
-				orderMasterVO.setBusinessNumber(rs.getString("BUSINESS_NUMBER"));
-				orderMasterVO.setDeliveryMethod(rs.getInt("DELIVERY_METHOD"));
-				orderMasterVO.setDeliveryAddress(rs.getString("DELIVERY_ADDRESS"));
-				orderMasterVO.setOrderMemo(rs.getNString("ORDER_MEMO"));
-				orderMasterVO.setInvoicePrice(rs.getString("INVOICE_PRICE"));
-				orderMasterVO.setInvoicePaidDate(rs.getDate("INVOICE_PAID_DATE"));
-				orderMasterVO.setDeliveryTime(rs.getDate("DELIVERY_TIME"));
-				orderMasterVO.setOrderStatus(rs.getInt("ORDER_STATUS"));
-				list.add(orderMasterVO);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return list;
-	}
+//	public List<OrderMasterVO> getAllByMemPhone(String memPhone) {
+//		List<OrderMasterVO> list = new ArrayList<OrderMasterVO>();
+//		OrderMasterVO orderMasterVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(GET_ALL_BYMEMPHONE);
+//			pstmt.setString(1, memPhone);
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				orderMasterVO = new OrderMasterVO();
+//				orderMasterVO.setOrderId(rs.getInt("ORDER_ID"));
+//				orderMasterVO.setOrderDate(rs.getDate("ORDER_DATE"));
+//				orderMasterVO.setMemPhone(rs.getString("MEM_PHONE"));
+//				orderMasterVO.setRecipientName(rs.getString("RECIPIENT_NAME"));
+//				orderMasterVO.setRecipientMobNumber(rs.getString("RECIPIENT_MOB_NUMBER"));
+//				orderMasterVO.setRecipientTelNumber(rs.getString("RECIPIENT_TEL_NUMBER"));
+//				orderMasterVO.setRecipientEmail(rs.getString("RECIPIENT_EMAIL"));
+//				orderMasterVO.setBusinessNumber(rs.getString("BUSINESS_NUMBER"));
+//				orderMasterVO.setDeliveryMethod(rs.getInt("DELIVERY_METHOD"));
+//				orderMasterVO.setDeliveryAddress(rs.getString("DELIVERY_ADDRESS"));
+//				orderMasterVO.setOrderMemo(rs.getNString("ORDER_MEMO"));
+//				orderMasterVO.setInvoicePrice(rs.getString("INVOICE_PRICE"));
+//				orderMasterVO.setInvoicePaidDate(rs.getDate("INVOICE_PAID_DATE"));
+//				orderMasterVO.setDeliveryTime(rs.getDate("DELIVERY_TIME"));
+//				orderMasterVO.setOrderStatus(rs.getInt("ORDER_STATUS"));
+//				list.add(orderMasterVO);
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		return list;
+//	}
 	
 	public static void main(String[] args) {
 		OrderMasterJNDIDAO dao = new OrderMasterJNDIDAO();

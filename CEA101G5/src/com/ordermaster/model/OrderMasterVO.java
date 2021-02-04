@@ -13,8 +13,6 @@ import com.orderdetail.model.OrderDetailVO;
 @Table(name="ORDER_MASTER")
 public class OrderMasterVO implements Serializable {
 	
-	@OneToMany(mappedBy="")
-	
 	@Id
 	@Column(name="ORDER_ID")
 	@SequenceGenerator(name="SEQ_ORDER_ID", sequenceName="SEQ_ORDER_ID", allocationSize=1)
@@ -41,7 +39,7 @@ public class OrderMasterVO implements Serializable {
 	
 	@Column(name="BUSINESS_NUMBER")
 	private String businessNumber;
-
+	
 	@Column(name="DELIVERY_METHOD")
 	private Integer deliveryMethod;
 	
@@ -62,6 +60,9 @@ public class OrderMasterVO implements Serializable {
 	
 	@Column(name="ORDER_STATUS")
 	private Integer orderStatus;
+	
+	@OneToMany(mappedBy="orderMasterVO")
+	private Set<OrderDetailVO> orderDetailVOs;
 	
 	public OrderMasterVO() {
 		super();
@@ -185,6 +186,14 @@ public class OrderMasterVO implements Serializable {
 
 	public void setOrderStatus(Integer orderStatus) {
 		this.orderStatus = orderStatus;
+	}
+	
+	public void setOrderDetailVOs(Set<OrderDetailVO> orderDetailVOs) {
+		this.orderDetailVOs = orderDetailVOs;
+	}
+	
+	public Set<OrderDetailVO> getOrderDetailVOs() {
+		return orderDetailVOs;
 	}
 	
 }
