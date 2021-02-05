@@ -61,9 +61,6 @@ public class OrderMasterVO implements Serializable {
 	@Column(name="ORDER_STATUS")
 	private Integer orderStatus;
 	
-	@OneToMany(mappedBy="orderMasterVO")
-	private Set<OrderDetailVO> orderDetailVOs;
-	
 	public OrderMasterVO() {
 		super();
 	}
@@ -186,14 +183,6 @@ public class OrderMasterVO implements Serializable {
 
 	public void setOrderStatus(Integer orderStatus) {
 		this.orderStatus = orderStatus;
-	}
-	
-	public void setOrderDetailVOs(Set<OrderDetailVO> orderDetailVOs) {
-		this.orderDetailVOs = orderDetailVOs;
-	}
-	
-	public Set<OrderDetailVO> getOrderDetailVOs() {
-		return orderDetailVOs;
 	}
 	
 }

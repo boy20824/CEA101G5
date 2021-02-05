@@ -9,7 +9,7 @@ public class OrderDetailService {
 	private OrderDetailDAO_Interface dao;
 	
 	public OrderDetailService() {
-		dao = new OrderDetailJDBCDAO();
+		dao = new OrderDetailJNDIDAO();
 	}
 	
 	public OrderDetailVO addOrderDetail(Integer orderId, String productId, Integer productPrice, Integer quantity, String productReview, byte[] productReviewPhoto, Integer productReviewStatus) {

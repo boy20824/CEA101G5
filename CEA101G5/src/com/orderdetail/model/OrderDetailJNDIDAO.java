@@ -16,11 +16,140 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 import com.product.model.ProductVO;
 
+import hibernate.util.HibernateUtil;
 import util.Util;
 
 public class OrderDetailJNDIDAO implements OrderDetailDAO_Interface {
+	
+	@Override
+	public List<OrderDetailVO> getAll(Integer orderId) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<OrderDetailVO> list = null;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from OrderDetailVO where orderId = ?0 order by productId asc");
+			query.setParameter(0, orderId);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+		return list;
+		
+	}
+	
+	@Override
+	public List<OrderDetailVO> getReviewByProductId(String productId) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<OrderDetailVO> list = null;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from OrderDetailVO where productId = ?0 order by orderId desc");
+			query.setParameter(0, productId);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+		return list;
+		
+	}
+	
+	@Override
+	public void updateReview(Integer productReviewStatus,Integer orderId, String productId) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		OrderDetailVO orderDetailVO = null;
+		
+		try {
+			session.beginTransaction();
+			orderDetailVO = session.get(OrderDetailVO.class, new OrderDetailVO(orderId, productId));
+			orderDetailVO.setProductReviewStatus(productReviewStatus);
+			session.saveOrUpdate(orderDetailVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+	}
+	
+	@Override
+	public List<OrderDetailVO> getAllReview() {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<OrderDetailVO> list = null;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from OrderDetailVO order by productReviewTS desc");
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+		return list;
+		
+	}
+	
+	@Override
+	public List<OrderDetailVO> getReviewById(String productId) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<OrderDetailVO> list = null;
+		
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from OrderDetailVO where productId = ?0 order by productReviewTS desc");
+			query.setParameter(0, productId);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+		return list;
+		
+	}
+	
+	@Override
+	public OrderDetailVO getOne(Integer orderId, String productId) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		OrderDetailVO orderDetailVO = null;
+		
+		try {
+			session.beginTransaction();
+			orderDetailVO = session.get(OrderDetailVO.class, new OrderDetailVO(orderId, productId));
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
+		return orderDetailVO;
+		
+	}
+	
+	@Override
+	public void update(OrderDetailVO orderDetailVO) {
+		// Method Not Used In Deployment //		
+	}
+	
+	@Override
+	public void delete(Integer orderId) {
+		// Method Not Used In Deployment //
+	}
 	
 	private static DataSource dataSource = null;
 	static {
@@ -93,215 +222,215 @@ public class OrderDetailJNDIDAO implements OrderDetailDAO_Interface {
 		}
 	}
 
-	@Override
-	public void update(OrderDetailVO orderDetailVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(UPDATE_STMT);
-			
-			pstmt.setInt(1, orderDetailVO.getProductPrice());
-			pstmt.setInt(2,  orderDetailVO.getQuantity());
-			pstmt.setString(3, orderDetailVO.getProductReview());
-			pstmt.setBytes(4, orderDetailVO.getProductReviewPhoto());
-			pstmt.setInt(5, orderDetailVO.getProductReviewStatus());
-			pstmt.setInt(6, orderDetailVO.getOrderId());
-			pstmt.setString(7, orderDetailVO.getProductId());
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+//	@Override
+//	public void update(OrderDetailVO orderDetailVO) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(UPDATE_STMT);
+//			
+//			pstmt.setInt(1, orderDetailVO.getProductPrice());
+//			pstmt.setInt(2,  orderDetailVO.getQuantity());
+//			pstmt.setString(3, orderDetailVO.getProductReview());
+//			pstmt.setBytes(4, orderDetailVO.getProductReviewPhoto());
+//			pstmt.setInt(5, orderDetailVO.getProductReviewStatus());
+//			pstmt.setInt(6, orderDetailVO.getOrderId());
+//			pstmt.setString(7, orderDetailVO.getProductId());
+//			
+//			pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();					
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 
-	@Override
-	public void delete(Integer orderId) {
-	}
+//	@Override
+//	public void delete(Integer orderId) {
+//	}
 	
-	@Override
-	public OrderDetailVO getOne(Integer orderId, String productId) {
-		OrderDetailVO orderDetailVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(GET_ONE_STMT);
-			pstmt.setInt(1, orderId);
-			pstmt.setString(2, productId);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				orderDetailVO = new OrderDetailVO();
-				orderDetailVO.setOrderId(rs.getInt("ORDER_ID"));
-				orderDetailVO.setProductId(rs.getString("PRODUCT_ID"));
-				orderDetailVO.setProductPrice(rs.getInt("PRODUCT_PRICE"));
-				orderDetailVO.setQuantity(rs.getInt("QUANTITY"));
-				orderDetailVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
-				orderDetailVO.setProductReviewPhoto(rs.getBytes("PRODUCT_REVIEW_PHOTO"));
-				orderDetailVO.setProductReviewTS(rs.getDate("PRODUCT_REVIEW_TS"));
-				orderDetailVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-				rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return orderDetailVO;
-	}
+//	@Override
+//	public OrderDetailVO getOne(Integer orderId, String productId) {
+//		OrderDetailVO orderDetailVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(GET_ONE_STMT);
+//			pstmt.setInt(1, orderId);
+//			pstmt.setString(2, productId);
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				orderDetailVO = new OrderDetailVO();
+//				orderDetailVO.setOrderId(rs.getInt("ORDER_ID"));
+//				orderDetailVO.setProductId(rs.getString("PRODUCT_ID"));
+//				orderDetailVO.setProductPrice(rs.getInt("PRODUCT_PRICE"));
+//				orderDetailVO.setQuantity(rs.getInt("QUANTITY"));
+//				orderDetailVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
+//				orderDetailVO.setProductReviewPhoto(rs.getBytes("PRODUCT_REVIEW_PHOTO"));
+//				orderDetailVO.setProductReviewTS(rs.getDate("PRODUCT_REVIEW_TS"));
+//				orderDetailVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//				rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		return orderDetailVO;
+//	}
 
-	@Override
-	public List<OrderDetailVO> getAll(Integer orderId) {
-		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
-		OrderDetailVO orderDetailVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_STMT);
-			pstmt.setInt(1, orderId);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				orderDetailVO = new OrderDetailVO();
-				orderDetailVO.setOrderId(rs.getInt("ORDER_ID"));
-				orderDetailVO.setProductId(rs.getString("PRODUCT_ID"));
-				orderDetailVO.setProductPrice(rs.getInt("PRODUCT_PRICE"));
-				orderDetailVO.setQuantity(rs.getInt("QUANTITY"));
-				orderDetailVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
-				orderDetailVO.setProductReviewPhoto(rs.getBytes("PRODUCT_REVIEW_PHOTO"));
-				orderDetailVO.setProductReviewTS(rs.getDate("PRODUCT_REVIEW_TS"));
-				orderDetailVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
-				list.add(orderDetailVO);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-				rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return list;
-	}
+//	@Override
+//	public List<OrderDetailVO> getAll(Integer orderId) {
+//		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
+//		OrderDetailVO orderDetailVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(GET_ALL_STMT);
+//			pstmt.setInt(1, orderId);
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				orderDetailVO = new OrderDetailVO();
+//				orderDetailVO.setOrderId(rs.getInt("ORDER_ID"));
+//				orderDetailVO.setProductId(rs.getString("PRODUCT_ID"));
+//				orderDetailVO.setProductPrice(rs.getInt("PRODUCT_PRICE"));
+//				orderDetailVO.setQuantity(rs.getInt("QUANTITY"));
+//				orderDetailVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
+//				orderDetailVO.setProductReviewPhoto(rs.getBytes("PRODUCT_REVIEW_PHOTO"));
+//				orderDetailVO.setProductReviewTS(rs.getDate("PRODUCT_REVIEW_TS"));
+//				orderDetailVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
+//				list.add(orderDetailVO);
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//				rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		return list;
+//	}
 	
-	@Override
-	public List<OrderDetailVO> getReviewByProductId(String productId) {
-		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
-		OrderDetailVO orderDetailVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_REVIEW_BYPRODUCTID_STMT);
-			pstmt.setString(1, productId);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				orderDetailVO = new OrderDetailVO();
-				orderDetailVO.setOrderId(rs.getInt("ORDER_ID"));
-				orderDetailVO.setProductId(rs.getString("PRODUCT_ID"));
-				orderDetailVO.setProductPrice(rs.getInt("PRODUCT_PRICE"));
-				orderDetailVO.setQuantity(rs.getInt("QUANTITY"));
-				orderDetailVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
-				orderDetailVO.setProductReviewPhoto(rs.getBytes("PRODUCT_REVIEW_PHOTO"));
-				orderDetailVO.setProductReviewTS(rs.getDate("PRODUCT_REVIEW_TS"));
-				orderDetailVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
-				list.add(orderDetailVO);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-				rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return list;
-	}
+//	@Override
+//	public List<OrderDetailVO> getReviewByProductId(String productId) {
+//		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
+//		OrderDetailVO orderDetailVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(GET_ALL_REVIEW_BYPRODUCTID_STMT);
+//			pstmt.setString(1, productId);
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				orderDetailVO = new OrderDetailVO();
+//				orderDetailVO.setOrderId(rs.getInt("ORDER_ID"));
+//				orderDetailVO.setProductId(rs.getString("PRODUCT_ID"));
+//				orderDetailVO.setProductPrice(rs.getInt("PRODUCT_PRICE"));
+//				orderDetailVO.setQuantity(rs.getInt("QUANTITY"));
+//				orderDetailVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
+//				orderDetailVO.setProductReviewPhoto(rs.getBytes("PRODUCT_REVIEW_PHOTO"));
+//				orderDetailVO.setProductReviewTS(rs.getDate("PRODUCT_REVIEW_TS"));
+//				orderDetailVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
+//				list.add(orderDetailVO);
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//				rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		return list;
+//	}
 	
 	@Override
 	public void insert(ProductVO productVO, Connection con) {
@@ -337,146 +466,146 @@ public class OrderDetailJNDIDAO implements OrderDetailDAO_Interface {
 		}
 	}
 	
-	@Override
-	public void updateReview(Integer productReviewStatus,Integer orderId, String productId) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(UPDATE_REVIEW);
-			
-			pstmt.setInt(1, productReviewStatus);
-			pstmt.setInt(2, orderId);
-			pstmt.setString(3, productId);
-			
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+//	@Override
+//	public void updateReview(Integer productReviewStatus,Integer orderId, String productId) {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(UPDATE_REVIEW);
+//			
+//			pstmt.setInt(1, productReviewStatus);
+//			pstmt.setInt(2, orderId);
+//			pstmt.setString(3, productId);
+//			
+//			
+//			pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();					
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 	
-	@Override
-	public List<OrderDetailVO> getAllReview() {
-		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
-		OrderDetailVO odVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_REVIEW);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				odVO = new OrderDetailVO();
-				odVO.setOrderId(rs.getInt("ORDER_ID"));
-				odVO.setProductId(rs.getString("PRODUCT_ID"));
-				odVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
-				odVO.setProductReviewTS(rs.getTimestamp("PRODUCT_REVIEW_TS"));
-				odVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
-				list.add(odVO);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return list;
-	}
+//	@Override
+//	public List<OrderDetailVO> getAllReview() {
+//		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
+//		OrderDetailVO odVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(GET_ALL_REVIEW);
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				odVO = new OrderDetailVO();
+//				odVO.setOrderId(rs.getInt("ORDER_ID"));
+//				odVO.setProductId(rs.getString("PRODUCT_ID"));
+//				odVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
+//				odVO.setProductReviewTS(rs.getTimestamp("PRODUCT_REVIEW_TS"));
+//				odVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
+//				list.add(odVO);
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		return list;
+//	}
 	
-	@Override
-	public List<OrderDetailVO> getReviewById(String productId) {
-		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
-		OrderDetailVO orderDetailVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			con = dataSource.getConnection();
-			pstmt = con.prepareStatement(REVIEW_BY_ID);
-			pstmt.setString(1, productId);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				orderDetailVO = new OrderDetailVO();
-				orderDetailVO.setOrderId(rs.getInt("ORDER_ID"));
-				orderDetailVO.setProductId(rs.getString("PRODUCT_ID"));
-				orderDetailVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
-				orderDetailVO.setProductReviewTS(rs.getDate("PRODUCT_REVIEW_TS"));
-				orderDetailVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
-				list.add(orderDetailVO);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-				rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return list;
-	}
+//	@Override
+//	public List<OrderDetailVO> getReviewById(String productId) {
+//		List<OrderDetailVO> list = new ArrayList<OrderDetailVO>();
+//		OrderDetailVO orderDetailVO = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = dataSource.getConnection();
+//			pstmt = con.prepareStatement(REVIEW_BY_ID);
+//			pstmt.setString(1, productId);
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				orderDetailVO = new OrderDetailVO();
+//				orderDetailVO.setOrderId(rs.getInt("ORDER_ID"));
+//				orderDetailVO.setProductId(rs.getString("PRODUCT_ID"));
+//				orderDetailVO.setProductReview(rs.getString("PRODUCT_REVIEW"));
+//				orderDetailVO.setProductReviewTS(rs.getDate("PRODUCT_REVIEW_TS"));
+//				orderDetailVO.setProductReviewStatus(rs.getInt("PRODUCT_REVIEW_STATUS"));
+//				list.add(orderDetailVO);
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//				rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		
+//		return list;
+//	}
 	
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(path);
@@ -506,20 +635,20 @@ public class OrderDetailJNDIDAO implements OrderDetailDAO_Interface {
 //		System.out.println("Statement Processed...");
 		
 //		testing : update()
-		OrderDetailVO orderDetailVO = new OrderDetailVO();
-		orderDetailVO.setOrderId(4);
-		orderDetailVO.setProductId("ENP0009");
-		orderDetailVO.setProductPrice(1400);
-		orderDetailVO.setQuantity(1);
-		orderDetailVO.setProductReview("�K�y������, �H��@�w�|�b�^�ʡI�I");
-		try {
-			orderDetailVO.setProductReviewPhoto(getPictureByteArray("/Users/jordan/desktop/boxing-day-offer-banner.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		orderDetailVO.setProductReviewStatus(1);
-		dao.update(orderDetailVO);
-		System.out.println("Statement Processed...");
+//		OrderDetailVO orderDetailVO = new OrderDetailVO();
+//		orderDetailVO.setOrderId(4);
+//		orderDetailVO.setProductId("ENP0009");
+//		orderDetailVO.setProductPrice(1400);
+//		orderDetailVO.setQuantity(1);
+//		orderDetailVO.setProductReview("�K�y������, �H��@�w�|�b�^�ʡI�I");
+//		try {
+//			orderDetailVO.setProductReviewPhoto(getPictureByteArray("/Users/jordan/desktop/boxing-day-offer-banner.jpg"));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		orderDetailVO.setProductReviewStatus(1);
+//		dao.update(orderDetailVO);
+//		System.out.println("Statement Processed...");
 		
 //		testing : getOne()
 //		OrderDetailVO orderDetailVO = dao.getOne(4, "ENP0006");

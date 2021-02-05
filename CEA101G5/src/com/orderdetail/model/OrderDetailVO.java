@@ -37,10 +37,13 @@ public class OrderDetailVO implements Serializable {
 	@Column(name="PRODUCT_REVIEW_STATUS")
 	private Integer productReviewStatus;
 	
-	private OrderMasterVO orderMasterVO;
-	
 	public OrderDetailVO() {
 		super();
+	}
+	
+	public OrderDetailVO(Integer orderId, String productId) {
+		this.orderId = orderId;
+		this.productId = productId;
 	}
 
 	public Integer getOrderId() {
@@ -107,12 +110,4 @@ public class OrderDetailVO implements Serializable {
 		this.productReviewStatus = productReviewStatus;
 	}
 	
-	public void setOrderMasterVO(OrderMasterVO orderMasterVO) {
-		this.orderMasterVO = orderMasterVO;
-	}
-	
-	public OrderMasterVO getOrderMasterVO() {
-		return orderMasterVO;
-	}
-
 }
