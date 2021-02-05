@@ -37,6 +37,10 @@ public class OrderDetailVO implements Serializable {
 	@Column(name="PRODUCT_REVIEW_STATUS")
 	private Integer productReviewStatus;
 	
+	@ManyToOne
+	@JoinColumn(name="ORDER_ID")
+	private OrderMasterVO orderMasterVO;
+	
 	public OrderDetailVO() {
 		super();
 	}
@@ -108,6 +112,14 @@ public class OrderDetailVO implements Serializable {
 
 	public void setProductReviewStatus(Integer productReviewStatus) {
 		this.productReviewStatus = productReviewStatus;
+	}
+	
+	public void setOrderMasterVO(OrderMasterVO orderMasterVO) {
+		this.orderMasterVO = orderMasterVO;
+	}
+	
+	public OrderMasterVO getOrderMasterVO() {
+		return orderMasterVO;
 	}
 	
 }

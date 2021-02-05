@@ -3,6 +3,7 @@ package com.ordermaster.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -60,6 +61,9 @@ public class OrderMasterVO implements Serializable {
 	
 	@Column(name="ORDER_STATUS")
 	private Integer orderStatus;
+	
+	@OneToMany(mappedBy="orderMasterVO", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<OrderDetailVO> orderDetailVOs;
 	
 	public OrderMasterVO() {
 		super();
@@ -183,6 +187,14 @@ public class OrderMasterVO implements Serializable {
 
 	public void setOrderStatus(Integer orderStatus) {
 		this.orderStatus = orderStatus;
+	}
+	
+	public void setOrderDetailVOs(List<OrderDetailVO> orderDetailVOs) {
+		this.orderDetailVOs = orderDetailVOs;
+	}
+	
+	public List<OrderDetailVO> getOrderDetailVOs() {
+		return orderDetailVOs;
 	}
 	
 }

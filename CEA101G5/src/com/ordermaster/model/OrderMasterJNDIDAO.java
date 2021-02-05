@@ -65,20 +65,6 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 	}
 	
 	@Override
-	public void insertWithOrderDetail(OrderMasterVO orderMasterVO, List<ProductVO> list) {
-		
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		
-		try {
-			session.beginTransaction();
-			
-			session.getTransaction().commit();
-		} catch (RuntimeException e) {
-			session.getTransaction().rollback();
-		}
-	}
-	
-	@Override
 	public void updateOM(Integer orderStatus,Integer orderId) {
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -117,7 +103,12 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 	
 	@Override
 	public void insert(OrderMasterVO orderMasterVO) {
-		// Method Not Used In Deployment //
+		// Method Not Used In Deployment //		
+	}
+	
+	@Override
+	public void insertWithOrderDetail(OrderMasterVO orderMasterVO, List<ProductVO> list) {
+		System.out.println("Hello World");
 	}
 	
 	@Override
