@@ -148,8 +148,11 @@ public class OrderMasterServlet extends HttpServlet {
 		if ("checkOut".equals(action)) {
 			
 			OrderMasterVO orderMasterVO = getOrderMasterVO(req);
-			OrderMasterJDBCDAO orderMasterJDBCDAO = new OrderMasterJDBCDAO();
-			orderMasterJDBCDAO.insertWithOrderDetail(orderMasterVO, buyList);
+			OrderMasterJNDIDAO orderMasterJNDIDAO = new OrderMasterJNDIDAO();
+			orderMasterJNDIDAO.insertWithOrderDetail(orderMasterVO, buyList);
+			
+//			OrderMasterJDBCDAO orderMasterJDBCDAO = new OrderMasterJDBCDAO();
+//			orderMasterJDBCDAO.insertWithOrderDetail(orderMasterVO, buyList);
 			
 			buyList.clear();
 			session.setAttribute("buyList", buyList);

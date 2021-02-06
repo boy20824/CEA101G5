@@ -108,7 +108,17 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 	
 	@Override
 	public void insertWithOrderDetail(OrderMasterVO orderMasterVO, List<ProductVO> list) {
-		System.out.println("Hello World");
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(orderMasterVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		}
+		
 	}
 	
 	@Override
