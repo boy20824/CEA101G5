@@ -115,7 +115,7 @@ public class OrderDetailVO implements Serializable {
 	public void setProductReviewStatus(Integer productReviewStatus) {
 		this.productReviewStatus = productReviewStatus;
 	}
-	
+
 	public void setOrderMasterVO(OrderMasterVO orderMasterVO) {
 		this.orderMasterVO = orderMasterVO;
 	}

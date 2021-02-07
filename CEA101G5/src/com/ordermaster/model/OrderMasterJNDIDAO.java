@@ -115,7 +115,7 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 	public void insertWithOrderDetail(OrderMasterVO orderMasterVO, List<ProductVO> list) {
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		List<OrderDetailVO> orderDetailVOList = new ArrayList<OrderDetailVO>();
+		Set<OrderDetailVO> orderDetailVOList = new HashSet<OrderDetailVO>();
 		
 		try {
 			session.beginTransaction();
@@ -126,7 +126,9 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 			orderDetailVO.setProductPrice(279);
 			orderDetailVO.setQuantity(5);
 			orderDetailVO.setProductReviewStatus(1);
+			
 			orderDetailVOList.add(orderDetailVO);
+			
 			orderMasterVO.setOrderDetailVOList(orderDetailVOList);
 			
 			session.saveOrUpdate(orderMasterVO);

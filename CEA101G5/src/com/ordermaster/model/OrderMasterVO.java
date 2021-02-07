@@ -68,7 +68,7 @@ public class OrderMasterVO implements Serializable {
 	private Integer orderStatus;
 	
 	@OneToMany(mappedBy="orderMasterVO", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private List<OrderDetailVO> orderDetailVOList;
+	private Set<OrderDetailVO> orderDetailVOList = new HashSet<OrderDetailVO>();
 	
 	public OrderMasterVO() {
 		super();
@@ -194,11 +194,11 @@ public class OrderMasterVO implements Serializable {
 		this.orderStatus = orderStatus;
 	}
 	
-	public void setOrderDetailVOList(List<OrderDetailVO> orderDetailVOList) {
+	public void setOrderDetailVOList(Set<OrderDetailVO> orderDetailVOList) {
 		this.orderDetailVOList = orderDetailVOList;
 	}
 	
-	public List<OrderDetailVO> getOrderDetailVOList() {
+	public Set<OrderDetailVO> getOrderDetailVOList() {
 		return orderDetailVOList;
 	}
 	
