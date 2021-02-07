@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.orderdetail.model.OrderDetailVO;
 
 @Entity
@@ -21,6 +23,7 @@ public class OrderMasterVO implements Serializable {
 	private Integer orderId;
 	
 	@Column(name="ORDER_DATE")
+	@CreationTimestamp
 	private Date orderDate;
 	
 	@Column(name="MEM_PHONE")
@@ -54,16 +57,18 @@ public class OrderMasterVO implements Serializable {
 	private String invoicePrice;
 	
 	@Column(name="INVOICE_PAID_DATE")
+	@CreationTimestamp
 	private Date invoicePaidDate;
 	
 	@Column(name="DELIVERY_TIME")
+	@CreationTimestamp
 	private Date deliveryTime;
 	
 	@Column(name="ORDER_STATUS")
 	private Integer orderStatus;
 	
 	@OneToMany(mappedBy="orderMasterVO", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private List<OrderDetailVO> orderDetailVOs;
+	private List<OrderDetailVO> orderDetailVOList;
 	
 	public OrderMasterVO() {
 		super();
@@ -189,12 +194,12 @@ public class OrderMasterVO implements Serializable {
 		this.orderStatus = orderStatus;
 	}
 	
-	public void setOrderDetailVOs(List<OrderDetailVO> orderDetailVOs) {
-		this.orderDetailVOs = orderDetailVOs;
+	public void setOrderDetailVOList(List<OrderDetailVO> orderDetailVOList) {
+		this.orderDetailVOList = orderDetailVOList;
 	}
 	
-	public List<OrderDetailVO> getOrderDetailVOs() {
-		return orderDetailVOs;
+	public List<OrderDetailVO> getOrderDetailVOList() {
+		return orderDetailVOList;
 	}
 	
 }

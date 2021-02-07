@@ -5,8 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.naming.Context;
@@ -110,9 +115,20 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 	public void insertWithOrderDetail(OrderMasterVO orderMasterVO, List<ProductVO> list) {
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<OrderDetailVO> orderDetailVOList = new ArrayList<OrderDetailVO>();
 		
 		try {
 			session.beginTransaction();
+			
+			OrderDetailVO orderDetailVO = new OrderDetailVO();
+			orderDetailVO.setOrderId(10);
+			orderDetailVO.setProductId("ENP0001");
+			orderDetailVO.setProductPrice(279);
+			orderDetailVO.setQuantity(5);
+			orderDetailVO.setProductReviewStatus(1);
+			orderDetailVOList.add(orderDetailVO);
+			orderMasterVO.setOrderDetailVOList(orderDetailVOList);
+			
 			session.saveOrUpdate(orderMasterVO);
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {
@@ -406,10 +422,10 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 //			}
 //			rs.close();
 //			
-//			OrderDetailJDBCDAO orderDetailJDBCDAO = new OrderDetailJDBCDAO();
+//			OrderDetailJNDIDAO orderDetailJNDIDAO = new OrderDetailJNDIDAO();
 //			for (ProductVO productVO : list) {
 //				productVO.setOrderId(nextOrderId);
-//				orderDetailJDBCDAO.insert(productVO, con);
+//				orderDetailJNDIDAO.insert(productVO, con);
 //			}
 //			
 //			con.commit();

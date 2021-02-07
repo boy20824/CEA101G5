@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.ordermaster.model.OrderMasterVO;
 
 @Entity
