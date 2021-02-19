@@ -119,19 +119,21 @@ public class OrderMasterJNDIDAO implements OrderMasterDAO_Interface {
 		
 		try {
 			session.beginTransaction();
-			
+
 			OrderDetailVO orderDetailVO = new OrderDetailVO();
+			
 			orderDetailVO.setOrderId(10);
 			orderDetailVO.setProductId("ENP0001");
 			orderDetailVO.setProductPrice(279);
 			orderDetailVO.setQuantity(5);
 			orderDetailVO.setProductReviewStatus(1);
-			
+			orderDetailVO.setOrderMasterVO(orderMasterVO);
+
 			orderDetailVOList.add(orderDetailVO);
-			
 			orderMasterVO.setOrderDetailVOList(orderDetailVOList);
 			
 			session.saveOrUpdate(orderMasterVO);
+			
 			session.getTransaction().commit();
 		} catch (RuntimeException e) {
 			session.getTransaction().rollback();
